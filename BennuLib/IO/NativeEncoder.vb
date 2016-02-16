@@ -2,7 +2,6 @@
 
 Imports System.IO.Compression
 Imports System.IO
-Imports PkSprite.Core
 
 Namespace Bennu.IO
     Public MustInherit Class NativeEncoder(Of T)

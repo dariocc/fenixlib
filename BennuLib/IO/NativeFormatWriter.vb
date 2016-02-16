@@ -1,6 +1,5 @@
 ﻿Option Infer On
 Imports System.IO
-Imports PkSprite.Core
 
 Namespace Bennu.IO
     Public Class NativeFormatWriter

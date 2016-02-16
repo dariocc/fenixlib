@@ -6,4 +6,6 @@
     ReadOnly Property Alpha As Integer
     ReadOnly Property Value As Integer
     Function GetTransparentCopy() As IPixel
+    Function GetOpaqueCopy() As IPixel
+    ReadOnly Property IsTransparent As Boolean
 End Interface

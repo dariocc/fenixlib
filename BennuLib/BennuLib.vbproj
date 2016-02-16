@@ -129,12 +129,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\PkSpriteCore\PkSprite.Core\PkSprite.Core.vbproj">
-      <Project>{44245289-5190-43d2-9334-fb670259c21e}</Project>
-      <Name>PkSprite.Core</Name>
-    </ProjectReference>
+    <Compile Include="Sprite.SearchDirection.vb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

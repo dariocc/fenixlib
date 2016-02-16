@@ -1,8 +1,5 @@
 ﻿Option Infer On
 
-Imports System.Linq
-Imports PkSprite.Core
-
 Namespace Bennu.IO
     Public Class FpgSpriteAssetEncoder
         Inherits NativeEncoder(Of SpriteAsset)

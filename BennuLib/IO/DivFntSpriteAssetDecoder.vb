@@ -1,7 +1,5 @@
 Option Infer On
 
-Imports PkSprite.Core
-
 Namespace Bennu.IO
     Public Class DivFntFpgDecoder
         Inherits NativeDecoder(Of SpriteAsset)

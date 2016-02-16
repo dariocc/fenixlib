@@ -1,7 +1,5 @@
 Option Infer On
 
-Imports System.Collections.Generic
-
 ''' <summary>
 ''' A sprite is SpritePocket concept of image data (pixel information) and
 ''' pivot points information grouped.
@@ -12,13 +10,17 @@ Imports System.Collections.Generic
 <Serializable>
 Public Class Sprite
 
+    Private _pixels() As IPixel
+    Private _palette As Palette
+    Private _parent As SpriteAsset
+    ' TODO: Limit max pivot point ID Max pivot point ID is 999 (checked with bennu).
+    Private _pivotPoints As IDictionary(Of Integer, PivotPoint) = New SortedDictionary(Of Integer, PivotPoint)
+
     Private Const MaxPivotPointId = 999
     Private Const MinPivotPointId = 0
-
-    Public Enum SearchDirection
-        Fordward
-        Backward
-    End Enum
+    Private Shared Function IsValidPivotPointId(id As Integer) As Boolean
+        Return id < MaxPivotPointId And id >= MinPivotPointId
+    End Function
 
     ''' <summary>
     ''' Creates an standalone <c>Sprite</c> object.
@@ -35,13 +37,13 @@ Public Class Sprite
     ''' The width.
     ''' </summary>
     ''' <returns>The width in pixels.</returns>
-    Public ReadOnly Property Width() As Integer
+    Public ReadOnly Property Width As Integer
 
     ''' <summary>
     ''' The height.
     ''' </summary>
     ''' <returns>The height in pixels.</returns>
-    Public ReadOnly Property Height() As Integer
+    Public ReadOnly Property Height As Integer
 
     ''' <summary>
     ''' The <see cref="Sprite"/> identifier.
@@ -49,7 +51,7 @@ Public Class Sprite
     ''' <returns>The identifier of this <see cref="Sprite"/> within its
     ''' parent <see cref="SpriteAsset"/>. <c>Nothing</c> if this object
     ''' is not contained in the <see cref="SpriteAsset"/></returns>
-    Public ReadOnly Property Id() As Integer?
+    Public ReadOnly Property Id As Integer?
         Get
             Return If(_parent Is Nothing, Nothing, _parent.IdOf(Me))
         End Get
@@ -59,13 +61,7 @@ Public Class Sprite
     ''' A descriptive string.
     ''' </summary>
     ''' <returns></returns>
-    Public Property Description() As String
-
-    Private _pixels() As IPixel
-    Private _palette As Palette
-    Private _parent As SpriteAsset
-    ' TODO: Limit max pivot point ID Max pivot point ID is 999 (checked with bennu).
-    Private _pivotPoints As IDictionary(Of Integer, PivotPoint) = New SortedDictionary(Of Integer, PivotPoint)
+    Public Property Description As String
 
     Public ReadOnly Property Palette As Palette
         Get
@@ -85,17 +81,15 @@ Public Class Sprite
     End Sub
 
     Public Sub DefinePivotPoint(id As Integer, x As Integer, y As Integer)
-        If x = -1 And y = -1 Then
-            Throw New ArgumentException() ' TODO: Customize
-        End If
-
         Dim pivotPoint = New PivotPoint(id, x, y)
 
         If _pivotPoints.ContainsKey(pivotPoint.Id) Then
             _pivotPoints.Remove(pivotPoint.Id)
         End If
 
-        _pivotPoints.Add(pivotPoint.Id, pivotPoint)
+        If Not x = -1 And y = -1 Then
+            _pivotPoints.Add(pivotPoint.Id, pivotPoint)
+        End If
     End Sub
 
     Public Sub DeletePivotPoint(id As Integer)
@@ -168,16 +162,14 @@ Public Class Sprite
     End Property
 
     ' TODO: Might not belong here
-    Public Sub RemoveTransparency()
-        Dim i As Integer = -1
-        For Each pixel As IPixel In _pixels
-            i += 1
-            ' TODO: Create method IsTransparent?
-            If pixel.Alpha = 255 Then
-                _pixels(i) = pixel.GetTransparentCopy()
-            End If
-        Next
-    End Sub
+    'Public Sub RemoveTransparency()
+    '    Dim i As Integer = -1
+    '    For Each pixel As IPixel In _pixels
+    '        i += 1
+    '        ' TODO: Create method IsTransparent?
+    '        If pixel.IsTransparent Then _pixels(i) = pixel.GetOpaqueCopy()
+    '    Next
+    'End Sub
 
     'Public Function GetCopy() As Sprite
     '    ' TODO: Should the pixelBuffers be encapsulated in a "PixelBuffer" object, that

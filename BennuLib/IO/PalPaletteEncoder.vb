@@ -1,6 +1,4 @@
-﻿Imports PkSprite.Core
-
-Namespace Bennu.IO
+﻿Namespace Bennu.IO
     Public Class PalPaletteEncoder
         Inherits NativeEncoder(Of Palette)
 

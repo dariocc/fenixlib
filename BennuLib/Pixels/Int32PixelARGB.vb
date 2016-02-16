@@ -1,4 +1,5 @@
 ﻿Option Infer On
+Imports BennuLib
 
 <Serializable>
 Public Class Int32PixelARGB
@@ -50,6 +51,12 @@ Public Class Int32PixelARGB
         End Get
     End Property
 
+    Public ReadOnly Property IsTransparent As Boolean Implements IPixel.IsTransparent
+        Get
+            Return Alpha = 255
+        End Get
+    End Property
+
     Public Function GetTransparentCopy() As IPixel Implements IPixel.GetTransparentCopy
         Return New Int32PixelARGB(_value)
     End Function
@@ -61,5 +68,9 @@ Public Class Int32PixelARGB
             buffer(n) = New Int32PixelARGB(graphicData(n), graphicData(n + 1), graphicData(n + 2), graphicData(n + 4))
         Next
         Return buffer
+    End Function
+
+    Public Function GetOpaqueCopy() As IPixel Implements IPixel.GetOpaqueCopy
+        Return New Int32PixelARGB(Value And &HFFFFFF)
     End Function
 End Class

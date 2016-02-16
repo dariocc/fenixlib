@@ -1,8 +1,12 @@
 ﻿Option Infer On
+Imports BennuLib
 
 <Serializable>
 Public Class Int16Pixel565
     Implements IPixel
+
+    ' TODO: It is certainly possible to speed up this colo conversions by 
+    ' keeping the list of all 65535 colors possible in memmory (65Kb)...
 
     Private ReadOnly _value As UShort
 
@@ -50,6 +54,12 @@ Public Class Int16Pixel565
         End Get
     End Property
 
+    Public ReadOnly Property IsTransparent As Boolean Implements IPixel.IsTransparent
+        Get
+            Return Value = 0
+        End Get
+    End Property
+
     Public Function GetTransparentCopy() As IPixel Implements IPixel.GetTransparentCopy
         Return New Int16Pixel565(0)
     End Function
@@ -62,4 +72,11 @@ Public Class Int16Pixel565
         Return buffer
     End Function
 
+    Public Function GetOpaqueCopy() As IPixel Implements IPixel.GetOpaqueCopy
+        If _value = 0 Then
+            Return New Int16Pixel565(1)
+        Else
+            Return New Int16Pixel565(_value)
+        End If
+    End Function
 End Class
