@@ -11,7 +11,7 @@ Namespace Bennu.IO
         Protected Overrides Sub WriteNativeFormat(sprite As Sprite, writer As NativeFormatWriter)
             writer.Write(Convert.ToUInt16(sprite.Width))
             writer.Write(Convert.ToUInt16(sprite.Height))
-            writer.Write(Convert.ToUInt32(sprite.Code.GetValueOrDefault))
+            writer.Write(Convert.ToUInt32(sprite.Id.GetValueOrDefault))
 
             If Not sprite.Palette Is Nothing Then
                 writer.Write(sprite.Palette)

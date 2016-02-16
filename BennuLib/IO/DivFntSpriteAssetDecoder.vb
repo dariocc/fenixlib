@@ -34,7 +34,7 @@ Namespace Bennu.IO
 
                 Dim pixels = IndexedPixel.CreateBufferFromBytes(graphicData)
                 Dim map = Sprite.Create(character.Width, character.Height, pixels)
-                fpg.Add(fpg.FindFreeCode, map)
+                fpg.Add(fpg.FindFreeId, map)
             Next
 
             Return fpg
