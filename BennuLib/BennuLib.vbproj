@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="Palette.vb" />
     <Compile Include="PivotPoint.vb" />
+    <Compile Include="Glyph.vb" />
     <Compile Include="Pixels\IndexedPixel.vb" />
     <Compile Include="Pixels\Int16Pixel565.vb" />
     <Compile Include="Pixels\Int32PixelARGB.vb" />
