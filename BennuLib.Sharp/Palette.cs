@@ -75,7 +75,7 @@ namespace BennuLib
 
         public override int GetHashCode()
         {
-            // TODO: We might want to make a better one...
+            // TODO: Pending to do a proper hashcode :)
             return _colors[0].r.GetHashCode() ^ _colors[100].r.GetHashCode();
         }
 
