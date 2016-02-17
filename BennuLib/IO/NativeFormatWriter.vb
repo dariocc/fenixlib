@@ -48,7 +48,7 @@ Namespace Bennu.IO
             Dim pivotPointsIncludingUndefined(ids.Max - 1) As PivotPoint
             For n = 0 To ids.Max
                 Dim id = n
-                Dim p = pivotPoints.Where(Function(x) x.Id = id).FirstOrDefault
+                Dim p? = pivotPoints.Where(Function(x) x.Id = id).FirstOrDefault
                 pivotPointsIncludingUndefined(n) = If(p Is Nothing,
                     New PivotPoint(id, -1, -1),
                     New PivotPoint(id, p.Value.X, p.Value.Y))

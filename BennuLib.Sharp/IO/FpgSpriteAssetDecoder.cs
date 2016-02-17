@@ -1,14 +1,6 @@
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
+using static BennuLib.IO.NativeFormat;
 
-namespace BennuLib.Bennu.IO
+namespace BennuLib.IO
 {
 	public class FpgSpriteAssetDecoder : NativeDecoder<SpriteAsset>
 	{
@@ -18,11 +10,11 @@ namespace BennuLib.Bennu.IO
 
 		protected override string[] KnownFileExtensions { get; }
 
-		protected override string[] KnownFileIds { get; }
+		protected override string[] KnownFileMagics { get; }
 
-		protected override SpriteAsset ReadNativeFormat(Magic magic, NativeFormatReader reader)
+		protected override SpriteAsset ReadBody(Header header, NativeFormatReader reader)
 		{
-			var depth = magic.Depth;
+			var depth = header.Depth;
 			if (depth == 8) {
 				var pal = Palette.Create(VGAtoColors(reader.ReadPalette()));
 				reader.ReadUnusedPaletteGamma();
@@ -34,15 +26,15 @@ namespace BennuLib.Bennu.IO
 				do {
 					var code = reader.ReadInt32();
 					var maplen = reader.ReadInt32();
-					var description = reader.ReadDescription();
-					var name = reader.ReadChars(12).ToString();
+					var description = reader.ReadAsciiZ(32);
+					var name = reader.ReadAsciiZ(12);
 					var width = reader.ReadInt32();
 					var height = reader.ReadInt32();
 
 					var mapDataLength = width * height * (depth / 8);
 
 					var numberOfPivotPoints = reader.ReadPivotPointsNumber();
-					[] pivotPoints = reader.ReadPivotPoints(numberOfPivotPoints);
+					var pivotPoints = reader.ReadPivotPoints(numberOfPivotPoints);
 
 					// Serves as checksum for FPGs created with non-standard tools such
 					// as FPG Edit
@@ -52,7 +44,7 @@ namespace BennuLib.Bennu.IO
 
 
 					var graphicData = reader.ReadBytes(mapDataLength);
-					var pixels = CreatePixelBuffer(magic.Depth, graphicData);
+					var pixels = CreatePixelBuffer(header.Depth, graphicData);
 
 					var map = Sprite.Create(width, height, pixels);
 					map.Description = description;

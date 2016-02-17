@@ -1,23 +1,13 @@
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
-using BennuLib;
+
 namespace BennuLib
 {
-
 	[Serializable()]
 	public class Int16Pixel565 : IPixel
 	{
 
 		// TODO: It is certainly possible to speed up this colo conversions by 
 		// keeping the list of all 65535 colors possible in memmory (65Kb)...
-
 
 		private readonly ushort _value;
 		public Int16Pixel565(byte r, byte g, byte b) : this(Convert.ToUInt16((r >> 3) << 11 | (g >> 2) << 5 | b >> 2))
@@ -65,7 +55,7 @@ namespace BennuLib
 		public static Int16Pixel565[] CreateBufferFromBytes(byte[] graphicData)
 		{
 			Int16Pixel565[] buffer = new Int16Pixel565[graphicData.Length / 3];
-			for (n = 0; n <= buffer.Length - 1; n += 3) {
+			for (var n = 0; n <= buffer.Length - 1; n += 3) {
 				buffer[n] = new Int16Pixel565(graphicData[n], graphicData[n + 1], graphicData[n + 2]);
 			}
 			return buffer;

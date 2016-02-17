@@ -1,32 +1,46 @@
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
-
 using System.IO;
+using System.Text;
 
-namespace BennuLib.Bennu.IO
+using static BennuLib.IO.NativeFormat;
+
+namespace BennuLib.IO
 {
 	public class NativeFormatReader : BinaryReader
 	{
 
+		private static readonly Encoding _encoding = Encoding.GetEncoding(850);
 
-		private static readonly System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding(850);
 		public NativeFormatReader(Stream input) : base(input, _encoding)
 		{
 		}
 
-		public string ReadDescription()
-		{
-			return _encoding.GetString(ReadBytes(32));
-		}
+        public string ReadAsciiZ(int length)
+        {
+            byte[] bytes = ReadBytes(length);
 
-		public Magic ReadMagic()
+            int n = 0;
+            for ( n = 0; n < length; n++ )
+            { 
+                if (bytes[n] == 0)
+                    break;
+            }
+
+            string result;
+            if (n > 0) {
+                byte[] trimmedBytes = new byte[n];
+                Array.Copy(bytes, 0, trimmedBytes, 0, n);
+                result = _encoding.GetString(trimmedBytes);
+            } else
+            {
+                result = "";
+            }
+
+            return result;
+        }
+
+		public Header ReadHeader()
 		{
 			// 3 first bytes describe the depth of the MAP
 			var fileType = _encoding.GetString(ReadBytes(3));
@@ -34,7 +48,7 @@ namespace BennuLib.Bennu.IO
 			var descriptor = ReadBytes(4);
 			var version = ReadByte();
 
-			return new Magic(fileType, version, descriptor);
+			return new Header(fileType, version, descriptor);
 		}
 
 		public byte[] ReadPalette()
@@ -64,7 +78,7 @@ namespace BennuLib.Bennu.IO
 		public int ReadPivotPointsNumber()
 		{
 			var flags = ReadUInt16();
-			var numberPivotPoints = Convert.ToInt16(flags & NativeFormat.NumberOfControlPointsBitMask);
+			var numberPivotPoints = Convert.ToInt16(flags & PivotPointsNumberBitMask);
 			return numberPivotPoints;
 		}
 

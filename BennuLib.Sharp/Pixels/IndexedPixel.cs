@@ -1,21 +1,11 @@
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
-using BennuLib;
+
 namespace BennuLib
 {
 
 	[Serializable()]
 	public class IndexedPixel : IPixel
 	{
-
-
 		private readonly int _index;
 
 		public IndexedPixel(int index)
@@ -80,7 +70,7 @@ namespace BennuLib
 		public static IndexedPixel[] CreateBufferFromBytes(byte[] graphicData)
 		{
 			IndexedPixel[] buffer = new IndexedPixel[graphicData.Length];
-			for (n = 0; n <= buffer.Length - 1; n++) {
+			for (var n = 0; n <= buffer.Length - 1; n++) {
 				buffer[n] = new IndexedPixel(graphicData[n]);
 			}
 			return buffer;

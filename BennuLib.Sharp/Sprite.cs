@@ -1,12 +1,6 @@
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
+
 namespace BennuLib
 {
 
@@ -27,8 +21,8 @@ namespace BennuLib
 		// TODO: Limit max pivot point ID Max pivot point ID is 999 (checked with bennu).
 
 		private IDictionary<int, PivotPoint> _pivotPoints = new SortedDictionary<int, PivotPoint>();
-		private const  MaxPivotPointId = 999;
-		private const  MinPivotPointId = 0;
+		private const int MaxPivotPointId = 999;
+		private const int MinPivotPointId = 0;
 		private static bool IsValidPivotPointId(int id)
 		{
 			return id < MaxPivotPointId & id >= MinPivotPointId;
@@ -65,7 +59,12 @@ namespace BennuLib
 		/// parent <see cref="SpriteAsset"/>. <c>Nothing</c> if this object
 		/// is not contained in the <see cref="SpriteAsset"/></returns>
 		public int? Id {
-			get { return _parent == null ? null : _parent.IdOf(this); }
+			get {
+                if (_parent == null)
+                    return null;
+                else
+                    return _parent.IdOf(this);
+            }
 		}
 
 		/// <summary>
@@ -150,14 +149,14 @@ namespace BennuLib
 		{
 			if (direction == SearchDirection.Fordward) {
 				// TODO: What happens if all Pivot Points are defined
-				for (n = start; n <= _pivotPoints.Count - 1; n++) {
+				for (var n = start; n <= _pivotPoints.Count - 1; n++) {
 					if (_pivotPoints[n].Id != n)
 						return n;
 				}
 
 				return _pivotPoints.Count;
 			} else if (direction == SearchDirection.Backward) {
-				for (n = start; n <= 0; n++) {
+				for (var n = start; n <= 0; n++) {
 					if (_pivotPoints[n].Id != n)
 						return n;
 				}

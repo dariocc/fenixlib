@@ -27,6 +27,7 @@ namespace BennuLib
 		private IDictionary<int, Sprite> _sprites = new SortedDictionary<int, Sprite>();
 
 		private Palette _palette;
+
 		public Sprite this[int code] {
 			get { return _sprites[code]; }
 		}

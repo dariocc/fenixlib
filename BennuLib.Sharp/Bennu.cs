@@ -1,13 +1,3 @@
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
-
 using System.IO;
 
 namespace BennuLib.Bennu
@@ -18,17 +8,15 @@ namespace BennuLib.Bennu
 		{
 			IO.MapSpriteDecoder decoder = new IO.MapSpriteDecoder();
 
-			using (Stream == File.Open(fileName, FileMode.Open)) {
-				return decoder.Decode(Stream);
+			using (var stream = File.Open(fileName, FileMode.Open)) {
+				return decoder.Decode(stream);
 			}
-
-			return null;
 		}
 
 		public static void Save(Sprite sprite, string fileName)
 		{
 			IO.MapSpriteEncoder encoder = new IO.MapSpriteEncoder();
-			using (output == System.IO.File.Open(fileName, FileMode.Create)) {
+			using (var output = System.IO.File.Open(fileName, FileMode.Create)) {
 				encoder.Encode(sprite, output);
 			}
 		}
@@ -40,11 +28,9 @@ namespace BennuLib.Bennu
 		{
 			IO.FpgSpriteAssetDecoder decoder = new IO.FpgSpriteAssetDecoder();
 
-			using (Stream == File.Open(fileName, FileMode.Open)) {
-				return decoder.Decode(Stream);
+			using (var stream = File.Open(fileName, FileMode.Open)) {
+				return decoder.Decode(stream);
 			}
-
-			return null;
 		}
 	}
 
@@ -54,11 +40,9 @@ namespace BennuLib.Bennu
 		{
 			IO.DivFormatPaletteDecoder decoder = new IO.DivFormatPaletteDecoder();
 
-			using (Stream == File.Open(fileName, FileMode.Open)) {
-				return decoder.Decode(Stream);
+			using (var stream = File.Open(fileName, FileMode.Open)) {
+				return decoder.Decode(stream);
 			}
-
-			return null;
 		}
 	}
 }

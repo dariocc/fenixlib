@@ -1,21 +1,17 @@
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
 using System.IO;
+using System.Text;
 
-namespace BennuLib.Bennu.IO
+namespace BennuLib.IO
 {
 	public class NativeFormatWriter : BinaryWriter
 	{
 
+		private static readonly Encoding _encoding = Encoding.GetEncoding(850);
 
-		private static readonly System.Text.Encoding _encoding = System.Text.Encoding.GetEncoding(850);
 		public NativeFormatWriter(Stream input) : base(input, _encoding)
 		{
 		}
@@ -23,12 +19,11 @@ namespace BennuLib.Bennu.IO
 		private void WriteHeader(string formatHeader, byte version)
 		{
 			if (formatHeader.Length != 3) {
-				throw new ArgumentException();
-				// TODO: Customize
+				throw new ArgumentException(); // TODO: Customize
 			}
 
 			base.Write(_encoding.GetBytes(formatHeader));
-			base.Write(NativeFormat.NativeDescriptor);
+			base.Write(NativeFormat.Terminator);
 			base.Write(version);
 		}
 
@@ -44,7 +39,7 @@ namespace BennuLib.Bennu.IO
 		public void Write(Palette palette)
 		{
 			byte[] bytes = new byte[palette.Colors.Length * 3];
-			for (n = 0; n <= palette.Colors.Length; n++) {
+			for (var n = 0; n <= palette.Colors.Length; n++) {
 				bytes[n * 3] = Convert.ToByte(palette[n].r);
 				bytes[n * 3 + 1] = Convert.ToByte(palette[n].g);
 				bytes[n * 3 + 2] = Convert.ToByte(palette[n].b);
@@ -61,40 +56,36 @@ namespace BennuLib.Bennu.IO
 				return;
 
 			PivotPoint[] pivotPointsIncludingUndefined = new PivotPoint[ids.Max()];
-			for (n = 0; n <= ids.Max(); n++) {
+			for (var n = 0; n <= ids.Max(); n++) {
 				var id = n;
-				var p = pivotPoints.Where(x => x.Id == id).FirstOrDefault();
+				PivotPoint? p = pivotPoints.Where(x => x.Id == id).FirstOrDefault();
 				pivotPointsIncludingUndefined[n] = p == null ? new PivotPoint(id, -1, -1) : new PivotPoint(id, p.Value.X, p.Value.Y);
 			}
 
-			foreach (PivotPoint pivotPoint_loopVariable in pivotPointsIncludingUndefined) {
-				pivotPoint = pivotPoint_loopVariable;
-				FileSystem.Write(Convert.ToInt16(pivotPoint.X));
-				FileSystem.Write(Convert.ToInt16(pivotPoint.Y));
+			foreach (PivotPoint pivotPoint in pivotPointsIncludingUndefined) {
+				Write(Convert.ToInt16(pivotPoint.X));
+				Write(Convert.ToInt16(pivotPoint.Y));
 			}
 		}
 
 		public void Write(Int32PixelARGB[] pixels)
 		{
-			foreach (Int32PixelARGB pixel_loopVariable in pixels) {
-				pixel = pixel_loopVariable;
-				FileSystem.Write(pixel.Value);
+			foreach (Int32PixelARGB pixel in pixels) {
+				Write(pixel.Value);
 			}
 		}
 
 		public void Write(Int16Pixel565[] pixels)
 		{
-			foreach (Int16Pixel565 pixel_loopVariable in pixels) {
-				pixel = pixel_loopVariable;
-				FileSystem.Write(Convert.ToUInt16(pixel.Value));
+			foreach (Int16Pixel565 pixel in pixels) {
+				Write(Convert.ToUInt16(pixel.Value));
 			}
 		}
 
 		public void Write(IndexedPixel[] pixels)
 		{
-			foreach (IndexedPixel pixel_loopVariable in pixels) {
-				pixel = pixel_loopVariable;
-				FileSystem.Write(Convert.ToByte(pixel.Value));
+			foreach (IndexedPixel pixel in pixels) {
+				Write(Convert.ToByte(pixel.Value));
 			}
 		}
 

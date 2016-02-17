@@ -1,14 +1,6 @@
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
+using static BennuLib.IO.NativeFormat;
 
-namespace BennuLib.Bennu.IO
+namespace BennuLib.IO
 {
 	public class DivFntFpgDecoder : NativeDecoder<SpriteAsset>
 	{
@@ -17,9 +9,9 @@ namespace BennuLib.Bennu.IO
 
 		protected override string[] KnownFileExtensions { get; }
 
-		protected override string[] KnownFileIds { get; }
+		protected override string[] KnownFileMagics { get; }
 
-		protected override SpriteAsset ReadNativeFormat(Magic magic, NativeFormatReader reader)
+		protected override SpriteAsset ReadBody(Header header, NativeFormatReader reader)
 		{
 
 			var pal = Palette.Create(VGAtoColors(reader.ReadPalette()));
@@ -28,13 +20,12 @@ namespace BennuLib.Bennu.IO
 			int fontInfo = reader.ReadInt32();
 
 			GlyphInfo[] characters = new GlyphInfo[256];
-			for (n = 0; n <= 255; n++) {
-				characters(n) = reader.ReadGlyphInfo();
+			for (var n = 0; n <= 255; n++) {
+				characters[n] = reader.ReadGlyphInfo();
 			}
 
 			SpriteAsset fpg = new SpriteAsset();
-			foreach (var character_loopVariable in characters) {
-				character = character_loopVariable;
+			foreach (var character in characters) {
 				var dataLength = character.Height * character.Width;
 
 				if (character.FileOffset == 0 | dataLength == 0)

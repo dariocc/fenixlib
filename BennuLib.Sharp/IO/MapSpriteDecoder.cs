@@ -1,14 +1,6 @@
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
+using static BennuLib.IO.NativeFormat;
 
-namespace BennuLib.Bennu.IO
+namespace BennuLib.IO
 {
 	public class MapSpriteDecoder : NativeDecoder<Sprite>
 	{
@@ -17,33 +9,32 @@ namespace BennuLib.Bennu.IO
 
 		protected override string[] KnownFileExtensions { get; }
 
-		protected override string[] KnownFileIds { get; }
+		protected override string[] KnownFileMagics { get; }
 
-		protected override Sprite ReadNativeFormat(Magic magic, NativeFormatReader reader)
+		protected override Sprite ReadBody(Header header, NativeFormatReader reader)
 		{
 			int width = reader.ReadUInt16();
 			int height = reader.ReadUInt16();
 			int code = reader.ReadInt32();
 
-			var description = reader.ReadDescription();
+			var description = reader.ReadAsciiZ(32);
 
-			var depth = magic.Depth;
+			var depth = header.Depth;
 			if (depth == 8) {
 				var pal = Palette.Create(VGAtoColors(reader.ReadPalette()));
 				reader.ReadUnusedPaletteGamma();
 			}
 
 			var numberOfPivotPoints = reader.ReadPivotPointsNumber();
-			[] pivotPoints = reader.ReadPivotPoints(numberOfPivotPoints);
+			var pivotPoints = reader.ReadPivotPoints(numberOfPivotPoints);
 
 			var mapDataLength = width * height * (depth / 8);
 			var graphicData = reader.ReadBytes(mapDataLength);
-			var pixels = CreatePixelBuffer(magic.Depth, graphicData);
+			var pixels = CreatePixelBuffer(header.Depth, graphicData);
 
 			var map = Sprite.Create(width, height, pixels);
 
-			foreach (? pivotPoint_loopVariable in pivotPoints) {
-				pivotPoint = pivotPoint_loopVariable;
+			foreach (var pivotPoint in pivotPoints) {
 				map.DefinePivotPoint(pivotPoint.Id, pivotPoint.X, pivotPoint.Y);
 			}
 

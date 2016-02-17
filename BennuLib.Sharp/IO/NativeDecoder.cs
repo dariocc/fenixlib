@@ -1,66 +1,148 @@
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
-
 using System.IO;
 using System.IO.Compression;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace BennuLib.Bennu.IO
+using static BennuLib.IO.NativeFormat;
+
+namespace BennuLib.IO
 {
+    /// <summary>
+    /// <see cref="NativeDecoder{T}"/> base class for all native formats decoders. It defines
+    /// common behaviour and defines a set of template methods that derivated classes must
+    /// implement.
+    /// </summary>
+    /// <remarks>
+    /// All native formats for fonts, graphics, graphic collections and palettes have 
+    /// similarities in how they are read from disk:
+    /// <list type="bullet">
+    ///     <item>Might or might not be compressed in GZip format</item>
+    ///     <item>Have a magic indicating the type of the file</item>
+    ///     <item>Have an specific sequence of bytes called terminator</item>
+    ///     <item>Have a byte indicating the version of the file</item>
+    /// </list>
+    /// The <see cref="NativeDecoder{T}"/> takes care of the communalities and leave the
+    /// read of the body to the derivated classes.
+    /// </remarks>
+    /// <typeparam name="T">The </typeparam>
 	public abstract class NativeDecoder<T> : IDecoder<T>
 	{
 
+        /// <summary>
+        /// The highest version number that the decoder expects to be capable of reading.
+        /// </summary>
 		public abstract int MaxSupportedVersion { get; }
-		protected abstract T ReadNativeFormat(Magic magic, NativeFormatReader reader);
-		protected abstract string[] KnownFileIds { get; }
+
+        
+        /// <summary>
+        /// Decodes the body of the native format and returns a <see cref="BennuLib"/> base 
+        /// type.
+        /// </summary>
+        /// <param name="header">A header object containing information of the magic, terminator
+        /// and version.</param>
+        /// <param name="reader">A <see cref="NativeFormatReader"/> that is used to read the
+        /// stream</param>
+        /// <returns></returns>
+        protected abstract T ReadBody(Header header, NativeFormatReader reader);
+
+        /// <summary>
+        /// The list of magic
+        /// </summary>
+        protected abstract string[] KnownFileMagics { get; }
+        
+        /// <summary>
+        /// The list of extensions that the Decoder expects to be capable of reading.
+        /// </summary>
 		protected abstract string[] KnownFileExtensions { get; }
 
 		public IEnumerable<string> SupportedExtensions {
 			get { return KnownFileExtensions; }
 		}
 
-		protected static bool IsGZip(byte[] header)
+        /// <summary>
+        /// GZip files start always with bytes {31, 139}. This function
+        /// will check if the argument matches that criteria.
+        /// </summary>
+        /// <param name="header">An array of bytes containing at least two elements</param>
+        /// <returns>True if the first two bytes <paramref name="header"/> are 
+        /// that of GZip format.</returns>
+		protected static bool HeaderIsGZip(byte[] header)
 		{
 			return header.Length >= 2 & header[0] == 31 & header[1] == 139;
 		}
 
+        /// <summary>
+        /// Decodes the stream and returns a <see cref="BennuLib"/> base type.
+        /// </summary>
+        /// <param name="input">The stream from which to read.</param>
+        /// <returns>A <see cref="BennuLib"/> base type.</returns>
 		public T Decode(Stream input)
 		{
-			// TODO: Do we need to check if I can seek? Should we make the function protected?
+		    
+            /* Native formats support GZip compression transparently
+             * This function will read the first two bytes of the file and determine if it 
+             * is a GZip file, in which case it will use a GZipStream object to read it.
+             */
+            	
 			byte[] buff = new byte[2];
-			if (!(input.Read(buff, 0, 2) == 2)) {
+
+			if ( !(input.Read(buff, 0, 2) == 2) ) {
 				throw new IOException();
 			}
 
-			input.Position = 0;
+            // Rewind
+			input.Position = 0; // TODO: Will it work with every type of stream?
 
 			Stream stream = null;
-			if (IsGZip(buff)) {
+			if ( HeaderIsGZip(buff) ) {
 				stream = new GZipStream(input, CompressionMode.Decompress);
 			} else {
 				stream = input;
 			}
 
 			using (NativeFormatReader reader = new NativeFormatReader(stream)) {
-				var magic = reader.ReadMagic();
+				var header = reader.ReadHeader();
 
-				if (!magic.IsValid)
-					throw new UnsuportedFileFormatException();
-				if (magic.Version > MaxSupportedVersion)
+				if ( ! KnownFileMagics.Contains(header.Magic) )
 					throw new UnsuportedFileFormatException();
 
-				return ReadNativeFormat(magic, reader);
+                if ( ! header.IsTerminatorValid() )
+                    throw new UnsuportedFileFormatException();
+
+				if (header.Version > MaxSupportedVersion)
+					throw new UnsuportedFileFormatException();
+
+				return ReadBody(header, reader);
 			}
 
 		}
 
-		protected static IPixel[] CreatePixelBuffer(int depth, byte[] graphicData)
+        /// <summary>
+        /// Attempts to decode <paramref name="input"/> into <paramref name="decoded"/>.
+        /// Returns whether the operation succeded or not.
+        /// </summary>
+        /// <param name="input">The input from which to read.</param>
+        /// <param name="decoded">When this method returns, the result of decoding the 
+        /// <see cref="Stream"/>. If the decoding fails, <paramref name="decoded"/> will
+        /// contain the default value of <typeparamref name="T"/>.</param>
+        /// <returns>True if the decoding was successful. Otherwise false.</returns>
+        public bool TryDecode(Stream input, out T decoded)
+        {
+            try
+            {
+                decoded = Decode(input);
+                return true;
+            }
+            catch (Exception)
+            {
+                decoded = default(T);
+                return false;
+            }
+        }
+
+        // TODO: Probably needs to be moved outside this class
+        protected static IPixel[] CreatePixelBuffer(int depth, byte[] graphicData)
 		{
 			switch (depth) {
 				case 8:
@@ -70,28 +152,21 @@ namespace BennuLib.Bennu.IO
 				case 32:
 					return Int32PixelARGB.CreateBufferFromBytes(graphicData);
 				default:
-					// TODO: Customize
-					throw new ArgumentException();
-			}
+					throw new ArgumentException(); // TODO: Customize
+            }
 		}
 
-		protected static Palette.Color[] VGAtoColors(byte[] colorData)
+        // TODO: Probably needs to be moved outside this class
+        protected static Palette.Color[] VGAtoColors(byte[] colorData)
 		{
 			Palette.Color[] colors = new Palette.Color[colorData.Length / 3];
-			for (n = 0; n <= colors.Length - 1; n++) {
-				colors[n] = new Palette.Color(colorData[n * 3] << 2, colorData[n * 3 + 1] << 2, colorData[n * 3 + 1] << 2);
+			for (var n = 0; n <= colors.Length - 1; n++) {
+				colors[n] = new Palette.Color(
+                    colorData[n * 3] << 2, 
+                    colorData[n * 3 + 1] << 2, 
+                    colorData[n * 3 + 1] << 2);
 			}
 			return colors;
-		}
-
-		public bool TryDecode(Stream input, ref T decoded)
-		{
-			try {
-				decoded = Decode(input);
-				return true;
-			} catch (Exception ex) {
-				return false;
-			}
 		}
 	}
 }

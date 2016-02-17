@@ -1,21 +1,10 @@
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Threading.Tasks;
-using BennuLib;
+
 namespace BennuLib
 {
-
 	[Serializable()]
 	public class Int32PixelARGB : IPixel
 	{
-
-
 		private readonly int _value;
 		public Int32PixelARGB(byte alpha, byte r, byte g, byte b) : this(alpha << 24 | r << 16 | g << 8 | b)
 		{
@@ -48,9 +37,7 @@ namespace BennuLib
 
 		public int Value {
 			get {
-				int functionReturnValue = 0;
-				return functionReturnValue;
-				return functionReturnValue;
+                return _value;
 			}
 		}
 
@@ -60,14 +47,14 @@ namespace BennuLib
 
 		public IPixel GetTransparentCopy()
 		{
-			return new Int32PixelARGB(_value);
+			return new Int32PixelARGB(_value & 0xFFFFFF);
 		}
 
 		public static Int32PixelARGB[] CreateBufferFromBytes(byte[] graphicData)
 		{
 			Int32PixelARGB[] buffer = new Int32PixelARGB[graphicData.Length / 4];
 
-			for (n = 0; n <= buffer.Length - 1; n++) {
+			for (var n = 0; n <= buffer.Length - 1; n++) {
 				buffer[n] = new Int32PixelARGB(graphicData[n], graphicData[n + 1], graphicData[n + 2], graphicData[n + 4]);
 			}
 			return buffer;
