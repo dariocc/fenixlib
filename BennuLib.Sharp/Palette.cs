@@ -46,14 +46,14 @@ namespace BennuLib
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
+            if (ReferenceEquals(obj, null))
             {
                 return false;
             }
 
             // Should we use reference comparison?
             Palette palette = obj as Palette;
-            if (((object) palette) == null)
+            if (ReferenceEquals(palette, null))
             {
                 return false;
             }
@@ -65,12 +65,12 @@ namespace BennuLib
         {
             // TODO: does it matter if we have the (object)?
             // Should we use reference comparison?
-            if ( ((object) palette) == null)
+            if ( ReferenceEquals(palette, null) )
             {
                 return false;
             }
 
-            return (palette.Colors.SequenceEqual(Colors));
+            return ( palette.Colors.SequenceEqual(Colors) );
         }
 
         public override int GetHashCode()
@@ -86,7 +86,7 @@ namespace BennuLib
 
         public static bool operator !=(Palette paletteA, Palette paletteB)
         {
-            return paletteA != paletteB;
+            return !paletteA.Equals(paletteB);
         }
     }
 }
