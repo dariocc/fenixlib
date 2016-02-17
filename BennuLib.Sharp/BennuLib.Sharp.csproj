@@ -80,6 +80,7 @@
     <Compile Include="Pixels\Int16Pixel565.cs" />
     <Compile Include="Pixels\Int32PixelARGB.cs" />
     <Compile Include="Pixels\IPixel.cs" />
+    <Compile Include="Pixels\MonochromePixel.cs" />
     <Compile Include="Pixels\PixelArrays.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprite.cs" />
