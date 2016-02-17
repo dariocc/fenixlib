@@ -65,15 +65,5 @@ namespace BennuLib
 		{
 			return new IndexedPixel(0);
 		}
-
-		// TODO: Might not belong here
-		public static IndexedPixel[] CreateBufferFromBytes(byte[] graphicData)
-		{
-			IndexedPixel[] buffer = new IndexedPixel[graphicData.Length];
-			for (var n = 0; n <= buffer.Length - 1; n++) {
-				buffer[n] = new IndexedPixel(graphicData[n]);
-			}
-			return buffer;
-		}
 	}
 }

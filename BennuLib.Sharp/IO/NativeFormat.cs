@@ -15,7 +15,7 @@ namespace BennuLib.IO
         /// <summary>
         /// The size of the color palette area, in bytes
         /// </summary>
-		public const int PaletteSize = 768;
+		public const int PaletteBytesSize = 768;
 
         /// <summary>
         /// The size of the gamma color area, in bytes

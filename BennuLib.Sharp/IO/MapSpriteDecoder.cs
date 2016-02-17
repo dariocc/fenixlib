@@ -29,8 +29,7 @@ namespace BennuLib.IO
 			var pivotPoints = reader.ReadPivotPoints(numberOfPivotPoints);
 
 			var mapDataLength = width * height * (depth / 8);
-			var graphicData = reader.ReadBytes(mapDataLength);
-			var pixels = CreatePixelBuffer(header.Depth, graphicData);
+			var pixels = reader.ReadPixels(header.Depth, width, height);
 
 			var map = Sprite.Create(width, height, pixels);
 

@@ -142,21 +142,6 @@ namespace BennuLib.IO
         }
 
         // TODO: Probably needs to be moved outside this class
-        protected static IPixel[] CreatePixelBuffer(int depth, byte[] graphicData)
-		{
-			switch (depth) {
-				case 8:
-					return IndexedPixel.CreateBufferFromBytes(graphicData);
-				case 16:
-					return Int16Pixel565.CreateBufferFromBytes(graphicData);
-				case 32:
-					return Int32PixelARGB.CreateBufferFromBytes(graphicData);
-				default:
-					throw new ArgumentException(); // TODO: Customize
-            }
-		}
-
-        // TODO: Probably needs to be moved outside this class
         protected static Palette.Color[] VGAtoColors(byte[] colorData)
 		{
 			Palette.Color[] colors = new Palette.Color[colorData.Length / 3];

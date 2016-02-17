@@ -36,24 +36,22 @@ namespace BennuLib.IO
 					var name = reader.ReadAsciiZ(12);
 					var width = reader.ReadInt32();
 					var height = reader.ReadInt32();
+                    var numberOfPivotPoints = reader.ReadPivotPointsNumberLong();
+                    var pivotPoints = reader.ReadPivotPoints(numberOfPivotPoints);
 
-					var mapDataLength = width * height * (header.Depth / 8);
-
-					var numberOfPivotPoints = reader.ReadPivotPointsNumberLong();
-					var pivotPoints = reader.ReadPivotPoints(numberOfPivotPoints);
+                    var mapDataLength = width * height * (header.Depth / 8);
 
 					// Some tools such as FPG Edit are non conformant with the standard
                     // FPG files and will add data at the end. 
 					if (mapDataLength + 64 + numberOfPivotPoints * 4 != maplen) {
                         // It can be that many tools generate this field with wrong
-                        // information. Check SmartFpgEditor output!
+                        // information. I am not even sure in SmartFpgEditor!
                         // break; 
                         // TODO: Consider if for example, we shall generate some 
                         // kind of event
 					}
 
-					var graphicData = reader.ReadBytes(mapDataLength);
-					var pixels = CreatePixelBuffer(header.Depth, graphicData);
+					IPixel[] pixels = reader.ReadPixels(header.Depth, width, height);
 
 					var map = Sprite.Create(width, height, pixels);
 					map.Description = description;

@@ -52,15 +52,6 @@ namespace BennuLib
 			return new Int16Pixel565(0);
 		}
 
-		public static Int16Pixel565[] CreateBufferFromBytes(byte[] graphicData)
-		{
-			Int16Pixel565[] buffer = new Int16Pixel565[graphicData.Length / 3];
-			for (var n = 0; n <= buffer.Length - 1; n += 3) {
-				buffer[n] = new Int16Pixel565(graphicData[n], graphicData[n + 1], graphicData[n + 2]);
-			}
-			return buffer;
-		}
-
 		public IPixel GetOpaqueCopy()
 		{
 			if (_value == 0) {

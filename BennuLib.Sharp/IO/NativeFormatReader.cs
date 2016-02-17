@@ -53,7 +53,7 @@ namespace BennuLib.IO
 
 		public byte[] ReadPalette()
 		{
-			var paletteColors = ReadBytes(NativeFormat.PaletteSize - 1);
+			var paletteColors = ReadBytes(PaletteBytesSize);
 			return paletteColors;
 		}
 
@@ -92,8 +92,70 @@ namespace BennuLib.IO
         }
 
         public GlyphInfo ReadGlyphInfo()
-		{
-			return new GlyphInfo(ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32());
-		}
-	}
+        {
+            return new GlyphInfo(ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32());
+        }
+
+        
+        public IPixel[] ReadPixels(int depth, int width, int height)
+        {
+            int byteLength = width * height * depth / 8; // TODO: Shall e adjusted for monochrome
+            byte[] graphicData = ReadBytes(byteLength);
+
+            switch (depth)
+            {
+                case 1:
+                    return ReadPixelMonochrome(graphicData);
+                case 8:
+                    return ReadPixelRgbIndexed(graphicData);
+                case 16:
+                    return ReadPixelsRgbInt16(graphicData);
+                case 32:
+                    return ReadPixelsArgbInt32(graphicData);
+                default:
+                    throw new ArgumentException(); // TODO: Customize
+            }
+        }
+
+        private IndexedPixel[] ReadPixelMonochrome(byte[] graphicData)
+        {
+            throw new NotImplementedException(); // TODO
+        }
+
+        private IndexedPixel[] ReadPixelRgbIndexed(byte[] graphicData)
+        {
+            IndexedPixel[] pixels = new IndexedPixel[graphicData.Length];
+            for (var n = 0; n <= pixels.Length - 1; n++)
+            {
+                pixels[n] = new IndexedPixel(graphicData[n]);
+            }
+            return pixels;
+        }
+
+        private Int16Pixel565[] ReadPixelsRgbInt16(byte[] graphicData)
+        {
+            Int16Pixel565[] pixels = new Int16Pixel565[graphicData.Length / 2];
+            for (var n = 0; n <= pixels.Length - 1; n += 3)
+            {
+                pixels[n] = new Int16Pixel565(graphicData[n], 
+                    graphicData[n + 1], 
+                    graphicData[n + 2]);
+            }
+            return pixels;
+        }
+
+        private Int32PixelARGB[] ReadPixelsArgbInt32(byte[] graphicData)
+        {
+            Int32PixelARGB[] buffer = new Int32PixelARGB[graphicData.Length / 4];
+
+            for (var n = 0; n <= buffer.Length - 1; n++)
+            {
+                buffer[n] = new Int32PixelARGB(graphicData[n], 
+                    graphicData[n + 1], 
+                    graphicData[n + 2],
+                    graphicData[n + 4]);
+            }
+            return buffer;
+        }
+    }
 }

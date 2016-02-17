@@ -33,10 +33,8 @@ namespace BennuLib.IO
 
 				if (character.FileOffset == 0 | dataLength == 0)
 					continue;
-
-				var graphicData = reader.ReadBytes(dataLength);
-
-				var pixels = IndexedPixel.CreateBufferFromBytes(graphicData);
+                
+				var pixels = reader.ReadPixels(header.Depth, character.Width, character.Height);
 				var map = Sprite.Create(character.Width, character.Height, pixels);
 				fpg.Add(fpg.FindFreeId(), ref map);
 			}
