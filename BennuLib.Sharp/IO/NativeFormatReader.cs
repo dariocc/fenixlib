@@ -60,10 +60,12 @@ namespace BennuLib.IO
 		public PivotPoint[] ReadPivotPoints(int number)
 		{
 			List<PivotPoint> points = new List<PivotPoint>();
-			for (int n = 0; n <= number - 1; n++) {
+			for (int n = 0; n < number; n++)
+            {
 				PivotPoint point = new PivotPoint(n, ReadInt16(), ReadInt16());
 				// Two coods set to -1 mean invalid point
-				if (!(point.X == -1 & point.Y == -1)) {
+				if ( !(point.X == -1 & point.Y == -1) )
+                {
 					points.Add(point);
 				}
 			}
@@ -82,7 +84,14 @@ namespace BennuLib.IO
 			return numberPivotPoints;
 		}
 
-		public GlyphInfo ReadGlyphInfo()
+        public int ReadPivotPointsNumberLong()
+        {
+            var flags = ReadUInt32();
+            var numberPivotPoints = Convert.ToInt16(flags & PivotPointsNumberBitMask);
+            return numberPivotPoints;
+        }
+
+        public GlyphInfo ReadGlyphInfo()
 		{
 			return new GlyphInfo(ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32());
 		}

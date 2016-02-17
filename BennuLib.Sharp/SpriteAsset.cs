@@ -26,7 +26,7 @@ namespace BennuLib
                 case DepthMode.ArgbInt32:
                     return new SpriteAsset(32, null);
                 case DepthMode.RgbInt16:
-                    return new SpriteAsset(32, null);
+                    return new SpriteAsset(16, null);
                 case DepthMode.Monochrome:
                     return new SpriteAsset(1, null);
                 default:
@@ -63,10 +63,6 @@ namespace BennuLib
 		public Palette Palette { get; private set; }
 
         public int Depth { get; private set; }
-
-		public int Count {
-			get { return _sprites.Count; }
-		}
 
 		public ICollection<Sprite> Sprites {
 			get { return _sprites.Values; }

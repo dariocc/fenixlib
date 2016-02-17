@@ -109,7 +109,7 @@ namespace BennuLib
 				_pivotPoints.Remove(pivotPoint.Id);
 			}
 
-			if (!(x == -1) & y == -1) {
+			if ( ! (x == -1 && y == -1) ) {
 				_pivotPoints.Add(pivotPoint.Id, pivotPoint);
 			}
 		}

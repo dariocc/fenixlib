@@ -67,9 +67,12 @@ namespace BennuLib.IO
                 // TODO: Perhaps it is wiser to have a ParseDepth instead of a property...
                 get
                 {
-                    int depth = 8;
-                    int.TryParse(Magic.Substring(1, 2), out depth);
-                    return depth;
+                    int depth;
+
+                    if (int.TryParse(Magic.Substring(1, 2), out depth))
+                        return depth;
+                    else
+                        return 8;
                 }
             }
 

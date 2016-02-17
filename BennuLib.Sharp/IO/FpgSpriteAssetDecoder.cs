@@ -39,13 +39,17 @@ namespace BennuLib.IO
 
 					var mapDataLength = width * height * (header.Depth / 8);
 
-					var numberOfPivotPoints = reader.ReadPivotPointsNumber();
+					var numberOfPivotPoints = reader.ReadPivotPointsNumberLong();
 					var pivotPoints = reader.ReadPivotPoints(numberOfPivotPoints);
 
 					// Some tools such as FPG Edit are non conformant with the standard
                     // FPG files and will add data at the end. 
 					if (mapDataLength + 64 + numberOfPivotPoints * 4 != maplen) {
-						break; // TODO: might not be correct. Was : Exit Do
+                        // It can be that many tools generate this field with wrong
+                        // information. Check SmartFpgEditor output!
+                        // break; 
+                        // TODO: Consider if for example, we shall generate some 
+                        // kind of event
 					}
 
 					var graphicData = reader.ReadBytes(mapDataLength);
@@ -53,8 +57,13 @@ namespace BennuLib.IO
 
 					var map = Sprite.Create(width, height, pixels);
 					map.Description = description;
+                    foreach (var point in pivotPoints)
+                    {
+                        map.DefinePivotPoint(point.Id, point.X, point.Y);
+                    }
 
 					fpg.Update(code, map);
+
 				} while (true);
 
 			}
