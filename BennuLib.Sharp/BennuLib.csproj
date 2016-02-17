@@ -73,7 +73,6 @@
     <Compile Include="IO\NativeFormatReader.cs" />
     <Compile Include="IO\NativeFormatWriter.cs" />
     <Compile Include="IO\PalPaletteEncoder.cs" />
-    <Compile Include="Legacy\CustomErrors.cs" />
     <Compile Include="Palette.cs" />
     <Compile Include="PivotPoint.cs" />
     <Compile Include="Pixels\IndexedPixel.cs" />
