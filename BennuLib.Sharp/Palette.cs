@@ -1,45 +1,35 @@
 using System;
 using System.Collections;
+using System.Linq;
 
 namespace BennuLib
 {
 	[Serializable()]
-	public class Palette : IEnumerable
+	public partial class Palette : IEnumerable
 	{
+        private Color[] _colors;
 
-		public struct Color
+        private Palette(Color[] colors)
+        {
+            _colors = colors;
+        }
+
+        public Color[] Colors
+        {
+            get { return _colors; }
+        }
+        public Color this[int index]
+        {
+            get { return _colors[index]; }
+            set { _colors[index] = value; }
+        }
+
+        public static Palette Create(Color[] colors)
 		{
-			public readonly int r;
-			public readonly int g;
+            if (colors.Length < 256)
+                throw new ArgumentException(); // TODO: Customize
 
-			public readonly int b;
-			public Color(int r, int g, int b)
-			{
-				this.r = r;
-				this.g = g;
-				this.b = b;
-			}
-		}
-
-
-		private Color[] _colors;
-		public static Palette Create(Color[] colors)
-		{
 			return new Palette(colors);
-		}
-
-		private Palette(Color[] colors)
-		{
-			_colors = colors;
-		}
-
-		public Color this[int index] {
-			get { return _colors[index]; }
-			set { _colors[index] = value; }
-		}
-
-		public Color[] Colors {
-			get { return _colors; }
 		}
 
 		public Palette GetCopy()
@@ -53,5 +43,50 @@ namespace BennuLib
 		{
 			return _colors.GetEnumerator();
 		}
-	}
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            // Should we use reference comparison?
+            Palette palette = obj as Palette;
+            if (((object) palette) == null)
+            {
+                return false;
+            }
+
+            return Equals(palette);
+        }
+
+        public bool Equals(Palette palette)
+        {
+            // TODO: does it matter if we have the (object)?
+            // Should we use reference comparison?
+            if ( ((object) palette) == null)
+            {
+                return false;
+            }
+
+            return (palette.Colors.SequenceEqual(Colors));
+        }
+
+        public override int GetHashCode()
+        {
+            // TODO: We might want to make a better one...
+            return _colors[0].r.GetHashCode() ^ _colors[100].r.GetHashCode();
+        }
+
+        public static bool operator == (Palette paletteA, Palette paletteB)
+        {
+            return paletteA.Equals(paletteB);
+        }
+
+        public static bool operator !=(Palette paletteA, Palette paletteB)
+        {
+            return paletteA != paletteB;
+        }
+    }
 }

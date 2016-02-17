@@ -5,25 +5,31 @@ namespace BennuLib.IO
 	public class FpgSpriteAssetDecoder : NativeDecoder<SpriteAsset>
 	{
 
-		public override int MaxSupportedVersion { get; }
-		// Current readable Fpg version
+        public override int MaxSupportedVersion { get; } = 0x00;
 
-		protected override string[] KnownFileExtensions { get; }
+        protected override string[] KnownFileExtensions { get; } = { "fpg" };
 
-		protected override string[] KnownFileMagics { get; }
+        protected override string[] KnownFileMagics { get; } = { "f16", "f32", "fpg", "f01" };
 
 		protected override SpriteAsset ReadBody(Header header, NativeFormatReader reader)
 		{
-			var depth = header.Depth;
-			if (depth == 8) {
-				var pal = Palette.Create(VGAtoColors(reader.ReadPalette()));
-				reader.ReadUnusedPaletteGamma();
-			}
+            SpriteAsset fpg;
 
-			SpriteAsset fpg = new SpriteAsset();
+            if (header.Depth == 8)
+            {
+                Palette palette = Palette.Create(VGAtoColors(reader.ReadPalette()));
+                reader.ReadUnusedPaletteGamma();
+                fpg = SpriteAsset.Create(palette);
+            }
+            else
+            {
+                fpg = SpriteAsset.Create((DepthMode)header.Depth);
+            }
 
-			try {
-				do {
+			try
+            {
+				do
+                {
 					var code = reader.ReadInt32();
 					var maplen = reader.ReadInt32();
 					var description = reader.ReadAsciiZ(32);
@@ -31,17 +37,16 @@ namespace BennuLib.IO
 					var width = reader.ReadInt32();
 					var height = reader.ReadInt32();
 
-					var mapDataLength = width * height * (depth / 8);
+					var mapDataLength = width * height * (header.Depth / 8);
 
 					var numberOfPivotPoints = reader.ReadPivotPointsNumber();
 					var pivotPoints = reader.ReadPivotPoints(numberOfPivotPoints);
 
-					// Serves as checksum for FPGs created with non-standard tools such
-					// as FPG Edit
+					// Some tools such as FPG Edit are non conformant with the standard
+                    // FPG files and will add data at the end. 
 					if (mapDataLength + 64 + numberOfPivotPoints * 4 != maplen) {
 						break; // TODO: might not be correct. Was : Exit Do
 					}
-
 
 					var graphicData = reader.ReadBytes(mapDataLength);
 					var pixels = CreatePixelBuffer(header.Depth, graphicData);
@@ -51,8 +56,12 @@ namespace BennuLib.IO
 
 					fpg.Update(code, map);
 				} while (true);
-			} catch (System.IO.EndOfStreamException exception) {
-				// Do nothing (the reading of the map
+
+			}
+            catch (System.IO.EndOfStreamException)
+            {
+				// Do nothing. The file is consumed until it is not possible to 
+                // read any more data.
 			}
 
 			return fpg;

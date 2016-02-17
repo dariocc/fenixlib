@@ -15,9 +15,39 @@ namespace BennuLib
 	public class SpriteAsset : IEnumerable<Sprite>
 	{
 
-		private const int MinCode = 1;
 
+		private const int MinCode = 1;
 		private const int MaxCode = 999;
+
+        public static SpriteAsset Create(DepthMode depthMode)
+        {
+            switch (depthMode)
+            {
+                case DepthMode.ArgbInt32:
+                    return new SpriteAsset(32, null);
+                case DepthMode.RgbInt16:
+                    return new SpriteAsset(32, null);
+                case DepthMode.Monochrome:
+                    return new SpriteAsset(1, null);
+                default:
+                    throw new ArgumentException(); // TODO: Customize
+            }
+        }
+
+        public static SpriteAsset Create(Palette palette)
+        {
+            if (palette.Colors.Length != 256)
+                throw new ArgumentException();
+
+            return new SpriteAsset(8, palette);
+        }
+
+        private SpriteAsset(int depth, Palette palette) {
+            Depth = depth;
+            Palette = palette;
+        }
+
+
 		[Obsolete()]
 		private bool IsIdValid(int x)
 		{
@@ -26,23 +56,13 @@ namespace BennuLib
 
 		private IDictionary<int, Sprite> _sprites = new SortedDictionary<int, Sprite>();
 
-		private Palette _palette;
-
 		public Sprite this[int code] {
 			get { return _sprites[code]; }
 		}
 
-		internal Palette Palette {
-			get { return _palette; }
-		}
+		public Palette Palette { get; private set; }
 
-		[Obsolete()]
-
-		private short _depth;
-		[Obsolete()]
-		public short Depth {
-			get { return _depth; }
-		}
+        public int Depth { get; private set; }
 
 		public int Count {
 			get { return _sprites.Count; }
@@ -54,7 +74,9 @@ namespace BennuLib
 
 		public void Add(int code, ref Sprite sprite)
 		{
-			// TODO: ensure palette constraint
+            if (sprite.Depth != Depth)
+                throw new InvalidOperationException();
+
 			_sprites.Add(code, sprite);
 			sprite.ParentAsset = this;
 		}

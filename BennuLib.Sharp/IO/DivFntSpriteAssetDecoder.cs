@@ -14,18 +14,21 @@ namespace BennuLib.IO
 		protected override SpriteAsset ReadBody(Header header, NativeFormatReader reader)
 		{
 
-			var pal = Palette.Create(VGAtoColors(reader.ReadPalette()));
+			Palette palette = Palette.Create(VGAtoColors(reader.ReadPalette()));
 			reader.ReadUnusedPaletteGamma();
 
 			int fontInfo = reader.ReadInt32();
 
 			GlyphInfo[] characters = new GlyphInfo[256];
-			for (var n = 0; n <= 255; n++) {
+			for (var n = 0; n <= 255; n++)
+            {
 				characters[n] = reader.ReadGlyphInfo();
 			}
 
-			SpriteAsset fpg = new SpriteAsset();
-			foreach (var character in characters) {
+			SpriteAsset fpg = SpriteAsset.Create(palette);
+
+			foreach (var character in characters)
+            {
 				var dataLength = character.Height * character.Width;
 
 				if (character.FileOffset == 0 | dataLength == 0)

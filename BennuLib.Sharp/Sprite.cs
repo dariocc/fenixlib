@@ -77,10 +77,21 @@ namespace BennuLib
 			get { return _palette; }
 		}
 
-		private Sprite(int width, int height, IPixel[] pixels)
+        /// <summary>
+        /// The depth of the map, which is determined by the type of its <see cref="Pixels"/>.
+        /// When the type of the pixels is undefined, the value of this property is 0.
+        /// </summary>
+        public int Depth
+        {
+            get {
+                return PixelArrays.GetDepth(_pixels);
+            }
+        }
+
+        protected Sprite(int width, int height, IPixel[] pixels)
 		{
-			this.Width = width;
-			this.Height = height;
+			Width = width;
+			Height = height;
 
 			if (pixels.Length != width * height) {
 				throw new ArgumentException();
@@ -198,5 +209,7 @@ namespace BennuLib
 
 		//    Return sprite
 		//End Function
+
+
 	}
 }
