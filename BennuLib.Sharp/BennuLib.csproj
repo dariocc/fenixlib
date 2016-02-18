@@ -55,6 +55,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapFont.cs" />
     <Compile Include="IO\File.cs" />
     <Compile Include="DepthMode.cs" />
     <Compile Include="Exceptions.cs" />

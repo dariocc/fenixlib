@@ -85,7 +85,7 @@ namespace BennuLib.IO
              * is a GZip file, in which case it will use a GZipStream object to read it.
              */
 
-            /*
+            /* Remove when function is verified
 			byte[] buff = new byte[2];
 
 			if ( !(input.Read(buff, 0, 2) == 2) ) {
