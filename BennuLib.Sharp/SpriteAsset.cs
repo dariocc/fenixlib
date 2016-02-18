@@ -121,6 +121,7 @@ namespace BennuLib
 			return code;
 		}
 
+        [Obsolete]
 		public int PreviousFreeCode(int startId = MaxCode)
 		{
 			if (IsIdValid(startId))

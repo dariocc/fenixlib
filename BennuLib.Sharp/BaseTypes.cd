@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BennuLib.SpriteAsset">
+    <Position X="0.5" Y="0.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAYAAACAAAAAABIAKAAAACAAAAAAAEAkCIAAAACAAAA=</HashCode>
+      <FileName>SpriteAsset.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_sprites" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BennuLib.Sprite">
+    <Position X="4" Y="0.5" Width="1.75" />
+    <Members>
+      <Property Name="Pixels" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BennuLib.Sprite.SearchDirection" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Sprite.SearchDirection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAKCAAAABIAiCAAAAAAhAGBQAAQgAEAgAAAAAANIIAA=</HashCode>
+      <FileName>Sprite.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Palette" />
+      <Property Name="Pixels" />
+      <Property Name="ParentAsset" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="_pixels" />
+      <Property Name="PivotPoints" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BennuLib.Palette">
+    <Position X="7.75" Y="3.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="BennuLib.Palette.Color" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Palette.Color.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAABAAiAAAAAAAAAAAQMAAAAAAgAAAAiA=</HashCode>
+      <FileName>Palette.Color.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BennuLib.Int16Pixel565" Collapsed="true">
+    <Position X="10" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABACAAABAAAAAgAAAAgAAAAAAAAAABAAAAggAhAAAAA=</HashCode>
+      <FileName>Pixels\Int16Pixel565.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="BennuLib.Int32PixelARGB" Collapsed="true">
+    <Position X="8" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACAAABAAAAAgAAAAgAAAAAAAAAABAAAAggAhAAAAA=</HashCode>
+      <FileName>Pixels\Int32PixelARGB.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.102" />
+  </Class>
+  <Class Name="BennuLib.IndexedPixel" Collapsed="true">
+    <Position X="12" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAABAAAAAgAAAAggAAAAAAAAABAAAAggAhAAAAA=</HashCode>
+      <FileName>Pixels\IndexedPixel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.133" />
+  </Class>
+  <Struct Name="BennuLib.PivotPoint">
+    <Position X="11.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAAAAAAYiA=</HashCode>
+      <FileName>PivotPoint.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="BennuLib.IPixel" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAABAAAAAgAAAAgAAAAAAAAAABAAAAggAhAAAAA=</HashCode>
+      <FileName>Pixels\IPixel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

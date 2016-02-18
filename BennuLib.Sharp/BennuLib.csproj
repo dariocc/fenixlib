@@ -100,5 +100,8 @@
   <ItemGroup>
     <Compile Include="Palette.Color.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="BaseTypes.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

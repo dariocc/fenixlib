@@ -9,7 +9,7 @@ namespace BennuLib
 	{
         private Color[] _colors;
 
-        private Palette(Color[] colors)
+        protected Palette(Color[] colors)
         {
             _colors = colors;
         }

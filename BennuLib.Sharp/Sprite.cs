@@ -130,7 +130,7 @@ namespace BennuLib
 			get { return _pivotPoints.Values; }
 		}
 
-		public bool BelongsToAsset {
+		public bool IsInAsset {
 			get { return _parent == null; }
 		}
 
