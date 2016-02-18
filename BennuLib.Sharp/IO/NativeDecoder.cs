@@ -79,20 +79,20 @@ namespace BennuLib.IO
         /// <returns>A <see cref="BennuLib"/> base type.</returns>
 		public T Decode(Stream input)
 		{
-		    
+
             /* Native formats support GZip compression transparently
              * This function will read the first two bytes of the file and determine if it 
              * is a GZip file, in which case it will use a GZipStream object to read it.
              */
-            	
+
+            /*
 			byte[] buff = new byte[2];
 
 			if ( !(input.Read(buff, 0, 2) == 2) ) {
 				throw new IOException();
 			}
-
-            // Rewind
-			input.Position = 0; // TODO: Will it work with every type of stream?
+            
+            input.Position = 0; // This will not work with every type of stream
 
 			Stream stream = null;
 			if ( HeaderIsGZip(buff) ) {
@@ -100,10 +100,44 @@ namespace BennuLib.IO
 			} else {
 				stream = input;
 			}
+            */
+
+            Stream stream = null;
+            Header header;
+            using (var memory = new MemoryStream(8))
+            {
+                input.CopyTo(memory, 8); // input will remain at Position 8
+                memory.Flush();
+
+                memory.Position = 0;
+
+                byte[] firstBytes = new byte[2];
+
+                if (!(memory.Read(firstBytes, 0, 2) == 2))
+                {
+                    throw new IOException();
+                }
+
+                if (HeaderIsGZip(firstBytes))
+                {
+                    stream = new GZipStream(input, CompressionMode.Decompress);
+                }
+                else
+                {
+                    stream = input;
+                }
+
+                // The native format header is read from the buffered memory, since
+                // we cannot be sure that the original input stream can be rewind.
+                memory.Position = 0;
+                using (NativeFormatReader reader = new NativeFormatReader(memory))
+                {
+                    header = reader.ReadHeader();
+                }
+            }
 
 			using (NativeFormatReader reader = new NativeFormatReader(stream)) {
-				var header = reader.ReadHeader();
-
+				
 				if ( ! KnownFileMagics.Contains(header.Magic) )
 					throw new UnsuportedFileFormatException();
 
