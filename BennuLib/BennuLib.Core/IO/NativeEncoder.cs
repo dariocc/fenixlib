@@ -7,10 +7,13 @@ namespace Bennu.IO
     {
 
         protected abstract byte LastHeaderByte { get; }
+
         protected abstract void WriteNativeFormatBody ( T obj, NativeFormatWriter writer );
+
         protected abstract string GetFileId ( T obj );
 
-        public readonly CompressionOptions Compression;
+        public CompressionOptions Compression { get; set; }
+
         public NativeEncoder () : this ( CompressionOptions.Uncompressed )
         {
         }
