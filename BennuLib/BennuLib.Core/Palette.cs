@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 
-namespace BennuLib
+namespace Bennu
 {
 	[Serializable()]
 	public partial class Palette : IEnumerable

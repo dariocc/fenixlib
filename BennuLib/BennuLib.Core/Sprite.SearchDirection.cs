@@ -1,4 +1,4 @@
-namespace BennuLib
+namespace Bennu
 {
 	public partial class Sprite
 	{

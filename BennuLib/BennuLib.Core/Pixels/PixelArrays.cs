@@ -1,4 +1,4 @@
-﻿namespace BennuLib
+﻿namespace Bennu
 {
     /// <summary>
     /// Helper functions to work with Arrays of pixels

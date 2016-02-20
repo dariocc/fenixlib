@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Collections;
 
-namespace BennuLib
+namespace Bennu
 {
     public class BitmapFont : IEnumerable<Glyph>
     {

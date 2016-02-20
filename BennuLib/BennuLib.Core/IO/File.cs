@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
     /// <summary>
     /// Provides static methods for the opening and creation of Bennu native file

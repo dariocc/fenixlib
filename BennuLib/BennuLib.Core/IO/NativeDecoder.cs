@@ -4,9 +4,9 @@ using System.IO.Compression;
 using System.Collections.Generic;
 using System.Linq;
 
-using static BennuLib.IO.NativeFormat;
+using static Bennu.IO.NativeFormat;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
     /// <summary>
     /// <see cref="NativeDecoder{T}"/> base class for all native formats decoders. It defines
@@ -34,7 +34,7 @@ namespace BennuLib.IO
         public abstract int MaxSupportedVersion { get; }
         
         /// <summary>
-        /// Decodes the body of the native format and returns a <see cref="BennuLib"/> base 
+        /// Decodes the body of the native format and returns a <see cref="Bennu"/> base 
         /// type.
         /// </summary>
         /// <param name="header">A header object containing information of the magic, terminator
@@ -87,10 +87,10 @@ namespace BennuLib.IO
         }
 
         /// <summary>
-        /// Decodes the stream and returns a <see cref="BennuLib"/> base type.
+        /// Decodes the stream and returns a <see cref="Bennu"/> base type.
         /// </summary>
         /// <param name="input">The stream from which to read.</param>
-        /// <returns>A <see cref="BennuLib"/> base type.</returns>
+        /// <returns>A <see cref="Bennu"/> base type.</returns>
 		public T Decode(Stream input)
 		{
 

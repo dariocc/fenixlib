@@ -1,6 +1,6 @@
 using System;
 
-namespace BennuLib
+namespace Bennu
 {
     [Serializable ()]
     public class Glyph

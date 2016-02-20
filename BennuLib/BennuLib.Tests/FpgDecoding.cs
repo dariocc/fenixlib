@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using BennuLib;
-using BennuLib.IO;
+using Bennu;
+using Bennu.IO;
 
-namespace BennuLib.Tests
+namespace Bennu.Tests
 {
     [TestClass]
     public class FpgDecoding

@@ -1,7 +1,7 @@
 using System.IO.Compression;
 using System.IO;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
 	public abstract class NativeEncoder<T> : IEncoder<T>
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BennuLib.Pixels
+namespace Bennu.Pixels
 {
     class MonochromePixel : IPixel
     {

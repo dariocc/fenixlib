@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
 	public class FpgSpriteAssetEncoder : NativeEncoder<SpriteAsset>
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
     public sealed class ExtendedFntFontDecoder : FntAbstractFontDecoder
     {

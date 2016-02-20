@@ -2,9 +2,9 @@
 using System.Linq;
 using System.IO;
 
-using static BennuLib.IO.NativeFormat;
+using static Bennu.IO.NativeFormat;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
     /// <summary>
     /// Bennu supports two types of font formats: Bennu's own format, called 'Fnx' Fonts, and

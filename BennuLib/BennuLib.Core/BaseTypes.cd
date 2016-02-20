@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="BennuLib.SpriteAsset">
+  <Class Name="Bennu.SpriteAsset">
     <Position X="0.5" Y="0.5" Width="2.25" />
     <Members>
       <Method Name="IdOf" Hidden="true" />
@@ -19,7 +19,7 @@
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="BennuLib.Sprite">
+  <Class Name="Bennu.Sprite">
     <Position X="4" Y="0.5" Width="1.75" />
     <Members>
       <Method Name="Create" Hidden="true" />
@@ -31,7 +31,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <NestedTypes>
-      <Enum Name="BennuLib.Sprite.SearchDirection" Collapsed="true">
+      <Enum Name="Bennu.Sprite.SearchDirection" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>Sprite.SearchDirection.cs</NewMemberFileName>
         </TypeIdentifier>
@@ -51,7 +51,7 @@
       <Property Name="PivotPoints" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="BennuLib.Palette">
+  <Class Name="Bennu.Palette">
     <Position X="10.75" Y="3.75" Width="2" />
     <Members>
       <Method Name="Create" Hidden="true" />
@@ -64,7 +64,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <NestedTypes>
-      <Struct Name="BennuLib.Palette.Color" Collapsed="true">
+      <Struct Name="Bennu.Palette.Color" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>Palette.Color.cs</NewMemberFileName>
         </TypeIdentifier>
@@ -76,7 +76,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="BennuLib.Int16Pixel565" Collapsed="true">
+  <Class Name="Bennu.Int16Pixel565" Collapsed="true">
     <Position X="10.25" Y="9.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
@@ -88,7 +88,7 @@
     </TypeIdentifier>
     <Lollipop Orientation="Left" Position="0.1" />
   </Class>
-  <Class Name="BennuLib.Int32PixelARGB" Collapsed="true">
+  <Class Name="Bennu.Int32PixelARGB" Collapsed="true">
     <Position X="8.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABACAAABAAAAAgAAAAgAAAAAAAAAABAAAAggAhAAAAA=</HashCode>
@@ -96,7 +96,7 @@
     </TypeIdentifier>
     <Lollipop Orientation="Left" Position="0.102" />
   </Class>
-  <Class Name="BennuLib.IndexedPixel" Collapsed="true">
+  <Class Name="Bennu.IndexedPixel" Collapsed="true">
     <Position X="12.5" Y="9.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAABAAAAAgAAAAggAAAAAAAAABAAAAggAhAAAAA=</HashCode>
@@ -104,13 +104,13 @@
     </TypeIdentifier>
     <Lollipop Orientation="Left" Position="0.133" />
   </Class>
-  <Class Name="BennuLib.BitmapFont">
+  <Class Name="Bennu.BitmapFont">
     <Position X="0.5" Y="5.5" Width="2.25" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAABAACAAAACAAAAAAAAAkAAYgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAABAACAAAACAAAAAAAEAkAAYgAAAAAAA=</HashCode>
       <FileName>BitmapFont.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -118,7 +118,7 @@
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="BennuLib.Glyph">
+  <Class Name="Bennu.Glyph">
     <Position X="5.25" Y="6.5" Width="1.5" />
     <Members>
       <Method Name="Glyph" Hidden="true" />
@@ -131,7 +131,7 @@
       <Property Name="Pixels" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Struct Name="BennuLib.PivotPoint">
+  <Struct Name="Bennu.PivotPoint">
     <Position X="9.5" Y="0.5" Width="1.5" />
     <Members>
       <Method Name="GetHashCode" Hidden="true" />
@@ -142,7 +142,7 @@
       <FileName>PivotPoint.cs</FileName>
     </TypeIdentifier>
   </Struct>
-  <Interface Name="BennuLib.IPixel">
+  <Interface Name="Bennu.IPixel">
     <Position X="8" Y="6.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />

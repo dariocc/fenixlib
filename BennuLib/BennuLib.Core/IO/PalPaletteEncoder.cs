@@ -1,4 +1,4 @@
-namespace BennuLib.IO
+namespace Bennu.IO
 {
 	public class PalPaletteEncoder : NativeEncoder<Palette>
 	{

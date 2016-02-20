@@ -5,7 +5,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
 	public class NativeFormatWriter : BinaryWriter
 	{

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using static BennuLib.IO.NativeFormat;
+using static Bennu.IO.NativeFormat;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
 	public class NativeFormatReader : BinaryReader
 	{

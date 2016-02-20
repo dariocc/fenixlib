@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Linq;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
 	public class MapSpriteEncoder : NativeEncoder<Sprite>
 	{

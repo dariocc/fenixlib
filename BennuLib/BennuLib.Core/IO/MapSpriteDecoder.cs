@@ -1,6 +1,6 @@
-using static BennuLib.IO.NativeFormat;
+using static Bennu.IO.NativeFormat;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
     public class MapSpriteDecoder : NativeDecoder<Sprite>
     {

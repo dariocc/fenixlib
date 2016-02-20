@@ -1,7 +1,7 @@
 using System;
 using static System.Collections.StructuralComparisons;
 
-namespace BennuLib.IO
+namespace Bennu.IO
 {
 	public static class NativeFormat
 	{

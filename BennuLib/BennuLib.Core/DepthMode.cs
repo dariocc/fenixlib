@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BennuLib
+namespace Bennu
 {
     public sealed class DepthMode
     {

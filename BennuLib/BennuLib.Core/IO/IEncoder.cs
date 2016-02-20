@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace BennuLib
+namespace Bennu
 {
 
 	public interface IEncoder<T>
