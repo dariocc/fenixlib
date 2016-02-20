@@ -7,7 +7,7 @@ namespace Bennu.IO
 	public class MapSpriteEncoder : NativeEncoder<Sprite>
 	{
 
-		protected override byte LastHeaderByte { get; }
+		protected override byte GetLastHeaderByte { get; }
 
 		protected override void WriteNativeFormatBody(Sprite sprite, NativeFormatWriter writer)
 		{

@@ -1,15 +1,19 @@
+using Bennu.Util;
+
 namespace Bennu
 {
-	public interface IPixel
+	public abstract class IPixel
 	{
-		int Argb { get; }
-		int Red { get; }
-		int Green { get; }
-		int Blue { get; }
-		int Alpha { get; }
-		int Value { get; }
-		IPixel GetTransparentCopy();
-		IPixel GetOpaqueCopy();
-		bool IsTransparent { get; }
-	}
+		public abstract int Argb { get; }
+        public abstract int Red { get; }
+        public abstract int Green { get; }
+        public abstract int Blue { get; }
+        public abstract int Alpha { get; }
+        public abstract int Value { get; }
+        public abstract IPixel GetTransparentCopy ();
+        public abstract IPixel GetOpaqueCopy ();
+
+        public abstract bool IsTransparent { get; }
+        internal abstract byte[] GetRawValueBytes ();
+    }
 }

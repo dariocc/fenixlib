@@ -21,6 +21,7 @@
     <DocumentationFile>BennuLib.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1591</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,7 +56,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BitmapFont.cs" />
+    <Compile Include="Util\Util.cs" />
     <Compile Include="FontCodepage.cs" />
     <Compile Include="IO\DivFntFontDecoder.cs" />
     <Compile Include="IO\File.cs" />

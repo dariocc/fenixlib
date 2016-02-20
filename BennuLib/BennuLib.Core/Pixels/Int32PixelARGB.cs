@@ -6,6 +6,7 @@ namespace Bennu
 	public class Int32PixelARGB : IPixel
 	{
 		private readonly int _value;
+
 		public Int32PixelARGB(byte alpha, byte r, byte g, byte b) : this(alpha << 24 | r << 16 | g << 8 | b)
 		{
 		}
@@ -15,44 +16,49 @@ namespace Bennu
 			_value = value;
 		}
 
-		public int Alpha {
+		public override int Alpha {
 			get { return _value >> 24; }
 		}
 
-		public int Argb {
+		public override int Argb {
 			get { return _value; }
 		}
 
-		public int Blue {
+		public override int Blue {
 			get { return _value & 0xff; }
 		}
 
-		public int Green {
+		public override int Green {
 			get { return _value >> 8 & 0xff; }
 		}
 
-		public int Red {
+		public override int Red {
 			get { return _value >> 24 & 0xff; }
 		}
 
-		public int Value {
+		public override int Value {
 			get {
                 return _value;
 			}
 		}
 
-		public bool IsTransparent {
+		public override bool IsTransparent {
 			get { return Alpha == 255; }
 		}
 
-		public IPixel GetTransparentCopy()
+        public override IPixel GetTransparentCopy()
 		{
 			return new Int32PixelARGB(_value & 0xFFFFFF);
 		}
 
-		public IPixel GetOpaqueCopy()
+		public override IPixel GetOpaqueCopy()
 		{
 			return new Int32PixelARGB(Value & 0xffffff);
 		}
-	}
+
+        internal override byte[] GetRawValueBytes ()
+        {
+            return BitConverter.GetBytes( _value );
+        }
+    }
 }

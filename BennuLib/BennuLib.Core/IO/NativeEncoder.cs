@@ -6,11 +6,11 @@ namespace Bennu.IO
     public abstract class NativeEncoder<T> : IEncoder<T>
     {
 
-        protected abstract byte LastHeaderByte { get; }
+        protected abstract byte GetLastHeaderByte ( T what );
 
         protected abstract void WriteNativeFormatBody ( T obj, NativeFormatWriter writer );
 
-        protected abstract string GetFileId ( T obj );
+        protected abstract string GetFileId ( T what );
 
         public CompressionOptions Compression { get; }
 
@@ -21,7 +21,7 @@ namespace Bennu.IO
             Compression = compressionOptions;
         }
 
-        public void Encode ( T obj, Stream output )
+        public void Encode ( T what, Stream output )
         {
             Stream nativeStream = null;
 
@@ -36,10 +36,10 @@ namespace Bennu.IO
 
             using ( NativeFormatWriter writer = new NativeFormatWriter ( output ) )
             {
-                writer.WriteAsciiZ ( GetFileId ( obj ).Substring ( 0, 3 ), 3 );
+                writer.WriteAsciiZ ( GetFileId ( what ).Substring ( 0, 3 ), 3 );
                 writer.Write ( NativeFormat.Terminator );
-                writer.Write ( LastHeaderByte );
-                WriteNativeFormatBody ( obj, writer );
+                writer.Write ( GetLastHeaderByte ( what ) );
+                WriteNativeFormatBody ( what, writer );
             }
         }
 
