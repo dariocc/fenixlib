@@ -65,6 +65,7 @@
     <Compile Include="IO\DivFntSpriteAssetDecoder.cs" />
     <Compile Include="IO\DivFormatlPaletteDecoder.cs" />
     <Compile Include="IO\FntAbstractFontDecoder.cs" />
+    <Compile Include="IO\FntAbstractFontEncoder.cs" />
     <Compile Include="IO\FpgSpriteAssetDecoder.cs" />
     <Compile Include="IO\FpgSpriteAssetEncoder.cs" />
     <Compile Include="IO\IDecoder.cs" />

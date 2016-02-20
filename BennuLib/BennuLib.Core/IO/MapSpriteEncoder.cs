@@ -7,9 +7,9 @@ namespace Bennu.IO
 	public class MapSpriteEncoder : NativeEncoder<Sprite>
 	{
 
-		protected override byte Version { get; }
+		protected override byte LastHeaderByte { get; }
 
-		protected override void WriteNativeFormat(Sprite sprite, NativeFormatWriter writer)
+		protected override void WriteNativeFormatBody(Sprite sprite, NativeFormatWriter writer)
 		{
 			writer.Write(Convert.ToUInt16(sprite.Width));
 			writer.Write(Convert.ToUInt16(sprite.Height));

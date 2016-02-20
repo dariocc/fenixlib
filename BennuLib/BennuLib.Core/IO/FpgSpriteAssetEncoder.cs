@@ -6,9 +6,9 @@ namespace Bennu.IO
 	public class FpgSpriteAssetEncoder : NativeEncoder<SpriteAsset>
 	{
 
-		protected override byte Version { get; }
+		protected override byte LastHeaderByte { get; }
 
-		protected override void WriteNativeFormat(SpriteAsset asset, NativeFormatWriter writer)
+		protected override void WriteNativeFormatBody(SpriteAsset asset, NativeFormatWriter writer)
 		{
 			if (HasPalette(asset)) {
 				// TODO: Write the palette
