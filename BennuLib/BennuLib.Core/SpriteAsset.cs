@@ -9,28 +9,12 @@ using System.Xml.Linq;
 using System.Threading.Tasks;
 namespace BennuLib
 {
-
-
     [Serializable ()]
     public sealed class SpriteAsset : IEnumerable<Sprite>
     {
 
-
         private const int MinCode = 1;
         private const int MaxCode = 999;
-
-        public static SpriteAsset Create ( DepthMode depthMode )
-        {
-            return new SpriteAsset ( ( int ) depthMode );
-        }
-
-        public static SpriteAsset Create ( Palette palette )
-        {
-            if ( palette.Colors.Length != 256 )
-                throw new ArgumentException ();
-
-            return new SpriteAsset ( (int) DepthMode.RgbIndexedPalette, palette );
-        }
 
         private SpriteAsset ( int depth, Palette palette = null)
         {
@@ -151,6 +135,19 @@ namespace BennuLib
         IEnumerator IEnumerable.GetEnumerator ()
         {
             return GetEnumerator ();
+        }
+
+        public static SpriteAsset Create ( DepthMode depthMode )
+        {
+            return new SpriteAsset ( ( int ) depthMode );
+        }
+
+        public static SpriteAsset Create ( Palette palette )
+        {
+            if ( palette.Colors.Length != 256 )
+                throw new ArgumentException ();
+
+            return new SpriteAsset ( ( int ) DepthMode.RgbIndexedPalette, palette );
         }
     }
 }
