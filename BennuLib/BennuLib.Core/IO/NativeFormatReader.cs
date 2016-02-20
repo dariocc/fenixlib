@@ -45,10 +45,11 @@ namespace BennuLib.IO
 			// 3 first bytes describe the depth of the MAP
 			var fileType = _encoding.GetString(ReadBytes(3));
 			// Next 4 bytes are MS-DOS termination, and last is the MAP version
-			var descriptor = ReadBytes(4);
+			var terminator = ReadBytes(4);
+            // Last byte of the header is the version number
 			var version = ReadByte();
 
-			return new Header(fileType, version, descriptor);
+			return new Header(fileType, terminator, version);
 		}
 
 		public byte[] ReadPalette()

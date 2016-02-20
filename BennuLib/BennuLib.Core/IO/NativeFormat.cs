@@ -41,20 +41,25 @@ namespace BennuLib.IO
 		public sealed class Header
 		{
 
-			public string Magic { get; }
-			public int Version { get; }
+            private string _magic;
+			public string Magic { get { return _magic; } }
 
-			public readonly byte[] Descriptor = new byte[5];
+            private int _version;
+			public int Version { get { return _version; } }
+
+			private readonly byte[] _terminator = new byte[5];
+            public byte[] Terminator { get { return _terminator;  } }
 			
-			public Header(string magic, int version, byte[] terminator)
+			public Header(string magic, byte[] terminator, int version)
 			{
-				Magic = magic.ToLower();
-				Version = version;
-				Descriptor = terminator;
+				_magic = magic.ToLower();
+				_version = version;
+				_terminator = terminator;
 			}
 
-			public bool IsTerminatorValid() {
-                    return StructuralEqualityComparer.Equals(Terminator, Descriptor);
+			public bool IsTerminatorValid()
+            {
+                    return StructuralEqualityComparer.Equals(NativeFormat.Terminator, Terminator);
 			}
 
             /// <summary>

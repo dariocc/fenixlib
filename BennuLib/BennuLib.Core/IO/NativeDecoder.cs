@@ -28,12 +28,10 @@ namespace BennuLib.IO
     /// <typeparam name="T">The </typeparam>
 	public abstract class NativeDecoder<T> : IDecoder<T>
 	{
-
         /// <summary>
         /// The highest version number that the decoder expects to be capable of reading.
         /// </summary>
-		public abstract int MaxSupportedVersion { get; }
-
+        public abstract int MaxSupportedVersion { get; }
         
         /// <summary>
         /// Decodes the body of the native format and returns a <see cref="BennuLib"/> base 
@@ -71,6 +69,25 @@ namespace BennuLib.IO
 		{
 			return header.Length >= 2 & header[0] == 31 & header[1] == 139;
 		}
+
+
+        protected virtual bool ValidateMagic(string magic)
+        {
+
+        }
+
+        protected virtual bool ValidateTerminator()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="header"></param>
+        /// <returns></returns>
+        protected virtual bool ValidateHeader(Header header)
+        {
+            return ( KnownFileMagics.Contains(header.Magic) 
+                && header.IsTerminatorValid()
+                && header.Version <= MaxSupportedVersion );
+        }
 
         /// <summary>
         /// Decodes the stream and returns a <see cref="BennuLib"/> base type.
@@ -133,22 +150,16 @@ namespace BennuLib.IO
                 using (NativeFormatReader reader = new NativeFormatReader(memory))
                 {
                     header = reader.ReadHeader();
+
+                    if ( ! ValidateHeader(header) )
+                        throw new UnsuportedFileFormatException();
                 }
             }
 
-			using (NativeFormatReader reader = new NativeFormatReader(stream)) {
-				
-				if ( ! KnownFileMagics.Contains(header.Magic) )
-					throw new UnsuportedFileFormatException();
-
-                if ( ! header.IsTerminatorValid() )
-                    throw new UnsuportedFileFormatException();
-
-				if (header.Version > MaxSupportedVersion)
-					throw new UnsuportedFileFormatException();
-
-				return ReadBody(header, reader);
-			}
+            using (NativeFormatReader reader = new NativeFormatReader(stream))
+            {
+                return ReadBody(header, reader);
+            }
 
 		}
 
