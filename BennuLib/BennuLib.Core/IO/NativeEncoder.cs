@@ -12,7 +12,7 @@ namespace Bennu.IO
 
         protected abstract string GetFileId ( T obj );
 
-        public CompressionOptions Compression { get; set; }
+        public CompressionOptions Compression { get; }
 
         public NativeEncoder () : this ( CompressionOptions.Uncompressed )
         {
