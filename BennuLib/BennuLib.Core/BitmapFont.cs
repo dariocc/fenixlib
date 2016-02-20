@@ -9,7 +9,7 @@ namespace BennuLib
     public class BitmapFont : IEnumerable<Glyph>
     {
         private Encoding _encoding;
-        private IDictionary<byte, Glyph> _glyps = new SortedDictionary<byte, Glyph> ();
+        private IDictionary<char, Glyph> _glyphs = new SortedDictionary<char, Glyph> ();
 
         private BitmapFont ( int depth, Encoding encoding, Palette palette = null )
         {
@@ -20,11 +20,11 @@ namespace BennuLib
         {
             get
             {
-                return this[IndexForCharacter ( character )];
+                return _glyphs.ElementAt ( character ).Value;
             }
             set
             {
-                this[IndexForCharacter ( character )] = value;
+                _glyphs.Add ( character, value );
             }
         }
 
@@ -32,14 +32,12 @@ namespace BennuLib
         {
             get
             {
-                return _glyps.ElementAt ( index ).Value;
+                return _glyphs.Values.ElementAt ( index );
             }
             set
             {
-                if ( index < 0 || index > 255 )
-                    throw new IndexOutOfRangeException (); // TODO: Customize
-
-                _glyps.Add ( index, value );
+                char character = _encoding.GetChars ( new byte[] { index } )[0];
+                this[character] = value;
             }
         }
 
@@ -50,18 +48,18 @@ namespace BennuLib
         {
             get
             {
-                return _glyps.Values.AsEnumerable ();
+                return _glyphs.Values.AsEnumerable ();
             }
         }
 
         public static BitmapFont Create ( DepthMode depthMode, FontCodePage codePage )
         {
-            if (depthMode == DepthMode.RgbIndexedPalette)
+            if ( depthMode == DepthMode.RgbIndexedPalette )
             {
                 throw new InvalidOperationException (); // TODO: Customize
             }
 
-            BitmapFont font = new BitmapFont ( (int) depthMode,
+            BitmapFont font = new BitmapFont ( ( int ) depthMode,
                 Encoding.GetEncoding ( codePage.Value ) );
 
             return font;
@@ -89,15 +87,6 @@ namespace BennuLib
         IEnumerator IEnumerable.GetEnumerator ()
         {
             return Glyphs.GetEnumerator ();
-        }
-
-        private byte IndexForCharacter ( char character )
-        {
-            byte[] bytes = new byte[1];
-            _encoding.GetEncoder ().GetBytes ( new char[] { character }, 0, 0,
-                bytes, 0, true );
-
-            return bytes[0];
         }
     }
 }

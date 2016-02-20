@@ -3,6 +3,7 @@
   <Class Name="BennuLib.SpriteAsset">
     <Position X="0.5" Y="0.5" Width="2.25" />
     <Members>
+      <Method Name="IdOf" Hidden="true" />
       <Method Name="IEnumerable.GetEnumerator" Hidden="true" />
       <Method Name="IsIdValid" Hidden="true" />
       <Field Name="MaxCode" Hidden="true" />
@@ -10,7 +11,7 @@
       <Method Name="SpriteAsset" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAYAAACAAAAAABIAKAAAACAAAAAAAAAkCIAAAACAAAA=</HashCode>
+      <HashCode>AAYAAACAAAAAABIAKAAAACAAAAAAAEAkCIAAAACAAAA=</HashCode>
       <FileName>SpriteAsset.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -109,7 +110,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAABAACgAAACAAAAAAAEAkAAIgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAABAACAAAACAAAAAAAAAkAAYgAAAAAAA=</HashCode>
       <FileName>BitmapFont.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
