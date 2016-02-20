@@ -94,12 +94,12 @@ namespace BennuLib.IO
             return numberPivotPoints;
         }
 
-        public GlyphInfo ReadDivGlyphInfo()
+        public GlyphInfo ReadLegacyFntGlyphInfo()
         {
             return new GlyphInfo(ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32());
         }
 
-        public GlyphInfo ReadFnxGlyphInfo()
+        public GlyphInfo ReadExtendedFntGlypInfo()
         {
             return new GlyphInfo ( ReadInt32 (), ReadInt32 (), ReadInt32 (),
                 ReadInt32 (), ReadInt32 (), ReadInt32 (), ReadInt32 () );

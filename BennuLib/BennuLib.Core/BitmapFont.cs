@@ -9,9 +9,9 @@ namespace BennuLib
     public class BitmapFont : IEnumerable<Glyph>
     {
         private Encoding _encoding;
-        private IDictionary<byte, Glyph> _glyps = new SortedDictionary<byte, Glyph>();
+        private IDictionary<byte, Glyph> _glyps = new SortedDictionary<byte, Glyph> ();
 
-        protected BitmapFont(Encoding encoding)
+        protected BitmapFont ( Encoding encoding )
         {
             _encoding = encoding;
         }
@@ -20,19 +20,26 @@ namespace BennuLib
         {
             get
             {
-                byte[] bytes = new byte[1];
-                _encoding.GetEncoder().GetBytes( new char[]{ character }, 0, 0, 
-                    bytes, 0, true);
-
-                return null;
+                return this[IndexForCharacter ( character )];
+            }
+            set
+            {
+                this[IndexForCharacter ( character )] = value;
             }
         }
 
-        public Glyph this[int index]
+        public Glyph this[byte index]
         {
             get
             {
-                return _glyps.ElementAt(index).Value;
+                return _glyps.ElementAt ( index ).Value;
+            }
+            set
+            {
+                if ( index < 0 || index > 255 )
+                    throw new IndexOutOfRangeException (); // TODO: Customize
+
+                _glyps.Add ( index, value );
             }
         }
 
@@ -40,30 +47,32 @@ namespace BennuLib
         {
             get
             {
-                return _glyps.Values.AsEnumerable();
+                return _glyps.Values.AsEnumerable ();
             }
         }
 
-        public static BitmapFont Create(int codepage)
+        public static BitmapFont Create ( FontCodePage codepage )
         {
-            // TODO: codepage should be encapsulated in an enum...
-
-            if ( codepage != 850 || codepage != 28591)
-            {
-                throw new ArgumentException();
-            }
-
-            return new BitmapFont(Encoding.GetEncoding(codepage));
+            return new BitmapFont ( Encoding.GetEncoding ( codepage.Value ) );
         }
 
-        public IEnumerator<Glyph> GetEnumerator()
+        public IEnumerator<Glyph> GetEnumerator ()
         {
-            return _glyps.GetEnumerator();
+            return Glyphs.GetEnumerator ();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator ()
         {
-            throw new NotImplementedException();
+            return Glyphs.GetEnumerator ();
+        }
+
+        private byte IndexForCharacter ( char character )
+        {
+            byte[] bytes = new byte[1];
+            _encoding.GetEncoder ().GetBytes ( new char[] { character }, 0, 0,
+                bytes, 0, true );
+
+            return bytes[0];
         }
     }
 }
