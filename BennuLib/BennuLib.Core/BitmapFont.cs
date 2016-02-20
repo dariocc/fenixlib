@@ -11,7 +11,7 @@ namespace BennuLib
         private Encoding _encoding;
         private IDictionary<byte, Glyph> _glyps = new SortedDictionary<byte, Glyph> ();
 
-        protected BitmapFont ( Encoding encoding )
+        private BitmapFont ( int depth, Encoding encoding, Palette palette = null )
         {
             _encoding = encoding;
         }
@@ -43,6 +43,9 @@ namespace BennuLib
             }
         }
 
+        public int Depth { get; }
+        public Palette Palette { get; }
+
         public IEnumerable<Glyph> Glyphs
         {
             get
@@ -51,9 +54,31 @@ namespace BennuLib
             }
         }
 
-        public static BitmapFont Create ( FontCodePage codepage )
+        public static BitmapFont Create ( DepthMode depthMode, FontCodePage codePage )
         {
-            return new BitmapFont ( Encoding.GetEncoding ( codepage.Value ) );
+            if (depthMode == DepthMode.RgbIndexedPalette)
+            {
+                throw new InvalidOperationException (); // TODO: Customize
+            }
+
+            BitmapFont font = new BitmapFont ( (int) depthMode,
+                Encoding.GetEncoding ( codePage.Value ) );
+
+            return font;
+        }
+
+        public static BitmapFont Create ( Palette palette, FontCodePage codePage )
+        {
+            if ( palette == null )
+            {
+                throw new ArgumentException (); // TODO: Customize
+            }
+
+            BitmapFont font = new BitmapFont ( 8,
+                Encoding.GetEncoding ( codePage.Value ),
+                palette );
+
+            return font;
         }
 
         public IEnumerator<Glyph> GetEnumerator ()

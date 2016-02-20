@@ -56,7 +56,8 @@ namespace BennuLib.IO
             }
 
             // Create the font
-            BitmapFont font = BitmapFont.Create ( ParseCodePageType ( codePageType ) );
+            BitmapFont font = BitmapFont.Create ( (DepthMode) depth, 
+                ParseCodePageType ( codePageType ) );
 
             Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream );
 
@@ -78,13 +79,13 @@ namespace BennuLib.IO
                     IPixel[] pixels = pixelsReader.ReadPixels ( depth, character.Width,
                         character.Height );
 
-                    font[characterIndex] = new Glyph ( character.Width, character.Height, pixels )
-                    {
-                        XAdvance = character.XAdvance,
-                        YAdavance = character.YAdvance,
-                        XOffset = character.XOffset,
-                        YOffset = character.YOffset
-                    };
+                    Glyph glyph = Glyph.Create ( character.Width, character.Height, pixels );
+                    glyph.XAdvance = character.XAdvance;
+                    glyph.YAdavance = character.YAdvance;
+                    glyph.XOffset = character.XOffset;
+                    glyph.YOffset = character.YOffset;
+
+                    font[characterIndex] = glyph;
 
                     characterIndex += 1;
                 }

@@ -88,7 +88,7 @@ namespace BennuLib
             }
         }
 
-        protected Sprite(int width, int height, IPixel[] pixels)
+        private Sprite(int width, int height, IPixel[] pixels)
 		{
 			Width = width;
 			Height = height;

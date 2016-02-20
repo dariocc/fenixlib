@@ -12,7 +12,7 @@ namespace BennuLib
 
 
 	[Serializable()]
-	public class SpriteAsset : IEnumerable<Sprite>
+	public sealed class SpriteAsset : IEnumerable<Sprite>
 	{
 
 
@@ -149,13 +149,9 @@ namespace BennuLib
 			return _sprites.Values.GetEnumerator();
 		}
 
-		private IEnumerator IEnumerable_GetEnumerator()
-		{
-			return _sprites.Values.GetEnumerator();
-		}
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return IEnumerable_GetEnumerator();
-		}
+			return GetEnumerator ();
+        }
 	}
 }

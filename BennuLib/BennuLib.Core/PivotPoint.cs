@@ -9,7 +9,7 @@ namespace BennuLib
 		public readonly int X;
 		public readonly int Y;
 
-		public PivotPoint(int id, int x, int y)
+		internal PivotPoint(int id, int x, int y)
 		{
 			Id = id;
 			X = x;
