@@ -52,10 +52,12 @@ namespace BennuLib.IO
 			return new Header(fileType, terminator, version);
 		}
 
-		public byte[] ReadPalette()
+		public Palette ReadPalette()
 		{
 			var paletteColors = ReadBytes(PaletteBytesSize);
-			return paletteColors;
+            Palette palette = Palette.Create ( Vga2PaleetteColors ( paletteColors ) );
+
+            return palette;
 		}
 
 		public PivotPoint[] ReadPivotPoints(int number)
@@ -92,9 +94,15 @@ namespace BennuLib.IO
             return numberPivotPoints;
         }
 
-        public GlyphInfo ReadGlyphInfo()
+        public GlyphInfo ReadDivGlyphInfo()
         {
             return new GlyphInfo(ReadInt32(), ReadInt32(), ReadInt32(), ReadInt32());
+        }
+
+        public GlyphInfo ReadFnxGlyphInfo()
+        {
+            return new GlyphInfo ( ReadInt32 (), ReadInt32 (), ReadInt32 (),
+                ReadInt32 (), ReadInt32 (), ReadInt32 (), ReadInt32 () );
         }
 
         
@@ -157,6 +165,19 @@ namespace BennuLib.IO
                     graphicData[n + 4]);
             }
             return buffer;
+        }
+
+        private static Palette.Color[] Vga2PaleetteColors ( byte[] colorData )
+        {
+            Palette.Color[] colors = new Palette.Color[colorData.Length / 3];
+            for ( var n = 0 ; n <= colors.Length - 1 ; n++ )
+            {
+                colors[n] = new Palette.Color (
+                    colorData[n * 3] << 2,
+                    colorData[n * 3 + 1] << 2,
+                    colorData[n * 3 + 1] << 2 );
+            }
+            return colors;
         }
     }
 }

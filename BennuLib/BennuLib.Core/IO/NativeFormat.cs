@@ -44,16 +44,16 @@ namespace BennuLib.IO
             private string _magic;
 			public string Magic { get { return _magic; } }
 
-            private int _version;
-			public int Version { get { return _version; } }
+            private int _lastByte;
+			public int LastByte { get { return _lastByte; } }
 
 			private readonly byte[] _terminator = new byte[5];
             public byte[] Terminator { get { return _terminator;  } }
 			
-			public Header(string magic, byte[] terminator, int version)
+			public Header(string magic, byte[] terminator, int lastByte)
 			{
 				_magic = magic.ToLower();
-				_version = version;
+				_lastByte = lastByte;
 				_terminator = terminator;
 			}
 
@@ -70,6 +70,7 @@ namespace BennuLib.IO
 			public int Depth
             {
                 // TODO: Perhaps it is wiser to have a ParseDepth instead of a property...
+                // TODO: Definitely, as the Depth does not apply for the Fnt FNX format, for instance
                 get
                 {
                     int depth;
@@ -85,20 +86,75 @@ namespace BennuLib.IO
 
 		public struct GlyphInfo
 		{
+            /// <summary>
+            /// The width of the character's glyph
+            /// </summary>
 			public int Width { get; }
+            /// <summary>
+            /// The height of the characters's glyph
+            /// </summary>
 			public int Height { get; }
+            /// <summary>
+            /// Displacement in the x-axis from the left side
+            /// </summary>
+            public int XOffset { get; }
+            /// <summary>
+            /// Displacement in the Y-axis from the top side
+            /// </summary>
 			public int YOffset { get; }
-			// Vertical displacement
-			public int FileOffset { get; }
-			// Offset of the graphic in the file
+            /// <summary>
+            /// 
+            /// </summary>
+            public int XAdvance { get; }
+            /// <summary>
+            /// 
+            /// </summary>
+            public int YAdvance { get; }
+            /// <summary>
+            /// The byte-location of the glyph's graphic data (pixels) in the
+            /// file.
+            /// </summary>
+            public int FileOffset { get; }
 
-			public GlyphInfo(int width, int height, int yOffset, int fileOffset)
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="width"></param>
+            /// <param name="height"></param>
+            /// <param name="yOffset"></param>
+            /// <param name="fileOffset"></param>
+            public GlyphInfo(int width, int height, int yOffset, int fileOffset)
 			{
-				Width = width;
-				Height = height;
-				YOffset = yOffset;
-				FileOffset = fileOffset;
-			}
+                Width = width;
+                Height = height;
+                XOffset = 0;
+                YOffset = yOffset;
+                XAdvance = width;
+                YAdvance = height + yOffset;
+                FileOffset = fileOffset;
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="width"></param>
+            /// <param name="height"></param>
+            /// <param name="xOffset"></param>
+            /// <param name="yOffset"></param>
+            /// <param name="xAdvance"></param>
+            /// <param name="yAdvance"></param>
+            /// <param name="fileOffset"></param>
+            public GlyphInfo(int width, int height, int xOffset, 
+                int yOffset, int xAdvance, int yAdvance, int fileOffset)
+            {
+                Width = width;
+                Height = height;
+                XOffset = xOffset;
+                YOffset = yOffset;
+                XAdvance = xAdvance;
+                YAdvance = yAdvance; 
+                FileOffset = fileOffset;
+            }
 		}
 	}
 }

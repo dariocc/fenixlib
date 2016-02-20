@@ -7,10 +7,22 @@ namespace BennuLib
 	{
 		public int Width { get; }
 		public int Height { get; }
-        public int YOffset { get; }
-        public int XOffset { get; }
-        public int XAdvance { get; }
-        public int YAdavance { get; }
+        public int YOffset { get; set; } = 0;
+        public int XOffset { get; set; } = 0;
+        public int XAdvance { get; set; } = 0;
+        public int YAdavance { get; set; } = 0;
 		public IPixel[] Pixels { get; }
+
+        public Glyph(int width, int height, IPixel[] pixels)
+        {
+            Width = width;
+            Height = height;
+
+            if ( width * height != pixels.Length )
+                throw new InvalidOperationException (); // TODO: Customize
+
+            Pixels = pixels;
+        }
+
 	}
 }

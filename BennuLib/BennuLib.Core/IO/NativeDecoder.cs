@@ -71,22 +71,19 @@ namespace BennuLib.IO
 		}
 
 
-        protected virtual bool ValidateMagic(string magic)
+        protected virtual bool ValidateHeaderMagic(string magic, Header header)
         {
-
+            return KnownFileMagics.Contains(magic);
         }
 
-        protected virtual bool ValidateTerminator()
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="header"></param>
-        /// <returns></returns>
-        protected virtual bool ValidateHeader(Header header)
+        protected virtual bool ValidateHeaderTerminator(byte[] terminator, Header header)
         {
-            return ( KnownFileMagics.Contains(header.Magic) 
-                && header.IsTerminatorValid()
-                && header.Version <= MaxSupportedVersion );
+            return header.IsTerminatorValid();
+        }
+
+        protected virtual bool ValidateHeaderVersion(int version, Header header)
+        {
+            return version <= MaxSupportedVersion;
         }
 
         /// <summary>
@@ -151,7 +148,13 @@ namespace BennuLib.IO
                 {
                     header = reader.ReadHeader();
 
-                    if ( ! ValidateHeader(header) )
+                    if ( ! ValidateHeaderMagic(header.Magic, header) )
+                        throw new UnsuportedFileFormatException(); // TODO: Make more specific
+
+                    if ( ! ValidateHeaderTerminator(header.Terminator, header)) // TODO: Make more specific
+                        throw new UnsuportedFileFormatException();
+
+                    if (! ValidateHeaderVersion(header.LastByte, header)) // TODO: Make more specific
                         throw new UnsuportedFileFormatException();
                 }
             }
@@ -185,18 +188,5 @@ namespace BennuLib.IO
                 return false;
             }
         }
-
-        // TODO: Probably needs to be moved outside this class
-        protected static Palette.Color[] VGAtoColors(byte[] colorData)
-		{
-			Palette.Color[] colors = new Palette.Color[colorData.Length / 3];
-			for (var n = 0; n <= colors.Length - 1; n++) {
-				colors[n] = new Palette.Color(
-                    colorData[n * 3] << 2, 
-                    colorData[n * 3 + 1] << 2, 
-                    colorData[n * 3 + 1] << 2);
-			}
-			return colors;
-		}
 	}
 }
