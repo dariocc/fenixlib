@@ -14,9 +14,7 @@ namespace Bennu.IO
 
         public CompressionOptions Compression { get; }
 
-        public NativeEncoder () : this ( CompressionOptions.Uncompressed )
-        {
-        }
+        public NativeEncoder () : this ( CompressionOptions.Uncompressed ) { }
 
         public NativeEncoder ( CompressionOptions compressionOptions )
         {
