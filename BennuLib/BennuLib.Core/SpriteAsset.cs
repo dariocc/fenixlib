@@ -139,9 +139,6 @@ namespace Bennu
 
         public static SpriteAsset Create ( Palette palette )
         {
-            if ( palette.Colors.Length != 256 )
-                throw new ArgumentException ();
-
             return new SpriteAsset ( ( int ) DepthMode.RgbIndexedPalette, palette );
         }
     }

@@ -107,10 +107,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Palette.Color.cs" />
+    <Compile Include="Color.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="BaseTypes.cd" />
+    <None Include="Diagrams\BaseTypes.cd" />
+    <None Include="Diagrams\Decoders.cd" />
+    <None Include="Diagrams\Encoders.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

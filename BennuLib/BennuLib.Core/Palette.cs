@@ -70,7 +70,7 @@ namespace Bennu
                 return false;
             }
 
-            return ( palette.Colors.SequenceEqual(Colors) );
+            return ( Colors.SequenceEqual(Colors) );
         }
 
         public override int GetHashCode()

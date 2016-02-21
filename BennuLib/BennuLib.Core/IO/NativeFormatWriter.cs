@@ -5,7 +5,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 
-using static Bennu.Util.Unsafe;
+using Bennu;
 
 namespace Bennu.IO
 {

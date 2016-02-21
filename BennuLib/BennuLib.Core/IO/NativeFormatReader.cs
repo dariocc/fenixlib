@@ -167,12 +167,12 @@ namespace Bennu.IO
             return buffer;
         }
 
-        private static Palette.Color[] Vga2PaleetteColors ( byte[] colorData )
+        private static Color[] Vga2PaleetteColors ( byte[] colorData )
         {
-            Palette.Color[] colors = new Palette.Color[colorData.Length / 3];
+            Color[] colors = new Color[colorData.Length / 3];
             for ( var n = 0 ; n <= colors.Length - 1 ; n++ )
             {
-                colors[n] = new Palette.Color (
+                colors[n] = new Color (
                     colorData[n * 3] << 2,
                     colorData[n * 3 + 1] << 2,
                     colorData[n * 3 + 1] << 2 );
