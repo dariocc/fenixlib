@@ -24,6 +24,9 @@ namespace Bennu
             }
             set
             {
+                if ( value.Depth != Depth )
+                    throw new InvalidOperationException ();
+
                 _glyphs.Add ( character, value );
             }
         }

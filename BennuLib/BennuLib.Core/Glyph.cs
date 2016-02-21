@@ -14,6 +14,14 @@ namespace Bennu
         public int YAdavance { get; set; } = 0;
         public AbstractPixel[] Pixels { get; }
 
+        public int Depth
+        {
+            get
+            {
+                return PixelArrays.GetDepth ( Pixels );
+            }
+        }
+
         private Glyph ( int width, int height, AbstractPixel[] pixels, Palette palette = null )
         {
             Width = width;
