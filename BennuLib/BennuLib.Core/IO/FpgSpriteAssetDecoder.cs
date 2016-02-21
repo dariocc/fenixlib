@@ -15,9 +15,10 @@ namespace Bennu.IO
         {
             SpriteAsset fpg;
 
+            Palette palette = null;
             if ( header.Depth == 8 )
             {
-                Palette palette = reader.ReadPalette ();
+                palette = reader.ReadPalette ();
                 reader.ReadUnusedPaletteGamma ();
                 fpg = SpriteAsset.Create ( palette );
             }
@@ -54,7 +55,8 @@ namespace Bennu.IO
 
                     byte[] pixels = reader.ReadPixels ( header.Depth, width, height );
 
-                    var map = Sprite.Create ( (DepthMode) header.Depth, width, height, pixels );
+                    var map = Sprite.Create ( (DepthMode) header.Depth, width, height, 
+                        pixels, palette );
                     map.Description = description;
                     foreach ( var point in pivotPoints )
                     {
