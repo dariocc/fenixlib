@@ -55,12 +55,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\TestFiles\16bpp-compressed.fpg">
+      <Link>Fpg\16bpp-compressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\TestFiles\16bpp-uncompressed.fpg">
       <Link>Fpg\16bpp-uncompressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\TestFiles\32bpp-compressed.fpg">
+      <Link>Fpg\32bpp-compressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\TestFiles\32bpp-uncompressed.fpg">
       <Link>Fpg\32bpp-uncompressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\8bpp-compressed.fpg">
+      <Link>Fpg\8bpp-compressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\TestFiles\8bpp-uncompressed.fpg">

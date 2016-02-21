@@ -54,5 +54,24 @@ namespace Bennu.Tests
         {
             var fpg = DecodeFpg ( "./Fpg/32bpp-uncompressed.fpg", 32 );
         }
+
+        [TestMethod]
+        public void DecodeFpg_8bppCompressed ()
+        {
+            var fpg = DecodeFpg ( "./Fpg/8bpp-compressed.fpg", 8 );
+            Assert.IsNotNull ( fpg.Palette );
+        }
+
+        [TestMethod]
+        public void DecodeFpg_16bppCompressed ()
+        {
+            var fpg = DecodeFpg ( "./Fpg/16bpp-compressed.fpg", 16 );
+        }
+
+        [TestMethod]
+        public void DecodeFpg_32bppCompressed ()
+        {
+            var fpg = DecodeFpg ( "./Fpg/32bpp-compressed.fpg", 32 );
+        }
     }
 }
