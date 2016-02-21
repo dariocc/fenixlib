@@ -38,13 +38,12 @@
       </Enum>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAKCAAAABIAiCAAAAAAhAGBQAAQgAEAgAAAAAANIIAA=</HashCode>
+      <HashCode>AAKCAAAABIAgCAAAAAAgAHBQAAQgAGAgAAAAAANIIAA=</HashCode>
       <FileName>Sprite.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Palette" />
       <Property Name="ParentAsset" />
-      <Property Name="Pixels" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="PivotPoints" />
@@ -71,31 +70,6 @@
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Bennu.Int16Pixel565" Collapsed="true">
-    <Position X="10.25" Y="9.75" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-      <Compartment Name="Properties" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>ABACAAABAABAAoAAAAgAAAAABAAAABAAAAggAhAAAAA=</HashCode>
-      <FileName>Pixels\Int16Pixel565.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Bennu.Int32PixelARGB" Collapsed="true">
-    <Position X="8.25" Y="9.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABACAAABAABAAgAAAAgAAAAABAAAABAAAAggAhAAAAA=</HashCode>
-      <FileName>Pixels\Int32PixelARGB.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Bennu.IndexedPixel" Collapsed="true">
-    <Position X="12.5" Y="9.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAABAABAAgAAAAggAAAABAAAABAAAAggAhAAAAA=</HashCode>
-      <FileName>Pixels\IndexedPixel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Bennu.BitmapFont">
     <Position X="0.5" Y="5.5" Width="2.25" />
     <Members>
@@ -117,18 +91,8 @@
       <Method Name="Glyph" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAABBAAAAAAAAAABAGAAAAAAAHAgAAAAAAABAAA=</HashCode>
+      <HashCode>AAAAAAABBAAAAAAAAAAAAGAAAAAAAHAgAAAAAAABAAA=</HashCode>
       <FileName>Glyph.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="Pixels" />
-    </ShowAsCollectionAssociation>
-  </Class>
-  <Class Name="Bennu.AbstractPixel" Collapsed="true">
-    <Position X="8.75" Y="8.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAABAABAAgAAAAgAAAAABAAAABAAAAggAhAAAAA=</HashCode>
-      <FileName>Pixels\AbstractPixel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="Bennu.PivotPoint">

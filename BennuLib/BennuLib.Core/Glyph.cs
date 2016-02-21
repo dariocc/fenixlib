@@ -12,41 +12,29 @@ namespace Bennu
         public int XOffset { get; set; } = 0;
         public int XAdvance { get; set; } = 0;
         public int YAdavance { get; set; } = 0;
-        public AbstractPixel[] Pixels { get; }
+        public byte[] PixelData { get; }
+        public int Depth { get; }
 
-        public int Depth
-        {
-            get
-            {
-                return PixelArrays.GetDepth ( Pixels );
-            }
-        }
-
-        private Glyph ( int width, int height, AbstractPixel[] pixels, Palette palette = null )
+        private Glyph ( int width, int height, int depth, byte[] pixelData, Palette palette = null )
         {
             Width = width;
             Height = height;
             Palette = palette;
-            Pixels = pixels;
+            Depth = depth;
+            PixelData = pixelData;
         }
 
-        public static Glyph Create ( int width, int height, Palette palette, AbstractPixel[] pixels )
+        public static Glyph Create (DepthMode depth, int width, int height, byte[] pixelData, 
+            Palette palette = null )
         {
             if ( width <= 0 || height <= 0 )
                 throw new ArgumentOutOfRangeException (); // TODO: Customize
 
-            if ( width * height != pixels.Length )
-                throw new InvalidOperationException (); // TODO: Customize
+            // TODO: Validate the size of pixelData array
+            if ( ( depth == DepthMode.RgbIndexedPalette ) != ( palette != null ) )
+                throw new ArgumentException (); // TODO: Customize
 
-            if ( ( palette == null ) == ( pixels[0].IsPalettized () ) )
-                throw new InvalidOperationException (); // TODO: Customize       
-
-            return new Glyph ( width, height, pixels, palette );
-        }
-
-        public static Glyph Create ( int width, int height, AbstractPixel[] pixels )
-        {
-            return Create ( width, height, null, pixels );
+            return new Glyph ( width, height, (int) depth, pixelData, palette );
         }
     }
 }

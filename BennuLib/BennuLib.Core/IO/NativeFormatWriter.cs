@@ -74,17 +74,6 @@ namespace Bennu.IO
             }
         }
 
-        // TODO: This is not going to work for monochrome pixels because we cannot have a "bit"
-        // I Believe the only way to handle this is to abstract the pixel memory into a custom
-        // class
-        public void Write ( AbstractPixel[] pixels )
-        {
-            foreach ( var pixel in pixels )
-            {
-                Write ( pixel.GetRawValueBytes () );
-            }
-        }
-
         public void WriteReservedPaletteGammaSection ()
         {
             byte[] bytes = new byte[NativeFormat.ReservedBytesSize];

@@ -52,9 +52,9 @@ namespace Bennu.IO
                         // kind of event
                     }
 
-                    AbstractPixel[] pixels = reader.ReadPixels ( header.Depth, width, height );
+                    byte[] pixels = reader.ReadPixels ( header.Depth, width, height );
 
-                    var map = Sprite.Create ( width, height, pixels );
+                    var map = Sprite.Create ( (DepthMode) header.Depth, width, height, pixels );
                     map.Description = description;
                     foreach ( var point in pivotPoints )
                     {

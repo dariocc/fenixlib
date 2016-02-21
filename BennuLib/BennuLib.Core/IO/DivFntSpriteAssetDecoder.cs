@@ -35,7 +35,8 @@ namespace Bennu.IO
                     continue;
 
                 var pixels = reader.ReadPixels ( header.Depth, character.Width, character.Height );
-                var map = Sprite.Create ( character.Width, character.Height, pixels );
+                var map = Sprite.Create ( (DepthMode) header.Depth, character.Width, 
+                    character.Height, pixels );
                 fpg.Add ( fpg.FindFreeId (), ref map );
             }
 

@@ -10,7 +10,7 @@ namespace Bennu.IO
 
         protected abstract void WriteNativeFormatBody ( T obj, NativeFormatWriter writer );
 
-        protected abstract string GetFileId ( T what );
+        protected abstract string GetFileMagic ( T what );
 
         public CompressionOptions Compression { get; }
 
@@ -36,7 +36,7 @@ namespace Bennu.IO
 
             using ( NativeFormatWriter writer = new NativeFormatWriter ( output ) )
             {
-                writer.WriteAsciiZ ( GetFileId ( what ).Substring ( 0, 3 ), 3 );
+                writer.WriteAsciiZ ( GetFileMagic ( what ).Substring ( 0, 3 ), 3 );
                 writer.Write ( NativeFormat.Terminator );
                 writer.Write ( GetLastHeaderByte ( what ) );
                 WriteNativeFormatBody ( what, writer );

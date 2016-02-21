@@ -118,11 +118,16 @@ namespace Bennu.IO
 
             Stream stream = null;
             Header header;
+            // TODO: If the stream can seek this code is not necessary
             using (var memory = new MemoryStream(8))
             {
-                input.CopyTo(memory, 8); // input will remain at Position 8
-                memory.Flush();
+                byte[] buffer = new byte[8];
 
+                if ( input.Read ( buffer, 0, buffer.Length ) != buffer.Length )
+                    throw new UnsuportedFileFormatException (); // TODO: Customize
+
+                memory.Write(buffer, 0, buffer.Length);
+                memory.Flush();
                 memory.Position = 0;
 
                 byte[] firstBytes = new byte[2];

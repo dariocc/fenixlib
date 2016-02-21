@@ -26,25 +26,24 @@ namespace Bennu.IO
 
             writer.Write ( Convert.ToUInt16 ( ids.Count () > 0 ? ids.Max () : 0 ) );
             writer.Write ( sprite.PivotPoints );
-            writer.Write ( sprite.Pixels );
+            writer.Write ( sprite.PixelData );
         }
 
-        protected override string GetFileId ( Sprite obj )
+        protected override string GetFileMagic ( Sprite sprite )
         {
-            if ( ( obj.Pixels[0] ) is IndexedPixel )
+
+            switch ( sprite.Depth )
             {
-                return "map";
-            }
-            else if ( ( obj.Pixels[0] ) is Int16Pixel565 )
-            {
-                return "m16";
-            }
-            else if ( ( obj.Pixels[0] ) is Int32PixelARGB )
-            {
-                return "m32";
-            }
-            else {
-                throw new ArgumentException ();
+                case 1:
+                    return "m01";
+                case 8:
+                    return "map";
+                case 16:
+                    return "m16";
+                case 32:
+                    return "m32";
+                default:
+                    throw new ArgumentException ();
             }
         }
 

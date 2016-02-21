@@ -32,7 +32,7 @@ namespace Bennu.IO
             var mapDataLength = width * height * ( depth / 8 );
             var pixels = reader.ReadPixels ( header.Depth, width, height );
 
-            var map = Sprite.Create ( width, height, pixels );
+            var map = Sprite.Create ( (DepthMode) depth, width, height, pixels );
 
             foreach ( var pivotPoint in pivotPoints )
             {

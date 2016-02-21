@@ -12,7 +12,7 @@ namespace Bennu.IO
 			writer.WriteReservedPaletteGammaSection();
 		}
 
-		protected override string GetFileId(Palette obj)
+		protected override string GetFileMagic(Palette palette)
 		{
 			return "pal";
 		}

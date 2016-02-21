@@ -32,7 +32,7 @@ namespace Bennu.IO
                 writer.Write ( Convert.ToUInt32 ( sprite.Height ) );
                 writer.Write ( Convert.ToUInt32 ( maxPivotPointId ) );
                 writer.Write ( sprite.PivotPoints );
-                writer.Write ( sprite.Pixels );
+                writer.Write ( sprite.PixelData );
             }
         }
 
@@ -42,11 +42,13 @@ namespace Bennu.IO
             // TODO
         }
 
-        protected override string GetFileId ( SpriteAsset asset )
+        protected override string GetFileMagic ( SpriteAsset asset )
         {
-            // TODO
+
             switch ( asset.Depth )
             {
+                case 1:
+                    return "f01";
                 case 8:
                     return "fpg";
                 case 16:
@@ -54,7 +56,6 @@ namespace Bennu.IO
                 case 32:
                     return "f32";
                 default:
-                    // TODO more specific
                     throw new ArgumentException ();
             }
         }

@@ -15,7 +15,7 @@ namespace Bennu
     public partial class Sprite
     {
 
-        private AbstractPixel[] _pixels;
+        private byte[] _pixelData;
         private Palette _palette;
         private SpriteAsset _parent;
 
@@ -29,30 +29,19 @@ namespace Bennu
             return id < MaxPivotPointId & id >= MinPivotPointId;
         }
 
-        public static Sprite Create ( int width, int height, Palette palette, AbstractPixel[] pixels )
+
+        public static Sprite Create ( DepthMode depth, int width, int height, byte[] pixelData,
+            Palette palette = null )
         {
             if ( width <= 0 || height <= 0 )
                 throw new ArgumentOutOfRangeException (); // TODO: Customize
 
-            if ( width * height != pixels.Length )
-                throw new InvalidOperationException (); // TODO: Customize
+            // TODO: Validate the size of pixelData array based on the depth
 
-            if ( ( palette == null ) == ( pixels[0].IsPalettized () ) )
-                throw new InvalidOperationException (); // TODO: Customize   
+            if ( ( depth == DepthMode.RgbIndexedPalette ) != ( palette != null ) )
+                throw new ArgumentException (); // TODO: Customize
 
-            return new Sprite ( width, height, palette, pixels );
-        }
-
-        /// <summary>
-        /// Creates an standalone <c>Sprite</c> object.
-        /// </summary>
-        /// <param name="width">The width of the sprite</param>
-        /// <param name="height">The height of the sprite</param>
-        /// <param name="pixels">The data that defines the pixel of the sprite</param>
-        /// <returns></returns>
-        public static Sprite Create ( int width, int height, AbstractPixel[] pixels )
-        {
-            return Create ( width, height, null, pixels );
+            return new Sprite ( width, height, ( int ) depth, pixelData, palette );
         }
 
         /// <summary>
@@ -105,31 +94,15 @@ namespace Bennu
             }
         }
 
-        /// <summary>
-        /// The depth of the map, which is determined by the type of its <see cref="Pixels"/>.
-        /// When the type of the pixels is undefined, the value of this property is 0.
-        /// </summary>
-        public int Depth
-        {
-            get
-            {
-                return PixelArrays.GetDepth ( _pixels );
-            }
-        }
+        public int Depth { get; }
 
-        private Sprite ( int width, int height, Palette palette, AbstractPixel[] pixels )
+        private Sprite ( int width, int height, int depth, byte[] pixelData, Palette palette = null )
         {
             Width = width;
             Height = height;
             _palette = palette;
-
-            if ( pixels.Length != width * height )
-            {
-                throw new ArgumentException ();
-                // TODO: Customize
-            }
-
-            _pixels = pixels;
+            _pixelData = pixelData;
+            Depth = depth;
         }
 
         public void DefinePivotPoint ( int id, int x, int y )
@@ -224,9 +197,9 @@ namespace Bennu
             return -1;
         }
 
-        public AbstractPixel[] Pixels
+        public byte[] PixelData
         {
-            get { return _pixels; }
+            get { return _pixelData; }
         }
 
         // TODO: Might not belong here
