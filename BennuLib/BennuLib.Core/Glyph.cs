@@ -11,9 +11,9 @@ namespace Bennu
         public int XOffset { get; set; } = 0;
         public int XAdvance { get; set; } = 0;
         public int YAdavance { get; set; } = 0;
-        public IPixel[] Pixels { get; }
+        public AbstractPixel[] Pixels { get; }
 
-        private Glyph ( int width, int height, IPixel[] pixels )
+        private Glyph ( int width, int height, AbstractPixel[] pixels )
         {
             Width = width;
             Height = height;
@@ -24,7 +24,7 @@ namespace Bennu
             Pixels = pixels;
         }
 
-        public static Glyph Create ( int width, int height, IPixel[] pixels )
+        public static Glyph Create ( int width, int height, AbstractPixel[] pixels )
         {
             return new Glyph ( width, height, pixels );
         }

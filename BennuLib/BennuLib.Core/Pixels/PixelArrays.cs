@@ -11,7 +11,7 @@
         /// <param name="pixels"></param>
         /// <returns>1, 8, 16 or 32 if the <paramref name="pixels"/> array is of known
         /// type. Otherwise it returns 0.</returns>
-        public static int GetDepth(IPixel[] pixels)
+        public static int GetDepth(AbstractPixel[] pixels)
         {
             if (pixels is IndexedPixel[])
                 return 8;

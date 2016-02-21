@@ -3,7 +3,7 @@ using System;
 namespace Bennu
 {
     [Serializable ()]
-    public class Int16Pixel565 : IPixel
+    public class Int16Pixel565 : AbstractPixel
     {
 
         // TODO: It is certainly possible to speed up this colo conversions by 
@@ -55,12 +55,12 @@ namespace Bennu
             get { return Value == 0; }
         }
 
-        public override IPixel GetTransparentCopy ()
+        public override AbstractPixel GetTransparentCopy ()
         {
             return new Int16Pixel565 ( 0 );
         }
 
-        public override IPixel GetOpaqueCopy ()
+        public override AbstractPixel GetOpaqueCopy ()
         {
             if ( _value == 0 )
             {

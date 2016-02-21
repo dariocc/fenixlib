@@ -76,7 +76,7 @@ namespace Bennu.IO
 
                     pixelsStream.Seek ( character.FileOffset, SeekOrigin.Begin );
 
-                    IPixel[] pixels = pixelsReader.ReadPixels ( depth, character.Width,
+                    AbstractPixel[] pixels = pixelsReader.ReadPixels ( depth, character.Width,
                         character.Height );
 
                     Glyph glyph = Glyph.Create ( character.Width, character.Height, pixels );

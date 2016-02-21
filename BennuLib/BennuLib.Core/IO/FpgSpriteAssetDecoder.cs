@@ -52,7 +52,7 @@ namespace Bennu.IO
                         // kind of event
                     }
 
-                    IPixel[] pixels = reader.ReadPixels ( header.Depth, width, height );
+                    AbstractPixel[] pixels = reader.ReadPixels ( header.Depth, width, height );
 
                     var map = Sprite.Create ( width, height, pixels );
                     map.Description = description;

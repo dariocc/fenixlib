@@ -3,7 +3,7 @@ using System;
 namespace Bennu
 {
 	[Serializable()]
-	public class Int32PixelARGB : IPixel
+	public class Int32PixelARGB : AbstractPixel
 	{
 		private readonly int _value;
 
@@ -46,12 +46,12 @@ namespace Bennu
 			get { return Alpha == 255; }
 		}
 
-        public override IPixel GetTransparentCopy()
+        public override AbstractPixel GetTransparentCopy()
 		{
 			return new Int32PixelARGB(_value & 0xFFFFFF);
 		}
 
-		public override IPixel GetOpaqueCopy()
+		public override AbstractPixel GetOpaqueCopy()
 		{
 			return new Int32PixelARGB(Value & 0xffffff);
 		}

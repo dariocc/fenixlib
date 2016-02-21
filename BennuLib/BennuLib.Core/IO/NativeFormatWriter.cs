@@ -14,9 +14,7 @@ namespace Bennu.IO
 
         private static readonly Encoding _encoding = Encoding.GetEncoding ( 850 );
 
-        public NativeFormatWriter ( Stream input ) : base ( input, _encoding )
-        {
-        }
+        public NativeFormatWriter ( Stream input ) : base ( input, _encoding ) { }
 
         private void WriteHeader ( string formatHeader, byte version )
         {
@@ -64,7 +62,9 @@ namespace Bennu.IO
             {
                 var id = n;
                 PivotPoint? p = pivotPoints.Where ( x => x.Id == id ).FirstOrDefault ();
-                pivotPointsIncludingUndefined[n] = p == null ? new PivotPoint ( id, -1, -1 ) : new PivotPoint ( id, p.Value.X, p.Value.Y );
+                pivotPointsIncludingUndefined[n] = p == null 
+                    ? new PivotPoint ( id, -1, -1 ) 
+                    : new PivotPoint ( id, p.Value.X, p.Value.Y );
             }
 
             foreach ( PivotPoint pivotPoint in pivotPointsIncludingUndefined )
@@ -74,12 +74,14 @@ namespace Bennu.IO
             }
         }
 
-
-        public void Write ( IPixel[] pixels )
+        // TODO: This is not going to work for monochrome pixels because we cannot have a "bit"
+        // I Believe the only way to handle this is to abstract the pixel memory into a custom
+        // class
+        public void Write ( AbstractPixel[] pixels )
         {
             foreach ( var pixel in pixels )
             {
-                Write( pixel.GetRawValueBytes() );
+                Write ( pixel.GetRawValueBytes () );
             }
         }
 

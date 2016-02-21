@@ -1,73 +1,64 @@
 ﻿using System;
 
-namespace Bennu.Pixels
+namespace Bennu
 {
-    class MonochromePixel : IPixel
+    class MonochromePixel : AbstractPixel
     {
-        public int Alpha
+        private const int Black = 0xFFFFFF << 8 | 0xFF;
+        private byte _value;
+
+        public MonochromePixel ( byte value )
+        {
+            if ( value > 1 )
+                throw new ArgumentException ();
+
+            _value = value;
+        }
+
+        public override int Alpha { get { return _value * 255; }
+        }
+
+        public override int Argb
         {
             get
             {
-                throw new NotImplementedException();
+                if ( _value == 1 )
+                    return Black;
+
+                return 0;
             }
         }
 
-        public int Argb
+        public override int Blue { get { return _value * 255; } }
+
+
+        public override int Green { get { return _value * 255; } }
+
+        public override bool IsTransparent
         {
             get
             {
-                throw new NotImplementedException();
+                throw new NotImplementedException ();
             }
         }
 
-        public int Blue
+        public override int Red { get { return _value; } }
+
+        public override int Value { get { return _value; } }
+
+        public override AbstractPixel GetOpaqueCopy ()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            return new MonochromePixel ( 0 );
         }
 
-        public int Green
+        public override AbstractPixel GetTransparentCopy ()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            return new MonochromePixel ( 1 );
         }
 
-        public bool IsTransparent
+        internal override byte[] GetRawValueBytes ()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int Red
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public int Value
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public IPixel GetOpaqueCopy()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IPixel GetTransparentCopy()
-        {
-            throw new NotImplementedException();
+            throw new NotImplementedException ();
         }
     }
 }

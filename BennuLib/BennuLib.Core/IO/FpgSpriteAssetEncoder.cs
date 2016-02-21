@@ -5,7 +5,9 @@ namespace Bennu.IO
 {
     public class FpgSpriteAssetEncoder : NativeEncoder<SpriteAsset>
     {
-        private const int Version = 0x00;
+        private const int version = 0x00;
+
+        protected override byte GetLastHeaderByte ( SpriteAsset what ) => version;
 
         protected override void WriteNativeFormatBody ( SpriteAsset asset, NativeFormatWriter writer )
         {
@@ -55,11 +57,6 @@ namespace Bennu.IO
                     // TODO more specific
                     throw new ArgumentException ();
             }
-        }
-
-        protected override byte GetLastHeaderByte ( SpriteAsset what )
-        {
-            return Version;
         }
     }
 }

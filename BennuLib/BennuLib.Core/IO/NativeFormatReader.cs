@@ -106,7 +106,7 @@ namespace Bennu.IO
         }
 
         
-        public IPixel[] ReadPixels(int depth, int width, int height)
+        public AbstractPixel[] ReadPixels(int depth, int width, int height)
         {
             int byteLength = width * height * depth / 8; // TODO: Shall e adjusted for monochrome
             byte[] graphicData = ReadBytes(byteLength);

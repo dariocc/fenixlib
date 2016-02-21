@@ -4,7 +4,7 @@ namespace Bennu
 {
 
     [Serializable ()]
-    public class IndexedPixel : IPixel
+    public class IndexedPixel : AbstractPixel
     {
         private readonly byte _index;
 
@@ -66,12 +66,12 @@ namespace Bennu
             }
         }
 
-        public override IPixel GetOpaqueCopy ()
+        public override AbstractPixel GetOpaqueCopy ()
         {
             throw new NotImplementedException ();
         }
 
-        public override IPixel GetTransparentCopy ()
+        public override AbstractPixel GetTransparentCopy ()
         {
             return new IndexedPixel ( 0 );
         }
