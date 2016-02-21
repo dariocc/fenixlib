@@ -56,6 +56,11 @@ namespace Bennu
             return new MonochromePixel ( 1 );
         }
 
+        public override bool IsPalettized ()
+        {
+            return false;
+        }
+
         internal override byte[] GetRawValueBytes ()
         {
             throw new NotImplementedException ();

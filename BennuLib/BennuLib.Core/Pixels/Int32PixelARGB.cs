@@ -60,5 +60,10 @@ namespace Bennu
         {
             return BitConverter.GetBytes( _value );
         }
+
+        public override bool IsPalettized ()
+        {
+            return false;
+        }
     }
 }

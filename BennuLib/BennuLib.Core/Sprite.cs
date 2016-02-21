@@ -29,16 +29,30 @@ namespace Bennu
             return id < MaxPivotPointId & id >= MinPivotPointId;
         }
 
+        public static Sprite Create ( int width, int height, Palette palette, AbstractPixel[] pixels )
+        {
+            if ( width <= 0 || height <= 0 )
+                throw new ArgumentOutOfRangeException (); // TODO: Customize
+
+            if ( width * height != pixels.Length )
+                throw new InvalidOperationException (); // TODO: Customize
+
+            if ( ( palette == null ) == ( pixels[0].IsPalettized () ) )
+                throw new InvalidOperationException (); // TODO: Customize   
+
+            return new Sprite ( width, height, palette, pixels );
+        }
+
         /// <summary>
         /// Creates an standalone <c>Sprite</c> object.
         /// </summary>
         /// <param name="width">The width of the sprite</param>
         /// <param name="height">The height of the sprite</param>
-        /// <param name="pixelBuffer">The data that defines the pixel of the sprite</param>
+        /// <param name="pixels">The data that defines the pixel of the sprite</param>
         /// <returns></returns>
-        public static Sprite Create ( int width, int height, AbstractPixel[] pixelBuffer )
+        public static Sprite Create ( int width, int height, AbstractPixel[] pixels )
         {
-            return new Sprite ( width, height, pixelBuffer );
+            return Create ( width, height, null, pixels );
         }
 
         /// <summary>
@@ -103,10 +117,11 @@ namespace Bennu
             }
         }
 
-        private Sprite ( int width, int height, AbstractPixel[] pixels )
+        private Sprite ( int width, int height, Palette palette, AbstractPixel[] pixels )
         {
             Width = width;
             Height = height;
+            _palette = palette;
 
             if ( pixels.Length != width * height )
             {
@@ -160,12 +175,14 @@ namespace Bennu
             get { return _parent; }
             internal set
             {
+                // Is this check necessary? It is like not trusting in 
+                // the internal code... it'd be better covered with a test
                 if ( !value.Sprites.Contains ( this ) )
                 {
-                    throw new InvalidOperationException ();
-                    // TODO: Customize
+                    throw new InvalidOperationException (); // TODO: Customize
                 }
 
+                _palette = ParentAsset.Palette;
                 _parent = value;
             }
         }

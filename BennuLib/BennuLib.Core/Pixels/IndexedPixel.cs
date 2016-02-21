@@ -80,5 +80,10 @@ namespace Bennu
         {
             return new byte[] { _index };
         }
+
+        public override bool IsPalettized ()
+        {
+            return true;
+        }
     }
 }

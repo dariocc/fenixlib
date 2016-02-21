@@ -12,6 +12,7 @@ namespace Bennu
         public abstract int Value { get; }
         public abstract AbstractPixel GetTransparentCopy ();
         public abstract AbstractPixel GetOpaqueCopy ();
+        public abstract bool IsPalettized ();
 
         public abstract bool IsTransparent { get; }
         internal abstract byte[] GetRawValueBytes ();
