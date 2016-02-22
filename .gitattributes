@@ -1,15 +1,3 @@
-*.txt text eol=crlf
-*.cls text eol=crlf
-*.vbg text eol=crlf
-*.bas text eol=crlf
-*.frm text eol=crlf
-*.vbp text eol=crlf
-*.ctl text eol=crlf
-*.nsi text eol=crlf
-
-*.res binary
-*.frx binary
-*.ctx binary
-*.png binary
-*.cur binary
-*.bmp binary
+*.cs diff=csharp
+*.csproj merge=union
+*.sln merge=union
