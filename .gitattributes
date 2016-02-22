@@ -1,13 +1,8 @@
-* text=auto
+* -text
 
 *.cs diff=csharp
 *.csproj merge=union
 *.sln merge=union
-
-*.cs text
-*.xml text
-*.txt text
-*.md text
 
 *.fpg binary
 *.map binary
