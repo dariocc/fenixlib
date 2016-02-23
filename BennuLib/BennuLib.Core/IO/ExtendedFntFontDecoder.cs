@@ -36,7 +36,7 @@ namespace Bennu.IO
 
         protected override NativeFormat.GlyphInfo ReadGlyphInfo (NativeFormatReader reader)
         {
-            return reader.ReadExtendedFntGlypInfo();
+            return reader.ReadExtendedFntGlyphInfo();
         }
 
         /// <summary>

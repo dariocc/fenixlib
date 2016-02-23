@@ -101,7 +101,7 @@ namespace Bennu.IO
             return new GlyphInfo ( ReadInt32 (), ReadInt32 (), ReadInt32 (), ReadInt32 () );
         }
 
-        public GlyphInfo ReadExtendedFntGlypInfo ()
+        public GlyphInfo ReadExtendedFntGlyphInfo ()
         {
             // TODO: Extract from this interface, we do not want to have an external
             // dependency
