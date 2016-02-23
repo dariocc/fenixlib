@@ -4,6 +4,8 @@ namespace Bennu.IO
 {
     public abstract class FntAbstractFontEncoder : NativeEncoder<BitmapFont>
     {
+        protected abstract int GlyphInfoBlockSize { get; }
+
         protected abstract int CodePageTypeForFont ( BitmapFont font );
 
         protected abstract void WriteGlyphInfo ( ref GlyphInfo glypInfo, 
@@ -40,7 +42,7 @@ namespace Bennu.IO
                     glyph = font[i];
                     glyphsInfo[i] = new GlyphInfo ( glyph.Width, glyph.Height,
                         glyph.XOffset, glyph.YOffset, glyph.XAdvance, glyph.YAdavance,
-                        pixelsDataOffset );
+                        pixelsDataOffset + GlyphInfoBlockSize + 12); // 12  = 8 bytes header + 4 font info
                 }
 
                 pixelsDataOffset += CalculatePixelBufferBytes ( font.Depth, 

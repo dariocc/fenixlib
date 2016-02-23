@@ -8,8 +8,17 @@ namespace Bennu
 {
     public class BitmapFont : IEnumerable<Glyph>
     {
-        private Encoding _encoding;
-        private IDictionary<char, Glyph> _glyphs = new SortedDictionary<char, Glyph> ();
+        private readonly Encoding _encoding;
+        private readonly IDictionary<char, Glyph> _glyphs =
+            new SortedDictionary<char, Glyph> ();
+
+        public FontCodePage CodePage
+        {
+            get
+            {
+                return FontCodePage.FromEncoding ( _encoding );
+            }
+        }
 
         private BitmapFont ( int depth, Encoding encoding, Palette palette = null )
         {

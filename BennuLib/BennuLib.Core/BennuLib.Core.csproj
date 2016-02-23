@@ -61,6 +61,8 @@
     <Compile Include="Image\DataBuffer.cs" />
     <Compile Include="Image\Raster.cs" />
     <Compile Include="Image\SampleModel.cs" />
+    <Compile Include="IO\DivFntBitmapFontEncoder.cs" />
+    <Compile Include="IO\ExtendedFntBitmapFontEncoder.cs" />
     <Compile Include="Util\Util.cs" />
     <Compile Include="FontCodepage.cs" />
     <Compile Include="IO\DivFntFontDecoder.cs" />

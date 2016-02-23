@@ -37,6 +37,25 @@ namespace Bennu.IO
             base.Write ( bytes );
         }
 
+        public void WriteExtendedGlyphInfo ( ref NativeFormat.GlyphInfo glypInfo )
+        {
+           Write ( ( int ) glypInfo.Width );
+           Write ( ( int ) glypInfo.Height );
+           Write ( ( int ) glypInfo.YOffset );
+           Write ( ( int ) glypInfo.FileOffset);
+        }
+
+        public void WriteLegacyFntGlyphInfo ( ref NativeFormat.GlyphInfo glypInfo )
+        {
+            Write ( ( int ) glypInfo.Width );
+            Write ( ( int ) glypInfo.Height );
+            Write ( ( int ) glypInfo.XAdvance );
+            Write ( ( int ) glypInfo.XOffset );
+            Write ( ( int ) glypInfo.YOffset );
+            Write ( ( int ) glypInfo.YAdvance );
+            Write ( ( int ) glypInfo.FileOffset );
+        }
+
         public void Write ( Palette palette )
         {
             byte[] bytes = new byte[palette.Colors.Length * 3];
