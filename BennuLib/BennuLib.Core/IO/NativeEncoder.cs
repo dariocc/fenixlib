@@ -8,7 +8,14 @@ namespace Bennu.IO
 
         protected abstract byte GetLastHeaderByte ( T what );
 
-        protected abstract void WriteNativeFormatBody ( T obj, NativeFormatWriter writer );
+        protected abstract void WriteNativeFormatBody ( T what, NativeFormatWriter writer );
+
+        protected virtual void WriteNativeFormatHeader ( T what, NativeFormatWriter writer )
+        {
+            writer.WriteAsciiZ ( GetFileMagic ( what ).Substring ( 0, 3 ), 3 );
+            writer.Write ( NativeFormat.Terminator );
+            writer.Write ( GetLastHeaderByte ( what ) );
+        }
 
         protected abstract string GetFileMagic ( T what );
 
@@ -36,9 +43,7 @@ namespace Bennu.IO
 
             using ( NativeFormatWriter writer = new NativeFormatWriter ( output ) )
             {
-                writer.WriteAsciiZ ( GetFileMagic ( what ).Substring ( 0, 3 ), 3 );
-                writer.Write ( NativeFormat.Terminator );
-                writer.Write ( GetLastHeaderByte ( what ) );
+                WriteNativeFormatHeader ( what, writer );
                 WriteNativeFormatBody ( what, writer );
             }
         }
