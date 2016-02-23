@@ -2,7 +2,7 @@
 
 namespace Bennu.IO
 {
-    public sealed class ExtendedFntFontDecoder : FntAbstractFontDecoder
+    public sealed class ExtendedFntBitmapFontDecoder : FntAbstractBitmapFontDecoder
     {
         /// <summary>
         /// Extended fonts (fnx) fonts do not have a version byte so this information is not used.

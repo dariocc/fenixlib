@@ -3,7 +3,7 @@ using System;
 
 namespace Bennu.IO
 {
-    public class ExtendedFntBitmapFontEncoder : FntAbstractFontEncoder
+    public class ExtendedFntBitmapFontEncoder : FntAbstractBitmapFontEncoder
     {
         protected override int GlyphInfoBlockSize { get; } = 28;
 

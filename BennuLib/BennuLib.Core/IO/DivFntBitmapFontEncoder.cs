@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bennu.IO
 {
-    class DivFntBitmapFontEncoder : FntAbstractFontEncoder
+    class DivFntBitmapFontEncoder : FntAbstractBitmapFontEncoder
     {
         private const byte Version = 0x00;
 

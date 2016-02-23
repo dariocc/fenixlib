@@ -2,7 +2,7 @@
 
 namespace Bennu.IO
 {
-    public abstract class FntAbstractFontEncoder : NativeEncoder<BitmapFont>
+    public abstract class FntAbstractBitmapFontEncoder : NativeEncoder<BitmapFont>
     {
         protected abstract int GlyphInfoBlockSize { get; }
 
