@@ -20,18 +20,22 @@ namespace Bennu
         {
             get
             {
-                return _glyphs.ElementAt ( character ).Value;
+                // TODO: Is it better to return nothing? or have an error?
+
+                return _glyphs.ElementAtOrDefault ( character ).Value;
             }
             set
             {
                 if ( value.Depth != Depth )
                     throw new InvalidOperationException ();
 
+                //TODO: Shall update the dictionary if the key exists.
+
                 _glyphs.Add ( character, value );
             }
         }
 
-        public Glyph this[byte index]
+        public Glyph this[int index]
         {
             get
             {
@@ -39,7 +43,9 @@ namespace Bennu
             }
             set
             {
-                char character = _encoding.GetChars ( new byte[] { index } )[0];
+                // TODO: I am unsure on what happens on encodings with more than 256 characters
+                // and if this can be used at all
+                char character = _encoding.GetChars ( BitConverter.GetBytes ( index ) )[0];
                 this[character] = value;
             }
         }

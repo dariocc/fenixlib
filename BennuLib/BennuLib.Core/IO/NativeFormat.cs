@@ -32,6 +32,30 @@ namespace Bennu.IO
         /// </summary>
 		public const int AnimationFlagBitMask = 0x1000;
 
+        /// <summary>
+        /// Computes the size in bytes of the area containing the pixel data for the specified 
+        /// depth
+        /// </summary>
+        /// <param name="depth"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        public static int CalculatePixelBufferBytes(int depth, int width, int height)
+        {
+            int byteLength;
+
+            if ( depth == 1 )
+            {
+                int rowByteSize = ( width + ( ( width - ( width % 8 ) ) & 7 ) ) / 8;
+                byteLength = rowByteSize * height;
+            }
+            else
+            {
+                byteLength = width * height * depth / 8;
+            }
+
+            return byteLength;
+        }
 
         /// <summary>
         /// Represents the header of the native formats, i.e. a section describing type
