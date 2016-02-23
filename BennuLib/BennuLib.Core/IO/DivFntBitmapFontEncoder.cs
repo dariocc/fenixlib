@@ -20,6 +20,15 @@ namespace Bennu.IO
             return 0;
         }
 
+        protected override void WriteNativeFormatHeader ( BitmapFont font, 
+            NativeFormatWriter writer )
+        {
+            if ( font.Depth != 8 )
+                throw new ArgumentException (); // Customize
+
+                base.WriteNativeFormatHeader ( font, writer );
+        }
+
         protected override string GetFileMagic ( BitmapFont font ) => "fnt";
 
         protected override byte GetLastHeaderByte ( BitmapFont font ) => Version;
