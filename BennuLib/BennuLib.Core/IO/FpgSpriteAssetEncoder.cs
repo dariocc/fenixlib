@@ -22,7 +22,7 @@ namespace Bennu.IO
                 // TODO: Will fail for no control points defined
                 var maxPivotPointId = Convert.ToUInt16 ( sprite.PivotPoints.Max ( p => p.Id ) );
                 var maplen = Convert.ToUInt32 ( 64
-                    + sprite.Width * sprite.Height * asset.Depth / 8
+                    + NativeFormat.CalculatePixelBufferBytes ( asset.Depth, sprite.Width, sprite.Height )
                     + maxPivotPointId * 4 );
 
                 writer.Write ( maplen );
