@@ -1,33 +1,42 @@
 # fenixlib
+![alt text](https://dacucar.com/fenixlib/fenixlib.png "FenixLib Logo")
+
 .NET support for opening, creating and operating with [PixTudio](https://pixtudio.org), 
 BennuGD(https://bennugd.org) and [DIV](http://div-arena.co.uk/) native graphic, 
 graphic collections, fonts and palette formats.
 
-A code is worth more than a thousand words... Here there is how to load a Fpg file:
-    using FenixLib.IO;
-    
-    SpriteAsset asset = File.LoadFpg ( path );
-    foreach ( Sprite sprite in asset )
-    {
-        System.Console.WriteLine ( sprite.Description );
-    }
+For example:
+```csharp
+using FenixLib.IO;
 
+SpriteAsset asset = File.LoadFpg ( "myfpg.fpg" );
+foreach ( Sprite sprite in asset )
+{
+	System.Console.WriteLine ( sprite.Description );
+}
+
+asset[10].Description = "My graphic"
+
+File.SaveFpg ( "modified.fpg",  )
+```
+## Using the library
+Wip
 ## Compiling
 Wip
-## Contribute
+
+Detailed instructions can be found on [Building FenixLib sources] section in the Wiki.
+FenixLib shall run in any platform with support for .NET 4.5 and C#. This includes
+Windows, Linux and MacOS.
+
+You can use Visual Studio.NET or Mono Develop.
+## Contributing
 Wip
 ## License
 Copyright 2016 Darío Cutillas Carrillo
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+FenixLib is distributed under the very permisive 
+[Apache License, Version 2.0] (http://www.apache.org/licenses/LICENSE-2.0)
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
+You are free to use FenixLib in both commercial and non commercial and 
+open or close source applications as long as you follow the terms of the 
+License.
