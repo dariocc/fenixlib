@@ -1,4 +1,18 @@
-﻿using System;
+﻿/*  Copyright 2016 Darío Cutillas Carrillo
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*       http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*/
+using System;
 using System.Linq;
 using System.IO;
 
@@ -61,7 +75,7 @@ namespace FenixLib.IO
 
             Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream );
 
-            using ( NativeFormatReader pixelsReader = new NativeFormatReader ( pixelsStream ) )
+            using ( var pixelsReader = new NativeFormatReader ( pixelsStream ) )
             {
                 // Read Glyph's pixels
                 byte characterIndex = 0;
@@ -115,26 +129,5 @@ namespace FenixLib.IO
             return memory;
         }
     }
-
-    /*
-    class FnxFntBitmapFontDecoder : NativeDecoder<BitmapFont>
-    {
-        public override int MaxSupportedVersion { get; } = 0x00;
-
-        private int[] KnownDepths { get; } = { 1, 8, 16, 32 };
-
-        private int[] KnownCharsets { get; } = { 0, 1 };
-
-        protected override string[] KnownFileExtensions { get; } = { "fnt" };
-
-        protected override string[] KnownFileMagics { get; } = { "fnx" };
-
-        protected override bool ValidateHeaderVersion ( int version, Header header )
-        {
-            // FNX format uses the version byte to tell about the depth of the font. There is
-            // no version number in the header and therefore this method shall always return true
-            return true;
-        }
-    }*/
 
 }

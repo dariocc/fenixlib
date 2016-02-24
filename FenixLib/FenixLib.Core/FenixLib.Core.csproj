@@ -111,6 +111,7 @@
     <None Include="Diagrams\BaseTypes.cd" />
     <None Include="Diagrams\Decoders.cd" />
     <None Include="Diagrams\Encoders.cd" />
+    <None Include="FenixLib.Core.licenseheader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,3 +1,17 @@
+/*  Copyright 2016 Darío Cutillas Carrillo
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*       http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*/
 using System.IO;
 
 namespace FenixLib.IO
@@ -7,7 +21,7 @@ namespace FenixLib.IO
     /// format.
     /// </summary>
 	public static class File
-	{
+    {
 
         /// <summary>
         /// Opens a Map file, reads all the information into a <see cref="Sprite"/> 
@@ -15,14 +29,15 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="path">The file to open.</param>
         /// <returns>An instance of <see cref="Sprite"/> created from the file.</returns>
-		public static Sprite LoadMap(string path)
-		{
-			MapSpriteDecoder decoder = new MapSpriteDecoder();
+		public static Sprite LoadMap ( string path )
+        {
+            MapSpriteDecoder decoder = new MapSpriteDecoder ();
 
-			using (var stream = System.IO.File.Open(path, FileMode.Open)) {
-				return decoder.Decode(stream);
-			}
-		}
+            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
+            {
+                return decoder.Decode ( stream );
+            }
+        }
 
         /// <summary>
         /// Creates a new Map file, writes the information of a <see cref="Sprite"/>,
@@ -30,13 +45,14 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="sprite">The <see cref="Sprite"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-		public static void SaveMap(Sprite sprite, string path)
-		{
-			MapSpriteEncoder encoder = new MapSpriteEncoder();
-			using (var output = System.IO.File.Open(path, FileMode.Create)) {
-				encoder.Encode(sprite, output);
-			}
-		}
+		public static void SaveMap ( Sprite sprite, string path )
+        {
+            MapSpriteEncoder encoder = new MapSpriteEncoder ();
+            using ( var output = System.IO.File.Open ( path, FileMode.Create ) )
+            {
+                encoder.Encode ( sprite, output );
+            }
+        }
 
         /// <summary>
         /// Opens a Fpg file, reads all the information into a <see cref="SpriteAsset"/> 
@@ -44,13 +60,13 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="path">The file to open.</param>
         /// <returns>An instance of <see cref="SpriteAsset"/> created from the file.</returns>
-        public static SpriteAsset LoadFpg(string path)
+        public static SpriteAsset LoadFpg ( string path )
         {
-            FpgSpriteAssetDecoder decoder = new FpgSpriteAssetDecoder();
+            FpgSpriteAssetDecoder decoder = new FpgSpriteAssetDecoder ();
 
-            using (var stream = System.IO.File.Open(path, FileMode.Open))
+            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {
-                return decoder.Decode(stream);
+                return decoder.Decode ( stream );
             }
         }
 
@@ -60,12 +76,12 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="asset">The <see cref="SpriteAsset"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-        public static void SaveFpg(SpriteAsset asset, string path)
+        public static void SaveFpg ( SpriteAsset asset, string path )
         {
-            FpgSpriteAssetEncoder encoder = new FpgSpriteAssetEncoder();
-            using (var output = System.IO.File.Open(path, FileMode.Create))
+            FpgSpriteAssetEncoder encoder = new FpgSpriteAssetEncoder ();
+            using ( var output = System.IO.File.Open ( path, FileMode.Create ) )
             {
-                encoder.Encode(asset, output);
+                encoder.Encode ( asset, output );
             }
         }
 
@@ -75,13 +91,13 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="path">The file to open.</param>
         /// <returns>An instance of <see cref="Palette"/> created from the file.</returns>
-        public static Palette LoadPal(string path)
+        public static Palette LoadPal ( string path )
         {
-            DivFormatPaletteDecoder decoder = new DivFormatPaletteDecoder();
+            DivFormatPaletteDecoder decoder = new DivFormatPaletteDecoder ();
 
-            using (var stream = System.IO.File.Open(path, FileMode.Open))
+            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {
-                return decoder.Decode(stream);
+                return decoder.Decode ( stream );
             }
         }
 
@@ -91,13 +107,13 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="palette">The <see cref="Palette"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-        public static void SavePal(Palette palette, string path)
+        public static void SavePal ( Palette palette, string path )
         {
-            PalPaletteEncoder encoder = new PalPaletteEncoder();
+            PalPaletteEncoder encoder = new PalPaletteEncoder ();
 
-            using (var stream = System.IO.File.Open(path, FileMode.Open))
+            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {
-                encoder.Encode(palette, stream);
+                encoder.Encode ( palette, stream );
             }
         }
     }

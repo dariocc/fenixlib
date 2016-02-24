@@ -1,3 +1,17 @@
+/*  Copyright 2016 Darío Cutillas Carrillo
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*       http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*/
 using System;
 using System.Linq;
 
@@ -9,7 +23,8 @@ namespace FenixLib.IO
 
         protected override byte GetLastHeaderByte ( SpriteAsset what ) => version;
 
-        protected override void WriteNativeFormatBody ( SpriteAsset asset, NativeFormatWriter writer )
+        protected override void WriteNativeFormatBody ( SpriteAsset asset, 
+            NativeFormatWriter writer )
         {
             if ( asset.Palette != null )
             {
@@ -20,10 +35,13 @@ namespace FenixLib.IO
             foreach ( var sprite in asset )
             {
                 // TODO: Will fail for no control points defined
-                var maxPivotPointId = Convert.ToUInt16 ( sprite.PivotPoints.Max ( p => p.Id ) );
-                var maplen = Convert.ToUInt32 ( 64
-                    + NativeFormat.CalculatePixelBufferBytes ( asset.Depth, sprite.Width, sprite.Height )
-                    + maxPivotPointId * 4 );
+                var maxPivotPointId = Convert.ToUInt16 ( 
+                    sprite.PivotPoints.Max ( p => p.Id ) );
+
+                var pixelDataSize = NativeFormat.CalculatePixelBufferBytes (
+                    asset.Depth, sprite.Width, sprite.Height );
+
+                var maplen = Convert.ToUInt32 ( 64 + pixelDataSize + maxPivotPointId * 4 );
 
                 writer.Write ( maplen );
                 writer.WriteAsciiZ ( sprite.Description, 32 );
@@ -36,15 +54,8 @@ namespace FenixLib.IO
             }
         }
 
-        private bool HasPalette ( SpriteAsset asset )
-        {
-            return false;
-            // TODO
-        }
-
         protected override string GetFileMagic ( SpriteAsset asset )
         {
-
             switch ( asset.Depth )
             {
                 case 1:

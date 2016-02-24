@@ -1,3 +1,17 @@
+/*  Copyright 2016 Darío Cutillas Carrillo
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*       http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*/
 using System;
 using System.Collections.Generic;
 
@@ -8,8 +22,8 @@ namespace FenixLib
     /// A sprite is SpritePocket concept of image data (pixel information) and
     /// pivot points information grouped.
     ///
-    /// Sprites can be collected in <see cref="SpriteAsset"></see>s and given a code from which
-    /// it is possible to be retrieved later on.
+    /// Sprites can be collected in <see cref="SpriteAsset"></see>s and given a code
+    /// from which it is possible to be retrieved later on.
     /// </summary>
     [Serializable ()]
     public partial class Sprite
@@ -21,7 +35,8 @@ namespace FenixLib
 
         // TODO: Limit max pivot point ID Max pivot point ID is 999 (checked with bennu).
 
-        private IDictionary<int, PivotPoint> _pivotPoints = new SortedDictionary<int, PivotPoint> ();
+        private IDictionary<int, PivotPoint> _pivotPoints = 
+            new SortedDictionary<int, PivotPoint> ();
         private const int MaxPivotPointId = 999;
         private const int MinPivotPointId = 0;
         private static bool IsValidPivotPointId ( int id )
@@ -30,8 +45,8 @@ namespace FenixLib
         }
 
 
-        public static Sprite Create ( DepthMode depth, int width, int height, byte[] pixelData,
-            Palette palette = null )
+        public static Sprite Create ( DepthMode depth, int width, int height, 
+            byte[] pixelData, Palette palette = null )
         {
             if ( width <= 0 || height <= 0 )
                 throw new ArgumentOutOfRangeException (); // TODO: Customize
@@ -96,7 +111,8 @@ namespace FenixLib
 
         public int Depth { get; }
 
-        private Sprite ( int width, int height, int depth, byte[] pixelData, Palette palette = null )
+        private Sprite ( int width, int height, int depth, byte[] pixelData, 
+            Palette palette = null )
         {
             Width = width;
             Height = height;
@@ -170,7 +186,8 @@ namespace FenixLib
             return _pivotPoints.ContainsKey ( id );
         }
 
-        public int FindFreePivotPointId ( int start = 0, SearchDirection direction = SearchDirection.Fordward )
+        public int FindFreePivotPointId ( int start = 0, 
+            SearchDirection direction = SearchDirection.Fordward )
         {
             if ( direction == SearchDirection.Fordward )
             {
