@@ -1,5 +1,5 @@
 # fenixlib
-![alt text](https://dacucar.com/fenixlib/fenixlib.png "FenixLib Logo")
+![FenixLib logo](http://dacucar.com/fenixlib/fenixlib.png "FenixLib Logo")
 
 .NET support for opening, creating and operating with [PixTudio](https://pixtudio.org), 
 BennuGD(https://bennugd.org) and [DIV](http://div-arena.co.uk/) native graphic, 
