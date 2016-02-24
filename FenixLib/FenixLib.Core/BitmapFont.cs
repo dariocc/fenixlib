@@ -37,6 +37,8 @@ namespace FenixLib
         private BitmapFont ( int depth, Encoding encoding, Palette palette = null )
         {
             _encoding = encoding;
+            Depth = depth;
+            Palette = palette;
         }
 
         public Glyph this[char character]
@@ -44,8 +46,10 @@ namespace FenixLib
             get
             {
                 // TODO: Is it better to return nothing? or have an error?
+                Glyph glyph;
+                _glyphs.TryGetValue ( character, out glyph );
 
-                return _glyphs.ElementAtOrDefault ( character ).Value;
+                return glyph;
             }
             set
             {
@@ -53,7 +57,6 @@ namespace FenixLib
                     throw new InvalidOperationException ();
 
                 //TODO: Shall update the dictionary if the key exists.
-
                 _glyphs.Add ( character, value );
             }
         }
@@ -62,14 +65,11 @@ namespace FenixLib
         {
             get
             {
-                return _glyphs.Values.ElementAt ( index );
+                return this[Index2Char ( index )];
             }
             set
             {
-                // TODO: I am unsure on what happens on encodings with more than 256 characters
-                // and if this can be used at all
-                char character = _encoding.GetChars ( BitConverter.GetBytes ( index ) )[0];
-                this[character] = value;
+                this[Index2Char ( index )] = value;
             }
         }
 
@@ -119,6 +119,11 @@ namespace FenixLib
         IEnumerator IEnumerable.GetEnumerator ()
         {
             return Glyphs.GetEnumerator ();
+        }
+
+        private char Index2Char ( int index )
+        {
+            return _encoding.GetChars ( BitConverter.GetBytes ( index ) )[0];
         }
     }
 }

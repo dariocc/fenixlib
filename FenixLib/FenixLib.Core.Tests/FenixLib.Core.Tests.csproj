@@ -38,7 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\FpgSpriteAssetDecoderTests.cs" />
-    <Compile Include="TestClass.cs" />
+    <Compile Include="BitmapFontTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
