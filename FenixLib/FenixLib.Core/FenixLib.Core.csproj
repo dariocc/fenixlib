@@ -55,7 +55,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BitmapFont.cs" />
     <Compile Include="Image\DataBuffer.cs" />
     <Compile Include="Image\Raster.cs" />
