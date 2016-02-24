@@ -2,11 +2,12 @@
 
 FenixLib brings to you.NET support for opening, creating and operating with 
 [PixTudio](https://pixtudio.org), [BennuGD](https://bennugd.org) and 
-[DIV](http://div-arena.co.uk/) [native graphic, graphic collections, 
-fonts and palette formats].
+[DIV](http://div-arena.co.uk/) native graphic, graphic collections, 
+fonts and palette formats.
 
 The following example snippet shows how easy is to manipulate Fpg files:
 ```csharp
+using FenixLib.Core;
 using FenixLib.IO;
 
 // Load a Fpg file
@@ -24,6 +25,16 @@ asset[10].Description = "My graphic";
 
 File.SaveFpg ( "modified.fpg",  );
 ```
+Not harder than it is to create new fonts:
+```csharp
+using FenixLib.Core;
+using FenixLib.IO;
+
+BitmapFont font = BitmapFont(DepthMode.Argb32, FontCodePage.ISO85591);
+font['å'] = Glyph.Create( DepthMode.ArgbInt32, 10, 10, new byte[10 * 10 * 8] );
+File.SaveFnt ( 'myfont.fnt' );
+```
+
 ## Using the library
 Wip
 ## Compiling
