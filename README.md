@@ -1,7 +1,7 @@
 ![FenixLib](http://dacucar.com/fenixlib/fenixlib.png "FenixLib Logo")
 
 FenixLib brings to you.NET support for opening, creating and operating with 
-[PixTudio](https://pixtudio.org), BennuGD(https://bennugd.org) and 
+[PixTudio](https://pixtudio.org), [BennuGD](https://bennugd.org) and 
 [DIV](http://div-arena.co.uk/) [native graphic, graphic collections, 
 fonts and palette formats].
 
