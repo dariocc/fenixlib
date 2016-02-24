@@ -14,7 +14,7 @@
 */
 using System;
 
-namespace FenixLib
+namespace FenixLib.Core
 {
     [Serializable ()]
     public class Glyph

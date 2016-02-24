@@ -18,8 +18,7 @@ using System.Data;
 using System.Linq;
 using System.IO;
 using System.Text;
-
-using FenixLib;
+using FenixLib.Core;
 
 namespace FenixLib.IO
 {

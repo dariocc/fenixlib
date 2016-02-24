@@ -15,10 +15,8 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace FenixLib
+namespace FenixLib.Core
 {
-
-
 	public interface IDecoder<T>
 	{
 		IEnumerable<string> SupportedExtensions { get; }

@@ -18,7 +18,7 @@ using System;
 using System.Linq;
 using System.Collections;
 
-namespace FenixLib
+namespace FenixLib.Core
 {
     public class BitmapFont : IEnumerable<Glyph>
     {

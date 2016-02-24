@@ -14,6 +14,7 @@
 */
 using System;
 using System.Linq;
+using FenixLib.Core;
 
 namespace FenixLib.IO
 {

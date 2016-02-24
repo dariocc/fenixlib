@@ -15,7 +15,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace FenixLib
+namespace FenixLib.Core
 {
 
     /// <summary>

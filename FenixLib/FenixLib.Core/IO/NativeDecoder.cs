@@ -17,7 +17,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Collections.Generic;
 using System.Linq;
-
+using FenixLib.Core;
 using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO

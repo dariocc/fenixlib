@@ -16,7 +16,7 @@ using System;
 using System.Collections;
 using System.Linq;
 
-namespace FenixLib
+namespace FenixLib.Core
 {
     [Serializable ()]
     public partial class Palette : IEnumerable

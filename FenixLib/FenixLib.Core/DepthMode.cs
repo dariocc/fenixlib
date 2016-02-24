@@ -14,7 +14,7 @@
 */
 using System;
 
-namespace FenixLib
+namespace FenixLib.Core
 {
     public sealed class DepthMode
     {

@@ -15,6 +15,7 @@
 using System;
 using System.Data;
 using System.Linq;
+using FenixLib.Core;
 
 namespace FenixLib.IO
 {

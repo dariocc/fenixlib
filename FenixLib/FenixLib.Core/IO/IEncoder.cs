@@ -14,9 +14,8 @@
 */
 using System.IO;
 
-namespace FenixLib
+namespace FenixLib.Core
 {
-
 	public interface IEncoder<T>
 	{
 		void Encode(T obj, Stream output);

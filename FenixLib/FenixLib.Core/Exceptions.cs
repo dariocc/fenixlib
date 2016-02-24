@@ -14,7 +14,7 @@
 */
 using System.IO;
 
-namespace FenixLib
+namespace FenixLib.Core
 {
 
 	public class UnsuportedFileFormatException : IOException

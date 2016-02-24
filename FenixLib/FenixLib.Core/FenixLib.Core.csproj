@@ -18,7 +18,8 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>BennuLib.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1591</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

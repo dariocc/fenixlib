@@ -14,6 +14,7 @@
 */
 using System.IO.Compression;
 using System.IO;
+using FenixLib.Core;
 
 namespace FenixLib.IO
 {

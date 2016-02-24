@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using FenixLib;
+using FenixLib.Core;
 using FenixLib.IO;
 
 namespace FenixLib.Tests
