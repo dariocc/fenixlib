@@ -1,23 +1,28 @@
-# fenixlib
-![FenixLib logo](http://dacucar.com/fenixlib/fenixlib.png "FenixLib Logo")
+![FenixLib](http://dacucar.com/fenixlib/fenixlib.png "FenixLib Logo")
 
-.NET support for opening, creating and operating with [PixTudio](https://pixtudio.org), 
-BennuGD(https://bennugd.org) and [DIV](http://div-arena.co.uk/) native graphic, 
-graphic collections, fonts and palette formats.
+FenixLib brings to you.NET support for opening, creating and operating with 
+[PixTudio](https://pixtudio.org), BennuGD(https://bennugd.org) and 
+[DIV](http://div-arena.co.uk/) [native graphic, graphic collections, 
+fonts and palette formats].
 
-For example:
+The following example snippet shows how easy is to manipulate Fpg files:
 ```csharp
 using FenixLib.IO;
 
+// Load a Fpg file
 SpriteAsset asset = File.LoadFpg ( "myfpg.fpg" );
+
+// Print out the code and description of every 
+// sprite in the Fpg
 foreach ( Sprite sprite in asset )
 {
-	System.Console.WriteLine ( sprite.Description );
+	System.Console.WriteLine ( sprite.Id + " - " + sprite.Description );
 }
 
-asset[10].Description = "My graphic"
+// Change the description of Sprite with code 10
+asset[10].Description = "My graphic";
 
-File.SaveFpg ( "modified.fpg",  )
+File.SaveFpg ( "modified.fpg",  );
 ```
 ## Using the library
 Wip
