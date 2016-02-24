@@ -56,7 +56,7 @@ namespace FenixLib.IO
                 nativeStream = new GZipStream ( output, ( CompressionLevel ) Compression );
             }
 
-            using ( NativeFormatWriter writer = new NativeFormatWriter ( output ) )
+            using ( NativeFormatWriter writer = new NativeFormatWriter ( nativeStream ) )
             {
                 WriteNativeFormatHeader ( what, writer );
                 WriteNativeFormatBody ( what, writer );
