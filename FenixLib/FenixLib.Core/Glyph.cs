@@ -29,7 +29,7 @@ namespace FenixLib.Core
         public byte[] PixelData { get; }
         public int Depth { get; }
 
-        private Glyph ( int width, int height, int depth, byte[] pixelData, 
+        protected Glyph ( int width, int height, int depth, byte[] pixelData, 
             Palette palette = null )
         {
             Width = width;

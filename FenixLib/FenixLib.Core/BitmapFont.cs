@@ -34,7 +34,7 @@ namespace FenixLib.Core
             }
         }
 
-        private BitmapFont ( int depth, Encoding encoding, Palette palette = null )
+        protected BitmapFont ( int depth, Encoding encoding, Palette palette = null )
         {
             _encoding = encoding;
             Depth = depth;

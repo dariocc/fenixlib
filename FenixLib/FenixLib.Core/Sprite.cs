@@ -111,7 +111,7 @@ namespace FenixLib.Core
 
         public int Depth { get; }
 
-        private Sprite ( int width, int height, int depth, byte[] pixelData, 
+        protected Sprite ( int width, int height, int depth, byte[] pixelData, 
             Palette palette = null )
         {
             Width = width;

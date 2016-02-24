@@ -19,13 +19,13 @@ using System.Collections.Generic;
 namespace FenixLib.Core
 {
     [Serializable ()]
-    public sealed class SpriteAsset : IEnumerable<Sprite>
+    public class SpriteAsset : IEnumerable<Sprite>
     {
 
         private const int MinCode = 1;
         private const int MaxCode = 999;
 
-        private SpriteAsset ( int depth, Palette palette = null)
+        protected SpriteAsset ( int depth, Palette palette = null)
         {
             Depth = depth;
             Palette = palette;
