@@ -35,19 +35,21 @@ namespace FenixLib.IO
             var description = reader.ReadAsciiZ ( 32 );
 
             var depth = header.Depth;
+			Palette palette = null;
             if ( depth == 8 )
             {
-                var pal = reader.ReadPalette ();
-                reader.ReadUnusedPaletteGamma ();
+                palette = reader.ReadPalette ();
+				reader.ReadUnusedPaletteGamma ();
             }
 
             var numberOfPivotPoints = reader.ReadPivotPointsNumber ();
             var pivotPoints = reader.ReadPivotPoints ( numberOfPivotPoints );
 
             var mapDataLength = width * height * ( depth / 8 );
-            var pixels = reader.ReadPixels ( header.Depth, width, height );
+			var pixelData = reader.ReadPixels ( header.Depth, width, height );
 
-            var map = Sprite.Create ( (DepthMode) depth, width, height, pixels );
+            var map = Sprite.Create ( (DepthMode) depth, width, height, pixelData, palette );
+			map.Description = description;
 
             foreach ( var pivotPoint in pivotPoints )
             {
