@@ -21,9 +21,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FenixLib")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription ( ".NET support for manipulating PixTudio, Bennu, DivDx native formats" )]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany ( "Dacucar OSS" )]
 [assembly: AssemblyProduct("FenixLib.Properties")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
