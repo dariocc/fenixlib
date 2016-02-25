@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Rhino.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,55 +11,72 @@ namespace FenixLib.Core.Tests
     [TestFixture]
     public class BitmapFontTests
     {
-        private BitmapFont stubFontIso85591bpp32;
-        private Glyph stubGlyph;
+        private BitmapFont stubFont32;
+        private BitmapFont stubFont16;
+
+        private Glyph stubGlyph32;
+        private Glyph stubGlyph16;
 
         [SetUp]
-        public void Init()
+        public void Init ()
         {
-            stubFontIso85591bpp32 = BitmapFont.Create ( DepthMode.ArgbInt32, 
+            stubFont32 = BitmapFont.Create ( DepthMode.ArgbInt32,
                 FontCodePage.ISO85591 );
-            stubGlyph = Glyph.Create ( DepthMode.ArgbInt32, 10, 10, new byte[10 * 10 * 8] );
+
+            stubFont16 = BitmapFont.Create ( DepthMode.RgbInt16,
+                FontCodePage.ISO85591 );
+
+            stubGlyph32 = Glyph.Create ( DepthMode.ArgbInt32, 10, 10, new byte[100 * 4], null );
+            stubGlyph16 = Glyph.Create ( DepthMode.RgbInt16, 10, 10, new byte[100 * 4], null );
         }
 
         [Test]
-        public void IndexerGetInt_NonDefinedGlyph_Null ()
+        public void IntIndexerGet_NonDefinedGlyph_Null ()
         {
-            Assert.IsNull ( stubFontIso85591bpp32[0] );
+            Assert.IsNull ( stubFont32[0] );
         }
 
         [Test]
-        public void IndexerGetChar_NonDefinedGlyph_Null ()
+        public void CharIndexerGet_NonDefinedGlyph_Null ()
         {
-            Assert.IsNull ( stubFontIso85591bpp32['a'] );
+            Assert.IsNull ( stubFont32['a'] );
         }
 
         [Test]
-        public void IndexerGetInt_DefinedGlyph_NotNull ()
+        public void IntIndexerGet_DefinedGlyph_NotNull ()
         {
-            stubFontIso85591bpp32[10] = stubGlyph;
-            Assert.IsNotNull ( stubFontIso85591bpp32[10] );
+            stubFont32[10] = stubGlyph32;
+            Assert.IsNotNull ( stubFont32[10] );
         }
 
         [Test]
-        public void IndexerGetChar_DefinedGlyph_NotNull ()
+        public void CharIndexerGet_DefinedGlyph_NotNull ()
         {
-            stubFontIso85591bpp32['a'] = stubGlyph;
-            Assert.IsNotNull ( stubFontIso85591bpp32['a'] );
+            stubFont32['a'] = stubGlyph32;
+            Assert.IsNotNull ( stubFont32['a'] );
         }
 
         [Test]
-        public void IndexerGetInt_DefinedGlypWithIndexerSetterChar_NotNull ()
+        public void IntIndexerGet_DefinedGlypWithIndexerSetterChar_NotNull ()
         {
-            stubFontIso85591bpp32['æ'] = stubGlyph;
-            Assert.IsNotNull ( stubFontIso85591bpp32[230] );
+            stubFont32['æ'] = stubGlyph32;
+            Assert.IsNotNull ( stubFont32[230] );
         }
 
         [Test]
-        public void IndexerGetInt_DefinedGlyphWithIndexerSetterInt_NotNull ()
+        public void IntIndexerGet_DefinedGlyphWithIndexerSetterInt_NotNull ()
         {
-            stubFontIso85591bpp32[230] = stubGlyph;
-            Assert.IsNotNull ( stubFontIso85591bpp32['æ'] );
+            stubFont32[230] = stubGlyph32;
+            Assert.IsNotNull ( stubFont32['æ'] );
+        }
+
+        [Test]
+        public void CharIndexerSet_GlyphDepthDoesNotMatchFontDepth_RaisesArgumentException ()
+        {
+            ArgumentException ex = Assert.Throws<ArgumentException> (
+                () => stubFont32['a'] = stubGlyph16 );
+
+            Assert.AreEqual ( "Glyph and font depths need to match.", ex.Message );
         }
     }
 }

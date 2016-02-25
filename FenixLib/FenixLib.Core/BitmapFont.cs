@@ -45,7 +45,6 @@ namespace FenixLib.Core
         {
             get
             {
-                // TODO: Is it better to return nothing? or have an error?
                 Glyph glyph;
                 _glyphs.TryGetValue ( character, out glyph );
 
@@ -54,10 +53,12 @@ namespace FenixLib.Core
             set
             {
                 if ( value.Depth != Depth )
-                    throw new InvalidOperationException ();
+                    throw new ArgumentException ("Glyph and font depths need to match");
 
-                //TODO: Shall update the dictionary if the key exists.
-                _glyphs.Add ( character, value );
+                if (_glyphs.ContainsKey( character ) )
+                    _glyphs[character] = value;
+                else
+                    _glyphs.Add ( character, value );
             }
         }
 
