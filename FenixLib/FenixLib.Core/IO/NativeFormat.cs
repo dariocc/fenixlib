@@ -59,7 +59,7 @@ namespace FenixLib.IO
 
             if ( depth == 1 )
             {
-                int rowByteSize = ( width + ( ( width - ( width % 8 ) ) & 7 ) ) / 8;
+                int rowByteSize = ( width + ( 8 - ( ( ( width % 8 ) ) & 7 ) ) ) / 8;
                 byteLength = rowByteSize * height;
             }
             else

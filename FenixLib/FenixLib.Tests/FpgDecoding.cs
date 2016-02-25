@@ -73,5 +73,15 @@ namespace FenixLib.Tests
         {
             var fpg = DecodeFpg ( "./Fpg/32bpp-compressed.fpg", 32 );
         }
+
+        [TestMethod]
+        public void DecodeFpg_1bppCompressed ()
+        {
+            SpriteAsset fpg = File.LoadFpg ( "./Fpg/1bpp-compressed.fpg" );
+            Assert.AreEqual ( fpg[1].Width, 10 );
+            Assert.AreEqual ( fpg[1].Height, 10 );
+            Assert.AreEqual ( fpg.Depth, 1);
+            Assert.AreEqual ( fpg.Sprites.Count, 1 );
+        }
     }
 }

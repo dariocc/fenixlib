@@ -63,6 +63,14 @@
       <Link>Fpg\16bpp-uncompressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\TestFiles\1bpp-compressed.fpg">
+      <Link>Fpg\1bpp-compressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\1bpp-uncompressed.fpg">
+      <Link>Fpg\1bpp-uncompressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\TestFiles\32bpp-compressed.fpg">
       <Link>Fpg\32bpp-compressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
