@@ -15,8 +15,7 @@ using FenixLib.IO;
 // Load a Fpg file
 SpriteAsset asset = File.LoadFpg ( "myfpg.fpg" );
 
-// Print out the code and description of every 
-// sprite in the Fpg
+// Print out the code and description of every sprite in the Fpg
 foreach ( Sprite sprite in asset )
 {
 	System.Console.WriteLine ( sprite.Id.ToString() + " - " + sprite.Description );
