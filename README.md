@@ -40,18 +40,21 @@ File.SaveFnt ( 'myfont.fnt' );
 ```
 
 ## Using the library
-If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/FpgFormat),  [Map](https://github.com/dacucar/fenixlib/wiki/MapFormat), [Pal](https://github.com/dacucar/fenixlib/wiki/PalFormat) and [Fnt](https://github.com/dacucar/fenixlib/wiki/FntFormat) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. If you don't, just have a look to the [[native formats introduction|NativeFormatsIntro]] and then you will be ready to understand the following topics.
+If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/FpgFormat),  [Map](https://github.com/dacucar/fenixlib/wiki/MapFormat), [Pal](https://github.com/dacucar/fenixlib/wiki/PalFormat) and [Fnt](https://github.com/dacucar/fenixlib/wiki/FntFormat) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. 
 
 * [Core Types](https://github.com/dacucar/fenixlib/wiki/CoreTypes)
 * [IO Api](https://github.com/dacucar/fenixlib/wiki/IOApi)
 * [Image Api](https://github.com/dacucar/fenixlib/wiki/ImageApi)
 * [Image Api Backends](https://github.com/dacucar/fenixlib/wiki/ImageBackends)
 
+If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/NativeFormats) and then you will be ready to the topics above.
+
 ## Compiling
 FenixLib core assembly runs in any platform with support for .NET 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
 [MonoDevelop / Xamarin](http://www.monodevelop.com/) and I have succesfully built it from Windows, Linux and OSX.
 
 Go ahead and make a clone of this repository:
+
     git clone https://github.com/dacucar/fenixlib
     
 Then open the ```FenixLib.Sln``` with either Visual Studio, MonoDevelop or Xamarin and you are ready to go... FenixLib builds as any other class library. Note that as long as you have a C# compiler for the .NET 4.5 platform you do not need any IDE, but I guess that if you know that you already know what to do... 
