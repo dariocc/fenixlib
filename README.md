@@ -40,7 +40,7 @@ File.SaveFnt ( 'myfont.fnt' );
 ```
 
 ## Using the library
-If you know what [[Fpg|Fpg Format]], [[Map|Map Format]], [[Pal|Pal Format]] and [[Fnt|Fnt Format]] files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. If you don't, just have a look to the [[native formats introduction|NativeFormatsIntro]] and then you will be ready to understand the following topics.
+If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/FpgFormat),  [Map](https://github.com/dacucar/fenixlib/wiki/MapFormat), [Pal](https://github.com/dacucar/fenixlib/wiki/PalFormat) and [Fnt](https://github.com/dacucar/fenixlib/wiki/FntFormat) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. If you don't, just have a look to the [[native formats introduction|NativeFormatsIntro]] and then you will be ready to understand the following topics.
 
 * [Core Types](https://github.com/dacucar/fenixlib/wiki/CoreTypes)
 * [IO Api](https://github.com/dacucar/fenixlib/wiki/IOApi)
@@ -50,23 +50,36 @@ If you know what [[Fpg|Fpg Format]], [[Map|Map Format]], [[Pal|Pal Format]] and 
 ## Compiling
 FenixLib core assembly runs in any platform with support for .NET 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
 [MonoDevelop / Xamarin](http://www.monodevelop.com/) and I have succesfully built it from Windows, Linux and OSX.
-The [[Image Api Backends||ImageApiBackends]] and auxiliary assemblies might however be platform dependent (this is done on purpose to take the most of each system). For example, the classes exposed by the FenixLib.Wpf are dependent on the [Wpf](https://msdn.microsoft.com/en-us/library/ms754130.aspx) assemblies.
+
+Go ahead and make a clone of this repository:
+    git clone https://github.com/dacucar/fenixlib
+    
+Then open the ```FenixLib.Sln``` with either Visual Studio, MonoDevelop or Xamarin and you are ready to go... FenixLib builds as any other class library. Note that as long as you have a C# compiler for the .NET 4.5 platform you do not need any IDE, but I guess that if you know that you already know what to do... 
+
+The [Image Api Backends](https://github.com/dacucar/fenixlib/wiki/ImageBackEnds) and auxiliary assemblies might however be platform dependent. This is done on purpose, to take the most of each system. For example, the classes exposed by the FenixLib.Wpf are dependent on the [Wpf](https://msdn.microsoft.com/en-us/library/ms754130.aspx) assemblies.
+
+For more detailed instructions refer to the [Compiling FenixLib](https://github.com/dacucar/fenixlib/wiki/Compiling) section of the Wiki.
 
 ## Contributing
 There basically three ways in which you can contribute:
   1. Reporting issues or feature requests. 
   2. Joining the development.
   3. Donating.
-  4. Letting me know how useful is this for you.
+  4. Letting me know how useful is this to you.
+
+Well, that was 4 actually!
 
 ### Reporting issues or feature requests
 Use the [issues](https://github.com/dacucar/fenixlib/issues) section. Any feature request shall also be written there.
+
 ### Joining the development
-If you feel to contribute with actual code, you can. Make sure to read the [FenixLib Architecture](https://github.com/dacucar/fenixlib/wiki/Architecture) notes and the [Coding Conventions](https://github.com/dacucar/fenixlib/wiki/CodingConventions). Then you are free to contact me
+If you feel to contribute with actual code, you can. Make sure to read the [FenixLib Architecture](https://github.com/dacucar/fenixlib/wiki/Architecture) notes and the [Coding Conventions](https://github.com/dacucar/fenixlib/wiki/CodingConventions). Then ju
+
 ### Donating
-If FenixLib is useful to you and you want so, you are welcomed to fund my Saturday´s cup of coffee, which greatly enhaces my coding productivity :).
-### Letting me know how useful is this for you
-If FenixLib is useful to you and you cannot afford a cup of coffee then you can still contribute by simply letting me know where and how do you use FenixLib. I am honour with every end-user and very willing to know about projects using this.
+If FenixLib is useful to you and you want so, you are welcomed to fund this project. For the price of a cup of coffee at your local cafeteria, I will be more than glad to mantain and extend this project.
+
+### Letting me know how useful is this to you
+If FenixLib is useful to you but donating is not an option for you, don't worry, you can still contribute by simply letting me know where and how do you use FenixLib. I am honour with every end-user and very willing to know about projects using my work.
 
 ## License
 Copyright 2016 Darío Cutillas Carrillo
