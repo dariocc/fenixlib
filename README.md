@@ -69,8 +69,9 @@ There basically three ways in which you can contribute:
   2. Joining the development.
   3. Donating.
   4. Letting me know how useful is this to you.
+  5. Hire me!
 
-Well, that was 4 actually!
+Well, that was 5 actually! Let's have a look on each of them:
 
 ### Reporting issues or feature requests
 Use the [issues](https://github.com/dacucar/fenixlib/issues) section. Any feature request shall also be written there.
@@ -83,8 +84,13 @@ If FenixLib is useful to you and you want so, you are welcomed to fund this proj
 
 <a href='https://pledgie.com/campaigns/31179'><img alt='Click here to lend your support to: Support FenixLib open source project and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/31179.png?skin_name=chrome' border='0' ></a>
 
+If you are donating to get some particular feature done, you are very welcomed to specified it in your donation message!
+
 ### Letting me know how useful is this to you
 If FenixLib is useful to you but donating is not an option for you, don't worry, you can still contribute by simply letting me know where and how do you use FenixLib. I am honour with every end-user and very willing to know about projects using my work.
+
+### Hire me!
+I develop FenixLib for free and for the fun of it. But as many other people I need to earn a living. If you are a talent hunter or recruiter and believe that [my skills]() suit to your project don't be shy and contact me. I offer a set of [services]() that might be of interest. Check my [profile](), you'll discover something that might be interesting.
 
 ## License
 Copyright 2016 Darío Cutillas Carrillo
