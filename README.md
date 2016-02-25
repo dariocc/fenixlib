@@ -42,10 +42,10 @@ File.SaveFnt ( 'myfont.fnt' );
 ## Using the library
 If you know what [[Fpg|Fpg Format]], [[Map|Map Format]], [[Pal|Pal Format]] and [[Fnt|Fnt Format]] files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. If you don't, just have a look to the [[native formats introduction|NativeFormatsIntro]] and then you will be ready to understand the following topics.
 
-* [[Core Types|CoreTypes]]
-* [[IO Api|IOApi]]
-* [[Image Api|ImageApi]]
-* [[Image Api Backends|ImageApiBackends]]
+* [Core Types](https://github.com/dacucar/fenixlib/wiki/CoreTypes)
+* [IO Api](https://github.com/dacucar/fenixlib/wiki/IOApi)
+* [Image Api](https://github.com/dacucar/fenixlib/wiki/ImageApi)
+* [Image Api Backends](https://github.com/dacucar/fenixlib/wiki/ImageBackends)
 
 ## Compiling
 FenixLib core assembly runs in any platform with support for .NET 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
@@ -54,17 +54,19 @@ The [[Image Api Backends||ImageApiBackends]] and auxiliary assemblies might howe
 
 ## Contributing
 There basically three ways in which you can contribute:
-1. Reporting issues or feature requests. 
-2. Joining the development.
-3. Donating.
-4. Letting me know how useful is this for you.
+  1. Reporting issues or feature requests. 
+  2. Joining the development.
+  3. Donating.
+  4. Letting me know how useful is this for you.
 
 ### Reporting issues or feature requests
 Use the [issues](https://github.com/dacucar/fenixlib/issues) section. Any feature request shall also be written there.
 ### Joining the development
-If you feel to contribute with actual code, you can. Make sure to read the [[FenixLib Architecture|Architecture]] notes and the [[Coding Conventions|CodingConventions]]. Then you are free to contact me
+If you feel to contribute with actual code, you can. Make sure to read the [FenixLib Architecture](https://github.com/dacucar/fenixlib/wiki/Architecture) notes and the [Coding Conventions](https://github.com/dacucar/fenixlib/wiki/CodingConventions). Then you are free to contact me
 ### Donating
-If FenixLib is useful to you and you want so, you are welcomed to fund my pre-coding Saturday´s cup of coffee or my wished software books.
+If FenixLib is useful to you and you want so, you are welcomed to fund my Saturday´s cup of coffee, which greatly enhaces my coding productivity :).
+### Letting me know how useful is this for you
+If FenixLib is useful to you and you cannot afford a cup of coffee then you can still contribute by simply letting me know where and how do you use FenixLib. I am honour with every end-user and very willing to know about projects using this.
 
 ## License
 Copyright 2016 Darío Cutillas Carrillo
