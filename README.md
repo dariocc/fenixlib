@@ -76,7 +76,7 @@ Well, that was 5 actually! Let's have a look on each of them:
 Use the [issues](https://github.com/dacucar/fenixlib/issues) section. Any feature request shall also be written there.
 
 ### Joining the development
-If you feel to contribute with actual code, you can. Make sure to read the [FenixLib Architecture](https://github.com/dacucar/fenixlib/wiki/Architecture) notes and the [Coding Conventions](https://github.com/dacucar/fenixlib/wiki/CodingConventions). Then ju
+If you feel to contribute with actual code, you can. Make sure to read the [FenixLib Architecture](https://github.com/dacucar/fenixlib/wiki/Architecture) notes and the [Coding Conventions](https://github.com/dacucar/fenixlib/wiki/CodingConventions). Then the best is that you create a fork of this project, make your modifications and then do a pull request. I will review the submissions and merge with the main stream if they belong to scope of fenixlib. If you plan to contribute it is always good to contact me so as we avoid working on the same areas.
 
 ### Donating
 If FenixLib is useful to you and you want so, you are welcomed to fund this project. For the price of a cup of coffee at your local cafeteria, I will keep my spirit fully loaded to mantain and extend this project.
