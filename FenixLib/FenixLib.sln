@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Core", "FenixLib.Core\FenixLib.Core.csproj", "{E110DF41-CAE8-4DCC-9A41-09864E5651DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Tests", "FenixLib.Tests\FenixLib.Tests.csproj", "{A34FA53A-3C0F-42C2-9559-2396004B3321}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Core.Tests", "FenixLib.Core.Tests\FenixLib.Core.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{E110DF41-CAE8-4DCC-9A41-09864E5651DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E110DF41-CAE8-4DCC-9A41-09864E5651DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E110DF41-CAE8-4DCC-9A41-09864E5651DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A34FA53A-3C0F-42C2-9559-2396004B3321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A34FA53A-3C0F-42C2-9559-2396004B3321}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A34FA53A-3C0F-42C2-9559-2396004B3321}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A34FA53A-3C0F-42C2-9559-2396004B3321}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
