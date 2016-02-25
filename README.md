@@ -5,7 +5,9 @@ FenixLib brings to you.NET support for opening, creating and operating with
 [DIV](http://div-arena.co.uk/) native graphic, graphic collections, 
 fonts and palette formats.
 
-The following example snippet shows how easy is to manipulate Fpg files:
+The following snippet shows how easy is to open a Fpg file, print the codes
+and description of every map, change the description of map with code 10 and
+save the changes in a new file.
 ```csharp
 using FenixLib.Core;
 using FenixLib.IO;
@@ -17,7 +19,7 @@ SpriteAsset asset = File.LoadFpg ( "myfpg.fpg" );
 // sprite in the Fpg
 foreach ( Sprite sprite in asset )
 {
-	System.Console.WriteLine ( sprite.Id + " - " + sprite.Description );
+	System.Console.WriteLine ( sprite.Id.ToString() + " - " + sprite.Description );
 }
 
 // Change the description of Sprite with code 10
@@ -25,28 +27,45 @@ asset[10].Description = "My graphic";
 
 File.SaveFpg ( "modified.fpg",  );
 ```
-Not harder than it is to create new fonts:
+
+Another cool example, see how easy it is to create a font file:
 ```csharp
 using FenixLib.Core;
 using FenixLib.IO;
 
-BitmapFont font = BitmapFont(DepthMode.Argb32, FontCodePage.ISO85591);
-font['å'] = Glyph.Create( DepthMode.ArgbInt32, 10, 10, new byte[10 * 10 * 4] );
+BitmapFont font = BitmapFont ( DepthMode.Argb32, FontCodePage.ISO85591 );
+// A dummy glyph
+font['å'] = Glyph.Create ( DepthMode.ArgbInt32, 10, 10, new byte[10 * 10 * 4] );
 File.SaveFnt ( 'myfont.fnt' );
 ```
 
 ## Using the library
-Wip
+If you know what [[Fpg|Fpg Format]], [[Map|Map Format]], [[Pal|Pal Format]] and [[Fnt|Fnt Format]] files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. If you don't, just have a look to the [[native formats introduction|NativeFormatsIntro]] and then you will be ready to understand the following topics.
+
+* [[Core Types|CoreTypes]]
+* [[IO Api|IOApi]]
+* [[Image Api|ImageApi]]
+* [[Image Api Backends|ImageApiBackends]]
+
 ## Compiling
-Wip
+FenixLib core assembly runs in any platform with support for .NET 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
+[MonoDevelop / Xamarin](http://www.monodevelop.com/) and I have succesfully built it from Windows, Linux and OSX.
+The [[Image Api Backends||ImageApiBackends]] and auxiliary assemblies might however be platform dependent (this is done on purpose to take the most of each system). For example, the classes exposed by the FenixLib.Wpf are dependent on the [Wpf](https://msdn.microsoft.com/en-us/library/ms754130.aspx) assemblies.
 
-Detailed instructions can be found on [Building FenixLib sources] section in the Wiki.
-FenixLib shall run in any platform with support for .NET 4.5 and C#. This includes
-Windows, Linux and MacOS.
-
-You can use Visual Studio.NET or Mono Develop.
 ## Contributing
-Wip
+There basically three ways in which you can contribute:
+1. Reporting issues or feature requests. 
+2. Joining the development.
+3. Donating.
+4. Letting me know how useful is this for you.
+
+### Reporting issues or feature requests
+Use the [issues](https://github.com/dacucar/fenixlib/issues) section. Any feature request shall also be written there.
+### Joining the development
+If you feel to contribute with actual code, you can. Make sure to read the [[FenixLib Architecture|Architecture]] notes and the [[Coding Conventions|CodingConventions]]. Then you are free to contact me
+### Donating
+If FenixLib is useful to you and you want so, you are welcomed to fund my pre-coding Saturday´s cup of coffee or my wished software books.
+
 ## License
 Copyright 2016 Darío Cutillas Carrillo
 
