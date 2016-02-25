@@ -79,9 +79,9 @@ Use the [issues](https://github.com/dacucar/fenixlib/issues) section. Any featur
 If you feel to contribute with actual code, you can. Make sure to read the [FenixLib Architecture](https://github.com/dacucar/fenixlib/wiki/Architecture) notes and the [Coding Conventions](https://github.com/dacucar/fenixlib/wiki/CodingConventions). Then ju
 
 ### Donating
-If FenixLib is useful to you and you want so, you are welcomed to fund this project. For the price of a cup of coffee at your local cafeteria, I will be more than glad to mantain and extend this project.
+If FenixLib is useful to you and you want so, you are welcomed to fund this project. For the price of a cup of coffee at your local cafeteria, I will keep my spirit fully loaded to mantain and extend this project.
 
-
+<a href='https://pledgie.com/campaigns/31179'><img alt='Click here to lend your support to: Support FenixLib open source project and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/31179.png?skin_name=chrome' border='0' ></a>
 
 ### Letting me know how useful is this to you
 If FenixLib is useful to you but donating is not an option for you, don't worry, you can still contribute by simply letting me know where and how do you use FenixLib. I am honour with every end-user and very willing to know about projects using my work.
