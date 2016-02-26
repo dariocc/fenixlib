@@ -25,7 +25,7 @@ namespace FenixLib.Core
         private const int MinCode = 1;
         private const int MaxCode = 999;
 
-        protected SpriteAsset ( int depth, Palette palette = null)
+        protected SpriteAsset ( GraphicFormat depth, Palette palette = null)
         {
             Depth = depth;
             Palette = palette;
@@ -46,7 +46,7 @@ namespace FenixLib.Core
 
         public Palette Palette { get; private set; }
 
-        public int Depth { get; private set; }
+        public GraphicFormat Depth { get; private set; }
 
         public ICollection<Sprite> Sprites
         {
@@ -146,14 +146,14 @@ namespace FenixLib.Core
             return GetEnumerator ();
         }
 
-        public static SpriteAsset Create ( DepthMode depthMode )
+        public static SpriteAsset Create ( GraphicFormat graphicFormat )
         {
-            return new SpriteAsset ( ( int ) depthMode );
+            return new SpriteAsset ( graphicFormat );
         }
 
         public static SpriteAsset Create ( Palette palette )
         {
-            return new SpriteAsset ( ( int ) DepthMode.RgbIndexedPalette, palette );
+            return new SpriteAsset ( GraphicFormat.RgbIndexedPalette, palette );
         }
     }
 }

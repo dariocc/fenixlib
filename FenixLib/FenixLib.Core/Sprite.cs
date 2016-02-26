@@ -26,7 +26,7 @@ namespace FenixLib.Core
     /// from which it is possible to be retrieved later on.
     /// </summary>
     [Serializable ()]
-    public partial class Sprite
+    public partial class Sprite : IGraphic
     {
 
         private byte[] _pixelData;
@@ -45,7 +45,7 @@ namespace FenixLib.Core
         }
 
 
-        public static Sprite Create ( DepthMode depth, int width, int height, 
+        public static Sprite Create ( GraphicFormat depth, int width, int height, 
             byte[] pixelData, Palette palette = null )
         {
             if ( width <= 0 || height <= 0 )
@@ -53,10 +53,10 @@ namespace FenixLib.Core
 
             // TODO: Validate the size of pixelData array based on the depth
 
-            if ( ( depth == DepthMode.RgbIndexedPalette ) != ( palette != null ) )
+            if ( ( depth == GraphicFormat.RgbIndexedPalette ) != ( palette != null ) )
                 throw new ArgumentException (); // TODO: Customize
 
-            return new Sprite ( width, height, ( int ) depth, pixelData, palette );
+            return new Sprite ( width, height, depth, pixelData, palette );
         }
 
         /// <summary>
@@ -109,9 +109,9 @@ namespace FenixLib.Core
             }
         }
 
-        public int Depth { get; }
+        public GraphicFormat Depth { get; }
 
-        protected Sprite ( int width, int height, int depth, byte[] pixelData, 
+        protected Sprite ( int width, int height, GraphicFormat depth, byte[] pixelData, 
             Palette palette = null )
         {
             Width = width;

@@ -70,7 +70,7 @@ namespace FenixLib.IO
             }
 
             // Create the font
-            BitmapFont font = BitmapFont.Create ( (DepthMode) depth, 
+            BitmapFont font = BitmapFont.Create ( (GraphicFormat) depth, 
                 ParseCodePageType ( codePageType ) );
 
             Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream );
@@ -93,7 +93,7 @@ namespace FenixLib.IO
                     byte[] pixels = pixelsReader.ReadPixels ( depth, character.Width,
                         character.Height );
 
-                    Glyph glyph = Glyph.Create ( (DepthMode) depth, character.Width, 
+                    Glyph glyph = Glyph.Create ( (GraphicFormat) depth, character.Width, 
                         character.Height, pixels );
                     glyph.XAdvance = character.XAdvance;
                     glyph.YAdavance = character.YAdvance;

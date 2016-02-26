@@ -34,7 +34,7 @@ namespace FenixLib.Core
             }
         }
 
-        protected BitmapFont ( int depth, Encoding encoding, Palette palette = null )
+        protected BitmapFont ( GraphicFormat depth, Encoding encoding, Palette palette = null )
         {
             _encoding = encoding;
             Depth = depth;
@@ -74,7 +74,7 @@ namespace FenixLib.Core
             }
         }
 
-        public int Depth { get; }
+        public GraphicFormat Depth { get; }
         public Palette Palette { get; }
 
         public IEnumerable<Glyph> Glyphs
@@ -85,14 +85,14 @@ namespace FenixLib.Core
             }
         }
 
-        public static BitmapFont Create ( DepthMode depthMode, FontCodePage codePage )
+        public static BitmapFont Create ( GraphicFormat graphicFormat, FontCodePage codePage )
         {
-            if ( depthMode == DepthMode.RgbIndexedPalette )
+            if ( graphicFormat == GraphicFormat.RgbIndexedPalette )
             {
                 throw new InvalidOperationException (); // TODO: Customize
             }
 
-            BitmapFont font = new BitmapFont ( ( int ) depthMode,
+            BitmapFont font = new BitmapFont ( graphicFormat,
                 Encoding.GetEncoding ( codePage.Value ) );
 
             return font;
@@ -105,7 +105,7 @@ namespace FenixLib.Core
                 throw new ArgumentException (); // TODO: Customize
             }
 
-            BitmapFont font = new BitmapFont ( 8,
+            BitmapFont font = new BitmapFont ( (GraphicFormat) 8,
                 Encoding.GetEncoding ( codePage.Value ),
                 palette );
 

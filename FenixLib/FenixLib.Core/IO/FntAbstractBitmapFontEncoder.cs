@@ -29,7 +29,7 @@ namespace FenixLib.IO
         protected override void WriteNativeFormatBody ( BitmapFont font, 
             NativeFormatWriter writer )
         {
-            if ( font.Depth == 8 )
+            if ( (int) font.Depth == 8 )
             {
                 writer.Write ( font.Palette );
                 writer.WriteReservedPaletteGammaSection ();
@@ -60,7 +60,7 @@ namespace FenixLib.IO
                         pixelsDataOffset + GlyphInfoBlockSize + 12); // 8 header + 4 font info
                 }
 
-                pixelsDataOffset += CalculatePixelBufferBytes ( font.Depth, 
+                pixelsDataOffset += CalculatePixelBufferBytes ( (int) font.Depth, 
                     glyphsInfo[i].Width,
                     glyphsInfo[i].Height );
 

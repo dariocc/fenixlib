@@ -17,7 +17,7 @@ using System;
 namespace FenixLib.Core
 {
     [Serializable ()]
-    public class Glyph
+    public class Glyph : IGraphic
     {
         public int Width { get; }
         public int Height { get; }
@@ -27,9 +27,9 @@ namespace FenixLib.Core
         public int XAdvance { get; set; } = 0;
         public int YAdavance { get; set; } = 0;
         public byte[] PixelData { get; }
-        public int Depth { get; }
+        public GraphicFormat Depth { get; }
 
-        protected Glyph ( int width, int height, int depth, byte[] pixelData, 
+        protected Glyph ( int width, int height, GraphicFormat depth, byte[] pixelData = null, 
             Palette palette = null )
         {
             Width = width;
@@ -39,17 +39,17 @@ namespace FenixLib.Core
             PixelData = pixelData;
         }
 
-        public static Glyph Create (DepthMode depth, int width, int height, byte[] pixelData, 
+        public static Glyph Create (GraphicFormat depth, int width, int height, byte[] pixelData, 
             Palette palette = null )
         {
             if ( width <= 0 || height <= 0 )
                 throw new ArgumentOutOfRangeException (); // TODO: Customize
 
             // TODO: Validate the size of pixelData array
-            if ( ( depth == DepthMode.RgbIndexedPalette ) != ( palette != null ) )
+            if ( ( depth == GraphicFormat.RgbIndexedPalette ) != ( palette != null ) )
                 throw new ArgumentException (); // TODO: Customize
 
-            return new Glyph ( width, height, (int) depth, pixelData, palette );
+            return new Glyph ( width, height, depth, pixelData, palette );
         }
     }
 }

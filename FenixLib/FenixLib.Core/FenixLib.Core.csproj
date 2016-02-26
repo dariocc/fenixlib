@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitmapFont.cs" />
+    <Compile Include="IGraphic.cs" />
     <Compile Include="Image\DataBuffer.cs" />
     <Compile Include="Image\Raster.cs" />
     <Compile Include="Image\SampleModel.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="FontCodepage.cs" />
     <Compile Include="IO\DivFntBitmapFontDecoder.cs" />
     <Compile Include="IO\File.cs" />
-    <Compile Include="DepthMode.cs" />
+    <Compile Include="GraphicFormat.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Glyph.cs" />
     <Compile Include="IO\DivFntSpriteAssetDecoder.cs" />

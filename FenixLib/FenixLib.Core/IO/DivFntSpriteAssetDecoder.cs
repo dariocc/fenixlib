@@ -51,7 +51,7 @@ namespace FenixLib.IO
 
                 var pixels = reader.ReadPixels ( header.Depth, character.Width, 
                     character.Height );
-                var map = Sprite.Create ( (DepthMode) header.Depth, character.Width, 
+                var map = Sprite.Create ( (GraphicFormat) header.Depth, character.Width, 
                     character.Height, pixels );
                 fpg.Add ( fpg.FindFreeId (), ref map );
             }

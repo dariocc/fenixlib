@@ -40,7 +40,7 @@ namespace FenixLib.IO
                     sprite.PivotPoints.Max ( p => p.Id ) );
 
                 var pixelDataSize = NativeFormat.CalculatePixelBufferBytes (
-                    asset.Depth, sprite.Width, sprite.Height );
+                    (int) asset.Depth, sprite.Width, sprite.Height );
 
                 var maplen = Convert.ToUInt32 ( 64 + pixelDataSize + maxPivotPointId * 4 );
 
@@ -57,7 +57,7 @@ namespace FenixLib.IO
 
         protected override string GetFileMagic ( SpriteAsset asset )
         {
-            switch ( asset.Depth )
+            switch ( (int) asset.Depth )
             {
                 case 1:
                     return "f01";

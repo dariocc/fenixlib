@@ -39,7 +39,7 @@ namespace FenixLib.IO
             }
             else
             {
-                fpg = SpriteAsset.Create ( ( DepthMode ) header.Depth );
+                fpg = SpriteAsset.Create ( ( GraphicFormat ) header.Depth );
             }
 
             try
@@ -70,7 +70,7 @@ namespace FenixLib.IO
 
                     byte[] pixels = reader.ReadPixels ( header.Depth, width, height );
 
-                    var map = Sprite.Create ( (DepthMode) header.Depth, width, height, 
+                    var map = Sprite.Create ( (GraphicFormat) header.Depth, width, height, 
                         pixels, palette );
                     map.Description = description;
                     foreach ( var point in pivotPoints )

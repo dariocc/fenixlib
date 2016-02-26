@@ -20,14 +20,14 @@ namespace FenixLib.Core.Tests
         [SetUp]
         public void Init ()
         {
-            stubFont32 = BitmapFont.Create ( DepthMode.ArgbInt32,
+            stubFont32 = BitmapFont.Create ( GraphicFormat.ArgbInt32,
                 FontCodePage.ISO85591 );
 
-            stubFont16 = BitmapFont.Create ( DepthMode.RgbInt16,
+            stubFont16 = BitmapFont.Create ( GraphicFormat.RgbInt16,
                 FontCodePage.ISO85591 );
 
-            stubGlyph32 = Glyph.Create ( DepthMode.ArgbInt32, 10, 10, new byte[100 * 4], null );
-            stubGlyph16 = Glyph.Create ( DepthMode.RgbInt16, 10, 10, new byte[100 * 4], null );
+            stubGlyph32 = Glyph.Create ( GraphicFormat.ArgbInt32, 10, 10, new byte[100 * 4], null );
+            stubGlyph16 = Glyph.Create ( GraphicFormat.RgbInt16, 10, 10, new byte[100 * 4], null );
         }
 
         [Test]

@@ -16,16 +16,16 @@ using System;
 
 namespace FenixLib.Core
 {
-    public sealed class DepthMode
+    public sealed class GraphicFormat
     {
-        public int Value { get; }
+        public int Bpp { get; }
 
-        private DepthMode ( int value )
+        private GraphicFormat ( int value )
         {
-            Value = value;
+            Bpp = value;
         }
 
-        public static explicit operator DepthMode ( int value )
+        public static explicit operator GraphicFormat ( int value )
         {
             switch ( value )
             {
@@ -42,14 +42,14 @@ namespace FenixLib.Core
             throw new ArgumentException ();
         }
 
-        public static explicit operator int (DepthMode depthMode)
+        public static explicit operator int (GraphicFormat graphicFormat)
         {
-            return depthMode.Value;
+            return graphicFormat.Bpp;
         }
 
-        public static DepthMode Monochrome = new DepthMode ( 1 );
-        public static DepthMode RgbIndexedPalette = new DepthMode ( 8 );
-        public static DepthMode RgbInt16 = new DepthMode ( 16 );
-        public static DepthMode ArgbInt32 = new DepthMode ( 32 );
+        public static GraphicFormat Monochrome = new GraphicFormat ( 1 );
+        public static GraphicFormat RgbIndexedPalette = new GraphicFormat ( 8 );
+        public static GraphicFormat RgbInt16 = new GraphicFormat ( 16 );
+        public static GraphicFormat ArgbInt32 = new GraphicFormat ( 32 );
     }
 }

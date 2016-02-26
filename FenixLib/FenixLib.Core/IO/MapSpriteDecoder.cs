@@ -48,7 +48,7 @@ namespace FenixLib.IO
             var mapDataLength = width * height * ( depth / 8 );
 			var pixelData = reader.ReadPixels ( header.Depth, width, height );
 
-            var map = Sprite.Create ( (DepthMode) depth, width, height, pixelData, palette );
+            var map = Sprite.Create ( (GraphicFormat) depth, width, height, pixelData, palette );
 			map.Description = description;
 
             foreach ( var pivotPoint in pivotPoints )
