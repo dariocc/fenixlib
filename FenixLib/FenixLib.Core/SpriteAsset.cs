@@ -25,9 +25,9 @@ namespace FenixLib.Core
         private const int MinCode = 1;
         private const int MaxCode = 999;
 
-        protected SpriteAsset ( GraphicFormat depth, Palette palette = null)
+        protected SpriteAsset ( GraphicFormat graphicFormat, Palette palette = null)
         {
-            Depth = depth;
+            GraphicFormat = graphicFormat;
             Palette = palette;
         }
 
@@ -46,7 +46,7 @@ namespace FenixLib.Core
 
         public Palette Palette { get; private set; }
 
-        public GraphicFormat Depth { get; private set; }
+        public GraphicFormat GraphicFormat { get; private set; }
 
         public ICollection<Sprite> Sprites
         {
@@ -55,7 +55,7 @@ namespace FenixLib.Core
 
         public void Add ( int code, ref Sprite sprite )
         {
-            if ( sprite.Depth != Depth )
+            if ( sprite.GraphicFormat != GraphicFormat )
                 throw new InvalidOperationException ();
 
             _sprites.Add ( code, sprite );

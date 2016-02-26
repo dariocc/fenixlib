@@ -45,7 +45,7 @@ namespace FenixLib.Core
         }
 
 
-        public static Sprite Create ( GraphicFormat depth, int width, int height, 
+        public static Sprite Create ( GraphicFormat graphicFormat, int width, int height, 
             byte[] pixelData, Palette palette = null )
         {
             if ( width <= 0 || height <= 0 )
@@ -53,10 +53,10 @@ namespace FenixLib.Core
 
             // TODO: Validate the size of pixelData array based on the depth
 
-            if ( ( depth == GraphicFormat.RgbIndexedPalette ) != ( palette != null ) )
+            if ( ( graphicFormat == GraphicFormat.RgbIndexedPalette ) != ( palette != null ) )
                 throw new ArgumentException (); // TODO: Customize
 
-            return new Sprite ( width, height, depth, pixelData, palette );
+            return new Sprite ( width, height, graphicFormat, pixelData, palette );
         }
 
         /// <summary>
@@ -109,16 +109,16 @@ namespace FenixLib.Core
             }
         }
 
-        public GraphicFormat Depth { get; }
+        public GraphicFormat GraphicFormat { get; }
 
-        protected Sprite ( int width, int height, GraphicFormat depth, byte[] pixelData, 
+        protected Sprite ( int width, int height, GraphicFormat graphicFormat, byte[] pixelData, 
             Palette palette = null )
         {
             Width = width;
             Height = height;
             _palette = palette;
             _pixelData = pixelData;
-            Depth = depth;
+            GraphicFormat = graphicFormat;
         }
 
         public void DefinePivotPoint ( int id, int x, int y )

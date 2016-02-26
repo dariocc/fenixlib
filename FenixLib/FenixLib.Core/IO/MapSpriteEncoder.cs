@@ -48,7 +48,7 @@ namespace FenixLib.IO
         protected override string GetFileMagic ( Sprite sprite )
         {
 
-            switch ( (int) sprite.Depth )
+            switch ( (int) sprite.GraphicFormat )
             {
                 case 1:
                     return "m01";

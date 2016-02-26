@@ -34,10 +34,10 @@ namespace FenixLib.Core
             }
         }
 
-        protected BitmapFont ( GraphicFormat depth, Encoding encoding, Palette palette = null )
+        protected BitmapFont ( GraphicFormat graphicFormat, Encoding encoding, Palette palette = null )
         {
             _encoding = encoding;
-            Depth = depth;
+            GraphicFormat = graphicFormat;
             Palette = palette;
         }
 
@@ -52,8 +52,8 @@ namespace FenixLib.Core
             }
             set
             {
-                if ( value.Depth != Depth )
-                    throw new ArgumentException ("Glyph and font depths need to match");
+                if ( value.GraphicFormat != GraphicFormat )
+                    throw new ArgumentException ("Glyph and font GraphicFormat need to match");
 
                 if (_glyphs.ContainsKey( character ) )
                     _glyphs[character] = value;
@@ -74,7 +74,7 @@ namespace FenixLib.Core
             }
         }
 
-        public GraphicFormat Depth { get; }
+        public GraphicFormat GraphicFormat { get; }
         public Palette Palette { get; }
 
         public IEnumerable<Glyph> Glyphs

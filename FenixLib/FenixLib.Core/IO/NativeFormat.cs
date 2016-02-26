@@ -49,22 +49,22 @@ namespace FenixLib.IO
         /// Computes the size in bytes of the area containing the pixel data for the specified 
         /// depth
         /// </summary>
-        /// <param name="depth"></param>
+        /// <param name="bpp"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public static int CalculatePixelBufferBytes(int depth, int width, int height)
+        public static int CalculatePixelBufferBytes(int bpp, int width, int height)
         {
             int byteLength;
 
-            if ( depth == 1 )
+            if ( bpp == 1 )
             {
                 int rowByteSize = ( width + ( 8 - ( ( ( width % 8 ) ) & 7 ) ) ) / 8;
                 byteLength = rowByteSize * height;
             }
             else
             {
-                byteLength = width * height * depth / 8;
+                byteLength = width * height * bpp / 8;
             }
 
             return byteLength;
@@ -72,7 +72,7 @@ namespace FenixLib.IO
 
         /// <summary>
         /// Represents the header of the native formats, i.e. a section describing type
-        /// type of file (graphic, graphic collection, font or palettes), and the depth
+        /// type of file (graphic, graphic collection, font or palettes), and the bpp
         /// of the graphic information (1, 8, 16 or 32bpp).
         /// </summary>
 		public sealed class Header
@@ -101,19 +101,17 @@ namespace FenixLib.IO
 
             /// <summary>
             /// All native format's magic follow the pattern 'aXY' where XY indicates, for
-            /// non 8bpp formats, the depth (01, 16 or 32). For 8bpp formats, XY ar two 
+            /// non 8bpp formats, the bpp (01, 16 or 32). For 8bpp formats, XY ar two 
             /// characters.
             /// </summary>
-			public int Depth
+			public int BitsPerPixel
             {
-                // TODO: Perhaps it is wiser to have a ParseDepth instead of a property...
-                // TODO: Definitely, as the Depth does not apply for the Fnt FNX format, for instance
                 get
                 {
-                    int depth;
+                    int bpp;
 
-                    if (int.TryParse(Magic.Substring(1, 2), out depth))
-                        return depth;
+                    if (int.TryParse(Magic.Substring(1, 2), out bpp ) )
+                        return bpp;
                     else
                         return 8;
                 }

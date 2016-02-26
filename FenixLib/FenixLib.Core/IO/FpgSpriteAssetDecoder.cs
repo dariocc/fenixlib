@@ -31,7 +31,7 @@ namespace FenixLib.IO
             SpriteAsset fpg;
 
             Palette palette = null;
-            if ( header.Depth == 8 )
+            if ( header.BitsPerPixel == 8 )
             {
                 palette = reader.ReadPalette ();
                 reader.ReadUnusedPaletteGamma ();
@@ -39,7 +39,7 @@ namespace FenixLib.IO
             }
             else
             {
-                fpg = SpriteAsset.Create ( ( GraphicFormat ) header.Depth );
+                fpg = SpriteAsset.Create ( ( GraphicFormat ) header.BitsPerPixel );
             }
 
             try
@@ -55,7 +55,7 @@ namespace FenixLib.IO
                     var numberOfPivotPoints = reader.ReadPivotPointsNumberLong ();
                     var pivotPoints = reader.ReadPivotPoints ( numberOfPivotPoints );
 
-                    var mapDataLength = width * height * ( header.Depth / 8 );
+                    var mapDataLength = width * height * ( header.BitsPerPixel / 8 );
 
                     // Some tools such as FPG Edit are non conformant with the standard
                     // FPG files and will add data at the end. 
@@ -68,9 +68,9 @@ namespace FenixLib.IO
                         // kind of event
                     }
 
-                    byte[] pixels = reader.ReadPixels ( header.Depth, width, height );
+                    byte[] pixels = reader.ReadPixels ( header.BitsPerPixel, width, height );
 
-                    var map = Sprite.Create ( (GraphicFormat) header.Depth, width, height, 
+                    var map = Sprite.Create ( (GraphicFormat) header.BitsPerPixel, width, height, 
                         pixels, palette );
                     map.Description = description;
                     foreach ( var point in pivotPoints )

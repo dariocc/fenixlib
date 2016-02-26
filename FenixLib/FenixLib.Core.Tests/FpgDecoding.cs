@@ -12,7 +12,7 @@ namespace FenixLib.Tests
         {
             SpriteAsset fpg = File.LoadFpg ( path );
 
-            Assert.AreEqual ( depth, fpg.Depth );
+            Assert.AreEqual ( depth, fpg.GraphicFormat );
             Assert.AreEqual ( 3, fpg.Sprites.Count );
             Assert.IsNotNull ( fpg.Sprites );
 
@@ -79,7 +79,7 @@ namespace FenixLib.Tests
             SpriteAsset fpg = File.LoadFpg ( "./Fpg/1bpp-compressed.fpg" );
             Assert.AreEqual ( fpg[1].Width, 10 );
             Assert.AreEqual ( fpg[1].Height, 10 );
-            Assert.AreEqual ( fpg.Depth, 1);
+            Assert.AreEqual ( fpg.GraphicFormat, 1);
             Assert.AreEqual ( fpg.Sprites.Count, 1 );
         }
     }

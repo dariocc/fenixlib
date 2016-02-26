@@ -29,7 +29,7 @@ namespace FenixLib.IO
         protected override void WriteNativeFormatBody ( BitmapFont font, 
             NativeFormatWriter writer )
         {
-            if ( (int) font.Depth == 8 )
+            if ( (int) font.GraphicFormat == 8 )
             {
                 writer.Write ( font.Palette );
                 writer.WriteReservedPaletteGammaSection ();
@@ -40,7 +40,7 @@ namespace FenixLib.IO
             // The character data section needs to know in advance the start position of the 
             // pixel data in the stream. Since the pixel of each glyph will be written 
             // consecutively, we can calculate the relative position to the beginning of the
-            // Pixel data section by considering the width, height (and depth) of the 
+            // Pixel data section by considering the width, height (and bpp) of the 
             // previous glyph.
 
             // This information is gathered by the GlyphInfo structure, which will then be
@@ -60,7 +60,7 @@ namespace FenixLib.IO
                         pixelsDataOffset + GlyphInfoBlockSize + 12); // 8 header + 4 font info
                 }
 
-                pixelsDataOffset += CalculatePixelBufferBytes ( (int) font.Depth, 
+                pixelsDataOffset += CalculatePixelBufferBytes ( (int) font.GraphicFormat, 
                     glyphsInfo[i].Width,
                     glyphsInfo[i].Height );
 

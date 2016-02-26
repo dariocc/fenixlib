@@ -30,11 +30,11 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileExtensions { get; } = { "fnt" };
 
-        protected abstract int[] KnownDepths { get; }
+        protected abstract int[] ValidBitPerPixelDepths { get; }
 
         protected abstract int[] KnownCodePageTypes { get; }
 
-        protected abstract int ParseDepth ( Header header );
+        protected abstract int ParseBitsPerPixel ( Header header );
 
         protected abstract FontCodePage ParseCodePageType ( int codePageType );
 
@@ -42,15 +42,15 @@ namespace FenixLib.IO
 
         protected override BitmapFont ReadBody ( Header header, NativeFormatReader reader )
         {
-            int depth = ParseDepth ( header );
+            int bpp = ParseBitsPerPixel ( header );
 
-            if ( !KnownDepths.Contains ( depth ) )
+            if ( !ValidBitPerPixelDepths.Contains ( bpp ) )
             {
                 throw new UnsuportedFileFormatException (); // TODO Customize
             }
 
             Palette palette = null;
-            if ( depth == 8 )
+            if ( bpp == 8 )
             {
                 palette = reader.ReadPalette ();
                 reader.ReadUnusedPaletteGamma ();
@@ -70,7 +70,7 @@ namespace FenixLib.IO
             }
 
             // Create the font
-            BitmapFont font = BitmapFont.Create ( (GraphicFormat) depth, 
+            BitmapFont font = BitmapFont.Create ( (GraphicFormat) bpp, 
                 ParseCodePageType ( codePageType ) );
 
             Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream );
@@ -90,10 +90,10 @@ namespace FenixLib.IO
 
                     pixelsStream.Seek ( character.FileOffset, SeekOrigin.Begin );
 
-                    byte[] pixels = pixelsReader.ReadPixels ( depth, character.Width,
+                    byte[] pixels = pixelsReader.ReadPixels ( bpp, character.Width,
                         character.Height );
 
-                    Glyph glyph = Glyph.Create ( (GraphicFormat) depth, character.Width, 
+                    Glyph glyph = Glyph.Create ( (GraphicFormat) bpp, character.Width, 
                         character.Height, pixels );
                     glyph.XAdvance = character.XAdvance;
                     glyph.YAdavance = character.YAdvance;

@@ -34,9 +34,9 @@ namespace FenixLib.IO
 
             var description = reader.ReadAsciiZ ( 32 );
 
-            var depth = header.Depth;
+            var bpp = header.BitsPerPixel;
 			Palette palette = null;
-            if ( depth == 8 )
+            if ( bpp == 8 )
             {
                 palette = reader.ReadPalette ();
 				reader.ReadUnusedPaletteGamma ();
@@ -45,10 +45,10 @@ namespace FenixLib.IO
             var numberOfPivotPoints = reader.ReadPivotPointsNumber ();
             var pivotPoints = reader.ReadPivotPoints ( numberOfPivotPoints );
 
-            var mapDataLength = width * height * ( depth / 8 );
-			var pixelData = reader.ReadPixels ( header.Depth, width, height );
+            var mapDataLength = width * height * ( bpp / 8 );
+			var pixelData = reader.ReadPixels ( header.BitsPerPixel, width, height );
 
-            var map = Sprite.Create ( (GraphicFormat) depth, width, height, pixelData, palette );
+            var map = Sprite.Create ( (GraphicFormat) bpp, width, height, pixelData, palette );
 			map.Description = description;
 
             foreach ( var pivotPoint in pivotPoints )

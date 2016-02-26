@@ -57,7 +57,7 @@ namespace FenixLib.IO
 
         public Header ReadHeader ()
         {
-            // 3 first bytes describe the depth of the MAP
+            // 3 first bytes describe the graphic format of the MAP
             var fileType = _encoding.GetString ( ReadBytes ( 3 ) );
             // Next 4 bytes are MS-DOS termination, and last is the MAP version
             var terminator = ReadBytes ( 4 );
@@ -122,9 +122,9 @@ namespace FenixLib.IO
         }
 
 
-        public byte[] ReadPixels ( int depth, int width, int height )
+        public byte[] ReadPixels ( int bpp, int width, int height )
         {
-            return ReadBytes ( CalculatePixelBufferBytes ( depth, width, height ) );
+            return ReadBytes ( CalculatePixelBufferBytes ( bpp, width, height ) );
         }
 
         private static Color[] Vga2PaleetteColors ( byte[] colorData )

@@ -18,11 +18,11 @@ namespace FenixLib.Core
 {
     public sealed class GraphicFormat
     {
-        public int Bpp { get; }
+        public int BitsPerPixel { get; }
 
         private GraphicFormat ( int value )
         {
-            Bpp = value;
+            BitsPerPixel = value;
         }
 
         public static explicit operator GraphicFormat ( int value )
@@ -44,7 +44,7 @@ namespace FenixLib.Core
 
         public static explicit operator int (GraphicFormat graphicFormat)
         {
-            return graphicFormat.Bpp;
+            return graphicFormat.BitsPerPixel;
         }
 
         public static GraphicFormat Monochrome = new GraphicFormat ( 1 );

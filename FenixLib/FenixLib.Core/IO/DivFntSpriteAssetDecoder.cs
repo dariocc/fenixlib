@@ -49,9 +49,9 @@ namespace FenixLib.IO
                 if ( character.FileOffset == 0 | dataLength == 0 )
                     continue;
 
-                var pixels = reader.ReadPixels ( header.Depth, character.Width, 
+                var pixels = reader.ReadPixels ( header.BitsPerPixel, character.Width, 
                     character.Height );
-                var map = Sprite.Create ( (GraphicFormat) header.Depth, character.Width, 
+                var map = Sprite.Create ( (GraphicFormat) header.BitsPerPixel, character.Width, 
                     character.Height, pixels );
                 fpg.Add ( fpg.FindFreeId (), ref map );
             }

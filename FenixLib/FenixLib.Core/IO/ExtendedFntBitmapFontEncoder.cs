@@ -34,7 +34,7 @@ namespace FenixLib.IO
 
         protected override string GetFileMagic ( BitmapFont font ) => "fnx";
 
-        protected override byte GetLastHeaderByte ( BitmapFont font ) => ( byte ) font.Depth;
+        protected override byte GetLastHeaderByte ( BitmapFont font ) => ( byte ) font.GraphicFormat;
 
         protected override void WriteGlyphInfo ( ref NativeFormat.GlyphInfo glypInfo,
             NativeFormatWriter writer )

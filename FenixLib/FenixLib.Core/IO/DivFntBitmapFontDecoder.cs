@@ -23,7 +23,7 @@ namespace FenixLib.IO
 
         protected override int[] KnownCodePageTypes { get; } = { 0 };
 
-        protected override int[] KnownDepths { get; } = { 8 };
+        protected override int[] ValidBitPerPixelDepths { get; } = { 8 };
 
         protected override string[] KnownFileMagics { get; } = { "fnt" };
 
@@ -39,7 +39,7 @@ namespace FenixLib.IO
             return codePage;
         }
 
-        protected override int ParseDepth ( NativeFormat.Header header )
+        protected override int ParseBitsPerPixel ( NativeFormat.Header header )
         {
             return 8;
         }

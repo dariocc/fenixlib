@@ -16,7 +16,7 @@ namespace FenixLib.Core
 {
     public interface IGraphic
     {
-        GraphicFormat Depth { get; }
+        GraphicFormat GraphicFormat { get; }
         int Height { get; }
         Palette Palette { get; }
         int Width { get; }

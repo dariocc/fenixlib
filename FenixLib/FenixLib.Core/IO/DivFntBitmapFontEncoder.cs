@@ -34,7 +34,7 @@ namespace FenixLib.IO
         protected override void WriteNativeFormatHeader ( BitmapFont font, 
             NativeFormatWriter writer )
         {
-            if ( font.Depth.Bpp != 8 )
+            if ( font.GraphicFormat.BitsPerPixel != 8 )
                 throw new ArgumentException (); // Customize
 
                 base.WriteNativeFormatHeader ( font, writer );
