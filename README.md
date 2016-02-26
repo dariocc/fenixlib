@@ -32,9 +32,9 @@ Another cool example, see how easy it is to create a font file:
 using FenixLib.Core;
 using FenixLib.IO;
 
-BitmapFont font = BitmapFont.Create ( DepthMode.Argb32, FontCodePage.ISO85591 );
+BitmapFont font = BitmapFont.Create ( GraphicFormat.Argb32, FontCodePage.ISO85591 );
 // A dummy glyph
-font['å'] = Glyph.Create ( DepthMode.ArgbInt32, 10, 10, new byte[10 * 10 * 4] );
+font['å'] = Glyph.Create ( GraphicFormat.ArgbInt32, 10, 10, new byte[10 * 10 * 4] );
 File.SaveFnt ( 'myfont.fnt' );
 ```
 
