@@ -13,16 +13,13 @@
 *   limitations under the License.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using FenixLib.Core;
 using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.Image
 {
-    public class DitherConverter : IFormatConverter
+    public class DirectConverter : IFormatConverter
     {
         public byte[] Convert ( IGraphic graphic, GraphicFormat format )
         {
@@ -36,15 +33,21 @@ namespace FenixLib.Image
                 throw new InvalidOperationException ( "Graphic has to have pixeldata" );
 
             if ( graphic.PixelData.Length != CalculatePixelBufferBytes (
-                graphic.GraphicFormat.BitsPerPixel, graphic.Width, graphic.Height) )
+                graphic.GraphicFormat.BitsPerPixel, graphic.Width, graphic.Height ) )
                 throw new InvalidOperationException ();
 
-            byte[] converted = new byte[CalculatePixelBufferBytes ( 
+            byte[] converted = new byte[CalculatePixelBufferBytes (
                 format.BitsPerPixel, graphic.Width, graphic.Height )];
 
+            using ( var source = new MemoryStream ( graphic.PixelData ) )
+            {
+                using ( var dest = new MemoryStream ( converted ) )
+                {
+                    var writer = new BinaryWriter ( dest );
+                    
+                }
+            }
 
-
-            return converted;
         }
     }
 }

@@ -6,7 +6,7 @@ using FenixLib.Image;
 
 namespace FenixLib.Core.Tests.Image
 {
-    [TestFixture ( typeof ( UpstreamConverter ) )]
+    [TestFixture ( typeof ( DirectConverter ) )]
     [TestFixture ( typeof ( DitherConverter ) )]
     class IFormatConverterContract<T> where T : IFormatConverter, new()
     {

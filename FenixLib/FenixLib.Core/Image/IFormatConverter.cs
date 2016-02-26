@@ -18,6 +18,6 @@ namespace FenixLib.Image
 {
     public interface IFormatConverter
     {
-        IGraphic Convert ( IGraphic graphic, GraphicFormat format );
+        byte[] Convert ( IGraphic graphic, GraphicFormat format );
     }
 }

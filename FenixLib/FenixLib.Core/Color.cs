@@ -18,8 +18,8 @@ namespace FenixLib.Core
     {
         public readonly int r;
         public readonly int g;
-
         public readonly int b;
+
         public Color ( int r, int g, int b )
         {
             this.r = r;

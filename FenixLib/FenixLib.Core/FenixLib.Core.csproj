@@ -61,9 +61,10 @@
     <Compile Include="Image\DataBuffer.cs" />
     <Compile Include="Image\DitherConverter.cs" />
     <Compile Include="Image\IFormatConverter.cs" />
+    <Compile Include="Image\IPixelReader.cs" />
     <Compile Include="Image\Raster.cs" />
     <Compile Include="Image\SampleModel.cs" />
-    <Compile Include="Image\UpstreamConverter.cs" />
+    <Compile Include="Image\DirectConverter.cs" />
     <Compile Include="IO\DivFntBitmapFontEncoder.cs" />
     <Compile Include="IO\ExtendedFntBitmapFontEncoder.cs" />
     <Compile Include="Util\Util.cs" />
