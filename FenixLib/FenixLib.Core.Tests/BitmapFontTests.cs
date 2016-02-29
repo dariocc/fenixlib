@@ -90,7 +90,7 @@ namespace FenixLib.Core.Tests
             ArgumentException ex = Assert.Throws<ArgumentException> (
                 () => stubFont32['a'] = stubGlyph16 );
 
-            Assert.AreEqual ( "Glyph and font depths need to match.", ex.Message );
+            Assert.AreEqual ( "Glyph and font graphic formats need to match.", ex.Message );
         }
     }
 }

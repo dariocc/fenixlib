@@ -34,7 +34,8 @@ namespace FenixLib.Core
             }
         }
 
-        protected BitmapFont ( GraphicFormat graphicFormat, Encoding encoding, Palette palette = null )
+        protected BitmapFont ( GraphicFormat graphicFormat, Encoding encoding, 
+            Palette palette = null )
         {
             _encoding = encoding;
             GraphicFormat = graphicFormat;
@@ -53,7 +54,8 @@ namespace FenixLib.Core
             set
             {
                 if ( value.GraphicFormat != GraphicFormat )
-                    throw new ArgumentException ("Glyph and font GraphicFormat need to match");
+                    throw new ArgumentException ("Glyph and font graphic formats "
+                        + "need to match.");
 
                 if (_glyphs.ContainsKey( character ) )
                     _glyphs[character] = value;
