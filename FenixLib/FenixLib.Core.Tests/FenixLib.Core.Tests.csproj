@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FpgDecoding.cs" />
-    <Compile Include="Image\GraphicFormatConverterTests.cs" />
+    <Compile Include="Image\FormatConverterTests.cs" />
     <Compile Include="IO\FpgSpriteAssetDecoderTests.cs" />
     <Compile Include="BitmapFontTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +95,7 @@
       <Link>Fpg\8bpp-uncompressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="FenixLib.Core.Tests.licenseheader" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
