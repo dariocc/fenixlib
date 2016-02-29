@@ -48,10 +48,4 @@ namespace FenixLib.Core.Tests.Image
                   converter.Convert ( stubGraphic, null ) );
         }
     }
-
-    [TestFixture]
-    class BasicConverter
-    {
-
-    }
 }

@@ -60,7 +60,6 @@
     <Compile Include="IGraphic.cs" />
     <Compile Include="Image\old\DataBuffer.cs" />
     <Compile Include="Image\IFormatConverter.cs" />
-    <Compile Include="Image\IPixelReader.cs" />
     <Compile Include="Image\old\Raster.cs" />
     <Compile Include="Image\old\SampleModel.cs" />
     <Compile Include="Image\BasicConverter.cs" />

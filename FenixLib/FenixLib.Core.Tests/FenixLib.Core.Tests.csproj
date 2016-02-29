@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FpgDecoding.cs" />
+    <Compile Include="Image\BasicConverterTests.cs" />
     <Compile Include="Image\FormatConverterTests.cs" />
     <Compile Include="IO\FpgSpriteAssetDecoderTests.cs" />
     <Compile Include="BitmapFontTests.cs" />
