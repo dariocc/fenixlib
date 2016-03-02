@@ -12,24 +12,23 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+using System.Collections.Generic;
+
 namespace FenixLib.Core
 {
-    public interface IGraphic
+    public interface ISprite : IGraphic
     {
-        GraphicFormat GraphicFormat { get; }
+        string Description { get; set; }
+        int? Id { get; }
+        bool IsInAsset { get; }
+        SpriteAsset ParentAsset { get; set; }
+        ICollection<PivotPoint> PivotPoints { get; }
 
-        /// <summary>
-        /// The height.
-        /// </summary>
-        /// <returns>The height in pixels.</returns>
-        int Height { get; }
-        Palette Palette { get; }
-
-        /// <summary>
-        /// The width.
-        /// </summary>
-        /// <returns>The width in pixels.</returns>
-        int Width { get; }
-        byte[] PixelData { get; }
+        void ClearPivotPoints ();
+        void DefinePivotPoint ( int id, int x, int y );
+        void DeletePivotPoint ( int id );
+        int FindFreePivotPointId ( int start = 0, 
+            Sprite.SearchDirection direction = Sprite.SearchDirection.Fordward );
+        bool IsPivotPointDefined ( int id );
     }
 }

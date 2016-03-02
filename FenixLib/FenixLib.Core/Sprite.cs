@@ -26,49 +26,46 @@ namespace FenixLib.Core
     /// from which it is possible to be retrieved later on.
     /// </summary>
     [Serializable ()]
-    public partial class Sprite : IGraphic
+    public partial class Sprite : ISprite
     {
-
-        private byte[] pixelData;
-        private Palette palette;
         private SpriteAsset parent;
-
-        // TODO: Limit max pivot point ID Max pivot point ID is 999 (checked with bennu).
+        private IGraphic graphic;
 
         private IDictionary<int, PivotPoint> pivotPoints = 
             new SortedDictionary<int, PivotPoint> ();
-        private const int MaxPivotPointId = 999;
-        private const int MinPivotPointId = 0;
-        private static bool IsValidPivotPointId ( int id )
+
+        public Sprite ( IGraphic graphic )
         {
-            return id < MaxPivotPointId & id >= MinPivotPointId;
+            if ( graphic == null )
+            {
+                throw new ArgumentNullException ( "graphic" );
+            }
+
+            this.graphic = graphic;
         }
 
-        public static Sprite Create ( GraphicFormat graphicFormat, int width, int height, 
-            byte[] pixelData, Palette palette = null )
+        public int Width => graphic.Width;
+
+        public int Height => graphic.Height;
+
+        public GraphicFormat GraphicFormat => graphic.GraphicFormat;
+
+        public byte[] PixelData => graphic.PixelData;
+
+        public Palette Palette
         {
-            if ( width <= 0 || height <= 0 )
-                throw new ArgumentOutOfRangeException (); // TODO: Customize
-
-            // TODO: Validate the size of pixelData array based on the depth
-
-            if ( ( graphicFormat == GraphicFormat.RgbIndexedPalette ) != ( palette != null ) )
-                throw new ArgumentException (); // TODO: Customize
-
-            return new Sprite ( width, height, graphicFormat, pixelData, palette );
+            get
+            {
+                if ( IsInAsset )
+                {
+                    return ParentAsset.Palette;
+                }
+                else
+                {
+                    return graphic.Palette; ;
+                }
+            }
         }
-
-        /// <summary>
-        /// The width.
-        /// </summary>
-        /// <returns>The width in pixels.</returns>
-        public int Width { get; }
-
-        /// <summary>
-        /// The height.
-        /// </summary>
-        /// <returns>The height in pixels.</returns>
-        public int Height { get; }
 
         /// <summary>
         /// The <see cref="Sprite"/> identifier.
@@ -81,9 +78,13 @@ namespace FenixLib.Core
             get
             {
                 if ( parent == null )
+                {
                     return null;
+                }
                 else
+                {
                     return parent.IdOf ( this );
+                }
             }
         }
 
@@ -93,31 +94,24 @@ namespace FenixLib.Core
         /// <returns></returns>
         public string Description { get; set; }
 
-        public Palette Palette
+        public SpriteAsset ParentAsset
         {
-            get
+            get { return parent; }
+            set
             {
-                if ( IsInAsset )
+                // TODO: This design makes it impossible to detach an Sprite from its parent
+                if ( !value.Sprites.Contains ( this ) )
                 {
-                    return ParentAsset.Palette;
+                    throw new InvalidOperationException (); // TODO: Customize
                 }
-                else
-                {
-                    return palette;
-                }
+
+                parent = value;
             }
         }
 
-        public GraphicFormat GraphicFormat { get; }
-
-        protected Sprite ( int width, int height, GraphicFormat graphicFormat, byte[] pixelData, 
-            Palette palette = null )
+        public bool IsInAsset
         {
-            Width = width;
-            Height = height;
-            this.palette = palette;
-            this.pixelData = pixelData;
-            GraphicFormat = graphicFormat;
+            get { return parent == null; }
         }
 
         public void DefinePivotPoint ( int id, int x, int y )
@@ -151,28 +145,6 @@ namespace FenixLib.Core
         public ICollection<PivotPoint> PivotPoints
         {
             get { return pivotPoints.Values; }
-        }
-
-        public bool IsInAsset
-        {
-            get { return parent == null; }
-        }
-
-        public SpriteAsset ParentAsset
-        {
-            get { return parent; }
-            internal set
-            {
-                // Is this check necessary? It is like not trusting in 
-                // the internal code... it'd be better covered with a test
-                if ( !value.Sprites.Contains ( this ) )
-                {
-                    throw new InvalidOperationException (); // TODO: Customize
-                }
-
-                palette = ParentAsset.Palette;
-                parent = value;
-            }
         }
 
         /// <summary>
@@ -213,39 +185,12 @@ namespace FenixLib.Core
             return -1;
         }
 
-        public byte[] PixelData
+        private static bool IsValidPivotPointId ( int id )
         {
-            get { return pixelData; }
+            const int MaxPivotPointId = 999;
+            const int MinPivotPointId = 0;
+
+            return id < MaxPivotPointId & id >= MinPivotPointId;
         }
-
-        // TODO: Might not belong here
-        //Public Sub RemoveTransparency()
-        //    Dim i As Integer = -1
-        //    For Each pixel As IPixel In _pixels
-        //        i += 1
-        //        ' TODO: Create method IsTransparent?
-        //        If pixel.IsTransparent Then _pixels(i) = pixel.GetOpaqueCopy()
-        //    Next
-        //End Sub
-
-        //Public Function GetCopy() As Sprite
-        //    ' TODO: Should the pixelBuffers be encapsulated in a "PixelBuffer" object, that
-        //    ' supports color spaces?
-        //    Dim pixelBuffer(_pixels.Length - 1) As IPixel
-        //    _pixels.CopyTo(pixelBuffer, 0)
-
-        //    Dim sprite = Create(Me.Width, Me.Height, pixelBuffer)
-        //    sprite.Description = Description
-
-        //    For Each pivotPoint In PivotPoints
-        //        sprite.DefinePivotPoint(pivotPoint.Id, pivotPoint.X, pivotPoint.Y)
-        //    Next
-
-        //    ' TODO: Palette
-
-        //    Return sprite
-        //End Function
-
-
     }
 }

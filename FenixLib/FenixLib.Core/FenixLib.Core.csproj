@@ -78,6 +78,7 @@
     <Compile Include="Image\PixelWriterRgbInt16.cs" />
     <Compile Include="IO\DivFntBitmapFontEncoder.cs" />
     <Compile Include="IO\ExtendedFntBitmapFontEncoder.cs" />
+    <Compile Include="ISprite.cs" />
     <Compile Include="StaticGraphic.cs" />
     <Compile Include="Util\Util.cs" />
     <Compile Include="FontCodepage.cs" />

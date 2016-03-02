@@ -30,7 +30,7 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="path">The file to open.</param>
         /// <returns>An instance of <see cref="Sprite"/> created from the file.</returns>
-		public static Sprite LoadMap ( string path )
+		public static ISprite LoadMap ( string path )
         {
             MapSpriteDecoder decoder = new MapSpriteDecoder ();
 

@@ -69,16 +69,17 @@ namespace FenixLib.IO
                     }
 
                     byte[] pixels = reader.ReadPixels ( header.BitsPerPixel, width, height );
-
-                    var map = Sprite.Create ( (GraphicFormat) header.BitsPerPixel, width, height, 
-                        pixels, palette );
-                    map.Description = description;
+                    IGraphic graphic = new StaticGraphic ( 
+                        ( GraphicFormat ) header. BitsPerPixel, 
+                        width, height, pixels, palette );
+                    ISprite sprite = new Sprite ( graphic );
+                    sprite.Description = description;
                     foreach ( var point in pivotPoints )
                     {
-                        map.DefinePivotPoint ( point.Id, point.X, point.Y );
+                        sprite.DefinePivotPoint ( point.Id, point.X, point.Y );
                     }
 
-                    fpg.Update ( code, map );
+                    fpg.Update ( code, sprite );
 
                 } while ( true );
 

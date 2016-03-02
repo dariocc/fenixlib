@@ -46,6 +46,8 @@ namespace FenixLib.Core
             {
                 throw new ArgumentNullException ( "graphic" );
             }
+
+            this.graphic = graphic;
         }
     }
 }

@@ -19,7 +19,7 @@ using System.Collections.Generic;
 namespace FenixLib.Core
 {
     [Serializable ()]
-    public class SpriteAsset : IEnumerable<Sprite>
+    public class SpriteAsset : IEnumerable<ISprite>
     {
 
         private const int MinCode = 1;
@@ -37,44 +37,45 @@ namespace FenixLib.Core
             return x >= MinCode & x <= MaxCode;
         }
 
-        private IDictionary<int, Sprite> _sprites = new SortedDictionary<int, Sprite> ();
+        private IDictionary<int, ISprite> sprites = new SortedDictionary<int, ISprite> ();
 
-        public Sprite this[int code]
+        public ISprite this[int code]
         {
-            get { return _sprites[code]; }
+            get { return sprites[code]; }
         }
 
         public Palette Palette { get; private set; }
 
         public GraphicFormat GraphicFormat { get; private set; }
 
-        public ICollection<Sprite> Sprites
+        public ICollection<ISprite> Sprites
         {
-            get { return _sprites.Values; }
+            get { return sprites.Values; }
         }
 
-        public void Add ( int code, ref Sprite sprite )
+        // TODO: Why ref?
+        public void Add ( int code, ref ISprite sprite )
         {
             if ( sprite.GraphicFormat != GraphicFormat )
                 throw new InvalidOperationException ();
 
-            _sprites.Add ( code, sprite );
+            sprites.Add ( code, sprite );
             sprite.ParentAsset = this;
         }
 
-        public void Update ( int code, Sprite map )
+        public void Update ( int code, ISprite map )
         {
-            if ( _sprites.ContainsKey ( code ) )
+            if ( sprites.ContainsKey ( code ) )
             {
-                _sprites.Remove ( code );
+                sprites.Remove ( code );
             }
 
-            _sprites.Add ( code, map );
+            sprites.Add ( code, map );
         }
 
-        internal int IdOf ( Sprite sprite )
+        internal int IdOf ( ISprite sprite )
         {
-            foreach ( KeyValuePair<int, Sprite> kvp in _sprites )
+            foreach ( KeyValuePair<int, ISprite> kvp in sprites )
             {
                 if ( object.ReferenceEquals ( kvp.Value, sprite ) )
                 {
@@ -98,7 +99,7 @@ namespace FenixLib.Core
             do
             {
                 code += 1;
-                if ( !_sprites.ContainsKey ( code ) )
+                if ( !sprites.ContainsKey ( code ) )
                 {
                     found = true;
                 }
@@ -123,7 +124,7 @@ namespace FenixLib.Core
             do
             {
                 code -= 1;
-                if ( !_sprites.ContainsKey ( code ) )
+                if ( !sprites.ContainsKey ( code ) )
                 {
                     found = true;
                 }
@@ -136,9 +137,9 @@ namespace FenixLib.Core
             return code;
         }
 
-        public IEnumerator<Sprite> GetEnumerator ()
+        public IEnumerator<ISprite> GetEnumerator ()
         {
-            return _sprites.Values.GetEnumerator ();
+            return sprites.Values.GetEnumerator ();
         }
 
         IEnumerator IEnumerable.GetEnumerator ()

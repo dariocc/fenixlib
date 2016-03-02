@@ -51,9 +51,13 @@ namespace FenixLib.IO
 
                 var pixels = reader.ReadPixels ( header.BitsPerPixel, character.Width, 
                     character.Height );
-                var map = Sprite.Create ( (GraphicFormat) header.BitsPerPixel, character.Width, 
-                    character.Height, pixels );
-                fpg.Add ( fpg.FindFreeId (), ref map );
+
+                IGraphic graphic = new StaticGraphic ( ( GraphicFormat ) header.BitsPerPixel, 
+                    character.Width, character.Height, pixels );
+
+                ISprite sprite = new Sprite ( graphic );
+
+                fpg.Add ( fpg.FindFreeId (), ref sprite );
             }
 
             return fpg;

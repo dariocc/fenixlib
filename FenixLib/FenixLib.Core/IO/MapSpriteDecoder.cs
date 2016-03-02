@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class MapSpriteDecoder : NativeDecoder<Sprite>
+    public class MapSpriteDecoder : NativeDecoder<ISprite>
     {
 
         public override int MaxSupportedVersion { get; }
@@ -26,7 +26,7 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics { get; }
 
-        protected override Sprite ReadBody ( Header header, NativeFormatReader reader )
+        protected override ISprite ReadBody ( Header header, NativeFormatReader reader )
         {
             int width = reader.ReadUInt16 ();
             int height = reader.ReadUInt16 ();
@@ -48,15 +48,17 @@ namespace FenixLib.IO
             var mapDataLength = width * height * ( bpp / 8 );
 			var pixelData = reader.ReadPixels ( header.BitsPerPixel, width, height );
 
-            var map = Sprite.Create ( (GraphicFormat) bpp, width, height, pixelData, palette );
-			map.Description = description;
+            IGraphic graphic = new StaticGraphic ( ( GraphicFormat ) bpp, 
+                width, height, pixelData, palette );
+            ISprite sprite = new Sprite ( graphic );
+			sprite.Description = description;
 
             foreach ( var pivotPoint in pivotPoints )
             {
-                map.DefinePivotPoint ( pivotPoint.Id, pivotPoint.X, pivotPoint.Y );
+                sprite.DefinePivotPoint ( pivotPoint.Id, pivotPoint.X, pivotPoint.Y );
             }
 
-            return map;
+            return sprite;
         }
     }
 }
