@@ -58,11 +58,23 @@
   <ItemGroup>
     <Compile Include="BitmapFont.cs" />
     <Compile Include="IGraphic.cs" />
+    <Compile Include="Image\Color\HslColor.cs" />
+    <Compile Include="Image\Color\RgbColor.cs" />
     <Compile Include="Image\old\DataBuffer.cs" />
     <Compile Include="Image\IFormatConverter.cs" />
     <Compile Include="Image\old\Raster.cs" />
     <Compile Include="Image\old\SampleModel.cs" />
-    <Compile Include="Image\BasicConverter.cs" />
+    <Compile Include="Image\FormatConverter.cs" />
+    <Compile Include="Image\PixelReader.cs" />
+    <Compile Include="Image\PixelReaderArgbInt32.cs" />
+    <Compile Include="Image\PixelReaderIntRgb16.cs" />
+    <Compile Include="Image\PixelReaderMonochrome.cs" />
+    <Compile Include="Image\PixelReaderRgbIndexed.cs" />
+    <Compile Include="Image\PixelWriter.cs" />
+    <Compile Include="Image\PixelWriterArgbInt32.cs" />
+    <Compile Include="Image\PixelWriterMonochrome.cs" />
+    <Compile Include="Image\PixelWriterRgbIndexed.cs" />
+    <Compile Include="Image\PixelWriterRgbInt16.cs" />
     <Compile Include="IO\DivFntBitmapFontEncoder.cs" />
     <Compile Include="IO\ExtendedFntBitmapFontEncoder.cs" />
     <Compile Include="Util\Util.cs" />
