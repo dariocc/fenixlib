@@ -24,6 +24,10 @@ namespace FenixLib.Core
         public int XAdvance { get; set; } = 0;
         public int YAdavance { get; set; } = 0;
 
+        // The implementation to satisfy the IGraphic interface will be delegated
+        // to a graphic object that is injected in the constructor. This allows for 
+        // reusability of the IGraphic implementations in other classes such as the
+        // Sprite class.
         private IGraphic graphic;
 
         public GraphicFormat GraphicFormat => graphic.GraphicFormat;
