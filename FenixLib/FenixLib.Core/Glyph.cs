@@ -17,37 +17,16 @@ using System;
 namespace FenixLib.Core
 {
     [Serializable ()]
-    public class Glyph : IGraphic
+    public class Glyph : StaticGraphic
     {
-        public int Width { get; }
-        public int Height { get; }
-        public Palette Palette { get; } = null;
         public int YOffset { get; set; } = 0;
         public int XOffset { get; set; } = 0;
         public int XAdvance { get; set; } = 0;
         public int YAdavance { get; set; } = 0;
-        public byte[] PixelData { get; }
-        public GraphicFormat GraphicFormat { get; }
 
-        public Glyph ( GraphicFormat graphicFormat, int width, int height, byte[] pixelData = null, 
-            Palette palette = null )
-        {
-            if ( width <= 0 )
-                throw new ArgumentOutOfRangeException (
-                    "width", width, "Negative values are not accepted.");
-
-            if ( height <= 0 )
-                throw new ArgumentOutOfRangeException (
-                    "height", height, "Negative values are not accepted." );
-
-            if ( ( graphicFormat == GraphicFormat.RgbIndexedPalette ) != ( palette != null ) )
-                throw new ArgumentException ();
-
-            Width = width;
-            Height = height;
-            Palette = palette;
-            GraphicFormat = graphicFormat;
-            PixelData = pixelData;
-        }
+        public Glyph ( GraphicFormat graphicFormat, int width, int height,
+            byte[] pixelData, Palette palette = null ) 
+            
+            : base(graphicFormat, width, height, pixelData, palette) {}
     }
 }

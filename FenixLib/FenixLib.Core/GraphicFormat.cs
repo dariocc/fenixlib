@@ -18,11 +18,28 @@ namespace FenixLib.Core
 {
     public sealed class GraphicFormat
     {
-        public int BitsPerPixel { get; }
-
         private GraphicFormat ( int value )
         {
             BitsPerPixel = value;
+        }
+
+        public int BitsPerPixel { get; }
+
+        public int PixelsBytesForSize(int width, int height)
+        {
+            int byteLength;
+
+            if ( BitsPerPixel == 1 )
+            {
+                int rowByteSize = ( width + ( 8 - ( ( ( width % 8 ) ) & 7 ) ) ) / 8;
+                byteLength = rowByteSize * height;
+            }
+            else
+            {
+                byteLength = width * height * BitsPerPixel / 8;
+            }
+
+            return byteLength;
         }
 
         public static explicit operator GraphicFormat ( int value )
