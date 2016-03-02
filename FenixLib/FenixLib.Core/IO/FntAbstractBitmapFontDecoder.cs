@@ -36,7 +36,7 @@ namespace FenixLib.IO
 
         protected abstract int ParseBitsPerPixel ( Header header );
 
-        protected abstract FontCodePage ParseCodePageType ( int codePageType );
+        protected abstract FontEncoding ParseCodePageType ( int codePageType );
 
         protected abstract GlyphInfo ReadGlyphInfo ( NativeFormatReader reader );
 

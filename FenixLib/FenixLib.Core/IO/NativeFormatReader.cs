@@ -23,9 +23,9 @@ namespace FenixLib.IO
 {
     public class NativeFormatReader : BinaryReader
     {
-        private static readonly Encoding _encoding = Encoding.GetEncoding ( 850 );
+        private static readonly Encoding encoding = Encoding.GetEncoding ( 850 );
 
-        public NativeFormatReader ( Stream input ) : base ( input, _encoding )
+        public NativeFormatReader ( Stream input ) : base ( input, encoding )
         {
         }
 
@@ -45,7 +45,7 @@ namespace FenixLib.IO
             {
                 byte[] trimmedBytes = new byte[n];
                 Array.Copy ( bytes, 0, trimmedBytes, 0, n );
-                result = _encoding.GetString ( trimmedBytes );
+                result = encoding.GetString ( trimmedBytes );
             }
             else
             {
@@ -58,7 +58,7 @@ namespace FenixLib.IO
         public Header ReadHeader ()
         {
             // 3 first bytes describe the graphic format of the MAP
-            var fileType = _encoding.GetString ( ReadBytes ( 3 ) );
+            var fileType = encoding.GetString ( ReadBytes ( 3 ) );
             // Next 4 bytes are MS-DOS termination, and last is the MAP version
             var terminator = ReadBytes ( 4 );
             // Last byte of the header is the version number

@@ -13,24 +13,21 @@
 *   limitations under the License.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FenixLib
 {
-    public sealed class FontCodePage
+    public sealed class FontEncoding
     {
-        private readonly int _codePage;
-        public int Value { get { return _codePage; } }
+        private readonly int codePage;
+        public int CodePage { get { return codePage; } }
 
-        private FontCodePage(int codePage)
+        private FontEncoding(int codePage)
         {
-            _codePage = codePage;
+            this.codePage = codePage;
         }
 
-        internal static FontCodePage FromEncoding(Encoding encoding)
+        internal static FontEncoding FromEncoding(Encoding encoding)
         {
             switch (encoding.CodePage)
             {
@@ -39,11 +36,11 @@ namespace FenixLib
                 case 28591:
                     return ISO85591;
                 default:
-                    throw new ArgumentException (); // TODO: Customize
+                    throw new ArgumentOutOfRangeException ("encoding");
             }
         }
 
-        public static FontCodePage ISO85591 = new FontCodePage(28591);
-        public static FontCodePage CP850 = new FontCodePage(850);
+        public static FontEncoding ISO85591 = new FontEncoding(28591);
+        public static FontEncoding CP850 = new FontEncoding(850);
     }
 }

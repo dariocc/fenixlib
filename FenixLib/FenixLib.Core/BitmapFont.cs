@@ -26,11 +26,11 @@ namespace FenixLib.Core
         private readonly IDictionary<char, IGlyph> glyphs =
             new SortedDictionary<char, IGlyph> ();
 
-        public FontCodePage CodePage
+        public FontEncoding CodePage
         {
             get
             {
-                return FontCodePage.FromEncoding ( encoding );
+                return FontEncoding.FromEncoding ( encoding );
             }
         }
 
@@ -87,7 +87,7 @@ namespace FenixLib.Core
             }
         }
 
-        public static BitmapFont Create ( GraphicFormat graphicFormat, FontCodePage codePage )
+        public static BitmapFont Create ( GraphicFormat graphicFormat, FontEncoding codePage )
         {
             if ( graphicFormat == GraphicFormat.RgbIndexedPalette )
             {
@@ -95,12 +95,12 @@ namespace FenixLib.Core
             }
 
             BitmapFont font = new BitmapFont ( graphicFormat,
-                Encoding.GetEncoding ( codePage.Value ) );
+                Encoding.GetEncoding ( codePage.CodePage ) );
 
             return font;
         }
 
-        public static BitmapFont Create ( Palette palette, FontCodePage codePage )
+        public static BitmapFont Create ( Palette palette, FontEncoding codePage )
         {
             if ( palette == null )
             {
@@ -108,7 +108,7 @@ namespace FenixLib.Core
             }
 
             BitmapFont font = new BitmapFont ( (GraphicFormat) 8,
-                Encoding.GetEncoding ( codePage.Value ),
+                Encoding.GetEncoding ( codePage.CodePage ),
                 palette );
 
             return font;

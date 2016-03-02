@@ -78,20 +78,20 @@ namespace FenixLib.IO
 		public sealed class Header
 		{
 
-            private string _magic;
-			public string Magic { get { return _magic; } }
+            private string magic;
+			public string Magic { get { return magic; } }
 
-            private int _lastByte;
-			public int LastByte { get { return _lastByte; } }
+            private int lastByte;
+			public int LastByte { get { return lastByte; } }
 
-			private readonly byte[] _terminator = new byte[5];
-            public byte[] Terminator { get { return _terminator;  } }
+			private readonly byte[] terminator = new byte[5];
+            public byte[] Terminator { get { return terminator;  } }
 			
 			public Header(string magic, byte[] terminator, int lastByte)
 			{
-				_magic = magic.ToLower();
-				_lastByte = lastByte;
-				_terminator = terminator;
+				this.magic = magic.ToLower();
+				this.lastByte = lastByte;
+				this.terminator = terminator;
 			}
 
 			public bool IsTerminatorValid()

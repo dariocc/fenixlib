@@ -27,12 +27,12 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics { get; } = { "fnt" };
 
-        protected override FontCodePage ParseCodePageType ( int codePageType )
+        protected override FontEncoding ParseCodePageType ( int codePageType )
         {
-            FontCodePage codePage;
+            FontEncoding codePage;
 
             if ( codePageType == 0 )
-                codePage = FontCodePage.CP850;
+                codePage = FontEncoding.CP850;
             else
                 throw new ArgumentException (); // TODO: Customize message
 

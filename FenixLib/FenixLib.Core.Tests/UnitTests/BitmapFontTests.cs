@@ -35,10 +35,10 @@ namespace FenixLib.Core.Tests
         public void SetUp ()
         {
             stubFont32 = BitmapFont.Create ( GraphicFormat.ArgbInt32,
-                FontCodePage.ISO85591 );
+                FontEncoding.ISO85591 );
 
             stubFont16 = BitmapFont.Create ( GraphicFormat.RgbInt16,
-                FontCodePage.ISO85591 );
+                FontEncoding.ISO85591 );
 
             stubGlyph32 = new Glyph ( CreateStubGraphic ( 32 ) );
             stubGlyph16 = new Glyph ( CreateStubGraphic ( 16 ) );

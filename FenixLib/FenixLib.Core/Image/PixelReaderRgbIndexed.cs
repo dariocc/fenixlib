@@ -28,9 +28,9 @@ namespace FenixLib.Image
         {
             int value = Reader.ReadByte ();
 
-            r = Graphic.Palette[value].r;
-            g = Graphic.Palette[value].g;
-            b = Graphic.Palette[value].b;
+            r = Graphic.Palette[value].R;
+            g = Graphic.Palette[value].G;
+            b = Graphic.Palette[value].B;
 
             if ( value == 0 )
                 alpha = 0;

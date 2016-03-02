@@ -25,9 +25,9 @@ namespace FenixLib.IO
     public class NativeFormatWriter : BinaryWriter
     {
 
-        private static readonly Encoding _encoding = Encoding.GetEncoding ( 850 );
+        private static readonly Encoding encoding = Encoding.GetEncoding ( 850 );
 
-        public NativeFormatWriter ( Stream input ) : base ( input, _encoding ) { }
+        public NativeFormatWriter ( Stream input ) : base ( input, encoding ) { }
 
         private void WriteHeader ( string formatHeader, byte version )
         {
@@ -36,7 +36,7 @@ namespace FenixLib.IO
                 throw new ArgumentException (); // TODO: Customize
             }
 
-            base.Write ( _encoding.GetBytes ( formatHeader ) );
+            base.Write ( encoding.GetBytes ( formatHeader ) );
             base.Write ( NativeFormat.Terminator );
             base.Write ( version );
         }
@@ -45,7 +45,7 @@ namespace FenixLib.IO
         {
             // Texts are encoded in ASCIZZ format
             var clippedText = text.Substring ( 0, Math.Min ( text.Length, maxLength ) );
-            var bytes = _encoding.GetBytes ( clippedText.ToCharArray () );
+            var bytes = encoding.GetBytes ( clippedText.ToCharArray () );
             Array.Resize ( ref bytes, maxLength );
             base.Write ( bytes );
         }
@@ -74,9 +74,9 @@ namespace FenixLib.IO
             byte[] bytes = new byte[palette.Colors.Length * 3];
             for ( var n = 0 ; n <= palette.Colors.Length ; n++ )
             {
-                bytes[n * 3] = Convert.ToByte ( palette[n].r );
-                bytes[n * 3 + 1] = Convert.ToByte ( palette[n].g );
-                bytes[n * 3 + 2] = Convert.ToByte ( palette[n].b );
+                bytes[n * 3] = Convert.ToByte ( palette[n].R );
+                bytes[n * 3 + 1] = Convert.ToByte ( palette[n].G );
+                bytes[n * 3 + 2] = Convert.ToByte ( palette[n].B );
             }
 
             base.Write ( bytes );

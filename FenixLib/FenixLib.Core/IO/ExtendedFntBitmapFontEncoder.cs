@@ -24,9 +24,9 @@ namespace FenixLib.IO
 
         protected override int CodePageTypeForFont ( BitmapFont font )
         {
-            if ( font.CodePage == FontCodePage.ISO85591 )
+            if ( font.CodePage == FontEncoding.ISO85591 )
                 return 1;
-            else if ( font.CodePage == FontCodePage.CP850 )
+            else if ( font.CodePage == FontEncoding.CP850 )
                 return 0;
             else
                 throw new ArgumentException ();
