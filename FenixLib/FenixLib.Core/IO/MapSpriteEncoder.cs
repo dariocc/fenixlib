@@ -19,13 +19,13 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    public class MapSpriteEncoder : NativeEncoder<Sprite>
+    public class MapSpriteEncoder : NativeEncoder<ISprite>
     {
         private const int version = 0x00;
 
-        protected override byte GetLastHeaderByte ( Sprite sprite ) => version;
+        protected override byte GetLastHeaderByte ( ISprite sprite ) => version;
 
-        protected override void WriteNativeFormatBody ( Sprite sprite, 
+        protected override void WriteNativeFormatBody ( ISprite sprite, 
             NativeFormatWriter writer )
         {
             writer.Write ( Convert.ToUInt16 ( sprite.Width ) );
@@ -45,7 +45,7 @@ namespace FenixLib.IO
             writer.Write ( sprite.PixelData );
         }
 
-        protected override string GetFileMagic ( Sprite sprite )
+        protected override string GetFileMagic ( ISprite sprite )
         {
 
             switch ( (int) sprite.GraphicFormat )
