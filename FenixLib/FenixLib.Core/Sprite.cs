@@ -29,13 +29,13 @@ namespace FenixLib.Core
     public partial class Sprite : IGraphic
     {
 
-        private byte[] _pixelData;
-        private Palette _palette;
-        private SpriteAsset _parent;
+        private byte[] pixelData;
+        private Palette palette;
+        private SpriteAsset parent;
 
         // TODO: Limit max pivot point ID Max pivot point ID is 999 (checked with bennu).
 
-        private IDictionary<int, PivotPoint> _pivotPoints = 
+        private IDictionary<int, PivotPoint> pivotPoints = 
             new SortedDictionary<int, PivotPoint> ();
         private const int MaxPivotPointId = 999;
         private const int MinPivotPointId = 0;
@@ -43,7 +43,6 @@ namespace FenixLib.Core
         {
             return id < MaxPivotPointId & id >= MinPivotPointId;
         }
-
 
         public static Sprite Create ( GraphicFormat graphicFormat, int width, int height, 
             byte[] pixelData, Palette palette = null )
@@ -81,10 +80,10 @@ namespace FenixLib.Core
         {
             get
             {
-                if ( _parent == null )
+                if ( parent == null )
                     return null;
                 else
-                    return _parent.IdOf ( this );
+                    return parent.IdOf ( this );
             }
         }
 
@@ -104,7 +103,7 @@ namespace FenixLib.Core
                 }
                 else
                 {
-                    return _palette;
+                    return palette;
                 }
             }
         }
@@ -116,8 +115,8 @@ namespace FenixLib.Core
         {
             Width = width;
             Height = height;
-            _palette = palette;
-            _pixelData = pixelData;
+            this.palette = palette;
+            this.pixelData = pixelData;
             GraphicFormat = graphicFormat;
         }
 
@@ -125,43 +124,43 @@ namespace FenixLib.Core
         {
             var pivotPoint = new PivotPoint ( id, x, y );
 
-            if ( _pivotPoints.ContainsKey ( pivotPoint.Id ) )
+            if ( pivotPoints.ContainsKey ( pivotPoint.Id ) )
             {
-                _pivotPoints.Remove ( pivotPoint.Id );
+                pivotPoints.Remove ( pivotPoint.Id );
             }
 
             if ( !( x == -1 && y == -1 ) )
             {
-                _pivotPoints.Add ( pivotPoint.Id, pivotPoint );
+                pivotPoints.Add ( pivotPoint.Id, pivotPoint );
             }
         }
 
         public void DeletePivotPoint ( int id )
         {
-            if ( _pivotPoints.ContainsKey ( id ) )
+            if ( pivotPoints.ContainsKey ( id ) )
             {
-                _pivotPoints.Remove ( id );
+                pivotPoints.Remove ( id );
             }
         }
 
         public void ClearPivotPoints ()
         {
-            _pivotPoints.Clear ();
+            pivotPoints.Clear ();
         }
 
         public ICollection<PivotPoint> PivotPoints
         {
-            get { return _pivotPoints.Values; }
+            get { return pivotPoints.Values; }
         }
 
         public bool IsInAsset
         {
-            get { return _parent == null; }
+            get { return parent == null; }
         }
 
         public SpriteAsset ParentAsset
         {
-            get { return _parent; }
+            get { return parent; }
             internal set
             {
                 // Is this check necessary? It is like not trusting in 
@@ -171,8 +170,8 @@ namespace FenixLib.Core
                     throw new InvalidOperationException (); // TODO: Customize
                 }
 
-                _palette = ParentAsset.Palette;
-                _parent = value;
+                palette = ParentAsset.Palette;
+                parent = value;
             }
         }
 
@@ -183,7 +182,7 @@ namespace FenixLib.Core
         /// <returns>True if the pivot point has been defined.</returns>
         public bool IsPivotPointDefined ( int id )
         {
-            return _pivotPoints.ContainsKey ( id );
+            return pivotPoints.ContainsKey ( id );
         }
 
         public int FindFreePivotPointId ( int start = 0, 
@@ -192,19 +191,19 @@ namespace FenixLib.Core
             if ( direction == SearchDirection.Fordward )
             {
                 // TODO: What happens if all Pivot Points are defined
-                for ( var n = start ; n <= _pivotPoints.Count - 1 ; n++ )
+                for ( var n = start ; n <= pivotPoints.Count - 1 ; n++ )
                 {
-                    if ( _pivotPoints[n].Id != n )
+                    if ( pivotPoints[n].Id != n )
                         return n;
                 }
 
-                return _pivotPoints.Count;
+                return pivotPoints.Count;
             }
             else if ( direction == SearchDirection.Backward )
             {
                 for ( var n = start ; n <= 0 ; n++ )
                 {
-                    if ( _pivotPoints[n].Id != n )
+                    if ( pivotPoints[n].Id != n )
                         return n;
                 }
 
@@ -216,7 +215,7 @@ namespace FenixLib.Core
 
         public byte[] PixelData
         {
-            get { return _pixelData; }
+            get { return pixelData; }
         }
 
         // TODO: Might not belong here
