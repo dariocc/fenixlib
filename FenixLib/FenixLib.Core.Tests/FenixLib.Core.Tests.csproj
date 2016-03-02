@@ -41,11 +41,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FpgDecoding.cs" />
-    <Compile Include="Image\FormatConverterTests.cs" />
-    <Compile Include="Image\IFormatConverterTests.cs" />
-    <Compile Include="IO\FpgSpriteAssetDecoderTests.cs" />
-    <Compile Include="BitmapFontTests.cs" />
+    <Compile Include="IntegrationTests\FpgDecoding.cs" />
+    <Compile Include="UnitTests\Image\FormatConverterTests.cs" />
+    <Compile Include="UnitTests\Image\IFormatConverterTests.cs" />
+    <Compile Include="UnitTests\IO\FpgSpriteAssetDecoderTests.cs" />
+    <Compile Include="UnitTests\BitmapFontTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

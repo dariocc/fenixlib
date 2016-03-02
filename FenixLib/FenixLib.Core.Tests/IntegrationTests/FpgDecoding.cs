@@ -19,7 +19,7 @@ using FenixLib.IO;
 
 namespace FenixLib.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("Integration")]
     public class FpgDecoding
     {
         private SpriteAsset DecodeFpg ( string path, int depth )

@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace FenixLib.Core.Tests
 {
-    [TestFixture]
+    [TestFixture, Category("Unit")]
     public class BitmapFontTests
     {
         private BitmapFont stubFont32;
@@ -32,7 +32,7 @@ namespace FenixLib.Core.Tests
         private Glyph stubGlyph16;
 
         [SetUp]
-        public void Init ()
+        public void SetUp ()
         {
             stubFont32 = BitmapFont.Create ( GraphicFormat.ArgbInt32,
                 FontCodePage.ISO85591 );
