@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace FenixLib.Core.Tests
 {
-    [TestFixture, Category("Unit")]
+    [TestFixture, Category ( "Unit" )]
     public class BitmapFontTests
     {
         private BitmapFont stubFont32;
@@ -40,8 +40,16 @@ namespace FenixLib.Core.Tests
             stubFont16 = BitmapFont.Create ( GraphicFormat.RgbInt16,
                 FontCodePage.ISO85591 );
 
-            stubGlyph32 = new Glyph ( GraphicFormat.ArgbInt32, 10, 10, new byte[100 * 4], null );
-            stubGlyph16 = new Glyph ( GraphicFormat.RgbInt16, 10, 10, new byte[100 * 4], null );
+            stubGlyph32 = new Glyph ( CreateStubGraphic ( 32 ) );
+            stubGlyph16 = new Glyph ( CreateStubGraphic ( 16 ) );
+        }
+
+        private IGraphic CreateStubGraphic ( int bpp )
+        {
+            IGraphic stubGraphic = MockRepository.GenerateStub<IGraphic> ();
+            stubGraphic.Stub ( x => x.GraphicFormat ).Return ( ( GraphicFormat ) bpp );
+
+            return stubGraphic;
         }
 
         [Test]

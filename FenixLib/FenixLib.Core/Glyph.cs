@@ -17,16 +17,31 @@ using System;
 namespace FenixLib.Core
 {
     [Serializable ()]
-    public class Glyph : StaticGraphic
+    public class Glyph : IGlyph
     {
         public int YOffset { get; set; } = 0;
         public int XOffset { get; set; } = 0;
         public int XAdvance { get; set; } = 0;
         public int YAdavance { get; set; } = 0;
 
-        public Glyph ( GraphicFormat graphicFormat, int width, int height,
-            byte[] pixelData, Palette palette = null ) 
-            
-            : base(graphicFormat, width, height, pixelData, palette) {}
+        private IGraphic graphic;
+
+        public GraphicFormat GraphicFormat => graphic.GraphicFormat;
+
+        public int Height => graphic.Height;
+
+        public Palette Palette => graphic.Palette;
+
+        public int Width => graphic.Width;
+
+        public byte[] PixelData => graphic.PixelData;
+
+        public Glyph ( IGraphic graphic )
+        {
+            if (graphic == null)
+            {
+                throw new ArgumentNullException ( "graphic" );
+            }
+        }
     }
 }

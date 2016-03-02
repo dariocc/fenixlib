@@ -20,34 +20,34 @@ using System.Collections;
 
 namespace FenixLib.Core
 {
-    public class BitmapFont : IEnumerable<Glyph>
+    public class BitmapFont : IEnumerable<IGlyph>
     {
-        private readonly Encoding _encoding;
-        private readonly IDictionary<char, Glyph> _glyphs =
-            new SortedDictionary<char, Glyph> ();
+        private readonly Encoding encoding;
+        private readonly IDictionary<char, IGlyph> glyphs =
+            new SortedDictionary<char, IGlyph> ();
 
         public FontCodePage CodePage
         {
             get
             {
-                return FontCodePage.FromEncoding ( _encoding );
+                return FontCodePage.FromEncoding ( encoding );
             }
         }
 
         protected BitmapFont ( GraphicFormat graphicFormat, Encoding encoding, 
             Palette palette = null )
         {
-            _encoding = encoding;
+            this.encoding = encoding;
             GraphicFormat = graphicFormat;
             Palette = palette;
         }
 
-        public Glyph this[char character]
+        public IGlyph this[char character]
         {
             get
             {
-                Glyph glyph;
-                _glyphs.TryGetValue ( character, out glyph );
+                IGlyph glyph;
+                glyphs.TryGetValue ( character, out glyph );
 
                 return glyph;
             }
@@ -57,14 +57,14 @@ namespace FenixLib.Core
                     throw new ArgumentException ("Glyph and font graphic formats "
                         + "need to match.");
 
-                if (_glyphs.ContainsKey( character ) )
-                    _glyphs[character] = value;
+                if (glyphs.ContainsKey( character ) )
+                    glyphs[character] = value;
                 else
-                    _glyphs.Add ( character, value );
+                    glyphs.Add ( character, value );
             }
         }
 
-        public Glyph this[int index]
+        public IGlyph this[int index]
         {
             get
             {
@@ -79,11 +79,11 @@ namespace FenixLib.Core
         public GraphicFormat GraphicFormat { get; }
         public Palette Palette { get; }
 
-        public IEnumerable<Glyph> Glyphs
+        public IEnumerable<IGlyph> Glyphs
         {
             get
             {
-                return _glyphs.Values.AsEnumerable ();
+                return glyphs.Values.AsEnumerable ();
             }
         }
 
@@ -114,7 +114,7 @@ namespace FenixLib.Core
             return font;
         }
 
-        public IEnumerator<Glyph> GetEnumerator ()
+        public IEnumerator<IGlyph> GetEnumerator ()
         {
             return Glyphs.GetEnumerator ();
         }
@@ -126,7 +126,7 @@ namespace FenixLib.Core
 
         private char Index2Char ( int index )
         {
-            return _encoding.GetChars ( BitConverter.GetBytes ( index ) )[0];
+            return encoding.GetChars ( BitConverter.GetBytes ( index ) )[0];
         }
     }
 }

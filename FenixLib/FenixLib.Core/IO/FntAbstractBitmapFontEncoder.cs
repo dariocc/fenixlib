@@ -51,7 +51,7 @@ namespace FenixLib.IO
             int pixelsDataOffset = 0; // Relative to the end of the glyph info section
             for ( int i = 0 ; i < glyphsInfo.Length ; i++ )
             {
-                Glyph glyph;
+                IGlyph glyph;
                 if ( font[i] != null )
                 {
                     glyph = font[i];
