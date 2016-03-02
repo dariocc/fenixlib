@@ -16,7 +16,6 @@ namespace FenixLib.Image
 {
     internal class PixelWriterMonochrome : PixelWriter
     {
-
         public override void Write ( int alpha, int r, int g, int b )
         {
             byte value;
