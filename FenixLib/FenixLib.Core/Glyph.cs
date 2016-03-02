@@ -29,27 +29,25 @@ namespace FenixLib.Core
         public byte[] PixelData { get; }
         public GraphicFormat GraphicFormat { get; }
 
-        protected Glyph ( int width, int height, GraphicFormat graphicFormat, byte[] pixelData = null, 
+        public Glyph ( GraphicFormat graphicFormat, int width, int height, byte[] pixelData = null, 
             Palette palette = null )
         {
+            if ( width <= 0 )
+                throw new ArgumentOutOfRangeException (
+                    "width", width, "Negative values are not accepted.");
+
+            if ( height <= 0 )
+                throw new ArgumentOutOfRangeException (
+                    "height", height, "Negative values are not accepted." );
+
+            if ( ( graphicFormat == GraphicFormat.RgbIndexedPalette ) != ( palette != null ) )
+                throw new ArgumentException ();
+
             Width = width;
             Height = height;
             Palette = palette;
             GraphicFormat = graphicFormat;
             PixelData = pixelData;
-        }
-
-        public static Glyph Create (GraphicFormat graphicFormat, int width, int height, byte[] pixelData, 
-            Palette palette = null )
-        {
-            if ( width <= 0 || height <= 0 )
-                throw new ArgumentOutOfRangeException (); // TODO: Customize
-
-            // TODO: Validate the size of pixelData array
-            if ( ( graphicFormat == GraphicFormat.RgbIndexedPalette ) != ( palette != null ) )
-                throw new ArgumentException (); // TODO: Customize
-
-            return new Glyph ( width, height, graphicFormat, pixelData, palette );
         }
     }
 }

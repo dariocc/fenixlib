@@ -40,8 +40,8 @@ namespace FenixLib.Core.Tests
             stubFont16 = BitmapFont.Create ( GraphicFormat.RgbInt16,
                 FontCodePage.ISO85591 );
 
-            stubGlyph32 = Glyph.Create ( GraphicFormat.ArgbInt32, 10, 10, new byte[100 * 4], null );
-            stubGlyph16 = Glyph.Create ( GraphicFormat.RgbInt16, 10, 10, new byte[100 * 4], null );
+            stubGlyph32 = new Glyph ( GraphicFormat.ArgbInt32, 10, 10, new byte[100 * 4], null );
+            stubGlyph16 = new Glyph ( GraphicFormat.RgbInt16, 10, 10, new byte[100 * 4], null );
         }
 
         [Test]
