@@ -127,12 +127,12 @@ namespace FenixLib.IO
             return ReadBytes ( CalculatePixelBufferBytes ( bpp, width, height ) );
         }
 
-        private static Color[] Vga2PaleetteColors ( byte[] colorData )
+        private static PaletteColor[] Vga2PaleetteColors ( byte[] colorData )
         {
-            Color[] colors = new Color[colorData.Length / 3];
+            PaletteColor[] colors = new PaletteColor[colorData.Length / 3];
             for ( var n = 0 ; n <= colors.Length - 1 ; n++ )
             {
-                colors[n] = new Color (
+                colors[n] = new PaletteColor (
                     colorData[n * 3] << 2,
                     colorData[n * 3 + 1] << 2,
                     colorData[n * 3 + 1] << 2 );

@@ -21,9 +21,9 @@ namespace FenixLib.Core
     [Serializable ()]
     public class Palette : IEnumerable
     {
-        private Color[] colors;
+        private PaletteColor[] colors;
 
-        public Palette ( Color[] colors )
+        public Palette ( PaletteColor[] colors )
         {
             if ( colors == null )
                 throw new ArgumentNullException ( "colors" );
@@ -35,11 +35,11 @@ namespace FenixLib.Core
             this.colors = colors;
         }
 
-        public virtual Color[] Colors
+        public virtual PaletteColor[] Colors
         {
             get { return colors; }
         }
-        public virtual Color this[int index]
+        public virtual PaletteColor this[int index]
         {
             get
             {
@@ -59,7 +59,7 @@ namespace FenixLib.Core
 
         public virtual Palette GetCopy ()
         {
-            Color[] colors = new Color[this.colors.Length];
+            PaletteColor[] colors = new PaletteColor[this.colors.Length];
             this.colors.CopyTo ( colors, 0 );
             return new Palette ( colors );
         }

@@ -18,18 +18,18 @@ using System;
 namespace FenixLib.Core.Tests.UnitTests
 {
     [TestFixture ( Category = "Unit" )]
-    class ColorTests
+    class PaletteColorTests
     {
-        private Color color;
-        private Color colorDuplicate;
-        private Color differentColor;
+        private PaletteColor color;
+        private PaletteColor colorDuplicate;
+        private PaletteColor differentColor;
 
         [SetUp]
         public void SetUp()
         {
-            color = new Color ( 10, 50, 100 );
-            colorDuplicate = new Color ( 10, 50, 100 );
-            differentColor = new Color ( 10, 10, 100 );
+            color = new PaletteColor ( 10, 50, 100 );
+            colorDuplicate = new PaletteColor ( 10, 50, 100 );
+            differentColor = new PaletteColor ( 10, 10, 100 );
         }
 
         [TestCase ( -100, 0, 0 )]
@@ -40,7 +40,7 @@ namespace FenixLib.Core.Tests.UnitTests
         [TestCase ( 0, 0, 256 )]
         public void Construct_ComponentOutsideRange_ArgumentError ( int r, int g, int b )
         {
-            Assert.Throws<ArgumentOutOfRangeException> ( () => new Color ( r, g, b ) );
+            Assert.Throws<ArgumentOutOfRangeException> ( () => new PaletteColor ( r, g, b ) );
         }
 
         [Test]

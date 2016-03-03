@@ -26,7 +26,7 @@ namespace FenixLib.Core.Tests.UnitTests
         [SetUp]
         public static void SetUp ()
         {
-            Color[] colors = CreateSampleColors ();
+            PaletteColor[] colors = CreateSampleColors ();
             palette = new Palette ( colors );
         }
 
@@ -41,14 +41,14 @@ namespace FenixLib.Core.Tests.UnitTests
         public void Construct_OtherThan256Colors_ArgumentException ( int numberOfColors )
         {
             ArgumentException e = Assert.Throws<ArgumentException> (
-                () => new Palette ( new Color[numberOfColors] ) );
+                () => new Palette ( new PaletteColor[numberOfColors] ) );
         }
 
         [TestCase ( -1 )]
         [TestCase ( 256 )]
         public void IndexerGetter_IndexOutOfRange_ColorIndexOutOfRangeException ( int index )
         {
-            TestDelegate colorAtIndex = () => new Func<Color> ( () =>
+            TestDelegate colorAtIndex = () => new Func<PaletteColor> ( () =>
             {
                 return palette[index];
             } ) ();
@@ -61,7 +61,7 @@ namespace FenixLib.Core.Tests.UnitTests
         {
             TestDelegate changeColorAtIndex = () => new Action ( () =>
             {
-                palette[index] = new Color ( 0, 0, 0 );
+                palette[index] = new PaletteColor ( 0, 0, 0 );
             } ) ();
             Assert.Throws<ColorIndexOutOfRangeException> ( changeColorAtIndex );
         }
@@ -95,13 +95,13 @@ namespace FenixLib.Core.Tests.UnitTests
             return !( paletteA != paletteB );
         }
 
-        private static Color[] CreateSampleColors()
+        private static PaletteColor[] CreateSampleColors()
         {
-            Color[] colors = new Color[256];
+            PaletteColor[] colors = new PaletteColor[256];
             // A palette with some color variation
             for ( int i = 0 ; i < colors.Length ; i++ )
             {
-                colors[i] = new Color ( i, i / 2, i / 3 );
+                colors[i] = new PaletteColor ( i, i / 2, i / 3 );
             }
 
             return colors;
@@ -115,14 +115,14 @@ namespace FenixLib.Core.Tests.UnitTests
 
             static PaletteComparisonCasesFactory()
             {
-                Color[] colors = CreateSampleColors ();
-                Color[] colorsCopy = new Color[256];
+                PaletteColor[] colors = CreateSampleColors ();
+                PaletteColor[] colorsCopy = new PaletteColor[256];
                 Array.Copy ( colors, colorsCopy, 256 );
 
 
                 palette = new Palette ( colors );
                 equivalentPalette = new Palette ( colorsCopy );
-                differentPalette = new Palette ( new Color[256] );
+                differentPalette = new Palette ( new PaletteColor[256] );
             }
             static IEnumerable TestCases
             {

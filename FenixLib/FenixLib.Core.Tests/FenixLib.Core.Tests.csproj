@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="UnitTests\GlyphTests.cs" />
     <Compile Include="IntegrationTests\FpgDecoding.cs" />
-    <Compile Include="UnitTests\ColorTests.cs" />
+    <Compile Include="UnitTests\PaletteColorTests.cs" />
     <Compile Include="UnitTests\CommonGraphicTests.cs" />
     <Compile Include="UnitTests\PaletteTests.cs" />
     <Compile Include="UnitTests\PivotPointTests.cs" />

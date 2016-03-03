@@ -103,7 +103,7 @@ namespace FenixLib.Image
 
             for ( int i = 0 ; i < palette.Colors.Length ; i++ )
             {
-                Core.Color paletteColor = palette[i];
+                Core.PaletteColor paletteColor = palette[i];
                 RgbColor c = new RgbColor( paletteColor.r, paletteColor.g, paletteColor.b );
 
                 hslColors[i] = HslColor.FromRgb ( c );
