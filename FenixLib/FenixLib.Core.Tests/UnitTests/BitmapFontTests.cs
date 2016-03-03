@@ -15,12 +15,8 @@
 using NUnit.Framework;
 using Rhino.Mocks;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FenixLib.Core.Tests
+namespace FenixLib.Core.Tests.UnitTests
 {
     [TestFixture, Category ( "Unit" )]
     public class BitmapFontTests
@@ -40,11 +36,11 @@ namespace FenixLib.Core.Tests
             stubFont16 = BitmapFont.Create ( GraphicFormat.RgbInt16,
                 FontCodePage.ISO85591 );
 
-            stubGlyph32 = new Glyph ( CreateStubGraphic ( 32 ) );
-            stubGlyph16 = new Glyph ( CreateStubGraphic ( 16 ) );
+            stubGlyph32 = new Glyph ( CreateFakeGraphic ( 32 ) );
+            stubGlyph16 = new Glyph ( CreateFakeGraphic ( 16 ) );
         }
 
-        private IGraphic CreateStubGraphic ( int bpp )
+        private IGraphic CreateFakeGraphic ( int bpp )
         {
             IGraphic stubGraphic = MockRepository.GenerateStub<IGraphic> ();
             stubGraphic.Stub ( x => x.GraphicFormat ).Return ( ( GraphicFormat ) bpp );
