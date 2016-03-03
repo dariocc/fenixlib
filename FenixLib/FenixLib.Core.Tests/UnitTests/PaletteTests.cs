@@ -107,7 +107,7 @@ namespace FenixLib.Core.Tests.UnitTests
             return colors;
         }
 
-        class PaletteComparisonCasesFactory
+        private class PaletteComparisonCasesFactory
         {
             private static Palette palette;
             private static Palette equivalentPalette;
