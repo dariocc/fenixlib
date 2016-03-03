@@ -18,9 +18,9 @@ namespace FenixLib.Core
 {
     public struct PaletteColor
     {
-        public readonly int R;
-        public readonly int G;
-        public readonly int B;
+        public int R { get; }
+        public int G { get; }
+        public int B { get; }
 
         public PaletteColor ( int r, int g, int b )
         {
