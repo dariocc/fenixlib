@@ -75,7 +75,7 @@ namespace FenixLib.Core.Tests.Image
             colors[4] = new Color ( 0, 0, 255 );
             stubGraphic8bpp = MockRepository.GenerateStub<IGraphic> ();
             stubGraphic8bpp.Stub ( x => x.PixelData ).Return ( pixelData8bpp );
-            stubGraphic8bpp.Stub ( x => x.Palette ).Return ( Palette.Create ( colors ) );
+            stubGraphic8bpp.Stub ( x => x.Palette ).Return ( new Palette ( colors ) );
             stubGraphic8bpp.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.RgbIndexedPalette );
         }
 
