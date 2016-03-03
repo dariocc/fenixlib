@@ -16,7 +16,6 @@ using System;
 
 namespace FenixLib.Core
 {
-	[Serializable()]
 	public struct PivotPoint
 	{
 		public readonly int Id;

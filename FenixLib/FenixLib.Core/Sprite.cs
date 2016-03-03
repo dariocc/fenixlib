@@ -25,7 +25,6 @@ namespace FenixLib.Core
     /// Sprites can be collected in <see cref="SpriteAsset"></see>s and given a code
     /// from which it is possible to be retrieved later on.
     /// </summary>
-    [Serializable ()]
     public partial class Sprite : ISprite
     {
         private SpriteAsset parent;

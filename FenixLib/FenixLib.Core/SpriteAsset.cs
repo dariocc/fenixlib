@@ -18,7 +18,6 @@ using System.Collections.Generic;
 
 namespace FenixLib.Core
 {
-    [Serializable ()]
     public class SpriteAsset : IEnumerable<ISprite>
     {
 

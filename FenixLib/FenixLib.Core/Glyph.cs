@@ -16,7 +16,6 @@ using System;
 
 namespace FenixLib.Core
 {
-    [Serializable ()]
     public class Glyph : IGlyph
     {
         public int YOffset { get; set; } = 0;
