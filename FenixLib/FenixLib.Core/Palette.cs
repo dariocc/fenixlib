@@ -23,34 +23,29 @@ namespace FenixLib.Core
     {
         private Color[] colors;
 
-        protected Palette ( Color[] colors )
+        public Palette ( Color[] colors )
         {
+            if ( colors.Length < 256 )
+                throw new ArgumentException (); // TODO: Customize
+
             this.colors = colors;
         }
 
-        public Color[] Colors
+        public virtual Color[] Colors
         {
             get { return colors; }
         }
-        public Color this[int index]
+        public virtual Color this[int index]
         {
             get { return colors[index]; }
             set { colors[index] = value; }
         }
 
-        public static Palette Create ( Color[] colors )
-        {
-            if ( colors.Length < 256 )
-                throw new ArgumentException (); // TODO: Customize
-
-            return new Palette ( colors );
-        }
-
-        public Palette GetCopy ()
+        public virtual Palette GetCopy ()
         {
             Color[] colors = new Color[this.colors.Length];
             this.colors.CopyTo ( colors, 0 );
-            return Create ( colors );
+            return new Palette ( colors );
         }
 
         public IEnumerator GetEnumerator ()

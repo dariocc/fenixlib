@@ -70,7 +70,7 @@ namespace FenixLib.IO
         public Palette ReadPalette ()
         {
             var paletteColors = ReadBytes ( PaletteBytesSize );
-            Palette palette = Palette.Create ( Vga2PaleetteColors ( paletteColors ) );
+            Palette palette = new Palette ( Vga2PaleetteColors ( paletteColors ) );
 
             return palette;
         }
