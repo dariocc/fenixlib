@@ -52,11 +52,12 @@ namespace FenixLib.Core
             get { return sprites.Values; }
         }
 
-        // TODO: Why ref?
-        public void Add ( int code, ref ISprite sprite )
+        public void Add ( int code, ISprite sprite )
         {
             if ( sprite.GraphicFormat != GraphicFormat )
+            { 
                 throw new InvalidOperationException ();
+            }
 
             sprites.Add ( code, sprite );
             sprite.ParentAsset = this;
