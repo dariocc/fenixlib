@@ -16,12 +16,39 @@ using NUnit.Framework;
 
 namespace FenixLib.Core.Tests.UnitTests
 {
-    [TestFixture ( typeof ( StaticGraphic ) )]
-    class IGraphicTests<T> where T : IGraphic, new()
+    abstract class IGraphicTests<T> where T : IGraphic
     {
-        protected IGraphic CreateGraphic()
+        private IGraphic graphic;
+
+        protected abstract IGraphic CreateSampleInstance ();
+
+        [SetUp]
+        public void SetUp()
         {
-            return new T ();
+            graphic = CreateSampleInstance ();
+        }
+
+        [Test]
+        public void PixelData_NotNull ()
+        {
+            Assert.IsNotNull ( graphic.PixelData );
+        }
+
+        [Test]
+        public void Width_GreaterThan0 ()
+        {
+            Assert.IsNotNull ( graphic.Width > 0 );
+        }
+
+        [Test]
+        public void Height_GreaterThan0 ()
+        {
+            Assert.IsNotNull ( graphic.Height > 0 );
+        }
+
+        public void GraphicFormat_NotNull ()
+        {
+            Assert.IsNotNull ( graphic.GraphicFormat );
         }
     }
 }

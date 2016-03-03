@@ -13,22 +13,15 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using FenixLib.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FenixLib.Core.Tests
+namespace FenixLib.Core.Tests.UnitTests
 {
     [TestFixture (Category = "Unit")]
-    public class StaticGraphicTests
+    class StaticGraphicTests : IGraphicTests<StaticGraphic>
     {
-        [Test ()]
-        public void StaticGraphicTest ()
+        protected override IGraphic CreateSampleInstance ()
         {
-            Assert.Fail ();
+            return new StaticGraphic ( GraphicFormat.ArgbInt32, 1, 1, new byte[4] );
         }
     }
 }

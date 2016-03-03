@@ -50,7 +50,7 @@ namespace FenixLib.Core
                 throw new ArgumentNullException ( "pixelData" );
             }
 
-            if ( pixelData.Length != GraphicFormat.PixelsBytesForSize ( width, height ) )
+            if ( pixelData.Length != graphicFormat.PixelsBytesForSize ( width, height ) )
             {
                 throw new ArgumentException ( "Insufficient size of 'pixelData' for the"
                     + "specified graphic format.", "pixelData" );
