@@ -24,10 +24,14 @@ namespace FenixLib.Core
         private const int MinCode = 1;
         private const int MaxCode = 999;
 
-        protected SpriteAsset ( GraphicFormat graphicFormat, Palette palette = null)
+        public SpriteAsset ( GraphicFormat graphicFormat, Palette palette = null )
         {
             GraphicFormat = graphicFormat;
             Palette = palette;
+        }
+
+        public SpriteAsset ( Palette palette ) : this ( GraphicFormat.RgbIndexedPalette, palette )
+        {
         }
 
         [Obsolete ()]
@@ -55,7 +59,7 @@ namespace FenixLib.Core
         public void Add ( int code, ISprite sprite )
         {
             if ( sprite.GraphicFormat != GraphicFormat )
-            { 
+            {
                 throw new InvalidOperationException ();
             }
 
@@ -145,16 +149,6 @@ namespace FenixLib.Core
         IEnumerator IEnumerable.GetEnumerator ()
         {
             return GetEnumerator ();
-        }
-
-        public static SpriteAsset Create ( GraphicFormat graphicFormat )
-        {
-            return new SpriteAsset ( graphicFormat );
-        }
-
-        public static SpriteAsset Create ( Palette palette )
-        {
-            return new SpriteAsset ( GraphicFormat.RgbIndexedPalette, palette );
         }
     }
 }

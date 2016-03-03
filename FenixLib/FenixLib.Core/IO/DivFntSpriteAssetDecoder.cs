@@ -40,7 +40,7 @@ namespace FenixLib.IO
                 characters[n] = reader.ReadLegacyFntGlyphInfo ();
             }
 
-            SpriteAsset fpg = SpriteAsset.Create ( palette );
+            SpriteAsset fpg = new SpriteAsset ( palette );
 
             foreach ( var character in characters )
             {

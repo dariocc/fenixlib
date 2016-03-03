@@ -35,12 +35,9 @@ namespace FenixLib.IO
             {
                 palette = reader.ReadPalette ();
                 reader.ReadUnusedPaletteGamma ();
-                fpg = SpriteAsset.Create ( palette );
             }
-            else
-            {
-                fpg = SpriteAsset.Create ( ( GraphicFormat ) header.BitsPerPixel );
-            }
+
+            fpg = new SpriteAsset( ( GraphicFormat ) header.BitsPerPixel, palette );
 
             try
             {
