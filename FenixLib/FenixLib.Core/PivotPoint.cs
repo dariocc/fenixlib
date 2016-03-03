@@ -37,7 +37,7 @@ namespace FenixLib.Core
                 return false;
             }
 
-            return point.X == X && point.Y == Y && point.Id == Id;
+            return point.Id == Id;
         }
 
         public override bool Equals(object obj)
