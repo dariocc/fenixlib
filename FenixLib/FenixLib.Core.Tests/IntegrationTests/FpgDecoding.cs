@@ -13,20 +13,32 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
+using System.Reflection;
+using System.IO;
 
 using FenixLib.Core;
-using FenixLib.IO;
+
 
 namespace FenixLib.Tests
 {
-    [TestFixture, Category("Integration")]
+    [TestFixture, Category ( "Integration" )]
     public class FpgDecoding
     {
-        private SpriteAsset DecodeFpg ( string path, int depth )
+        [TestCase( "8bpp-uncompressed.fpg", 8)]
+        [TestCase ( "8bpp-compressed.fpg", 8 )]
+        [TestCase ( "16bpp-uncompressed.fpg", 8 )]
+        [TestCase ( "16bpp-compressed.fpg", 16 )]
+        [TestCase ( "32bpp-uncompressed.fpg", 32 )]
+        [TestCase ( "32bpp-compressed.fpg", 32 )]
+        public void FpgFileCanBeDecoded ( string resourceName, int expectedDepth )
         {
-            SpriteAsset fpg = File.LoadFpg ( path );
+            var assembly = Assembly.GetExecutingAssembly ();
+            string folder = Path.GetDirectoryName ( assembly.Location );
+            string path = Path.Combine ( folder, "TestFiles", "Fpg", resourceName );
 
-            Assert.AreEqual ( depth, fpg.GraphicFormat );
+            SpriteAsset fpg = IO.File.LoadFpg ( path );
+
+            // Assert.AreEqual ( depth, (int) fpg.GraphicFormat );
             Assert.AreEqual ( 3, fpg.Sprites.Count );
             Assert.IsNotNull ( fpg.Sprites );
 
@@ -45,48 +57,8 @@ namespace FenixLib.Tests
 
             // Validate control points
             Assert.AreEqual ( 2, fpg[500].PivotPoints.Count );
-
-            return fpg;
         }
-
-        [Test]
-        public void DecodeFpg_8bppUncompressed ()
-        {
-            var fpg = DecodeFpg ( "./Fpg/8bpp-uncompressed.fpg", 8 );
-            Assert.IsNotNull ( fpg.Palette );
-        }
-
-        [Test]
-        public void DecodeFpg_16bppUncompressed ()
-        {
-            var fpg = DecodeFpg ( "./Fpg/16bpp-uncompressed.fpg", 16 );
-        }
-
-        [Test]
-        public void DecodeFpg_32bppUncompressed ()
-        {
-            var fpg = DecodeFpg ( "./Fpg/32bpp-uncompressed.fpg", 32 );
-        }
-
-        [Test]
-        public void DecodeFpg_8bppCompressed ()
-        {
-            var fpg = DecodeFpg ( "./Fpg/8bpp-compressed.fpg", 8 );
-            Assert.IsNotNull ( fpg.Palette );
-        }
-
-        [Test]
-        public void DecodeFpg_16bppCompressed ()
-        {
-            var fpg = DecodeFpg ( "./Fpg/16bpp-compressed.fpg", 16 );
-        }
-
-        [Test]
-        public void DecodeFpg_32bppCompressed ()
-        {
-            var fpg = DecodeFpg ( "./Fpg/32bpp-compressed.fpg", 32 );
-        }
-
+        /*
         [Test]
         public void DecodeFpg_1bppCompressed ()
         {
@@ -95,6 +67,6 @@ namespace FenixLib.Tests
             Assert.AreEqual ( fpg[1].Height, 10 );
             Assert.AreEqual ( fpg.GraphicFormat, 1);
             Assert.AreEqual ( fpg.Sprites.Count, 1 );
-        }
+        }*/
     }
 }
