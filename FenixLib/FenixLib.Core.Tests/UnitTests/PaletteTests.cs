@@ -128,10 +128,14 @@ namespace FenixLib.Core.Tests.UnitTests
             {
                 get
                 {
-                    yield return new TestCaseData ( palette, palette ).Returns ( true );
-                    yield return new TestCaseData ( palette, equivalentPalette ).Returns ( true );
-                    yield return new TestCaseData ( equivalentPalette, palette ).Returns ( true );
-                    yield return new TestCaseData ( palette, differentPalette ).Returns ( false );
+                    yield return new TestCaseData ( palette, palette )
+                        .Returns ( true );
+                    yield return new TestCaseData ( palette, equivalentPalette )
+                        .Returns ( true );
+                    yield return new TestCaseData ( equivalentPalette, palette )
+                        .Returns ( true );
+                    yield return new TestCaseData ( palette, differentPalette )
+                        .Returns ( false );
                 }
             }
         }
