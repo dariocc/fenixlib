@@ -19,7 +19,7 @@ using System.Linq;
 namespace FenixLib.Core
 {
     [Serializable ()]
-    public partial class Palette : IEnumerable
+    public class Palette : IEnumerable
     {
         private Color[] colors;
 
