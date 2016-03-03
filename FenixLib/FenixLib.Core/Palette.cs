@@ -41,8 +41,20 @@ namespace FenixLib.Core
         }
         public virtual Color this[int index]
         {
-            get { return colors[index]; }
-            set { colors[index] = value; }
+            get
+            {
+                if ( index < 0 || index > 255 )
+                    throw new ColorIndexOutOfRangeException ();
+
+                return colors[index];
+            }
+            set
+            {
+                if ( index < 0 || index > 255 )
+                    throw new ColorIndexOutOfRangeException ();
+
+                colors[index] = value;
+            }
         }
 
         public virtual Palette GetCopy ()
