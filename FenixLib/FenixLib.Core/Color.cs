@@ -12,6 +12,8 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+using System;
+
 namespace FenixLib.Core
 {
     public struct Color
@@ -22,6 +24,10 @@ namespace FenixLib.Core
 
         public Color ( int r, int g, int b )
         {
+            ValidateComponent ( r );
+            ValidateComponent ( g );
+            ValidateComponent ( b );
+
             this.r = r;
             this.g = g;
             this.b = b;
@@ -56,6 +62,15 @@ namespace FenixLib.Core
         public static bool operator != ( Color colorA, Color colorB )
         {
             return !( colorA == colorB );
+        }
+
+        private static void ValidateComponent( int component )
+        {
+            if ( component < 0 | component > 255 )
+            {
+                throw new ArgumentOutOfRangeException ("component", component, 
+                    "Color component out of allowed range 0..255.");
+            }
         }
     }
 }
