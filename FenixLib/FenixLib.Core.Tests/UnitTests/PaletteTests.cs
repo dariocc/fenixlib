@@ -107,6 +107,8 @@ namespace FenixLib.Core.Tests.UnitTests
             return colors;
         }
 
+        // Feeds the comparison cases for Equals and Equality and 
+        // inequality operators.
         private class PaletteComparisonCasesFactory
         {
             private static Palette palette;
