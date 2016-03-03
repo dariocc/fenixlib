@@ -21,21 +21,21 @@ namespace FenixLib.Core
     [Serializable ()]
     public partial class Palette : IEnumerable
     {
-        private Color[] _colors;
+        private Color[] colors;
 
         protected Palette ( Color[] colors )
         {
-            _colors = colors;
+            this.colors = colors;
         }
 
         public Color[] Colors
         {
-            get { return _colors; }
+            get { return colors; }
         }
         public Color this[int index]
         {
-            get { return _colors[index]; }
-            set { _colors[index] = value; }
+            get { return colors[index]; }
+            set { colors[index] = value; }
         }
 
         public static Palette Create ( Color[] colors )
@@ -48,14 +48,14 @@ namespace FenixLib.Core
 
         public Palette GetCopy ()
         {
-            Color[] colors = new Color[_colors.Length];
-            _colors.CopyTo ( colors, 0 );
+            Color[] colors = new Color[this.colors.Length];
+            this.colors.CopyTo ( colors, 0 );
             return Create ( colors );
         }
 
         public IEnumerator GetEnumerator ()
         {
-            return _colors.GetEnumerator ();
+            return colors.GetEnumerator ();
         }
 
         public override bool Equals ( object obj )
@@ -90,7 +90,7 @@ namespace FenixLib.Core
         public override int GetHashCode ()
         {
             // TODO: Pending to do a proper hashcode :)
-            return _colors[0].r.GetHashCode () ^ _colors[100].r.GetHashCode ();
+            return colors[0].r.GetHashCode () ^ colors[100].r.GetHashCode ();
         }
 
         public static bool operator == ( Palette paletteA, Palette paletteB )
