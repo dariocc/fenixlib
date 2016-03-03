@@ -18,9 +18,9 @@ namespace FenixLib.Core
 {
     public struct PaletteColor
     {
-        public readonly int r;
-        public readonly int g;
-        public readonly int b;
+        public readonly int R;
+        public readonly int G;
+        public readonly int B;
 
         public PaletteColor ( int r, int g, int b )
         {
@@ -28,14 +28,14 @@ namespace FenixLib.Core
             ValidateComponent ( g );
             ValidateComponent ( b );
 
-            this.r = r;
-            this.g = g;
-            this.b = b;
+            R = r;
+            G = g;
+            B = b;
         }
 
         public bool Equals ( PaletteColor color )
         {
-            return r == color.r && g == color.g && b == color.b;
+            return R == color.R && G == color.G && B == color.B;
         }
 
         public override bool Equals ( object obj )
@@ -48,7 +48,7 @@ namespace FenixLib.Core
 
         public override int GetHashCode ()
         {
-            return r << 16 & g << 8 & b;
+            return R << 16 & G << 8 & B;
         }
 
         public static bool operator == ( PaletteColor colorA, PaletteColor colorB )

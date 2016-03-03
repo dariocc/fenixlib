@@ -1,4 +1,4 @@
-/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 DarÃ­o Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -99,7 +99,7 @@ namespace FenixLib.Core
         public override int GetHashCode ()
         {
             // TODO: Pending to do a proper hashcode :)
-            return colors[0].r.GetHashCode () ^ colors[100].r.GetHashCode ();
+            return colors[0].R.GetHashCode () ^ colors[100].R.GetHashCode ();
         }
 
         public static bool operator == ( Palette paletteA, Palette paletteB )
