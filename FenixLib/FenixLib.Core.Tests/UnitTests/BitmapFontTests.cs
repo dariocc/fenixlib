@@ -89,12 +89,10 @@ namespace FenixLib.Core.Tests.UnitTests
         }
 
         [Test]
-        public void CharIndexerSet_GlyphDepthDoesNotMatchFontDepth_RaisesArgumentException ()
+        public void CharIndexerSet_GlyphFormatDoesNotMatchFontFormat_ArgumentException ()
         {
             ArgumentException ex = Assert.Throws<ArgumentException> (
                 () => stubFont32['a'] = stubGlyph16 );
-
-            Assert.AreEqual ( "Glyph and font graphic formats need to match.", ex.Message );
         }
     }
 }
