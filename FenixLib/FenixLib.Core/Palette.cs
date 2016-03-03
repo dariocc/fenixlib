@@ -25,8 +25,12 @@ namespace FenixLib.Core
 
         public Palette ( Color[] colors )
         {
-            if ( colors.Length < 256 )
-                throw new ArgumentException (); // TODO: Customize
+            if ( colors == null )
+                throw new ArgumentNullException ( "colors" );
+
+            if ( colors.Length != 256 )
+                throw new ArgumentException (
+                    "The number of colors must be 256.", "colors" );
 
             this.colors = colors;
         }
@@ -77,7 +81,7 @@ namespace FenixLib.Core
                 return false;
             }
 
-            return ( Colors.SequenceEqual ( Colors ) );
+            return ( Colors.SequenceEqual ( palette.Colors ) );
         }
 
         public override int GetHashCode ()

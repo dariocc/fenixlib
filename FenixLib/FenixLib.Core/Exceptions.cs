@@ -12,6 +12,7 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+using System;
 using System.IO;
 
 namespace FenixLib.Core
@@ -20,5 +21,9 @@ namespace FenixLib.Core
 	public class UnsuportedFileFormatException : IOException
 	{
 	}
+
+    public class ColorIndexOutOfRangeException : Exception
+    {
+    }
 }
 
