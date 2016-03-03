@@ -72,8 +72,6 @@ namespace FenixLib.Core
 
         public bool Equals ( Palette palette )
         {
-            // TODO: does it matter if we have the (object)?
-            // Should we use reference comparison?
             if ( ReferenceEquals ( palette, null ) )
             {
                 return false;
