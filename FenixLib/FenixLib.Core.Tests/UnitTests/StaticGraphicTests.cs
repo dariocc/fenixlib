@@ -17,7 +17,7 @@ using NUnit.Framework;
 namespace FenixLib.Core.Tests.UnitTests
 {
     [TestFixture (Category = "Unit")]
-    class StaticGraphicTests : IGraphicTests<StaticGraphic>
+    class StaticGraphicTests : CommonGraphicTests
     {
         protected override IGraphic CreateSampleInstance ()
         {

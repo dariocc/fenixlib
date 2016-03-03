@@ -13,42 +13,28 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
+using Rhino.Mocks;
+using System;
 
 namespace FenixLib.Core.Tests.UnitTests
 {
-    abstract class IGraphicTests<T> where T : IGraphic
+    [TestFixture ( Category = "Unit" )]
+    class GlyphTests : CommonGraphicTests
     {
-        private IGraphic graphic;
-
-        protected abstract IGraphic CreateSampleInstance ();
-
-        [SetUp]
-        public void SetUp()
+        protected override IGraphic CreateSampleInstance ()
         {
-            graphic = CreateSampleInstance ();
+            return new Glyph ( CreateFakeGraphic () );
         }
 
-        [Test]
-        public void PixelData_NotNull ()
+        private static IGraphic CreateFakeGraphic ()
         {
-            Assert.IsNotNull ( graphic.PixelData );
-        }
+            IGraphic fakeGraphic = MockRepository.GenerateStub<IGraphic> ();
+            fakeGraphic.Stub ( x => x.Width ).Return ( 1 );
+            fakeGraphic.Stub ( x => x.Height ).Return ( 1 );
+            fakeGraphic.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+            fakeGraphic.Stub ( x => x.PixelData ).Return ( new byte[1] );
 
-        [Test]
-        public void Width_GreaterThan0 ()
-        {
-            Assert.IsNotNull ( graphic.Width > 0 );
-        }
-
-        [Test]
-        public void Height_GreaterThan0 ()
-        {
-            Assert.IsNotNull ( graphic.Height > 0 );
-        }
-
-        public void GraphicFormat_NotNull ()
-        {
-            Assert.IsNotNull ( graphic.GraphicFormat );
+            return fakeGraphic;
         }
     }
 }
