@@ -19,38 +19,49 @@ using System.Linq;
 namespace FenixLib.Core
 {
     [Serializable ()]
-    public partial class Palette : IEnumerable
+    public class Palette : IEnumerable
     {
-        private Color[] colors;
+        private PaletteColor[] colors;
 
-        protected Palette ( Color[] colors )
+        public Palette ( PaletteColor[] colors )
         {
+            if ( colors == null )
+                throw new ArgumentNullException ( "colors" );
+
+            if ( colors.Length != 256 )
+                throw new ArgumentException (
+                    "The number of colors must be 256.", "colors" );
+
             this.colors = colors;
         }
 
-        public Color[] Colors
+        public virtual PaletteColor[] Colors
         {
             get { return colors; }
         }
-        public Color this[int index]
+        public virtual PaletteColor this[int index]
         {
-            get { return colors[index]; }
-            set { colors[index] = value; }
+            get
+            {
+                if ( index < 0 || index > 255 )
+                    throw new ColorIndexOutOfRangeException ();
+
+                return colors[index];
+            }
+            set
+            {
+                if ( index < 0 || index > 255 )
+                    throw new ColorIndexOutOfRangeException ();
+
+                colors[index] = value;
+            }
         }
 
-        public static Palette Create ( Color[] colors )
+        public virtual Palette GetCopy ()
         {
-            if ( colors.Length < 256 )
-                throw new ArgumentException (); // TODO: Customize
-
-            return new Palette ( colors );
-        }
-
-        public Palette GetCopy ()
-        {
-            Color[] colors = new Color[this.colors.Length];
+            PaletteColor[] colors = new PaletteColor[this.colors.Length];
             this.colors.CopyTo ( colors, 0 );
-            return Create ( colors );
+            return new Palette ( colors );
         }
 
         public IEnumerator GetEnumerator ()
@@ -77,20 +88,18 @@ namespace FenixLib.Core
 
         public bool Equals ( Palette palette )
         {
-            // TODO: does it matter if we have the (object)?
-            // Should we use reference comparison?
             if ( ReferenceEquals ( palette, null ) )
             {
                 return false;
             }
 
-            return ( Colors.SequenceEqual ( Colors ) );
+            return ( Colors.SequenceEqual ( palette.Colors ) );
         }
 
         public override int GetHashCode ()
         {
             // TODO: Pending to do a proper hashcode :)
-            return colors[0].R.GetHashCode () ^ colors[100].R.GetHashCode ();
+            return colors[0].r.GetHashCode () ^ colors[100].r.GetHashCode ();
         }
 
         public static bool operator == ( Palette paletteA, Palette paletteB )

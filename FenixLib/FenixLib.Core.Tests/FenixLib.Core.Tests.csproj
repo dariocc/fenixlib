@@ -41,7 +41,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnitTests\GlyphTests.cs" />
     <Compile Include="IntegrationTests\FpgDecoding.cs" />
+    <Compile Include="UnitTests\PaletteColorTests.cs" />
+    <Compile Include="UnitTests\CommonGraphicTests.cs" />
+    <Compile Include="UnitTests\PaletteTests.cs" />
+    <Compile Include="UnitTests\PivotPointTests.cs" />
     <Compile Include="UnitTests\StaticGraphicTests.cs" />
     <Compile Include="UnitTests\Image\FormatConverterTests.cs" />
     <Compile Include="UnitTests\Image\IFormatConverterTests.cs" />
@@ -51,54 +56,61 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\testfiles\16bpp-compressed.fpg">
-      <Link>Fpg\16bpp-compressed.fpg</Link>
+      <Link>TestFiles\Fpg\16bpp-compressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\testfiles\16bpp-uncompressed.fpg">
-      <Link>Fpg\16bpp-uncompressed.fpg</Link>
+      <Link>TestFiles\Fpg\16bpp-uncompressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\TestFiles\1bpp-compressed.fpg">
-      <Link>Fpg\1bpp-compressed.fpg</Link>
+      <Link>TestFiles\Fpg\1bpp-compressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\TestFiles\1bpp-uncompressed.fpg">
-      <Link>Fpg\1bpp-uncompressed.fpg</Link>
+      <Link>TestFiles\Fpg\1bpp-uncompressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\testfiles\32bpp-compressed.fpg">
-      <Link>Fpg\32bpp-compressed.fpg</Link>
+      <Link>TestFiles\Fpg\32bpp-compressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\testfiles\32bpp-uncompressed.fpg">
-      <Link>Fpg\32bpp-uncompressed.fpg</Link>
+      <Link>TestFiles\Fpg\32bpp-uncompressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\testfiles\8bpp-compressed.fpg">
-      <Link>Fpg\8bpp-compressed.fpg</Link>
+      <Link>TestFiles\Fpg\8bpp-compressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\TestFiles\8bpp-div-extendid.fnt">
-      <Link>Fnt\8bpp-div-extendid.fnt</Link>
+      <Link>TestFiles\Fnt\8bpp-div-extendid.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\TestFiles\8bpp-div-mayuscul.fnt">
-      <Link>Fnt\8bpp-div-mayuscul.fnt</Link>
+      <Link>TestFiles\Fnt\8bpp-div-mayuscul.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\TestFiles\8bpp-div-minusc.fnt">
-      <Link>Fnt\8bpp-div-minusc.fnt</Link>
+      <Link>TestFiles\Fnt\8bpp-div-minusc.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\TestFiles\8bpp-div-numeros.fnt">
-      <Link>Fnt\8bpp-div-numeros.fnt</Link>
+      <Link>TestFiles\Fnt\8bpp-div-numeros.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\TestFiles\8bpp-div-simbolos.fnt">
-      <Link>Fnt\8bpp-div-simbolos.fnt</Link>
+      <Link>TestFiles\Fnt\8bpp-div-simbolos.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\testfiles\8bpp-uncompressed.fpg">
-      <Link>Fpg\8bpp-uncompressed.fpg</Link>
+      <Link>TestFiles\Fpg\8bpp-uncompressed.fpg</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="FenixLib.Core.Tests.licenseheader" />
     <None Include="packages.config" />
+    <None Include="TestFiles\Fnt\PLACEHOLDER.md" />
+    <None Include="TestFiles\Fpg\PLACEHOLDER.md" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

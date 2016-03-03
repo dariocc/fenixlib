@@ -15,12 +15,11 @@
 using NUnit.Framework;
 using Rhino.Mocks;
 using System;
-using FenixLib.Core;
 using FenixLib.Image;
 
 namespace FenixLib.Core.Tests.Image
 {
-    [TestFixture ( typeof ( FenixLib.Image.FormatConverter ) )]
+    [TestFixture ( typeof ( FormatConverter ) )]
     class IFormatConverterContract<T> where T : IFormatConverter, new()
     {
         protected IFormatConverter CreateConverter ()

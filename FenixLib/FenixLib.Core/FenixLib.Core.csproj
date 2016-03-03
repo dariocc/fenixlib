@@ -123,7 +123,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Color.cs" />
+    <Compile Include="PaletteColor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\BaseTypes.cd" />

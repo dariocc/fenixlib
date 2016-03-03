@@ -13,15 +13,28 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
+using Rhino.Mocks;
+using System;
 
 namespace FenixLib.Core.Tests.UnitTests
 {
-    [TestFixture (Category = "Unit")]
-    class StaticGraphicTests : CommonGraphicTests
+    [TestFixture ( Category = "Unit" )]
+    class GlyphTests : CommonGraphicTests
     {
         protected override IGraphic CreateSampleInstance ()
         {
-            return new StaticGraphic ( GraphicFormat.ArgbInt32, 1, 1, new byte[4] );
+            return new Glyph ( CreateFakeGraphic () );
+        }
+
+        private static IGraphic CreateFakeGraphic ()
+        {
+            IGraphic fakeGraphic = MockRepository.GenerateStub<IGraphic> ();
+            fakeGraphic.Stub ( x => x.Width ).Return ( 1 );
+            fakeGraphic.Stub ( x => x.Height ).Return ( 1 );
+            fakeGraphic.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+            fakeGraphic.Stub ( x => x.PixelData ).Return ( new byte[1] );
+
+            return fakeGraphic;
         }
     }
 }

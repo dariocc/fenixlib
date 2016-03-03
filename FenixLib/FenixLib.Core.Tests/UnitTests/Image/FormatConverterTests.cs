@@ -67,15 +67,15 @@ namespace FenixLib.Core.Tests.Image
             }
             pixelData8bpp[19] = 0xFF;
             // Palette colors
-            Color[] colors = new Color[256];
-            colors[0] = new Color ( 0, 0, 0 );
-            colors[1] = new Color ( 255, 255, 255 );
-            colors[2] = new Color ( 255, 0, 0 );
-            colors[3] = new Color ( 0, 255, 0 );
-            colors[4] = new Color ( 0, 0, 255 );
+            PaletteColor[] colors = new PaletteColor[256];
+            colors[0] = new PaletteColor ( 0, 0, 0 );
+            colors[1] = new PaletteColor ( 255, 255, 255 );
+            colors[2] = new PaletteColor ( 255, 0, 0 );
+            colors[3] = new PaletteColor ( 0, 255, 0 );
+            colors[4] = new PaletteColor ( 0, 0, 255 );
             stubGraphic8bpp = MockRepository.GenerateStub<IGraphic> ();
             stubGraphic8bpp.Stub ( x => x.PixelData ).Return ( pixelData8bpp );
-            stubGraphic8bpp.Stub ( x => x.Palette ).Return ( Palette.Create ( colors ) );
+            stubGraphic8bpp.Stub ( x => x.Palette ).Return ( new Palette ( colors ) );
             stubGraphic8bpp.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.RgbIndexedPalette );
         }
 
