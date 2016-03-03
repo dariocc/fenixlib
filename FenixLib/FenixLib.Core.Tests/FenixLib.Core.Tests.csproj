@@ -45,6 +45,7 @@
     <Compile Include="IntegrationTests\FpgDecoding.cs" />
     <Compile Include="UnitTests\ColorTests.cs" />
     <Compile Include="UnitTests\CommonGraphicTests.cs" />
+    <Compile Include="UnitTests\PaletteTests.cs" />
     <Compile Include="UnitTests\PivotPointTests.cs" />
     <Compile Include="UnitTests\StaticGraphicTests.cs" />
     <Compile Include="UnitTests\Image\FormatConverterTests.cs" />
