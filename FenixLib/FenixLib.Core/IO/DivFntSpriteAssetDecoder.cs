@@ -57,7 +57,7 @@ namespace FenixLib.IO
 
                 ISprite sprite = new Sprite ( graphic );
 
-                fpg.Add ( fpg.FindFreeId (), sprite );
+                fpg.Add ( fpg.GetFreeId (), sprite );
             }
 
             return fpg;

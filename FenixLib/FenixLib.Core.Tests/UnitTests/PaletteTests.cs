@@ -52,7 +52,7 @@ namespace FenixLib.Core.Tests.UnitTests
             {
                 return palette[index];
             } ) ();
-            Assert.Throws<ColorIndexOutOfRangeException> ( colorAtIndex );
+            Assert.Throws<ArgumentOutOfRangeException> ( colorAtIndex );
         }
 
         [TestCase ( -1 )]
@@ -63,7 +63,7 @@ namespace FenixLib.Core.Tests.UnitTests
             {
                 palette[index] = new PaletteColor ( 0, 0, 0 );
             } ) ();
-            Assert.Throws<ColorIndexOutOfRangeException> ( changeColorAtIndex );
+            Assert.Throws<ArgumentOutOfRangeException> ( changeColorAtIndex );
         }
 
         [Test]

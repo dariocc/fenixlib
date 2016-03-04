@@ -43,14 +43,14 @@ namespace FenixLib.Core
             get
             {
                 if ( index < 0 || index > 255 )
-                    throw new ColorIndexOutOfRangeException ();
+                    throw new ArgumentOutOfRangeException ();
 
                 return colors[index];
             }
             set
             {
                 if ( index < 0 || index > 255 )
-                    throw new ColorIndexOutOfRangeException ();
+                    throw new ArgumentOutOfRangeException ();
 
                 colors[index] = value;
             }

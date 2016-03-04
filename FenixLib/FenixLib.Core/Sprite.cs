@@ -27,7 +27,6 @@ namespace FenixLib.Core
     /// </summary>
     public partial class Sprite : ISprite
     {
-        private SpriteAsset parent;
         private IGraphic graphic;
 
         private IDictionary<int, PivotPoint> pivotPoints = 
@@ -43,77 +42,23 @@ namespace FenixLib.Core
             this.graphic = graphic;
         }
 
-        public int Width => graphic.Width;
+        public virtual int Width => graphic.Width;
 
-        public int Height => graphic.Height;
+        public virtual int Height => graphic.Height;
 
-        public GraphicFormat GraphicFormat => graphic.GraphicFormat;
+        public virtual GraphicFormat GraphicFormat => graphic.GraphicFormat;
 
-        public byte[] PixelData => graphic.PixelData;
+        public virtual byte[] PixelData => graphic.PixelData;
 
-        public Palette Palette
-        {
-            get
-            {
-                if ( IsInAsset )
-                {
-                    return ParentAsset.Palette;
-                }
-                else
-                {
-                    return graphic.Palette; ;
-                }
-            }
-        }
-
-        /// <summary>
-        /// The <see cref="Sprite"/> identifier.
-        /// </summary>
-        /// <returns>The identifier of this <see cref="Sprite"/> within its
-        /// parent <see cref="SpriteAsset"/>. <c>Nothing</c> if this object
-        /// is not contained in the <see cref="SpriteAsset"/></returns>
-        public int? Id
-        {
-            get
-            {
-                if ( parent == null )
-                {
-                    return null;
-                }
-                else
-                {
-                    return parent.IdOf ( this );
-                }
-            }
-        }
+        public virtual Palette Palette => graphic.Palette;
 
         /// <summary>
         /// A descriptive string.
         /// </summary>
         /// <returns></returns>
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
-        public SpriteAsset ParentAsset
-        {
-            get { return parent; }
-            set
-            {
-                // TODO: This design makes it impossible to detach an Sprite from its parent
-                if ( !value.Sprites.Contains ( this ) )
-                {
-                    throw new InvalidOperationException (); // TODO: Customize
-                }
-
-                parent = value;
-            }
-        }
-
-        public bool IsInAsset
-        {
-            get { return parent == null; }
-        }
-
-        public void DefinePivotPoint ( int id, int x, int y )
+        public virtual void DefinePivotPoint ( int id, int x, int y )
         {
             var pivotPoint = new PivotPoint ( id, x, y );
 
@@ -128,7 +73,7 @@ namespace FenixLib.Core
             }
         }
 
-        public void DeletePivotPoint ( int id )
+        public virtual void DeletePivotPoint ( int id )
         {
             if ( pivotPoints.ContainsKey ( id ) )
             {
@@ -136,12 +81,12 @@ namespace FenixLib.Core
             }
         }
 
-        public void ClearPivotPoints ()
+        public virtual void ClearPivotPoints ()
         {
             pivotPoints.Clear ();
         }
 
-        public ICollection<PivotPoint> PivotPoints
+        public virtual ICollection<PivotPoint> PivotPoints
         {
             get { return pivotPoints.Values; }
         }
@@ -151,12 +96,12 @@ namespace FenixLib.Core
         /// </summary>
         /// <param name="id">the id of the pivot point</param>
         /// <returns>True if the pivot point has been defined.</returns>
-        public bool IsPivotPointDefined ( int id )
+        public virtual bool IsPivotPointDefined ( int id )
         {
             return pivotPoints.ContainsKey ( id );
         }
 
-        public int FindFreePivotPointId ( int start = 0, 
+        public virtual int FindFreePivotPointId ( int start = 0, 
             SearchDirection direction = SearchDirection.Fordward )
         {
             if ( direction == SearchDirection.Fordward )

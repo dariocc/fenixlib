@@ -16,19 +16,17 @@ using System.Collections.Generic;
 
 namespace FenixLib.Core
 {
-    public interface ISprite : IGraphic
+    public interface ISpriteAsset : IEnumerable<SpriteAssetElement>
     {
-        string Description { get; set; }
-        //int? Id { get; }
-        //bool IsInAsset { get; }
-        //SpriteAsset ParentAsset { get; set; }
-        ICollection<PivotPoint> PivotPoints { get; }
+        ISprite this[int id] { get; }
+        ICollection<SpriteAssetElement> Sprites { get; }
+        Palette Palette { get; }
+        GraphicFormat GraphicFormat { get; }
 
-        void ClearPivotPoints ();
-        void DefinePivotPoint ( int id, int x, int y );
-        void DeletePivotPoint ( int id );
-        int FindFreePivotPointId ( int start = 0, 
-            Sprite.SearchDirection direction = Sprite.SearchDirection.Fordward );
-        bool IsPivotPointDefined ( int id );
+        void Add ( int id, ISprite sprite );
+        void Update ( int id, ISprite sprite );
+        IEnumerable<int> Ids { get; }
+
+        int GetFreeId ();
     }
 }

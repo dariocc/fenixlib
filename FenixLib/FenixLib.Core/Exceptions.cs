@@ -21,9 +21,5 @@ namespace FenixLib.Core
 	public class UnsuportedFileFormatException : IOException
 	{
 	}
-
-    public class ColorIndexOutOfRangeException : Exception
-    {
-    }
 }
 

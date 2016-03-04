@@ -15,82 +15,204 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FenixLib.Core
 {
-    public class SpriteAsset : IEnumerable<ISprite>
+    public class SpriteAsset : ISpriteAsset
     {
+        private const int DefaultCapacity = 100;
+        private UniformFormatGraphicDictionary<int, SpriteAssetElement> sprites;
 
-        private const int MinCode = 1;
-        private const int MaxCode = 999;
-
-        public SpriteAsset ( GraphicFormat graphicFormat, Palette palette = null )
+        public SpriteAsset ( GraphicFormat format, Palette palette )
         {
-            GraphicFormat = graphicFormat;
-            Palette = palette;
-        }
-
-        public SpriteAsset ( Palette palette ) : this ( GraphicFormat.RgbIndexedPalette, palette )
-        {
-        }
-
-        [Obsolete ()]
-        private bool IsIdValid ( int x )
-        {
-            return x >= MinCode & x <= MaxCode;
-        }
-
-        private IDictionary<int, ISprite> sprites = new SortedDictionary<int, ISprite> ();
-
-        public ISprite this[int code]
-        {
-            get { return sprites[code]; }
-        }
-
-        public Palette Palette { get; private set; }
-
-        public GraphicFormat GraphicFormat { get; private set; }
-
-        public ICollection<ISprite> Sprites
-        {
-            get { return sprites.Values; }
-        }
-
-        public void Add ( int code, ISprite sprite )
-        {
-            if ( sprite.GraphicFormat != GraphicFormat )
+            if ( format == GraphicFormat.RgbIndexedPalette )
             {
-                throw new InvalidOperationException ();
-            }
-
-            sprites.Add ( code, sprite );
-            sprite.ParentAsset = this;
-        }
-
-        public void Update ( int code, ISprite map )
-        {
-            if ( sprites.ContainsKey ( code ) )
-            {
-                sprites.Remove ( code );
-            }
-
-            sprites.Add ( code, map );
-        }
-
-        internal int IdOf ( ISprite sprite )
-        {
-            foreach ( KeyValuePair<int, ISprite> kvp in sprites )
-            {
-                if ( object.ReferenceEquals ( kvp.Value, sprite ) )
+                if ( palette == null )
                 {
-                    return kvp.Key;
+                    throw new ArgumentNullException ( "palette", "" );
+                }
+                Palette = palette;
+            }
+
+            sprites = new UniformFormatGraphicDictionary<int, SpriteAssetElement> ( 
+                format, DefaultCapacity );
+        }
+
+        public SpriteAsset (Palette palette) : this(GraphicFormat.RgbIndexedPalette, palette) { }
+
+        public Palette Palette { get; }
+
+        public ICollection<SpriteAssetElement> Sprites => sprites.Values;
+
+        public IEnumerable<int> Ids => sprites.Select ( x => x.Value.Id ).OrderBy(x => x);
+
+        public GraphicFormat GraphicFormat => sprites.GraphicFormat; 
+
+        public ISprite this[int id]
+        {
+            get
+            {
+                return sprites[id];
+            }
+            set
+            {
+                sprites[id] = PrepareSprite ( id, value );
+            }
+        }
+
+        public void Add ( int id, ISprite sprite )
+        {
+            sprites.Add ( id, PrepareSprite(id, sprite) );
+        }
+
+        public void Update ( int id, ISprite sprite )
+        {
+            this[id] = sprite;
+        }
+
+        public int GetFreeId ()
+        {
+            return Ids.Max(x => x ) + 1;
+        }
+
+        public IEnumerator<SpriteAssetElement> GetEnumerator ()
+        {
+            return sprites.Values.OrderBy(x => x.Id).GetEnumerator ();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator ()
+        {
+            return GetEnumerator ();
+        }
+
+        private SpriteAssetElement PrepareSprite (int id, ISprite sprite)
+        {
+            return new SpriteAssetElement ( id, new AssetSprite ( this, sprite ) );
+        }
+
+        private class AssetSprite : ISprite
+        {
+            private ISprite Sprite { get; }
+            private SpriteAsset ParentAsset { get; }
+
+            public AssetSprite ( SpriteAsset parentAsset, ISprite sprite )
+            {
+                ParentAsset = parentAsset;
+                Sprite = sprite;
+            }
+
+            public GraphicFormat GraphicFormat => Sprite.GraphicFormat;
+
+            public int Height => Sprite.Height;
+
+            public Palette Palette => ParentAsset.Palette;
+
+            public byte[] PixelData => Sprite.PixelData;
+
+            public int Width => Sprite.Width;
+
+            public string Description
+            {
+                get
+                {
+                    return Sprite.Description;
+                }
+
+                set
+                {
+                    Sprite.Description = Description;
                 }
             }
 
-            throw new ArgumentException ();
-            // TODO customize
+            public ICollection<PivotPoint> PivotPoints => Sprite.PivotPoints;
+
+            public void ClearPivotPoints ()
+            {
+                Sprite.ClearPivotPoints ();
+            }
+
+            public void DefinePivotPoint ( int id, int x, int y )
+            {
+                Sprite.DefinePivotPoint ( id, x, y );
+            }
+
+            public void DeletePivotPoint ( int id )
+            {
+                Sprite.DeletePivotPoint ( id );
+            }
+
+            public int FindFreePivotPointId ( int start = 0,
+                Sprite.SearchDirection direction = Core.Sprite.SearchDirection.Fordward )
+            {
+                return Sprite.FindFreePivotPointId ( start, direction );
+            }
+
+            public bool IsPivotPointDefined ( int id )
+            {
+                return Sprite.IsPivotPointDefined ( id );
+            }
         }
 
+
+        /*  private bool IsIdValid ( int x )
+ {
+     return x >= MinCode & x <= MaxCode;
+ }*/
+
+        /*  public ISprite this[int code]
+          {
+              get { return sprites[code]; }
+          }
+
+          public Palette Palette { get; private set; }
+
+          public GraphicFormat GraphicFormat => graphicsCollection.Format
+
+          ICollection<SpriteWithId<int>> IGenericSpriteAsset<int>.Sprites
+          {
+              get
+              {
+                  throw new NotImplementedException ();
+              }
+          }
+
+          public void Add ( int code, ISprite sprite )
+          {
+              if ( sprite.GraphicFormat != GraphicFormat )
+              {
+                  throw new InvalidOperationException ();
+              }
+
+              graphicsCollection.Add
+              sprites.Add ( code, sprite );
+              sprite.ParentAsset = this;
+          }
+
+          public void Update ( int code, ISprite map )
+          {
+              if ( sprites.ContainsKey ( code ) )
+              {
+                  sprites.Remove ( code );
+              }
+
+              sprites.Add ( code, map );
+          }
+
+          internal int IdOf ( ISprite sprite )
+          {
+              foreach ( KeyValuePair<int, ISprite> kvp in sprites )
+              {
+                  if ( object.ReferenceEquals ( kvp.Value, sprite ) )
+                  {
+                      return kvp.Key;
+                  }
+              }
+
+              throw new ArgumentException ();
+              // TODO customize
+          }*/
+        /*
         public int FindFreeId ( int startId = MinCode )
         {
 
@@ -140,15 +262,6 @@ namespace FenixLib.Core
 
             return code;
         }
-
-        public IEnumerator<ISprite> GetEnumerator ()
-        {
-            return sprites.Values.GetEnumerator ();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator ()
-        {
-            return GetEnumerator ();
-        }
+        */
     }
 }

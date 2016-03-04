@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitmapFont.cs" />
+    <Compile Include="UniformFormatGraphicDictionary.cs" />
     <Compile Include="IGlyph.cs" />
     <Compile Include="IGraphic.cs" />
     <Compile Include="Image\Color\HslColor.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="IO\DivFntBitmapFontEncoder.cs" />
     <Compile Include="IO\ExtendedFntBitmapFontEncoder.cs" />
     <Compile Include="ISprite.cs" />
+    <Compile Include="ISpriteAsset.cs" />
+    <Compile Include="SpriteAssetElement.cs" />
     <Compile Include="StaticGraphic.cs" />
     <Compile Include="Util\Util.cs" />
     <Compile Include="FontCodepage.cs" />

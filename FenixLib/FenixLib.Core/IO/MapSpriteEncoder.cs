@@ -30,7 +30,7 @@ namespace FenixLib.IO
         {
             writer.Write ( Convert.ToUInt16 ( sprite.Width ) );
             writer.Write ( Convert.ToUInt16 ( sprite.Height ) );
-            writer.Write ( Convert.ToUInt32 ( sprite.Id.GetValueOrDefault () ) );
+            writer.Write ( Convert.ToUInt32 ( 0 ) );
 
             if ( ( sprite.Palette != null ) )
             {
