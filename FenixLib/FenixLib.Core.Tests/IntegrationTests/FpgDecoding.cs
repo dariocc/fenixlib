@@ -18,7 +18,6 @@ using System.IO;
 
 using FenixLib.Core;
 
-
 namespace FenixLib.Tests.IntegrationTests
 {
     [TestFixture, Category ( "Integration" )]
