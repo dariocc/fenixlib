@@ -18,8 +18,7 @@ using System.IO;
 
 using FenixLib.Core;
 
-
-namespace FenixLib.Tests
+namespace FenixLib.Tests.IntegrationTests
 {
     [TestFixture, Category ( "Integration" )]
     public class FpgDecoding
