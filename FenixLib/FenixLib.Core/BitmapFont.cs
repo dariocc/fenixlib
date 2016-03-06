@@ -20,47 +20,58 @@ using System.Collections;
 
 namespace FenixLib.Core
 {
-    public class BitmapFont : IEnumerable<IGlyph>
+    public class BitmapFont : IBitmapFont
     {
         private readonly Encoding encoding;
-        private readonly IDictionary<char, IGlyph> glyphs =
-            new SortedDictionary<char, IGlyph> ();
 
-        public FontEncoding CodePage
-        {
-            get
-            {
-                return FontEncoding.FromEncoding ( encoding );
-            }
-        }
+        private UniformFormatGraphicDictionary<char, FontGlyph> glyphs;
 
-        protected BitmapFont ( GraphicFormat graphicFormat, Encoding encoding, 
+        //private readonly IDictionary<char, IGlyph> glyphs =
+        //    new SortedDictionary<char, IGlyph> ();
+
+        public FontEncoding CodePage => FontEncoding.FromEncoding ( encoding );
+
+        public BitmapFont ( FontEncoding encoding, GraphicFormat format,
             Palette palette = null )
         {
-            this.encoding = encoding;
-            GraphicFormat = graphicFormat;
-            Palette = palette;
+            if ( format == GraphicFormat.RgbIndexedPalette )
+            {
+                if ( palette == null )
+                {
+                    throw new ArgumentNullException ( "palette",
+                        "A palette is required for RgbIndexedPalette format." );
+                }
+                Palette = palette;
+            }
+
+
+            this.encoding = Encoding.GetEncoding ( encoding.CodePage );
+            GraphicFormat = format;
         }
+
+        public BitmapFont ( FontEncoding encoding, Palette palette )
+            : this ( encoding, GraphicFormat.RgbIndexedPalette, palette )
+        { }
 
         public IGlyph this[char character]
         {
             get
             {
-                IGlyph glyph;
+                FontGlyph glyph;
                 glyphs.TryGetValue ( character, out glyph );
 
                 return glyph;
             }
             set
             {
-                if ( value.GraphicFormat != GraphicFormat )
-                    throw new ArgumentException ("Glyph and font graphic formats "
-                        + "need to match.");
-
-                if (glyphs.ContainsKey( character ) )
-                    glyphs[character] = value;
+                if ( glyphs.ContainsKey ( character ) )
+                {
+                    glyphs[character] = new FontGlyph ( character, value );
+                }
                 else
-                    glyphs.Add ( character, value );
+                {
+                    glyphs.Add ( character, new FontGlyph ( character, value ) );
+                }
             }
         }
 
@@ -79,7 +90,7 @@ namespace FenixLib.Core
         public GraphicFormat GraphicFormat { get; }
         public Palette Palette { get; }
 
-        public IEnumerable<IGlyph> Glyphs
+        public IEnumerable<FontGlyph> Glyphs
         {
             get
             {
@@ -87,41 +98,14 @@ namespace FenixLib.Core
             }
         }
 
-        public static BitmapFont Create ( GraphicFormat graphicFormat, FontEncoding codePage )
+        public IEnumerator<FontGlyph> GetEnumerator ()
         {
-            if ( graphicFormat == GraphicFormat.RgbIndexedPalette )
-            {
-                throw new InvalidOperationException (); // TODO: Customize
-            }
-
-            BitmapFont font = new BitmapFont ( graphicFormat,
-                Encoding.GetEncoding ( codePage.CodePage ) );
-
-            return font;
-        }
-
-        public static BitmapFont Create ( Palette palette, FontEncoding codePage )
-        {
-            if ( palette == null )
-            {
-                throw new ArgumentException (); // TODO: Customize
-            }
-
-            BitmapFont font = new BitmapFont ( (GraphicFormat) 8,
-                Encoding.GetEncoding ( codePage.CodePage ),
-                palette );
-
-            return font;
-        }
-
-        public IEnumerator<IGlyph> GetEnumerator ()
-        {
-            return Glyphs.GetEnumerator ();
+            return glyphs.Values.GetEnumerator ();
         }
 
         IEnumerator IEnumerable.GetEnumerator ()
         {
-            return Glyphs.GetEnumerator ();
+            return GetEnumerator ();
         }
 
         private char Index2Char ( int index )

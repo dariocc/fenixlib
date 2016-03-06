@@ -24,13 +24,14 @@ namespace FenixLib.Core
         private const int DefaultCapacity = 100;
         private UniformFormatGraphicDictionary<int, SpriteAssetElement> sprites;
 
-        public SpriteAsset ( GraphicFormat format, Palette palette )
+        public SpriteAsset ( GraphicFormat format, Palette palette = null )
         {
             if ( format == GraphicFormat.RgbIndexedPalette )
             {
                 if ( palette == null )
                 {
-                    throw new ArgumentNullException ( "palette", "" );
+                    throw new ArgumentNullException ( "palette", 
+                        "A palette is required for RgbIndexedPalette format." );
                 }
                 Palette = palette;
             }

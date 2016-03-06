@@ -86,6 +86,21 @@ namespace FenixLib.IO
             }
         }
 
+        public static BitmapFont LoadFnt ( string path )
+        {
+            FntAbstractBitmapFontDecoder decoder = new DivFntBitmapFontDecoder ();
+
+            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
+            {
+                return decoder.Decode ( stream );
+            }
+        } 
+
+        public static void SaveFnt ( BitmapFont font, string path )
+        {
+
+        }
+
         /// <summary>
         /// Opens a 8bpp Pal, Map, Fpg or Fnt file, reads all the information into 
         /// a <see cref="Palette"/> object, and then closes the file.

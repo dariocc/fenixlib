@@ -70,8 +70,8 @@ namespace FenixLib.IO
             }
 
             // Create the font
-            BitmapFont font = BitmapFont.Create ( (GraphicFormat) bpp, 
-                ParseCodePageType ( codePageType ) );
+            BitmapFont font = new BitmapFont ( ParseCodePageType ( codePageType ),
+                ( GraphicFormat) bpp );
 
             Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream );
 

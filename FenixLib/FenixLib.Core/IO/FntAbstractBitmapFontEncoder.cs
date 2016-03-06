@@ -70,7 +70,7 @@ namespace FenixLib.IO
             }
 
             // Write pixel data for every glyph
-            foreach ( Glyph g in font )
+            foreach ( IGlyph g in font )
             {
                 writer.Write ( g.PixelData );
             }
