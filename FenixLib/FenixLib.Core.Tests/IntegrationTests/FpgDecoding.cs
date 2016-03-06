@@ -18,6 +18,7 @@ using System.Reflection;
 using System.IO;
 using System.Collections;
 using System.Linq;
+using FenixLib.Core.Tests.IntegrationTests.Comparison;
 using static FenixLib.IO.File;
 
 namespace FenixLib.Core.Tests.IntegrationTests

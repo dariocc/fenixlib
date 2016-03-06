@@ -15,7 +15,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace FenixLib.Core.Tests.IntegrationTests
+namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 {
     internal class PixelsComparer : SpriteComparer
     {

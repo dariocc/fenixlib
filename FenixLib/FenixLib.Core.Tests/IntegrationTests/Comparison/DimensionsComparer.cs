@@ -13,7 +13,7 @@
 *   limitations under the License.
 */
 
-namespace FenixLib.Core.Tests.IntegrationTests
+namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 {
     internal class DimensionsComparer : SpriteComparer
     {

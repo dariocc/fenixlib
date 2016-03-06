@@ -14,7 +14,7 @@
 */
 using System.Collections.Generic;
 
-namespace FenixLib.Core.Tests.IntegrationTests
+namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 {
     internal abstract class SpriteComparer : IEqualityComparer<ISprite>
     {
