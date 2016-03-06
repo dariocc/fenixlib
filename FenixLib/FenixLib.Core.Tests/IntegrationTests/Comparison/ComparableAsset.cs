@@ -65,7 +65,7 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 
         public override int GetHashCode ()
         {
-            return GraphicFormat.GetHashCode () ^ Sprites.Count.GetHashCode ();
+            return 0; // Force equallity via Equals
         }
 
         public override bool Equals ( object obj )

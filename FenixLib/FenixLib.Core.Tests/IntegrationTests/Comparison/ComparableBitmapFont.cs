@@ -38,21 +38,21 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 
         public AbstractGraphicComparer<IGraphic> GlyphsComparer { get; set; }
 
-        public virtual bool Equals ( ISpriteAsset asset )
+        public virtual bool Equals ( IBitmapFont font )
         {
-            if ( ReferenceEquals ( asset, null ) )
+            if ( ReferenceEquals ( font, null ) )
                 return false;
 
-            if ( CompareFormat && GraphicFormat != asset.GraphicFormat )
+            if ( CompareFormat && GraphicFormat != font.GraphicFormat )
                 return false;
 
-            if ( ComparePalette && Palette != asset.Palette )
+            if ( ComparePalette && Palette != font.Palette )
                 return false;
 
             if ( CompareGlyphs && GlyphsComparer != null )
                 foreach ( FontGlyph element in Glyphs )
                 {
-                   if ( !GlyphsComparer.Equals ( element, asset[element.Character] ) )
+                   if ( !GlyphsComparer.Equals ( element, font[element.Character] ) )
                     {
                         return false;
                     }
@@ -63,13 +63,12 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 
         public override int GetHashCode ()
         {
-            return 0;
-           // return GraphicFormat.GetHashCode () ^ Sprites.Count.GetHashCode ();
+            return 0; // Force equallity via Equals
         }
 
         public override bool Equals ( object obj )
         {
-            ISpriteAsset objAsAsset = obj as ISpriteAsset;
+            IBitmapFont objAsAsset = obj as IBitmapFont;
             if ( objAsAsset == null )
             {
                 return false;
@@ -116,6 +115,6 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 
         public IEnumerator<FontGlyph> GetEnumerator () => decorated.GetEnumerator ();
 
-        IEnumerator IEnumerable.GetEnumerator () => decorated.GetEnumerator ();
+        IEnumerator IEnumerable.GetEnumerator () => GetEnumerator ();
     }
 }
