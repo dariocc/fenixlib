@@ -43,7 +43,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
         {
             get
             {
-                yield return new TestCaseData ( "1bpp-compressed.fpg", new BlackFakeAsset10x10x1bpp () );
+                yield return new TestCaseData ( "1bpp-compressed.fpg", new BlackFakeAsset () );
                 yield return new TestCaseData ( "8bpp-uncompressed.fpg", new AnimalsFakeAsset ( 8 ) );
                 yield return new TestCaseData ( "8bpp-compressed.fpg", new AnimalsFakeAsset ( 8 ) );
                 yield return new TestCaseData ( "16bpp-uncompressed.fpg", new AnimalsFakeAsset ( 16 ) );
@@ -53,15 +53,15 @@ namespace FenixLib.Core.Tests.IntegrationTests
             }
         }
 
-        private class BlackFakeAsset10x10x1bpp : ComparableAsset
+        private class BlackFakeAsset : ComparableAsset
         {
-            public override SpriteAssetElementComparer GetComparer ()
+            public override SpriteAssetElementComparer GetElementComparer ()
             {
                 return new PixelsComparer ( new DimensionsComparer (
                     new DescriptionComparer () ) );
             }
 
-            public BlackFakeAsset10x10x1bpp () : base ( CreateStubAsset () )
+            public BlackFakeAsset () : base ( CreateStubAsset () )
             {
                 CompareFormat = true;
             }
@@ -92,7 +92,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
                 CompareFormat = true;
             }
 
-            public override SpriteAssetElementComparer GetComparer ()
+            public override SpriteAssetElementComparer GetElementComparer ()
             {
                 return new DimensionsComparer ( new DescriptionComparer () );
             }

@@ -32,7 +32,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
             this.decorated = decorated;
         }
 
-        public abstract SpriteAssetElementComparer GetComparer ();
+        public abstract SpriteAssetElementComparer GetElementComparer ();
 
         public virtual bool Equals ( ISpriteAsset asset )
         {
@@ -48,7 +48,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
             foreach ( SpriteAssetElement element in Sprites )
             {
 
-                if ( ! GetComparer ().Equals ( element, asset[element.Id] ) )
+                if ( ! GetElementComparer ().Equals ( element, asset[element.Id] ) )
                 {
                     return false;
                 }
