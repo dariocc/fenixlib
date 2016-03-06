@@ -12,26 +12,23 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using System.Linq;
-using System.Security.Cryptography;
 
 namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 {
-    internal class PixelsComparer : SpriteComparer
+    internal class GraphicComparerByDimensions : AbstractGraphicComparer<IGraphic>
     {
-        public PixelsComparer ( SpriteComparer comparer = null ) : base ( comparer ) { }
+        public GraphicComparerByDimensions ( AbstractGraphicComparer<IGraphic> comparer = null )
+            : base ( comparer )
+        { }
 
-        public override int CalculateHashCode ( ISprite x )
+        public override int CalculateHashCode ( IGraphic x )
         {
-            // Simple hashcode based on three elements of the PixelData array
-            return x.PixelData[0].GetHashCode () 
-                ^ x.PixelData[x.PixelData.Length / 2 - 1].GetHashCode ()
-                ^ x.PixelData[x.PixelData.Length - 1].GetHashCode();
+            return x.Width.GetHashCode () ^ x.Height.GetHashCode ();
         }
 
-        public override bool CompareCore ( ISprite x, ISprite y )
+        public override bool CompareCore ( IGraphic x, IGraphic y )
         {
-            return x.PixelData.SequenceEqual ( y.PixelData );
+            return x.Width == y.Width && x.Height == y.Height;
         }
     }
 }

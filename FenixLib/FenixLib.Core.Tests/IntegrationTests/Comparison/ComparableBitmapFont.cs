@@ -12,29 +12,31 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 {
-    internal abstract class ComparableAsset : ISpriteAsset
+    internal class ComparableBitmapFont : IBitmapFont
     {
-        ISpriteAsset decorated;
+        IBitmapFont decorated;
 
-        public ComparableAsset ( ISpriteAsset decorated )
+        public ComparableBitmapFont (IBitmapFont font)
         {
-            this.decorated = decorated;
+            decorated = font;
         }
 
         public bool ComparePalette { get; set; } = false;
 
         public bool CompareFormat { get; set; } = false;
 
-        public bool CompareNumberOfElements { get; set; } = false;
+        public bool CompareGlyphs { get; set; } = false;
 
-        public bool CompareElements { get; set; } = false;
-
-        public IGraphicEqualityComparer<IGraphic> ElementsComparer { get; set; }
+        public AbstractGraphicComparer<IGraphic> GlyphsComparer { get; set; }
 
         public virtual bool Equals ( ISpriteAsset asset )
         {
@@ -47,14 +49,10 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
             if ( ComparePalette && Palette != asset.Palette )
                 return false;
 
-            if ( CompareNumberOfElements && Sprites.Count != asset.Sprites.Count )
-                return false;
-
-            if ( CompareElements && ElementsComparer != null )
-                foreach ( SpriteAssetElement element in Sprites )
+            if ( CompareGlyphs && GlyphsComparer != null )
+                foreach ( FontGlyph element in Glyphs )
                 {
-
-                    if ( !ElementsComparer.Equals ( element, asset[element.Id] ) )
+                   if ( !GlyphsComparer.Equals ( element, asset[element.Character] ) )
                     {
                         return false;
                     }
@@ -65,7 +63,8 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 
         public override int GetHashCode ()
         {
-            return GraphicFormat.GetHashCode () ^ Sprites.Count.GetHashCode ();
+            return 0;
+           // return GraphicFormat.GetHashCode () ^ Sprites.Count.GetHashCode ();
         }
 
         public override bool Equals ( object obj )
@@ -81,30 +80,42 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
             }
         }
 
-        public SpriteAssetElement this[int id] => decorated[id];
+        public IGlyph this[char character]
+        {
+            get
+            {
+                return decorated[character];
+            }
+
+            set
+            {
+                decorated[character] = value;
+            }
+        }
+
+        public IGlyph this[int index]
+        {
+            get
+            {
+                return decorated[index];
+            }
+
+            set
+            {
+                decorated[index] = value;
+            }
+        }
+
+        public FontEncoding CodePage => decorated.CodePage;
+
+        public IEnumerable<FontGlyph> Glyphs => decorated.Glyphs;
 
         public GraphicFormat GraphicFormat => decorated.GraphicFormat;
 
-        public IEnumerable<int> Ids => decorated.Ids;
-
         public Palette Palette => decorated.Palette;
 
-        public ICollection<SpriteAssetElement> Sprites => decorated.Sprites;
+        public IEnumerator<FontGlyph> GetEnumerator () => decorated.GetEnumerator ();
 
-        public void Add ( int id, ISprite sprite )
-        {
-            decorated.Add ( id, sprite );
-        }
-
-        public IEnumerator<SpriteAssetElement> GetEnumerator () => decorated.GetEnumerator ();
-
-        public int GetFreeId () => decorated.GetFreeId ();
-
-        public void Update ( int id, ISprite sprite )
-        {
-            decorated.Update ( id, sprite );
-        }
-
-        IEnumerator IEnumerable.GetEnumerator () => GetEnumerator ();
+        IEnumerator IEnumerable.GetEnumerator () => decorated.GetEnumerator ();
     }
 }

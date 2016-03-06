@@ -41,12 +41,15 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegrationTests\Comparison\ComparableBitmapFont.cs" />
+    <Compile Include="IntegrationTests\Comparison\AbstractGraphicComparer.cs" />
+    <Compile Include="IntegrationTests\Comparison\GlyphComparerByGlyphInfo.cs" />
+    <Compile Include="IntegrationTests\Comparison\IGraphicEquallyComparer.cs" />
     <Compile Include="IntegrationTests\FntDecoding.cs" />
     <Compile Include="IntegrationTests\Comparison\ComparableAsset.cs" />
-    <Compile Include="IntegrationTests\Comparison\DescriptionComparer.cs" />
-    <Compile Include="IntegrationTests\Comparison\DimensionsComparer.cs" />
-    <Compile Include="IntegrationTests\Comparison\SpriteComparer.cs" />
-    <Compile Include="IntegrationTests\Comparison\PixelsComparer.cs" />
+    <Compile Include="IntegrationTests\Comparison\SpriteComparerByDescription.cs" />
+    <Compile Include="IntegrationTests\Comparison\GraphicComparerByDimensions.cs" />
+    <Compile Include="IntegrationTests\Comparison\GraphicComparerByPixels.cs" />
     <Compile Include="UnitTests\GlyphTests.cs" />
     <Compile Include="IntegrationTests\FpgDecoding.cs" />
     <Compile Include="UnitTests\PaletteColorTests.cs" />

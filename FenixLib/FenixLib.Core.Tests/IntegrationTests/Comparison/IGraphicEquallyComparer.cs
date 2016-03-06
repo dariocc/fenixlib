@@ -12,23 +12,11 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+using System.Collections.Generic;
 
 namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 {
-    internal class DescriptionComparer : SpriteComparer
+    internal interface IGraphicEqualityComparer<in E> : IEqualityComparer<E> where E : IGraphic
     {
-        public DescriptionComparer ( SpriteComparer comparer = null )
-            : base ( comparer )
-        { }
-
-        public override int CalculateHashCode ( ISprite x )
-        {
-            return x.Description.GetHashCode ();
-        }
-
-        public override bool CompareCore ( ISprite x, ISprite y )
-        {
-            return x.Description == y.Description;
-        }
     }
 }

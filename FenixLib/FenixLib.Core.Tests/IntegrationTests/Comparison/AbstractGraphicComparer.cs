@@ -12,49 +12,47 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using System.Collections.Generic;
-
 namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 {
-    internal abstract class SpriteComparer : IEqualityComparer<ISprite>
+    internal abstract class AbstractGraphicComparer<E> : IGraphicEqualityComparer<E>
+        where E : IGraphic
     {
-        private SpriteComparer decorated;
+        private IGraphicEqualityComparer<E> decorated;
 
-        public SpriteComparer ( SpriteComparer comparer = null )
+        public AbstractGraphicComparer ( IGraphicEqualityComparer<E> comparer = null )
         {
             decorated = comparer;
         }
 
-        public abstract bool CompareCore ( ISprite x, ISprite y );
+        public abstract int CalculateHashCode ( E x );
+        public abstract bool CompareCore ( E x, E y );
 
-        public abstract int CalculateHashCode ( ISprite x );
-
-        public bool Equals ( ISprite x, ISprite y )
+        public bool Equals ( E x, E y )
         {
             bool result = true;
 
             if ( decorated != null )
             {
-                result = decorated.CompareCore ( x, y ) ;
+                result = decorated.Equals ( x, y );
             }
 
             return result & CompareCore ( x, y );
         }
 
-        public int GetHashCode ( ISprite obj )
+        public int GetHashCode ( E obj )
         {
             int hashCode = CalculateHashCode ( obj );
 
             if ( decorated != null )
             {
-                hashCode = decorated.CalculateHashCode ( obj ) ^ CalculateHashCode ( obj );
+                hashCode = decorated.GetHashCode ( obj ) ^ CalculateHashCode ( obj );
             }
             else
             {
                 hashCode = CalculateHashCode ( obj );
             }
 
-            return hashCode ;
+            return hashCode;
         }
     }
 }

@@ -15,8 +15,9 @@
 using NUnit.Framework;
 using System.Reflection;
 using System.IO;
-
-using FenixLib.Core;
+using System.Collections;
+using FenixLib.Core.Tests.IntegrationTests.Comparison;
+using static FenixLib.IO.File;
 
 namespace FenixLib.Core.Tests.IntegrationTests
 {
@@ -26,9 +27,35 @@ namespace FenixLib.Core.Tests.IntegrationTests
         [TestCase ( "8bpp-div-extendid.fnt" )]
         [TestCase ( "8bpp-div-mayuscul.fnt" )]
         [TestCase ( "8bpp-div-minusc.fnt" )]
-        void FntFileCanBeDecoded ( string fontFile )
+        void FntFileCanBeDecoded ( string fontFile, IBitmapFont referenceFont )
         {
+            var assembly = Assembly.GetExecutingAssembly ();
+            string folder = Path.GetDirectoryName ( assembly.Location );
+            string path = Path.Combine ( folder, "TestFiles", "Fpg", fontFile );
 
+            BitmapFont actualFont = LoadFnt ( path );
+
+            Assert.IsTrue ( referenceFont.Equals ( actualFont ) );
+        }
+
+        public static IEnumerable TestCases
+        {
+            get
+            {
+                yield return new TestCaseData ( "8bpp-div-extendid.fnt", new FakeDivFont () );
+                yield return new TestCaseData ( "8bpp-div-mayuscul.fnt", new FakeDivFont () );
+                yield return new TestCaseData ( "8bpp-div-minusc.fnt", new FakeDivFont () );
+            }
+        }
+
+        private class FakeDivFont : ComparableBitmapFont
+        {
+            public FakeDivFont () : base ( CreateFontStub () ) { }
+
+            private static IBitmapFont CreateFontStub ()
+            {
+                return null;
+            }
         }
     }
 }

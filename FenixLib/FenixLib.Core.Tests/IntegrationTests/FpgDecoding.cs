@@ -59,8 +59,8 @@ namespace FenixLib.Core.Tests.IntegrationTests
             {
                 CompareFormat = true;
                 CompareElements = true;
-                ElementsComparer = new PixelsComparer ( 
-                    new DimensionsComparer ( new DescriptionComparer () ) );
+                ElementsComparer = new SpriteComparerByDescription ( new GraphicComparerByPixels (
+                    new GraphicComparerByDimensions () ) );
             }
 
             private static ISpriteAsset CreateStubAsset ()
@@ -70,7 +70,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
                 sprite.Stub ( x => x.Height ).Return ( 10 );
                 sprite.Description = "";
                 byte[] PixelData = Enumerable.Repeat<byte> ( 255, 2 * 10 ).ToArray ();
-                sprite.Stub ( x => x.PixelData ).Return ( PixelData  );
+                sprite.Stub ( x => x.PixelData ).Return ( PixelData );
 
                 var asset = MockRepository.GenerateStub<ISpriteAsset> ();
                 asset.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Monochrome );
@@ -89,7 +89,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
                 ComparePalette = false;
                 CompareFormat = true;
                 CompareElements = true;
-                ElementsComparer = new DimensionsComparer ( new DescriptionComparer () );
+                ElementsComparer = new SpriteComparerByDescription ( new GraphicComparerByDimensions () );
             }
 
             private static ISpriteAsset CreateStubAsset ( int bpp )
