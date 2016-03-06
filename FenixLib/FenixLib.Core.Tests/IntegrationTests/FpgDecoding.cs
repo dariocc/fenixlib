@@ -28,11 +28,11 @@ namespace FenixLib.Core.Tests.IntegrationTests
     {
 
         [Test, TestCaseSource ( "TestCases" )]
-        public void FpgFileCanBeDecoded ( string resourceName, ISpriteAsset referenceAsset )
+        public void FpgFileCanBeDecoded ( string fpgFile, ISpriteAsset referenceAsset )
         {
             var assembly = Assembly.GetExecutingAssembly ();
             string folder = Path.GetDirectoryName ( assembly.Location );
-            string path = Path.Combine ( folder, "TestFiles", "Fpg", resourceName );
+            string path = Path.Combine ( folder, "TestFiles", "Fpg", fpgFile );
 
             SpriteAsset actualAsset = LoadFpg ( path );
 
@@ -55,15 +55,12 @@ namespace FenixLib.Core.Tests.IntegrationTests
 
         private class MonochromeSampleAsset : ComparableAsset
         {
-            public override SpriteComparer GetElementComparer ()
-            {
-                return new PixelsComparer ( new DimensionsComparer (
-                    new DescriptionComparer () ) );
-            }
-
             public MonochromeSampleAsset () : base ( CreateStubAsset () )
             {
                 CompareFormat = true;
+                CompareElements = true;
+                ElementsComparer = new PixelsComparer ( 
+                    new DimensionsComparer ( new DescriptionComparer () ) );
             }
 
             private static ISpriteAsset CreateStubAsset ()
@@ -91,11 +88,8 @@ namespace FenixLib.Core.Tests.IntegrationTests
             {
                 ComparePalette = false;
                 CompareFormat = true;
-            }
-
-            public override SpriteComparer GetElementComparer ()
-            {
-                return new DimensionsComparer ( new DescriptionComparer () );
+                CompareElements = true;
+                ElementsComparer = new DimensionsComparer ( new DescriptionComparer () );
             }
 
             private static ISpriteAsset CreateStubAsset ( int bpp )

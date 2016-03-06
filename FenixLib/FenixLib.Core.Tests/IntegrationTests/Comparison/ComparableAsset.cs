@@ -21,16 +21,20 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
     {
         ISpriteAsset decorated;
 
-        public bool ComparePalette { get; set; } = false;
-
-        public bool CompareFormat { get; set; } = false;
-
         public ComparableAsset ( ISpriteAsset decorated )
         {
             this.decorated = decorated;
         }
 
-        public abstract SpriteComparer GetElementComparer ();
+        public bool ComparePalette { get; set; } = false;
+
+        public bool CompareFormat { get; set; } = false;
+
+        public bool CompareNumberOfElements { get; set; } = false;
+
+        public bool CompareElements { get; set; } = false;
+
+        public SpriteComparer ElementsComparer { get; set; }
 
         public virtual bool Equals ( ISpriteAsset asset )
         {
@@ -43,14 +47,18 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
             if ( ComparePalette && Palette != asset.Palette )
                 return false;
 
-            foreach ( SpriteAssetElement element in Sprites )
-            {
+            if ( CompareNumberOfElements && Sprites.Count != asset.Sprites.Count )
+                return false;
 
-                if ( ! GetElementComparer ().Equals ( element, asset[element.Id] ) )
+            if ( CompareElements && ElementsComparer != null )
+                foreach ( SpriteAssetElement element in Sprites )
                 {
-                    return false;
+
+                    if ( !ElementsComparer.Equals ( element, asset[element.Id] ) )
+                    {
+                        return false;
+                    }
                 }
-            }
 
             return true;
         }
