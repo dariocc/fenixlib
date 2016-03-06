@@ -49,15 +49,11 @@ namespace FenixLib.Core
 
         public GraphicFormat GraphicFormat => sprites.GraphicFormat; 
 
-        public ISprite this[int id]
+        public SpriteAssetElement this[int id]
         {
             get
             {
                 return sprites[id];
-            }
-            set
-            {
-                sprites[id] = PrepareSprite ( id, value );
             }
         }
 
@@ -68,7 +64,7 @@ namespace FenixLib.Core
 
         public void Update ( int id, ISprite sprite )
         {
-            this[id] = sprite;
+            sprites[id] = PrepareSprite ( id, sprite );
         }
 
         public int GetFreeId ()

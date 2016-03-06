@@ -42,6 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests\FntDecoding.cs" />
+    <Compile Include="IntegrationTests\Util\ComparableAsset.cs" />
+    <Compile Include="IntegrationTests\Util\DescriptionComparer.cs" />
+    <Compile Include="IntegrationTests\Util\DimensionsComparer.cs" />
+    <Compile Include="IntegrationTests\Util\SpriteAssetElementComparer.cs" />
+    <Compile Include="IntegrationTests\Util\PixelsComparer.cs" />
     <Compile Include="UnitTests\GlyphTests.cs" />
     <Compile Include="IntegrationTests\FpgDecoding.cs" />
     <Compile Include="UnitTests\PaletteColorTests.cs" />
@@ -122,6 +127,7 @@
       <Name>FenixLib.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

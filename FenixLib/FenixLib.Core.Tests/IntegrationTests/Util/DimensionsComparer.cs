@@ -12,21 +12,23 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using System.Collections.Generic;
 
-namespace FenixLib.Core
+namespace FenixLib.Core.Tests.IntegrationTests
 {
-    public interface ISpriteAsset : IEnumerable<SpriteAssetElement>
+    internal class DimensionsComparer : SpriteAssetElementComparer
     {
-        SpriteAssetElement this[int id] { get; }
-        ICollection<SpriteAssetElement> Sprites { get; }
-        Palette Palette { get; }
-        GraphicFormat GraphicFormat { get; }
+        public DimensionsComparer ( SpriteAssetElementComparer comparer = null )
+            : base ( comparer )
+        { }
 
-        void Add ( int id, ISprite sprite );
-        void Update ( int id, ISprite sprite );
-        IEnumerable<int> Ids { get; }
+        public override int CalculateHashCode ( SpriteAssetElement x )
+        {
+            return x.Width.GetHashCode () ^ x.Height.GetHashCode ();
+        }
 
-        int GetFreeId ();
+        public override bool CompareCore ( SpriteAssetElement x, SpriteAssetElement y )
+        {
+            return x.Width == y.Width && x.Height == y.Height;
+        }
     }
 }
