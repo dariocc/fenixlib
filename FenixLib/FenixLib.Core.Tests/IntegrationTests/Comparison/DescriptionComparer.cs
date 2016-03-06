@@ -12,25 +12,23 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using System.Linq;
-using System.Security.Cryptography;
 
 namespace FenixLib.Core.Tests.IntegrationTests
 {
-    internal class PixelsComparer : SpriteAssetElementComparer
+    internal class DescriptionComparer : SpriteComparer
     {
-        public PixelsComparer ( SpriteAssetElementComparer comparer = null ) : base ( comparer ) { }
+        public DescriptionComparer ( SpriteComparer comparer = null )
+            : base ( comparer )
+        { }
 
-        public override int CalculateHashCode ( SpriteAssetElement x )
+        public override int CalculateHashCode ( ISprite x )
         {
-            return x.PixelData[0].GetHashCode () 
-                ^ x.PixelData[x.PixelData.Length / 2 - 1].GetHashCode ()
-                ^ x.PixelData[x.PixelData.Length - 1].GetHashCode();
+            return x.Description.GetHashCode ();
         }
 
-        public override bool CompareCore ( SpriteAssetElement x, SpriteAssetElement y )
+        public override bool CompareCore ( ISprite x, ISprite y )
         {
-            return x.PixelData.SequenceEqual ( y.PixelData );
+            return x.Description == y.Description;
         }
     }
 }

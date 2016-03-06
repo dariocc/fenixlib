@@ -42,11 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests\FntDecoding.cs" />
-    <Compile Include="IntegrationTests\Util\ComparableAsset.cs" />
-    <Compile Include="IntegrationTests\Util\DescriptionComparer.cs" />
-    <Compile Include="IntegrationTests\Util\DimensionsComparer.cs" />
-    <Compile Include="IntegrationTests\Util\SpriteAssetElementComparer.cs" />
-    <Compile Include="IntegrationTests\Util\PixelsComparer.cs" />
+    <Compile Include="IntegrationTests\Comparison\ComparableAsset.cs" />
+    <Compile Include="IntegrationTests\Comparison\DescriptionComparer.cs" />
+    <Compile Include="IntegrationTests\Comparison\DimensionsComparer.cs" />
+    <Compile Include="IntegrationTests\Comparison\SpriteComparer.cs" />
+    <Compile Include="IntegrationTests\Comparison\PixelsComparer.cs" />
     <Compile Include="UnitTests\GlyphTests.cs" />
     <Compile Include="IntegrationTests\FpgDecoding.cs" />
     <Compile Include="UnitTests\PaletteColorTests.cs" />

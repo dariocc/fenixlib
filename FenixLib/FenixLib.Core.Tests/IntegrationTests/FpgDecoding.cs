@@ -54,7 +54,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
 
         private class MonochromeSampleAsset : ComparableAsset
         {
-            public override SpriteAssetElementComparer GetElementComparer ()
+            public override SpriteComparer GetElementComparer ()
             {
                 return new PixelsComparer ( new DimensionsComparer (
                     new DescriptionComparer () ) );
@@ -92,7 +92,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
                 CompareFormat = true;
             }
 
-            public override SpriteAssetElementComparer GetElementComparer ()
+            public override SpriteComparer GetElementComparer ()
             {
                 return new DimensionsComparer ( new DescriptionComparer () );
             }

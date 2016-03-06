@@ -12,10 +12,8 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FenixLib.Core.Tests.IntegrationTests
 {
@@ -32,7 +30,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
             this.decorated = decorated;
         }
 
-        public abstract SpriteAssetElementComparer GetElementComparer ();
+        public abstract SpriteComparer GetElementComparer ();
 
         public virtual bool Equals ( ISpriteAsset asset )
         {

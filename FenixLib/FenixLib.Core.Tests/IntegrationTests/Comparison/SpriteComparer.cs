@@ -16,20 +16,20 @@ using System.Collections.Generic;
 
 namespace FenixLib.Core.Tests.IntegrationTests
 {
-    internal abstract class SpriteAssetElementComparer : IEqualityComparer<SpriteAssetElement>
+    internal abstract class SpriteComparer : IEqualityComparer<ISprite>
     {
-        private SpriteAssetElementComparer decorated;
+        private SpriteComparer decorated;
 
-        public SpriteAssetElementComparer ( SpriteAssetElementComparer comparer = null )
+        public SpriteComparer ( SpriteComparer comparer = null )
         {
             decorated = comparer;
         }
 
-        public abstract bool CompareCore ( SpriteAssetElement x, SpriteAssetElement y );
+        public abstract bool CompareCore ( ISprite x, ISprite y );
 
-        public abstract int CalculateHashCode ( SpriteAssetElement x );
+        public abstract int CalculateHashCode ( ISprite x );
 
-        public bool Equals ( SpriteAssetElement x, SpriteAssetElement y )
+        public bool Equals ( ISprite x, ISprite y )
         {
             bool result = true;
 
@@ -41,7 +41,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
             return result & CompareCore ( x, y );
         }
 
-        public int GetHashCode ( SpriteAssetElement obj )
+        public int GetHashCode ( ISprite obj )
         {
             int hashCode = CalculateHashCode ( obj );
 

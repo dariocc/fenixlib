@@ -15,18 +15,18 @@
 
 namespace FenixLib.Core.Tests.IntegrationTests
 {
-    internal class DimensionsComparer : SpriteAssetElementComparer
+    internal class DimensionsComparer : SpriteComparer
     {
-        public DimensionsComparer ( SpriteAssetElementComparer comparer = null )
+        public DimensionsComparer ( SpriteComparer comparer = null )
             : base ( comparer )
         { }
 
-        public override int CalculateHashCode ( SpriteAssetElement x )
+        public override int CalculateHashCode ( ISprite x )
         {
             return x.Width.GetHashCode () ^ x.Height.GetHashCode ();
         }
 
-        public override bool CompareCore ( SpriteAssetElement x, SpriteAssetElement y )
+        public override bool CompareCore ( ISprite x, ISprite y )
         {
             return x.Width == y.Width && x.Height == y.Height;
         }
