@@ -17,9 +17,8 @@ using Rhino.Mocks;
 using System.Reflection;
 using System.IO;
 using System.Collections;
+using System.Linq;
 using static FenixLib.IO.File;
-using System;
-using System.Collections.Generic;
 
 namespace FenixLib.Core.Tests.IntegrationTests
 {
@@ -43,7 +42,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
         {
             get
             {
-                yield return new TestCaseData ( "1bpp-compressed.fpg", new BlackFakeAsset () );
+                yield return new TestCaseData ( "1bpp-compressed.fpg", new MonochromeSampleAsset () );
                 yield return new TestCaseData ( "8bpp-uncompressed.fpg", new AnimalsFakeAsset ( 8 ) );
                 yield return new TestCaseData ( "8bpp-compressed.fpg", new AnimalsFakeAsset ( 8 ) );
                 yield return new TestCaseData ( "16bpp-uncompressed.fpg", new AnimalsFakeAsset ( 16 ) );
@@ -53,7 +52,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
             }
         }
 
-        private class BlackFakeAsset : ComparableAsset
+        private class MonochromeSampleAsset : ComparableAsset
         {
             public override SpriteAssetElementComparer GetElementComparer ()
             {
@@ -61,7 +60,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
                     new DescriptionComparer () ) );
             }
 
-            public BlackFakeAsset () : base ( CreateStubAsset () )
+            public MonochromeSampleAsset () : base ( CreateStubAsset () )
             {
                 CompareFormat = true;
             }
@@ -72,7 +71,8 @@ namespace FenixLib.Core.Tests.IntegrationTests
                 sprite.Stub ( x => x.Width ).Return ( 10 );
                 sprite.Stub ( x => x.Height ).Return ( 10 );
                 sprite.Description = "";
-                sprite.Stub ( x => x.PixelData ).Return ( new byte[2 * 10] );
+                byte[] PixelData = Enumerable.Repeat<byte> ( 255, 2 * 10 ).ToArray ();
+                sprite.Stub ( x => x.PixelData ).Return ( PixelData  );
 
                 var asset = MockRepository.GenerateStub<ISpriteAsset> ();
                 asset.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Monochrome );
@@ -128,6 +128,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
                 return asset;
             }
         }
+
     }
 }
 

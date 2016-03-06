@@ -13,6 +13,7 @@
 *   limitations under the License.
 */
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace FenixLib.Core.Tests.IntegrationTests
 {
@@ -22,7 +23,9 @@ namespace FenixLib.Core.Tests.IntegrationTests
 
         public override int CalculateHashCode ( SpriteAssetElement x )
         {
-            return x.PixelData.GetHashCode ();
+            return x.PixelData[0].GetHashCode () 
+                ^ x.PixelData[x.PixelData.Length / 2 - 1].GetHashCode ()
+                ^ x.PixelData[x.PixelData.Length - 1].GetHashCode();
         }
 
         public override bool CompareCore ( SpriteAssetElement x, SpriteAssetElement y )
