@@ -24,17 +24,15 @@ namespace FenixLib.Core.Tests.UnitTests
         private BitmapFont stubFont32;
         private BitmapFont stubFont16;
 
-        private Glyph stubGlyph32;
-        private Glyph stubGlyph16;
+        private IGlyph stubGlyph32;
+        private IGlyph stubGlyph16;
 
         [SetUp]
         public void SetUp ()
         {
-            stubFont32 = BitmapFont.Create ( GraphicFormat.ArgbInt32,
-                FontEncoding.ISO85591 );
+            stubFont32 = new BitmapFont ( FontEncoding.ISO85591, GraphicFormat.ArgbInt32 );
 
-            stubFont16 = BitmapFont.Create ( GraphicFormat.RgbInt16,
-                FontEncoding.ISO85591 );
+            stubFont16 = new BitmapFont ( FontEncoding.ISO85591, GraphicFormat.RgbInt16  );
 
             stubGlyph32 = new Glyph ( CreateFakeGraphic ( 32 ) );
             stubGlyph16 = new Glyph ( CreateFakeGraphic ( 16 ) );
