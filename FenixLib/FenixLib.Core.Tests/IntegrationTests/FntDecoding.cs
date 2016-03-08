@@ -14,6 +14,7 @@
 */
 using NUnit.Framework;
 using Rhino.Mocks;
+using System.Text;
 using System.Reflection;
 using System.IO;
 using System.Collections;
@@ -25,14 +26,13 @@ namespace FenixLib.Core.Tests.IntegrationTests
     [TestFixture, Category ( "Integration" )]
     public class FntDecoding
     {
-        [TestCase ( "8bpp-div-extendid.fnt" )]
-        [TestCase ( "8bpp-div-mayuscul.fnt" )]
-        [TestCase ( "8bpp-div-minusc.fnt" )]
-        void FntFileCanBeDecoded ( string fontFile, IBitmapFont referenceFont )
+
+        [TestCaseSource("TestCases")]
+        public void FntFileCanBeDecoded ( string fontFile, IBitmapFont referenceFont )
         {
             var assembly = Assembly.GetExecutingAssembly ();
             string folder = Path.GetDirectoryName ( assembly.Location );
-            string path = Path.Combine ( folder, "TestFiles", "Fpg", fontFile );
+            string path = Path.Combine ( folder, "TestFiles", "Fnt", fontFile );
 
             BitmapFont actualFont = LoadFnt ( path );
 
@@ -49,18 +49,6 @@ namespace FenixLib.Core.Tests.IntegrationTests
 
         private class FakeDivFont : ComparableBitmapFont
         {
-            private struct Dimension
-            {
-                int Width { get; }
-                int Height { get; }
-
-                public Dimension ( int width, int height)
-                {
-                    Width = width;
-                    Height = height;
-                }
-            }
-
             public FakeDivFont () : base ( CreateFontStub () )
             {
                 CompareFormat = true;
@@ -106,9 +94,44 @@ namespace FenixLib.Core.Tests.IntegrationTests
                     new Dimension(17, 36),
                 };
 
+                FontGlyph[] glyphs = new FontGlyph[glyphDimensions.Length - 1];
+                for ( int i = 0 ; i < glyphs.Length ; i++ )
+                {
+                    Encoding encoding = Encoding.GetEncoding ( FontEncoding.CP850.CodePage );
+                    char character = encoding.GetChars ( new byte[] { ( byte ) i } )[0];
+                    glyphs[i] = new FontGlyph(character, CreateStubGlyph ( glyphDimensions[i].Width,
+                        glyphDimensions[i].Height ));
+                }
+
                 IBitmapFont stub = MockRepository.GenerateStub<IBitmapFont> ();
-                stub.Stub(x => x.GetEnumerator() ). Return
+                stub.Stub ( x => x.Glyphs ).Return ( glyphs );
+                stub.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.RgbIndexedPalette );
+
+                return stub;
             }
+
+            private static IGlyph CreateStubGlyph ( int width, int height )
+            {
+                IGlyph glyph = MockRepository.GenerateStub<IGlyph> ();
+                glyph.Stub ( x => x.Width ).Return ( width );
+                glyph.Stub ( x => x.Height ).Return ( height );
+                glyph.Stub ( x => x.Palette ).Return ( null );
+
+                return glyph;
+            }
+
+            private struct Dimension
+            {
+                public int Width { get; }
+                public int Height { get; }
+
+                public Dimension ( int width, int height )
+                {
+                    Width = width;
+                    Height = height;
+                }
+            }
+
         }
     }
 }
