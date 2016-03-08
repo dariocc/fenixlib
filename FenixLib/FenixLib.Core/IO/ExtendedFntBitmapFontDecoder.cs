@@ -24,24 +24,36 @@ namespace FenixLib.IO
         /// </summary>
         public override int MaxSupportedVersion { get; } = 0x00;
 
-        protected override int[] KnownCodePageTypes { get; } = { 0, 1 };
-
         protected override int[] ValidBitPerPixelDepths { get; } = { 1, 8, 16, 32 };
 
         protected override string[] KnownFileMagics { get; } = { "fnx" };
 
-        protected override FontEncoding ParseCodePageType ( int codePageType )
+        private FontEncoding encoding;
+
+        protected override FontEncoding Encoding
         {
-            FontEncoding codePage;
+            get
+            {
+                return encoding;
+            }
+        }
 
-            if ( codePageType == 0 )
-                codePage = FontEncoding.CP850;
-            else if ( codePageType == 1 )
-                codePage = FontEncoding.ISO85591;
+        protected override void ProcessFontInfoField ( int fontInfoField )
+        {
+            // The font info field is used to determine the font encoding
+
+            if ( fontInfoField == 0 )
+            {
+                encoding = FontEncoding.CP850;
+            }
+            else if ( fontInfoField == 1 )
+            {
+                encoding = FontEncoding.ISO85591;
+            }
             else
+            {
                 throw new ArgumentException (); // TODO: Customize message
-
-            return codePage;
+            }
         }
 
         protected override int ParseBitsPerPixel ( NativeFormat.Header header )
@@ -49,9 +61,9 @@ namespace FenixLib.IO
             return header.LastByte;
         }
 
-        protected override NativeFormat.GlyphInfo ReadGlyphInfo (NativeFormatReader reader)
+        protected override NativeFormat.GlyphInfo ReadGlyphInfo ( NativeFormatReader reader )
         {
-            return reader.ReadExtendedFntGlyphInfo();
+            return reader.ReadExtendedFntGlyphInfo ();
         }
 
         /// <summary>
@@ -61,7 +73,7 @@ namespace FenixLib.IO
         /// <param name="version"></param>
         /// <param name="header"></param>
         /// <returns>True</returns>
-        protected override bool ValidateHeaderVersion ( int version, 
+        protected override bool ValidateHeaderVersion ( int version,
             NativeFormat.Header header )
         {
             return true;

@@ -21,22 +21,35 @@ namespace FenixLib.IO
 
         public override int MaxSupportedVersion { get; } = 0x00;
 
-        protected override int[] KnownCodePageTypes { get; } = { 0 };
-
         protected override int[] ValidBitPerPixelDepths { get; } = { 8 };
 
         protected override string[] KnownFileMagics { get; } = { "fnt" };
 
-        protected override FontEncoding ParseCodePageType ( int codePageType )
+        protected override FontEncoding Encoding
         {
-            FontEncoding codePage;
+            get
+            {
+                return FontEncoding.CP850;
+            }
+        }
 
-            if ( codePageType == 0 )
-                codePage = FontEncoding.CP850;
-            else
+        protected override void ProcessFontInfoField ( int fontInfoField )
+        {
+            // The field determines the group of characters present in the
+            // font
+            // +1 Numbers
+            // +2 Upper Case
+            // +4 Lower Case
+            // +8 Simbols
+            // +16 Extended
+
+            // This information is however not necessary to read the font.
+
+            // Only above values or BitField combinations are valid
+            if ( fontInfoField <= 0 || fontInfoField > 0xF )
+            {
                 throw new ArgumentException (); // TODO: Customize message
-
-            return codePage;
+            }
         }
 
         protected override int ParseBitsPerPixel ( NativeFormat.Header header )

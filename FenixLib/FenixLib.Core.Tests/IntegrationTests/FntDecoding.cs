@@ -43,6 +43,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
         {
             get
             {
+                // A 
                 yield return new TestCaseData ( "8bpp-div-simbolos.fnt", new FakeDivFont () );
             }
         }
@@ -58,40 +59,18 @@ namespace FenixLib.Core.Tests.IntegrationTests
             private static IBitmapFont CreateFontStub ()
             {
                 Dimension[] glyphDimensions = new Dimension[] {
-                    new Dimension(15, 36),
-                    new Dimension(21, 21),
-                    new Dimension(33, 34),
-                    new Dimension(34, 44),
-                    new Dimension(41, 36),
-                    new Dimension(37, 36),
-                    new Dimension(13, 21),
-                    new Dimension(23, 44),
-                    new Dimension(23, 44),
-                    new Dimension(21, 22),
-                    new Dimension(28, 28),
-                    new Dimension(15, 21),
-                    new Dimension(19, 15),
-                    new Dimension(14, 15),
-                    new Dimension(33, 44),
-                    new Dimension(14, 24),
-                    new Dimension(15, 30),
-                    new Dimension(26, 33),
-                    new Dimension(28, 22),
-                    new Dimension(26, 33),
-                    new Dimension(32, 36),
-                    new Dimension(38, 36),
-                    new Dimension(20, 44),
-                    new Dimension(20, 44),
-                    new Dimension(33, 44),
-                    new Dimension(20, 44),
-                    new Dimension(28, 23),
-                    new Dimension(29, 15),
-                    new Dimension(18, 15),
-                    new Dimension(22, 44),
-                    new Dimension(16, 43),
-                    new Dimension(22, 44),
-                    new Dimension(28, 18),
-                    new Dimension(17, 36),
+                    new Dimension(15, 36), new Dimension(21, 21), new Dimension(33, 34),
+                    new Dimension(34, 44), new Dimension(41, 36), new Dimension(37, 36),
+                    new Dimension(13, 21), new Dimension(23, 44), new Dimension(23, 44),
+                    new Dimension(21, 22), new Dimension(28, 28), new Dimension(15, 21),
+                    new Dimension(19, 15), new Dimension(14, 15), new Dimension(33, 44),
+                    new Dimension(14, 24), new Dimension(15, 30), new Dimension(26, 33),
+                    new Dimension(28, 22), new Dimension(26, 33), new Dimension(32, 36),
+                    new Dimension(38, 36), new Dimension(20, 44), new Dimension(20, 44),
+                    new Dimension(33, 44), new Dimension(20, 44), new Dimension(28, 23),
+                    new Dimension(29, 15), new Dimension(18, 15), new Dimension(22, 44),
+                    new Dimension(16, 43), new Dimension(22, 44), new Dimension(28, 18),
+                    new Dimension(17, 36)
                 };
 
                 FontGlyph[] glyphs = new FontGlyph[glyphDimensions.Length - 1];

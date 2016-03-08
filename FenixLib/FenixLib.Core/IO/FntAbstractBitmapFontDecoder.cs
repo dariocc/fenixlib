@@ -32,11 +32,13 @@ namespace FenixLib.IO
 
         protected abstract int[] ValidBitPerPixelDepths { get; }
 
-        protected abstract int[] KnownCodePageTypes { get; }
+        //protected abstract int[] KnownFontFlags { get; }
 
         protected abstract int ParseBitsPerPixel ( Header header );
 
-        protected abstract FontEncoding ParseCodePageType ( int codePageType );
+        protected abstract void ProcessFontInfoField ( int codePageType );
+
+        protected abstract FontEncoding Encoding { get; }
 
         protected abstract GlyphInfo ReadGlyphInfo ( NativeFormatReader reader );
 
@@ -56,12 +58,16 @@ namespace FenixLib.IO
                 reader.ReadUnusedPaletteGamma ();
             }
 
-            int codePageType = reader.ReadInt32 ();
+            int fontInfoField = reader.ReadInt32 ();
 
-            if ( !KnownCodePageTypes.Contains ( codePageType ) )
+            ProcessFontInfoField ( fontInfoField );
+
+            /*
+            if ( !KnownFontFlags.Contains ( fontInfoField ) )
             {
                 throw new UnsuportedFileFormatException (); // TODO Customize
             }
+            */
 
             GlyphInfo[] characters = new GlyphInfo[256];
             for ( var n = 0 ; n <= 255 ; n++ )
@@ -70,8 +76,7 @@ namespace FenixLib.IO
             }
 
             // Create the font
-            BitmapFont font = new BitmapFont ( ParseCodePageType ( codePageType ),
-                ( GraphicFormat) bpp );
+            BitmapFont font = new BitmapFont ( Encoding, ( GraphicFormat) bpp );
 
             Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream );
 
