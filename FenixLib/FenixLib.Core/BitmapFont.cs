@@ -22,8 +22,8 @@ namespace FenixLib.Core
 {
     public class BitmapFont : IBitmapFont
     {
+        private const int DefaultCapacity = 256;
         private readonly Encoding encoding;
-
         private UniformFormatGraphicDictionary<char, FontGlyph> glyphs;
 
         //private readonly IDictionary<char, IGlyph> glyphs =
@@ -44,9 +44,9 @@ namespace FenixLib.Core
                 Palette = palette;
             }
 
-
             this.encoding = Encoding.GetEncoding ( encoding.CodePage );
-            GraphicFormat = format;
+            glyphs = new UniformFormatGraphicDictionary<char, FontGlyph> (
+                format, DefaultCapacity );
         }
 
         public BitmapFont ( FontEncoding encoding, Palette palette )
@@ -87,7 +87,7 @@ namespace FenixLib.Core
             }
         }
 
-        public GraphicFormat GraphicFormat { get; }
+        public GraphicFormat GraphicFormat => glyphs.GraphicFormat;
         public Palette Palette { get; }
 
         public IEnumerable<FontGlyph> Glyphs
