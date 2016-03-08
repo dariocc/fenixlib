@@ -37,6 +37,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
             BitmapFont actualFont = LoadFnt ( path );
 
             Assert.IsTrue ( referenceFont.Equals ( actualFont ) );
+            // TODO: Assert.AreEqual ( referenceFont, actualFont ) ; will not work ecause of equality compare
         }
 
         public static IEnumerable TestCases
@@ -54,7 +55,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
                 CompareFormat = true;
                 CompareGlyphs = true;
 
-                GlyphsComparer = new GlyphComparerByGlyphInfo ();
+                GlyphsComparer = new GraphicComparerByDimensions ();
             }
 
             private static IBitmapFont CreateFontStub ()
@@ -67,11 +68,10 @@ namespace FenixLib.Core.Tests.IntegrationTests
                     new FakeGlyphInfo(19, 15), new FakeGlyphInfo(14, 15), new FakeGlyphInfo(33, 44),
                     new FakeGlyphInfo(14, 24), new FakeGlyphInfo(15, 30), new FakeGlyphInfo(26, 33),
                     new FakeGlyphInfo(28, 22), new FakeGlyphInfo(26, 33), new FakeGlyphInfo(32, 36),
-                    new FakeGlyphInfo(38, 36), new FakeGlyphInfo(20, 44), new FakeGlyphInfo(20, 44),
-                    new FakeGlyphInfo(33, 44), new FakeGlyphInfo(20, 44), new FakeGlyphInfo(28, 23),
-                    new FakeGlyphInfo(29, 15), new FakeGlyphInfo(18, 15), new FakeGlyphInfo(22, 44),
-                    new FakeGlyphInfo(16, 43), new FakeGlyphInfo(22, 44), new FakeGlyphInfo(28, 18),
-                    new FakeGlyphInfo(17, 36)
+                    new FakeGlyphInfo(38, 36), new FakeGlyphInfo(20, 44), new FakeGlyphInfo(33, 44),
+                    new FakeGlyphInfo(20, 44), new FakeGlyphInfo(28, 23), new FakeGlyphInfo(29, 15),
+                    new FakeGlyphInfo(18, 15), new FakeGlyphInfo(22, 44), new FakeGlyphInfo(16, 43),
+                    new FakeGlyphInfo(22, 44), new FakeGlyphInfo(28, 18), new FakeGlyphInfo(17, 36)
                 };
 
                 FontGlyph[] glyphs = new FontGlyph[glyphsInfo.Length - 1];
@@ -111,7 +111,6 @@ namespace FenixLib.Core.Tests.IntegrationTests
                     Height = height;
                 }
             }
-
         }
     }
 }
