@@ -26,9 +26,6 @@ namespace FenixLib.Core
         private readonly Encoding encoding;
         private UniformFormatGraphicDictionary<char, FontGlyph> glyphs;
 
-        //private readonly IDictionary<char, IGlyph> glyphs =
-        //    new SortedDictionary<char, IGlyph> ();
-
         public FontEncoding CodePage => FontEncoding.FromEncoding ( encoding );
 
         public BitmapFont ( FontEncoding encoding, GraphicFormat format,
