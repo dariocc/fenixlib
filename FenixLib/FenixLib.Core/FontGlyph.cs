@@ -82,7 +82,7 @@ namespace FenixLib.Core
 
         public int Height => decorated.Height;
 
-        public Palette Palette => decorated.Palette;
+        public Palette Palette => decorated.Palette; // TODO: Shall return the parent palette
 
         public int Width => decorated.Width;
 

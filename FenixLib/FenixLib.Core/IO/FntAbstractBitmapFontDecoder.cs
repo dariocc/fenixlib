@@ -62,13 +62,6 @@ namespace FenixLib.IO
 
             ProcessFontInfoField ( fontInfoField );
 
-            /*
-            if ( !KnownFontFlags.Contains ( fontInfoField ) )
-            {
-                throw new UnsuportedFileFormatException (); // TODO Customize
-            }
-            */
-
             GlyphInfo[] characters = new GlyphInfo[256];
             for ( var n = 0 ; n <= 255 ; n++ )
             {
@@ -76,7 +69,7 @@ namespace FenixLib.IO
             }
 
             // Create the font
-            BitmapFont font = new BitmapFont ( Encoding, ( GraphicFormat) bpp );
+            BitmapFont font = new BitmapFont ( Encoding, ( GraphicFormat) bpp, palette );
 
             Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream );
 
@@ -86,11 +79,11 @@ namespace FenixLib.IO
                 byte characterIndex = 0;
                 foreach ( var character in characters )
                 {
-                    bool characterValid = character.Height <= 0
+                    bool characterInvalid = character.Height <= 0
                         || character.Width <= 0
                         || character.FileOffset <= 0;
 
-                    if ( !characterValid )
+                    if ( characterInvalid )
                         continue;
 
                     pixelsStream.Seek ( character.FileOffset, SeekOrigin.Begin );
@@ -99,7 +92,7 @@ namespace FenixLib.IO
                         character.Height );
 
                     IGraphic graphic = new StaticGraphic ( ( GraphicFormat ) bpp, character.Width,
-                        character.Height, pixels );
+                        character.Height, pixels, palette );
                     IGlyph glyph = new Glyph ( graphic );
                     glyph.XAdvance = character.XAdvance;
                     glyph.YAdavance = character.YAdvance;
