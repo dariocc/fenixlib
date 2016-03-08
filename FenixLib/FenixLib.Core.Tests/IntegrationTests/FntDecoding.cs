@@ -43,43 +43,44 @@ namespace FenixLib.Core.Tests.IntegrationTests
         {
             get
             {
-                // A 
-                yield return new TestCaseData ( "8bpp-div-simbolos.fnt", new FakeDivFont () );
+                yield return new TestCaseData ( "8bpp-div-simbolos.fnt", new Fake8bppDivSimbolosFnt () );
             }
         }
 
-        private class FakeDivFont : ComparableBitmapFont
+        private class Fake8bppDivSimbolosFnt : ComparableBitmapFont
         {
-            public FakeDivFont () : base ( CreateFontStub () )
+            public Fake8bppDivSimbolosFnt () : base ( CreateFontStub () )
             {
                 CompareFormat = true;
                 CompareGlyphs = true;
+
+                GlyphsComparer = new GlyphComparerByGlyphInfo ();
             }
 
             private static IBitmapFont CreateFontStub ()
             {
-                Dimension[] glyphDimensions = new Dimension[] {
-                    new Dimension(15, 36), new Dimension(21, 21), new Dimension(33, 34),
-                    new Dimension(34, 44), new Dimension(41, 36), new Dimension(37, 36),
-                    new Dimension(13, 21), new Dimension(23, 44), new Dimension(23, 44),
-                    new Dimension(21, 22), new Dimension(28, 28), new Dimension(15, 21),
-                    new Dimension(19, 15), new Dimension(14, 15), new Dimension(33, 44),
-                    new Dimension(14, 24), new Dimension(15, 30), new Dimension(26, 33),
-                    new Dimension(28, 22), new Dimension(26, 33), new Dimension(32, 36),
-                    new Dimension(38, 36), new Dimension(20, 44), new Dimension(20, 44),
-                    new Dimension(33, 44), new Dimension(20, 44), new Dimension(28, 23),
-                    new Dimension(29, 15), new Dimension(18, 15), new Dimension(22, 44),
-                    new Dimension(16, 43), new Dimension(22, 44), new Dimension(28, 18),
-                    new Dimension(17, 36)
+                FakeGlyphInfo[] glyphsInfo = new FakeGlyphInfo[] {
+                    new FakeGlyphInfo(15, 36), new FakeGlyphInfo(21, 21), new FakeGlyphInfo(33, 34),
+                    new FakeGlyphInfo(34, 44), new FakeGlyphInfo(41, 36), new FakeGlyphInfo(37, 36),
+                    new FakeGlyphInfo(13, 21), new FakeGlyphInfo(23, 44), new FakeGlyphInfo(23, 44),
+                    new FakeGlyphInfo(21, 22), new FakeGlyphInfo(28, 28), new FakeGlyphInfo(15, 21),
+                    new FakeGlyphInfo(19, 15), new FakeGlyphInfo(14, 15), new FakeGlyphInfo(33, 44),
+                    new FakeGlyphInfo(14, 24), new FakeGlyphInfo(15, 30), new FakeGlyphInfo(26, 33),
+                    new FakeGlyphInfo(28, 22), new FakeGlyphInfo(26, 33), new FakeGlyphInfo(32, 36),
+                    new FakeGlyphInfo(38, 36), new FakeGlyphInfo(20, 44), new FakeGlyphInfo(20, 44),
+                    new FakeGlyphInfo(33, 44), new FakeGlyphInfo(20, 44), new FakeGlyphInfo(28, 23),
+                    new FakeGlyphInfo(29, 15), new FakeGlyphInfo(18, 15), new FakeGlyphInfo(22, 44),
+                    new FakeGlyphInfo(16, 43), new FakeGlyphInfo(22, 44), new FakeGlyphInfo(28, 18),
+                    new FakeGlyphInfo(17, 36)
                 };
 
-                FontGlyph[] glyphs = new FontGlyph[glyphDimensions.Length - 1];
+                FontGlyph[] glyphs = new FontGlyph[glyphsInfo.Length - 1];
                 for ( int i = 0 ; i < glyphs.Length ; i++ )
                 {
                     Encoding encoding = Encoding.GetEncoding ( FontEncoding.CP850.CodePage );
                     char character = encoding.GetChars ( new byte[] { ( byte ) i } )[0];
-                    glyphs[i] = new FontGlyph(character, CreateStubGlyph ( glyphDimensions[i].Width,
-                        glyphDimensions[i].Height ));
+                    glyphs[i] = new FontGlyph(character, CreateStubGlyph ( glyphsInfo[i].Width,
+                        glyphsInfo[i].Height ));
                 }
 
                 IBitmapFont stub = MockRepository.GenerateStub<IBitmapFont> ();
@@ -99,12 +100,12 @@ namespace FenixLib.Core.Tests.IntegrationTests
                 return glyph;
             }
 
-            private struct Dimension
+            private struct FakeGlyphInfo
             {
                 public int Width { get; }
                 public int Height { get; }
 
-                public Dimension ( int width, int height )
+                public FakeGlyphInfo ( int width, int height )
                 {
                     Width = width;
                     Height = height;

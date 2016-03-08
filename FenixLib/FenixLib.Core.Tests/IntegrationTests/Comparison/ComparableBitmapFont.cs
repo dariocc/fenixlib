@@ -36,7 +36,7 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 
         public bool CompareGlyphs { get; set; } = false;
 
-        public AbstractGraphicComparer<IGraphic> GlyphsComparer { get; set; }
+        public IGraphicEqualityComparer<IGraphic> GlyphsComparer { get; set; }
 
         public virtual bool Equals ( IBitmapFont font )
         {
@@ -49,7 +49,7 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
             if ( ComparePalette && Palette != font.Palette )
                 return false;
 
-            if ( CompareGlyphs && GlyphsComparer != null )
+            if ( CompareGlyphs )
                 foreach ( FontGlyph element in Glyphs )
                 {
                    if ( !GlyphsComparer.Equals ( element, font[element.Character] ) )

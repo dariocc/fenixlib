@@ -50,7 +50,7 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
             if ( CompareNumberOfElements && Sprites.Count != asset.Sprites.Count )
                 return false;
 
-            if ( CompareElements && ElementsComparer != null )
+            if ( CompareElements )
                 foreach ( SpriteAssetElement element in Sprites )
                 {
 
