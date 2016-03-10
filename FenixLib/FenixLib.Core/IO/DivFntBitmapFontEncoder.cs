@@ -17,7 +17,7 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    class DivFntBitmapFontEncoder : FntAbstractBitmapFontEncoder
+    public class DivFntBitmapFontEncoder : FntAbstractBitmapFontEncoder
     {
         private const byte Version = 0x00;
 
@@ -26,7 +26,9 @@ namespace FenixLib.IO
         protected override int CodePageTypeForFont ( BitmapFont font )
         {
             if ( font.CodePage != FontEncoding.CP850 )
+            { 
                 throw new ArgumentException (); // TODO: Customize
+            }
 
             return 0;
         }
@@ -35,9 +37,11 @@ namespace FenixLib.IO
             NativeFormatWriter writer )
         {
             if ( font.GraphicFormat.BitsPerPixel != 8 )
+            { 
                 throw new ArgumentException (); // Customize
+            }
 
-                base.WriteNativeFormatHeader ( font, writer );
+            base.WriteNativeFormatHeader ( font, writer );
         }
 
         protected override string GetFileMagic ( BitmapFont font ) => "fnt";
