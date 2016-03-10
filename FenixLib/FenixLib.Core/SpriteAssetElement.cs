@@ -19,63 +19,64 @@ namespace FenixLib.Core
     public sealed class SpriteAssetElement : ISprite
     {
         public int Id { get; }
-        private ISprite Sprite { get; }
+
+        private ISprite BaseSprite { get; }
 
         public SpriteAssetElement ( int id, ISprite sprite )
         {
             Id = id;
-            Sprite = sprite;
+            BaseSprite = sprite;
         }
 
-        public GraphicFormat GraphicFormat => Sprite.GraphicFormat;
+        public GraphicFormat GraphicFormat => BaseSprite.GraphicFormat;
 
-        public int Height => Sprite.Height;
+        public int Height => BaseSprite.Height;
 
         public Palette Palette => Palette;
 
-        public byte[] PixelData => Sprite.PixelData;
+        public byte[] PixelData => BaseSprite.PixelData;
 
-        public int Width => Sprite.Width;
+        public int Width => BaseSprite.Width;
 
         public string Description
         {
             get
             {
-                return Sprite.Description;
+                return BaseSprite.Description;
             }
 
             set
             {
-                Sprite.Description = Description;
+                BaseSprite.Description = Description;
             }
         }
 
-        public ICollection<PivotPoint> PivotPoints => Sprite.PivotPoints;
+        public ICollection<PivotPoint> PivotPoints => BaseSprite.PivotPoints;
 
         public void ClearPivotPoints ()
         {
-            Sprite.ClearPivotPoints ();
+            BaseSprite.ClearPivotPoints ();
         }
 
         public void DefinePivotPoint ( int id, int x, int y )
         {
-            Sprite.DefinePivotPoint ( id, x, y );
+            BaseSprite.DefinePivotPoint ( id, x, y );
         }
 
         public void DeletePivotPoint ( int id )
         {
-            Sprite.DeletePivotPoint ( id );
+            BaseSprite.DeletePivotPoint ( id );
         }
 
         public int FindFreePivotPointId ( int start = 0, 
             Sprite.SearchDirection direction = Core.Sprite.SearchDirection.Fordward )
         {
-            return Sprite.FindFreePivotPointId ( start, direction );
+            return BaseSprite.FindFreePivotPointId ( start, direction );
         }
 
         public bool IsPivotPointDefined ( int id )
         {
-            return Sprite.IsPivotPointDefined ( id );
+            return BaseSprite.IsPivotPointDefined ( id );
         }
 
         public override bool Equals ( object obj )
