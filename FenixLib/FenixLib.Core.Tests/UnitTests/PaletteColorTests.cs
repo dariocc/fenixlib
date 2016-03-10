@@ -56,13 +56,13 @@ namespace FenixLib.Core.Tests.UnitTests
         }
 
         [Test]
-        public void LogicalEquality_SameComponents_True ()
+        public void EqualOperator_SameComponents_True ()
         {
             Assert.IsTrue ( color == colorDuplicate );
         }
 
         [Test]
-        public void LogicalEquality_DifferentComponents_False ()
+        public void EqualOperator_DifferentComponents_False ()
         {
             Assert.IsFalse ( color == differentColor );
         }
@@ -74,13 +74,13 @@ namespace FenixLib.Core.Tests.UnitTests
         }
 
         [Test]
-        public void LogicalInequality_SameComponents_False ()
+        public void DifferentThanOperator_SameComponents_False ()
         {
             Assert.IsFalse ( color != colorDuplicate );
         }
 
         [Test]
-        public void LogicalInequality_DifferentComponents_True ()
+        public void DifferentThanOperator_DifferentComponents_True ()
         {
             Assert.IsTrue ( color != differentColor );
         }

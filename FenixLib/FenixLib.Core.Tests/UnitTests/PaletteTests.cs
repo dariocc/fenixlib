@@ -78,19 +78,19 @@ namespace FenixLib.Core.Tests.UnitTests
         }
 
         [Test, TestCaseSource ( typeof( PaletteComparisonCasesFactory), "TestCases" )]
-        public bool Equals_ComparisonCases ( Palette paletteA, Palette paletteB)
+        public bool Equals_EvaluateForTwoPalettes_ReturnsAsTestCaseExpects ( Palette paletteA, Palette paletteB)
         {
             return paletteA.Equals ( paletteB );
         }
 
         [Test, TestCaseSource ( typeof ( PaletteComparisonCasesFactory ), "TestCases" )]
-        public bool LogicalEquality_ComparisonCases ( Palette paletteA, Palette paletteB )
+        public bool EqualOperator_EvaluateForPalettes_ReturnsAsTestCaseExpects ( Palette paletteA, Palette paletteB )
         {
             return ( paletteA == paletteB );
         }
 
         [Test, TestCaseSource ( typeof ( PaletteComparisonCasesFactory ), "TestCases" )]
-        public bool LogicalInequality_ComparisonCases ( Palette paletteA, Palette paletteB )
+        public bool DifferentThanOperator_EvaluateForTwoPalettes_ReturnsAsTestCaseExpects ( Palette paletteA, Palette paletteB )
         {
             return !( paletteA != paletteB );
         }
