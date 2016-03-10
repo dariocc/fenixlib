@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class FpgSpriteAssetDecoder : NativeDecoder<SpriteAsset>
+    public class FpgSpriteAssetDecoder : NativeDecoder<ISpriteAsset>
     {
 
         public override int MaxSupportedVersion { get; } = 0x00;
@@ -26,7 +26,7 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics { get; } = { "f16", "f32", "fpg", "f01" };
 
-        protected override SpriteAsset ReadBody ( Header header, NativeFormatReader reader )
+        protected override ISpriteAsset ReadBody ( Header header, NativeFormatReader reader )
         {
             SpriteAsset fpg;
 

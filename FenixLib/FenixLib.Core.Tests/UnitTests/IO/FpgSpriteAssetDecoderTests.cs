@@ -13,23 +13,16 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FenixLib.IO;
 
-namespace FenixLib.Core.Tests.IO
+namespace FenixLib.Core.Tests.UnitTests.IO
 {
     [TestFixture]
-    public class FpgSpriteAssetDecoderTests
+    public class FpgSpriteAssetDecoderTests : GenericDecoderTests<FpgSpriteAssetDecoder, ISpriteAsset>
     {
-        [Test]
-        public void Decode_NullStream_IOException ()
+        protected override FpgSpriteAssetDecoder CreateInstance ()
         {
-            FpgSpriteAssetDecoder decoder = new FpgSpriteAssetDecoder ();
-            decoder.Decode ( null );
+            return new FpgSpriteAssetDecoder ();
         }
     }
 }

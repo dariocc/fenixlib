@@ -52,6 +52,7 @@
     <Compile Include="IntegrationTests\Comparison\GraphicComparerByPixels.cs" />
     <Compile Include="UnitTests\GlyphTests.cs" />
     <Compile Include="IntegrationTests\FpgDecoding.cs" />
+    <Compile Include="UnitTests\IO\GenericDecoderTests.cs" />
     <Compile Include="UnitTests\PaletteColorTests.cs" />
     <Compile Include="UnitTests\CommonGraphicTests.cs" />
     <Compile Include="UnitTests\PaletteTests.cs" />

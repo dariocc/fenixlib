@@ -61,7 +61,7 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="path">The file to open.</param>
         /// <returns>An instance of <see cref="SpriteAsset"/> created from the file.</returns>
-        public static SpriteAsset LoadFpg ( string path )
+        public static ISpriteAsset LoadFpg ( string path )
         {
             FpgSpriteAssetDecoder decoder = new FpgSpriteAssetDecoder ();
 

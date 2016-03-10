@@ -34,7 +34,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
             string folder = Path.GetDirectoryName ( assembly.Location );
             string path = Path.Combine ( folder, "TestFiles", "Fpg", fpgFile );
 
-            SpriteAsset actualAsset = LoadFpg ( path );
+            ISpriteAsset actualAsset = LoadFpg ( path );
 
             Assert.IsTrue ( referenceAsset.Equals ( actualAsset ) );
         }

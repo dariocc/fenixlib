@@ -108,28 +108,15 @@ namespace FenixLib.IO
         /// <returns>A <see cref="FenixLib"/> base type.</returns>
 		public T Decode ( Stream input )
         {
+            if ( input == null )
+            { 
+                throw new ArgumentNullException ( nameof ( input ) );
+            }
 
             /* Native formats support GZip compression transparently
              * This function will read the first two bytes of the file and determine if it 
              * is a GZip file, in which case it will use a GZipStream object to read it.
              */
-
-            /* Remove when function is verified
-			byte[] buff = new byte[2];
-
-			if ( !(input.Read(buff, 0, 2) == 2) ) {
-				throw new IOException();
-			}
-            
-            input.Position = 0; // This will not work with every type of stream
-
-			Stream stream = null;
-			if ( HeaderIsGZip(buff) ) {
-				stream = new GZipStream(input, CompressionMode.Decompress);
-			} else {
-				stream = input;
-			}
-            */
 
             Header header;
             Stream bodyStream = null;
