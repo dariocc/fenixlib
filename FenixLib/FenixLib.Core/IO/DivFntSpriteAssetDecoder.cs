@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class DivFntFpgDecoder : NativeDecoder<SpriteAsset>
+    public class DivFntSpriteAssetDecoder : NativeDecoder<ISpriteAsset>
     {
 
         public override int MaxSupportedVersion { get; }
@@ -26,7 +26,7 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics { get; }
 
-        protected override SpriteAsset ReadBody ( Header header, NativeFormatReader reader )
+        protected override ISpriteAsset ReadBody ( Header header, NativeFormatReader reader )
         {
 
             Palette palette = reader.ReadPalette ();

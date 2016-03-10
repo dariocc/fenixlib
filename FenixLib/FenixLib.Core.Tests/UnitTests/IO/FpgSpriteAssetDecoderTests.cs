@@ -18,11 +18,8 @@ using FenixLib.IO;
 namespace FenixLib.Core.Tests.UnitTests.IO
 {
     [TestFixture]
-    public class FpgSpriteAssetDecoderTests : GenericDecoderTests<FpgSpriteAssetDecoder, ISpriteAsset>
+    public class FpgSpriteAssetDecoderTests : IDecoderTests<FpgSpriteAssetDecoder, ISpriteAsset>
     {
-        protected override FpgSpriteAssetDecoder CreateInstance ()
-        {
-            return new FpgSpriteAssetDecoder ();
-        }
+
     }
 }

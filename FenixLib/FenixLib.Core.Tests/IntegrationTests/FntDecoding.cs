@@ -34,7 +34,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
             string folder = Path.GetDirectoryName ( assembly.Location );
             string path = Path.Combine ( folder, "TestFiles", "Fnt", fontFile );
 
-            BitmapFont actualFont = LoadFnt ( path );
+            IBitmapFont actualFont = LoadFnt ( path );
 
             Assert.IsTrue ( referenceFont.Equals ( actualFont ) );
             // TODO: Assert.AreEqual ( referenceFont, actualFont ) ; will not work ecause of equality compare

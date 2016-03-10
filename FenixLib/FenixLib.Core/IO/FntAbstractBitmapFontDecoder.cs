@@ -25,7 +25,7 @@ namespace FenixLib.IO
     /// the legacy DIV Games Studio font format, called 'Fnt'. 
     /// Much of the process of decoding those formats is equivalent. This class 
     /// </summary>
-    public abstract class FntAbstractBitmapFontDecoder : NativeDecoder<BitmapFont>
+    public abstract class FntAbstractBitmapFontDecoder : NativeDecoder<IBitmapFont>
     {
 
         protected override string[] KnownFileExtensions { get; } = { "fnt" };
@@ -42,7 +42,7 @@ namespace FenixLib.IO
 
         protected abstract GlyphInfo ReadGlyphInfo ( NativeFormatReader reader );
 
-        protected override BitmapFont ReadBody ( Header header, NativeFormatReader reader )
+        protected override IBitmapFont ReadBody ( Header header, NativeFormatReader reader )
         {
             int bpp = ParseBitsPerPixel ( header );
 

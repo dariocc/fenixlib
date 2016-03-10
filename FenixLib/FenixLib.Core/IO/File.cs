@@ -86,7 +86,7 @@ namespace FenixLib.IO
             }
         }
 
-        public static BitmapFont LoadFnt ( string path )
+        public static IBitmapFont LoadFnt ( string path )
         {
             FntAbstractBitmapFontDecoder decoder = new DivFntBitmapFontDecoder ();
 
@@ -109,7 +109,7 @@ namespace FenixLib.IO
         /// <returns>An instance of <see cref="Palette"/> created from the file.</returns>
         public static Palette LoadPal ( string path )
         {
-            DivFormatPaletteDecoder decoder = new DivFormatPaletteDecoder ();
+            DivFilePaletteDecoder decoder = new DivFilePaletteDecoder ();
 
             using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {
