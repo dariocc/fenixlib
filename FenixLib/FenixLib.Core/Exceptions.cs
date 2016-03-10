@@ -21,5 +21,24 @@ namespace FenixLib.Core
 	public class UnsuportedFileFormatException : IOException
 	{
 	}
+
+    public class UniformGraphicCollectionFormatException : Exception
+    {
+        public GraphicFormat Expected { get; }
+        public GraphicFormat Was { get; }
+
+        public UniformGraphicCollectionFormatException(GraphicFormat expected, 
+            GraphicFormat was)
+        {
+            Expected = expected;
+            Was = was;
+        }
+
+        public override string ToString ()
+        {
+            return $"Attempt to insert graphic of invalid format '{Was}' to a graphic " +
+                $"collection restricted to '{Expected}' graphics.";
+        }
+    }
 }
 

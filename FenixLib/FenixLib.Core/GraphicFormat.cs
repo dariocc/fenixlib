@@ -18,14 +18,16 @@ namespace FenixLib.Core
 {
     public sealed class GraphicFormat
     {
-        private GraphicFormat ( int value )
+        private GraphicFormat ( int value, string name )
         {
             BitsPerPixel = value;
+            this.name = name;
         }
 
         public int BitsPerPixel { get; }
+        private string name;
 
-        public int PixelsBytesForSize(int width, int height)
+        public int PixelsBytesForSize ( int width, int height )
         {
             int byteLength;
 
@@ -59,14 +61,19 @@ namespace FenixLib.Core
             throw new ArgumentException ();
         }
 
-        public static explicit operator int (GraphicFormat graphicFormat)
+        public static explicit operator int ( GraphicFormat graphicFormat )
         {
             return graphicFormat.BitsPerPixel;
         }
 
-        public static GraphicFormat Monochrome = new GraphicFormat ( 1 );
-        public static GraphicFormat RgbIndexedPalette = new GraphicFormat ( 8 );
-        public static GraphicFormat RgbInt16 = new GraphicFormat ( 16 );
-        public static GraphicFormat ArgbInt32 = new GraphicFormat ( 32 );
+        public override string ToString ()
+        {
+            return name;
+        }
+
+        public static GraphicFormat Monochrome = new GraphicFormat ( 1, nameof ( Monochrome ) );
+        public static GraphicFormat RgbIndexedPalette = new GraphicFormat ( 8, nameof ( RgbIndexedPalette ) );
+        public static GraphicFormat RgbInt16 = new GraphicFormat ( 16, nameof ( RgbInt16 ) );
+        public static GraphicFormat ArgbInt32 = new GraphicFormat ( 32, nameof ( ArgbInt32 ) );
     }
 }

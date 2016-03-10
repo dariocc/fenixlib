@@ -33,6 +33,12 @@ namespace FenixLib.Core
 
             set
             {
+                if ( ( value.GraphicFormat ) != GraphicFormat )
+                {
+                    throw new UniformGraphicCollectionFormatException (
+                        GraphicFormat, value.GraphicFormat );
+                }
+
                 ( ( IDictionary<K, E> ) decorated )[key] = value;
             }
         }
@@ -71,11 +77,17 @@ namespace FenixLib.Core
 
         public void Add ( KeyValuePair<K, E> item )
         {
-            ( ( IDictionary<K, E> ) decorated ).Add ( item );
+            Add ( item.Key, item.Value );
         }
 
         public void Add ( K key, E value )
         {
+            if ( ( value.GraphicFormat ) != GraphicFormat )
+            {
+                throw new UniformGraphicCollectionFormatException (
+                    GraphicFormat, value.GraphicFormat );
+            }
+
             ( ( IDictionary<K, E> ) decorated ).Add ( key, value );
         }
 
