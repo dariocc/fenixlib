@@ -87,9 +87,9 @@ namespace FenixLib.Core.Tests.UnitTests
         }
 
         [Test]
-        public void CharIndexerSet_GlyphFormatDoesNotMatchFontFormat_FormatException ()
+        public void CharIndexerSet_GlyphFormatDoesNotMatchFontFormat_ThrowsException ()
         {
-            var ex = Assert.Throws<UniformGraphicCollectionFormatException> (
+            var ex = Assert.Throws<FormatMismatchException> (
                 () => stubFont32['a'] = stubGlyph16 );
         }
     }

@@ -35,7 +35,7 @@ namespace FenixLib.Core
             {
                 if ( ( value.GraphicFormat ) != GraphicFormat )
                 {
-                    throw new UniformGraphicCollectionFormatException (
+                    throw new FormatMismatchException (
                         GraphicFormat, value.GraphicFormat );
                 }
 
@@ -84,7 +84,7 @@ namespace FenixLib.Core
         {
             if ( ( value.GraphicFormat ) != GraphicFormat )
             {
-                throw new UniformGraphicCollectionFormatException (
+                throw new FormatMismatchException (
                     GraphicFormat, value.GraphicFormat );
             }
 

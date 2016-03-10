@@ -31,14 +31,14 @@ namespace FenixLib.Core.Tests.UnitTests
         }
 
         [Test]
-        public void Construct_NullColors_ArgumentNullException ()
+        public void Construct_NullColors_ThrowsException ()
         {
             Assert.Throws<ArgumentNullException> ( () => new Palette ( null ) );
         }
 
         [TestCase ( 2 )]
         [TestCase ( 257 )]
-        public void Construct_OtherThan256Colors_ArgumentException ( int numberOfColors )
+        public void Construct_OtherThan256Colors_ThrowsException ( int numberOfColors )
         {
             ArgumentException e = Assert.Throws<ArgumentException> (
                 () => new Palette ( new PaletteColor[numberOfColors] ) );
@@ -46,7 +46,7 @@ namespace FenixLib.Core.Tests.UnitTests
 
         [TestCase ( -1 )]
         [TestCase ( 256 )]
-        public void IndexerGetter_IndexOutOfRange_ColorIndexOutOfRangeException ( int index )
+        public void IndexerGetter_IndexOutOfRange_ThrowsException ( int index )
         {
             TestDelegate colorAtIndex = () => new Func<PaletteColor> ( () =>
             {
@@ -57,7 +57,7 @@ namespace FenixLib.Core.Tests.UnitTests
 
         [TestCase ( -1 )]
         [TestCase ( 256 )]
-        public void IndexerSetter_IndexOutOfRange_ColorIndexOutOfRangeException ( int index )
+        public void IndexerSetter_IndexOutOfRange_ThrowsException ( int index )
         {
             TestDelegate changeColorAtIndex = () => new Action ( () =>
             {

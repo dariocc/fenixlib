@@ -22,12 +22,17 @@ namespace FenixLib.Core
 	{
 	}
 
-    public class UniformGraphicCollectionFormatException : Exception
+    public abstract class GraphicCollectionException : Exception
+    {
+
+    }
+
+    public class FormatMismatchException : GraphicCollectionException
     {
         public GraphicFormat Expected { get; }
         public GraphicFormat Was { get; }
 
-        public UniformGraphicCollectionFormatException(GraphicFormat expected, 
+        public FormatMismatchException(GraphicFormat expected, 
             GraphicFormat was)
         {
             Expected = expected;
@@ -36,7 +41,7 @@ namespace FenixLib.Core
 
         public override string ToString ()
         {
-            return $"Attempt to insert graphic of invalid format '{Was}' to a graphic " +
+            return $"Attempt to insert graphic of format '{Was}' to a graphic " +
                 $"collection restricted to '{Expected}' graphics.";
         }
     }

@@ -38,7 +38,7 @@ namespace FenixLib.Core.Tests.UnitTests
         [TestCase ( 256, 0, 0 )]
         [TestCase ( 0, 256, 0 )]
         [TestCase ( 0, 0, 256 )]
-        public void Construct_ComponentOutsideRange_ArgumentError ( int r, int g, int b )
+        public void Construct_ComponentOutsideRange_ThrowsException ( int r, int g, int b )
         {
             Assert.Throws<ArgumentOutOfRangeException> ( () => new PaletteColor ( r, g, b ) );
         }
