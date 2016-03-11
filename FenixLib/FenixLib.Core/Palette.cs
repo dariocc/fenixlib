@@ -22,14 +22,23 @@ namespace FenixLib.Core
     {
         private PaletteColor[] colors;
 
+        public Palette ()
+        {
+            colors = new PaletteColor[256];
+        }
+
         public Palette ( PaletteColor[] colors )
         {
             if ( colors == null )
-                throw new ArgumentNullException ( "colors" );
+            {
+                throw new ArgumentNullException ( nameof ( colors ) );
+            }
 
             if ( colors.Length != 256 )
+            {
                 throw new ArgumentException (
                     "The number of colors must be 256.", "colors" );
+            }
 
             this.colors = colors;
         }

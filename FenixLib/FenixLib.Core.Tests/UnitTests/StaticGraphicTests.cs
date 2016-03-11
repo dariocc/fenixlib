@@ -13,15 +13,95 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
+using Rhino.Mocks;
+using System;
 
 namespace FenixLib.Core.Tests.UnitTests
 {
-    [TestFixture (Category = "Unit")]
+    [TestFixture ( Category = "Unit" )]
     class StaticGraphicTests
     {
-        protected IGraphic CreateSampleGraphic ()
+
+        private byte[] argbPixels;
+        private byte[] indexedPixels;
+
+        [SetUp]
+        public void SetUp ()
         {
-            return new StaticGraphic ( GraphicFormat.ArgbInt32, 1, 1, new byte[4] );
+            argbPixels = new byte[GraphicFormat.ArgbInt32.PixelsBytesForSize ( 1, 1 )];
+            indexedPixels = new byte[GraphicFormat.RgbIndexedPalette.PixelsBytesForSize ( 1, 1 )];
+        }
+
+        [TestCase ( -1, 1 )]
+        [TestCase ( 0, 1 )]
+        [TestCase ( 1, -1 )]
+        [TestCase ( 1, 0 )]
+        public void Construct_NegativeOrZeoWidthOrHeight_ThrowsException ( int w, int h )
+        {
+            TestDelegate createGraphic = () => 
+            {
+                new StaticGraphic ( GraphicFormat.ArgbInt32, w, h, argbPixels );
+            };
+
+            Assert.That ( createGraphic, Throws.InstanceOf<ArgumentOutOfRangeException> () );
+
+        }
+
+        [Test]
+        public void Construct_GraphicFormatIsIndexedAndPaletteIsNull_ThrowsException ()
+        {
+            TestDelegate createGraphic = () =>
+            {
+                new StaticGraphic ( GraphicFormat.RgbIndexedPalette, 1, 1, indexedPixels, null );
+            };
+
+            Assert.That ( createGraphic, Throws.InstanceOf<ArgumentException> () );
+        }
+
+        [Test]
+        public void Construct_PaletteIsPassedButFormatIsNotIndexed_PaletteIsSetToNull ()
+        {
+            var palette = MockRepository.GenerateStub<Palette> ();
+
+            // A non indexed graphic with a non null palette
+            var g = new StaticGraphic ( GraphicFormat.ArgbInt32, 1, 1, argbPixels, palette );
+
+            // Graphic palette still needs to be null
+            Assert.That ( g.Palette, Is.Null );
+        }
+
+        [Test]
+        public void Construct_NullPixelData_ThrowsException ()
+        {
+            TestDelegate createGraphic = () =>
+            {
+                new StaticGraphic ( GraphicFormat.ArgbInt32, 1, 1, null );
+            };
+
+            Assert.That ( createGraphic, Throws.InstanceOf<ArgumentNullException> () );
+        }
+
+        [Test]
+        public void Construct_NullGraphicFormat_ThrowsException ()
+        {
+            TestDelegate createGraphic = () =>
+            {
+                new StaticGraphic ( null, 1, 1, argbPixels );
+            };
+
+            Assert.That ( createGraphic, Throws.InstanceOf<ArgumentNullException> () );
+        }
+
+        [Test]
+        public void Construct_InvalidPixelDataLength_ThrowsException ()
+        {
+            TestDelegate createGraphic = () =>
+            {
+                // The pixel data should 4bytes but we pass instead 100
+                new StaticGraphic ( GraphicFormat.ArgbInt32, 1, 1, new byte[100] );
+            };
+
+            Assert.That ( createGraphic, Throws.InstanceOf<ArgumentException> () );
         }
     }
 }

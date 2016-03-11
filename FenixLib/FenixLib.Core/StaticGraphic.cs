@@ -20,45 +20,50 @@ namespace FenixLib.Core
     {
         public int Width { get; }
         public int Height { get; }
-        public Palette Palette { get; } = null;
+        public Palette Palette { get; }
         public byte[] PixelData { get; }
         public GraphicFormat GraphicFormat { get; }
 
         public StaticGraphic ( GraphicFormat graphicFormat, int width, int height,
             byte[] pixelData, Palette palette = null )
         {
+            if ( graphicFormat == null )
+            {
+                throw new ArgumentNullException ( nameof ( graphicFormat ) );
+            }
+
             if ( width <= 0 )
             {
                 throw new ArgumentOutOfRangeException (
-                    "width", width, "Negative values are not accepted." );
+                    nameof ( width ), width, "Negative values are not accepted." );
             }
 
             if ( height <= 0 )
             {
                 throw new ArgumentOutOfRangeException (
-                    "height", height, "Negative values are not accepted." );
+                    nameof ( height ), height, "Negative values are not accepted." );
             }
 
-            if ( ( graphicFormat == GraphicFormat.RgbIndexedPalette ) != ( palette != null ) )
+            if ( graphicFormat == GraphicFormat.RgbIndexedPalette && palette == null )
             {
                 throw new ArgumentException ( "A palette is required if, and only if, "
-                    + "graphicFormat == GraphicFormat.RgbIndexedPalette.", "palette" );
+                    + "graphicFormat == GraphicFormat.RgbIndexedPalette.", nameof ( palette ) );
             }
 
             if ( pixelData == null )
             {
-                throw new ArgumentNullException ( "pixelData" );
+                throw new ArgumentNullException ( nameof ( pixelData ) );
             }
 
             if ( pixelData.Length != graphicFormat.PixelsBytesForSize ( width, height ) )
             {
-                throw new ArgumentException ( "Insufficient size of 'pixelData' for the"
-                    + "specified graphic format.", "pixelData" );
+                throw new ArgumentException ( "The size of 'pixelData' array is not valid "
+                    + "for the specified graphic format.", nameof ( pixelData ) );
             }
 
             Width = width;
             Height = height;
-            Palette = palette;
+            Palette = GraphicFormat == GraphicFormat.RgbIndexedPalette ? palette : null;
             GraphicFormat = graphicFormat;
             PixelData = pixelData;
         }
