@@ -14,22 +14,46 @@
 */
 using NUnit.Framework;
 using Rhino.Mocks;
-using FenixLib.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FenixLib.Core.Tests.UnitTests
 {
     [TestFixture ( Category = "Unit" )]
     public class FontGlyphTests
     {
-        [Test]
-        public void FontGlyphTest ()
+        private IGlyph fakeGlyph;
+        private FontGlyph aFontGlyph;
+        private FontGlyph equivalentFontGlyph;
+
+        [SetUp]
+        public void SetUp ()
         {
-            Assert.Fail ();
+            fakeGlyph = MockRepository.GenerateStub<IGlyph> ();
+            fakeGlyph.Stub ( x => x.Width ).Return ( 1 );
+            fakeGlyph.Stub ( x => x.Height ).Return ( 1 );
+            fakeGlyph.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+
+            aFontGlyph = new FontGlyph ( 'a', fakeGlyph );
+            equivalentFontGlyph = new FontGlyph ( aFontGlyph.Character, fakeGlyph );
+        }
+
+        [Test]
+        public void Equals_NullGlyph_ReturnsFalse ()
+        {
+            Assert.That ( aFontGlyph.Equals ( null ), Is.False );
+        }
+
+        [Test]
+        public void Equals_FontGlyphWithSameCharacter_ReturnsTrue ()
+        {
+            Assert.That ( aFontGlyph.Equals ( equivalentFontGlyph ), Is.True );
+        }
+
+        [Test]
+        public void GetHashCode_TwoFontGlyphsWithSameCharacter_AreEqual ()
+        {
+            
+            Assert.AreEqual ( aFontGlyph.GetHashCode (), 
+                equivalentFontGlyph.GetHashCode () );
         }
     }
 }
