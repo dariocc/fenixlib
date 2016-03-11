@@ -44,8 +44,8 @@
     <Compile Include="UnitTests\SpriteAssetTests.cs" />
     <Compile Include="UnitTests\SpriteTests.cs" />
     <Compile Include="UnitTests\GraphicFormatTests.cs" />
-    <Compile Include="UnitTests\SpriteAssetSpriteTests.cs" />
     <Compile Include="UnitTests\FontGlyphTests.cs" />
+    <Compile Include="UnitTests\SpriteAssetSpriteTests.cs" />
     <Compile Include="IntegrationTests\Comparison\ComparableBitmapFont.cs" />
     <Compile Include="IntegrationTests\Comparison\AbstractGraphicComparer.cs" />
     <Compile Include="IntegrationTests\Comparison\GlyphComparerByGlyphInfo.cs" />

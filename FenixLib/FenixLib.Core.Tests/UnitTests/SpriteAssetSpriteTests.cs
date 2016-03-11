@@ -18,42 +18,56 @@ using Rhino.Mocks;
 namespace FenixLib.Core.Tests.UnitTests
 {
     [TestFixture ( Category = "Unit" )]
-    public class FontGlyphTests
+    public class SpriteAssetSpriteTests
     {
-        private IGlyph fakeGlyph;
-        private FontGlyph aFontGlyph;
-        private FontGlyph equivalentFontGlyph;
+        private ISprite fakeSprite;
+        private SpriteAssetSprite aSprite;
+        private SpriteAssetSprite equivalentSprite;
 
         [SetUp]
         public void SetUp ()
         {
-            fakeGlyph = MockRepository.GenerateStub<IGlyph> ();
-            fakeGlyph.Stub ( x => x.Width ).Return ( 1 );
-            fakeGlyph.Stub ( x => x.Height ).Return ( 1 );
-            fakeGlyph.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+            fakeSprite = MockRepository.GenerateStub<ISprite> ();
+            fakeSprite.Stub ( x => x.Width ).Return ( 1 );
+            fakeSprite.Stub ( x => x.Height ).Return ( 1 );
+            fakeSprite.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
 
-            aFontGlyph = new FontGlyph ( 'a', fakeGlyph );
-            equivalentFontGlyph = new FontGlyph ( aFontGlyph.Character, fakeGlyph );
+            aSprite = new SpriteAssetSprite ( 10, fakeSprite );
+            equivalentSprite = new SpriteAssetSprite ( 10, fakeSprite );
         }
 
         [Test]
-        public void Equals_NullGlyph_ReturnsFalse ()
+        public void DescriptionGetter_SameAsBaseSprite ()
         {
-            Assert.That ( aFontGlyph.Equals ( null ), Is.False );
+            fakeSprite.Description = "A description";
+            Assert.That ( aSprite.Description, Is.EqualTo ( "A description" ) );
         }
 
         [Test]
-        public void Equals_FontGlyphWithSameCharacter_ReturnsTrue ()
+        public void PivotPointsGetter_SameAsBaseSprite ()
         {
-            Assert.That ( aFontGlyph.Equals ( equivalentFontGlyph ), Is.True );
+            fakeSprite.Stub ( x => x.PivotPoints ).Return ( new PivotPoint[0] );
+            Assert.That ( aSprite.PivotPoints, Is.EqualTo ( fakeSprite.PivotPoints ) );
         }
 
         [Test]
-        public void GetHashCode_TwoFontGlyphsWithSameCharacter_AreEqual ()
+        public void Equals_NullSprite_ReturnsFalse ()
         {
-            
-            Assert.AreEqual ( aFontGlyph.GetHashCode (), 
-                equivalentFontGlyph.GetHashCode () );
+            Assert.That ( aSprite.Equals ( null ), Is.False );
+        }
+
+        [Test]
+        public void Equals_SpriteWithSameId_ReturnsTrue ()
+        {
+            Assert.That ( aSprite.Equals ( equivalentSprite ), Is.True );
+        }
+
+        [Test]
+        public void GetHashCode_TwoSpritesWithSameId_AreEqual ()
+        {
+
+            Assert.AreEqual ( aSprite.GetHashCode (),
+                equivalentSprite.GetHashCode () );
         }
     }
 }

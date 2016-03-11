@@ -16,12 +16,67 @@ namespace FenixLib.Core
 {
     public sealed class FontGlyph : Glyph
     {
+        private readonly IGlyph baseGlyph;
+
         internal FontGlyph ( char character, IGlyph glyph ) : base( glyph )
         {
             Character = character;
+            baseGlyph = glyph;
         }
 
         public char Character { get; }
+
+        public override int XAdvance
+        {
+            get
+            {
+                return baseGlyph.XAdvance;
+            }
+
+            set
+            {
+                baseGlyph.XAdvance = value;
+            }
+        }
+
+        public override int YAdavance
+        {
+            get
+            {
+                return baseGlyph.YAdavance;
+            }
+
+            set
+            {
+                baseGlyph.YAdavance = value;
+            }
+        }
+
+        public override int XOffset
+        {
+            get
+            {
+                return baseGlyph.XOffset;
+            }
+
+            set
+            {
+                baseGlyph.XOffset = value;
+            }
+        }
+
+        public override int YOffset
+        {
+            get
+            {
+                return baseGlyph.YOffset;
+            }
+
+            set
+            {
+                baseGlyph.YOffset = value;
+            }
+        }
 
         public override bool Equals ( object obj )
         {

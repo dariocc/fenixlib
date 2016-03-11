@@ -18,10 +18,10 @@ namespace FenixLib.Core
 {
     public class Glyph : IGlyph
     {
-        public int YOffset { get; set; } = 0;
-        public int XOffset { get; set; } = 0;
-        public int XAdvance { get; set; } = 0;
-        public int YAdavance { get; set; } = 0;
+        public virtual int YOffset { get; set; } = 0;
+        public virtual int XOffset { get; set; } = 0;
+        public virtual int XAdvance { get; set; } = 0;
+        public virtual int YAdavance { get; set; } = 0;
 
         // The implementation to satisfy the IGraphic interface will be delegated
         // to a graphic object that is injected in the constructor. This allows for 
@@ -31,13 +31,13 @@ namespace FenixLib.Core
 
         public GraphicFormat GraphicFormat => graphic.GraphicFormat;
 
-        public int Height => graphic.Height;
+        public virtual int Height => graphic.Height;
 
         public Palette Palette => graphic.Palette;
 
-        public int Width => graphic.Width;
+        public virtual int Width => graphic.Width;
 
-        public byte[] PixelData => graphic.PixelData;
+        public virtual byte[] PixelData => graphic.PixelData;
 
         public Glyph ( IGraphic graphic )
         {

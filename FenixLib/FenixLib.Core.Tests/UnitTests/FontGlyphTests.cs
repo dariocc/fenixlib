@@ -18,42 +18,100 @@ using Rhino.Mocks;
 namespace FenixLib.Core.Tests.UnitTests
 {
     [TestFixture ( Category = "Unit" )]
-    public class SpriteAssetSpriteTests
+    public class FontGlyphTests
     {
-        private ISprite fakeSprite;
-        private SpriteAssetSprite aSprite;
-        private SpriteAssetSprite equivalentSprite;
+        private IGlyph fakeGlyph;
+        private FontGlyph aFontGlyph;
+        private FontGlyph equivalentFontGlyph;
 
         [SetUp]
         public void SetUp ()
         {
-            fakeSprite = MockRepository.GenerateStub<ISprite> ();
-            fakeSprite.Stub ( x => x.Width ).Return ( 1 );
-            fakeSprite.Stub ( x => x.Height ).Return ( 1 );
-            fakeSprite.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+            fakeGlyph = MockRepository.GenerateStub<IGlyph> ();
+            fakeGlyph.Stub ( x => x.Width ).Return ( 1 );
+            fakeGlyph.Stub ( x => x.Height ).Return ( 1 );
+            fakeGlyph.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
 
-            aSprite = new SpriteAssetSprite ( 10, fakeSprite );
-            equivalentSprite = new SpriteAssetSprite ( 10, fakeSprite );
+            aFontGlyph = new FontGlyph ( 'a', fakeGlyph );
+            equivalentFontGlyph = new FontGlyph ( aFontGlyph.Character, fakeGlyph );
         }
 
         [Test]
-        public void Equals_NullSprite_ReturnsFalse ()
+        public void XAdvanceGetter_PropertyModifiedInBaseGlyph_ReturnsSameAsBaseGlyph()
         {
-            Assert.That ( aSprite.Equals ( null ), Is.False );
+            fakeGlyph.XAdvance = 10;
+            Assert.AreEqual ( 10, aFontGlyph.XAdvance );
         }
 
         [Test]
-        public void Equals_SpriteWithSameId_ReturnsTrue ()
+        public void YAdvanceGetter_PropertyModifiedInBaseGlyph_ReturnsSameAsBaseGlyph ()
         {
-            Assert.That ( aSprite.Equals ( equivalentSprite ), Is.True );
+            fakeGlyph.YAdavance = 10;
+            Assert.AreEqual ( 10, aFontGlyph.YAdavance );
         }
 
         [Test]
-        public void GetHashCode_TwoSpritesWithSameId_AreEqual ()
+        public void XOffsetGetter_PropertyModifiedInBaseGlyph_ReturnsSameAsBaseGlyph ()
+        {
+            fakeGlyph.XOffset = 10;
+            Assert.AreEqual ( 10, aFontGlyph.XOffset );
+        }
+
+
+        [Test]
+        public void YOffsetGetter_PropertyModifiedInBaseGlyph_ReturnsSameAsBaseGlyph ()
+        {
+            fakeGlyph.YOffset = 10;
+            Assert.AreEqual ( 10, aFontGlyph.YOffset );
+        }
+
+        [Test]
+        public void XAdvanceSetter_PropertyIsModified_ChangeReflectedInBaseGlyph ()
+        {
+            aFontGlyph.XAdvance = 10;
+            Assert.AreEqual ( 10, fakeGlyph.XAdvance );
+        }
+
+        [Test]
+        public void YAdvanceSetter_PropertyIsModified_ChangeReflectedInBaseGlyph ()
+        {
+            aFontGlyph.YAdavance = 10;
+            Assert.AreEqual ( 10, fakeGlyph.YAdavance );
+        }
+
+        [Test]
+        public void XOffsetSetter_PropertyIsModified_ChangeReflectedInBaseGlyph ()
+        {
+            aFontGlyph.XOffset = 10;
+            Assert.AreEqual ( 10, fakeGlyph.XOffset );
+        }
+
+
+        [Test]
+        public void YOffsetSetter_PropertyIsModified_ChangeReflectedInBaseGlyph ()
+        {
+            aFontGlyph.YOffset = 10;
+            Assert.AreEqual ( 10, fakeGlyph.YOffset );
+        }
+
+        [Test]
+        public void Equals_NullGlyph_ReturnsFalse ()
+        {
+            Assert.That ( aFontGlyph.Equals ( null ), Is.False );
+        }
+
+        [Test]
+        public void Equals_FontGlyphWithSameCharacter_ReturnsTrue ()
+        {
+            Assert.That ( aFontGlyph.Equals ( equivalentFontGlyph ), Is.True );
+        }
+
+        [Test]
+        public void GetHashCode_TwoFontGlyphsWithSameCharacter_AreEqual ()
         {
             
-            Assert.AreEqual ( aSprite.GetHashCode (), 
-                equivalentSprite.GetHashCode () );
+            Assert.AreEqual ( aFontGlyph.GetHashCode (), 
+                equivalentFontGlyph.GetHashCode () );
         }
     }
 }
