@@ -22,7 +22,7 @@ namespace FenixLib.Core
 
         private ISprite BaseSprite { get; }
 
-        public SpriteAssetElement ( int id, ISprite sprite )
+        internal SpriteAssetElement ( int id, ISprite sprite )
         {
             Id = id;
             BaseSprite = sprite;

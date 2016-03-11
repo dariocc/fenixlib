@@ -16,26 +16,26 @@ namespace FenixLib.Core
 {
     public sealed class FontGlyph : IGlyph
     {
-        public FontGlyph ( char character, IGlyph glyph )
+        internal FontGlyph ( char character, IGlyph glyph )
         {
             Character = character;
-            decorated = glyph;
+            BaseGlyph = glyph;
         }
 
         public char Character { get; }
 
-        public IGlyph decorated { get; }
+        private IGlyph BaseGlyph { get; }
 
         public int XAdvance
         {
             get
             {
-                return decorated.XAdvance;
+                return BaseGlyph.XAdvance;
             }
 
             set
             {
-                decorated.XAdvance = value;
+                BaseGlyph.XAdvance = value;
             }
         }
 
@@ -43,12 +43,12 @@ namespace FenixLib.Core
         {
             get
             {
-                return decorated.XOffset;
+                return BaseGlyph.XOffset;
             }
 
             set
             {
-                decorated.XOffset = value;
+                BaseGlyph.XOffset = value;
             }
         }
 
@@ -56,12 +56,12 @@ namespace FenixLib.Core
         {
             get
             {
-                return decorated.YAdavance;
+                return BaseGlyph.YAdavance;
             }
 
             set
             {
-                decorated.YAdavance = value;
+                BaseGlyph.YAdavance = value;
             }
         }
 
@@ -69,23 +69,54 @@ namespace FenixLib.Core
         {
             get
             {
-                return decorated.YOffset;
+                return BaseGlyph.YOffset;
             }
 
             set
             {
-                decorated.YOffset = value;
+                BaseGlyph.YOffset = value;
             }
         }
 
-        public GraphicFormat GraphicFormat => decorated.GraphicFormat;
+        public GraphicFormat GraphicFormat => BaseGlyph.GraphicFormat;
 
-        public int Height => decorated.Height;
+        public int Height => BaseGlyph.Height;
 
-        public Palette Palette => decorated.Palette; // TODO: Shall return the parent palette
+        public Palette Palette => BaseGlyph.Palette;
 
-        public int Width => decorated.Width;
+        public int Width => BaseGlyph.Width;
 
-        public byte[] PixelData => decorated.PixelData;
+        public byte[] PixelData => BaseGlyph.PixelData;
+
+        public override bool Equals ( object obj )
+        {
+            if ( ReferenceEquals ( obj, null ) )
+            {
+                return false;
+            }
+
+            FontGlyph glyph = obj as FontGlyph;
+            if ( ReferenceEquals ( glyph, null ) )
+            {
+                return false;
+            }
+
+            return Equals ( glyph );
+        }
+
+        public bool Equals ( FontGlyph glyph )
+        {
+            if ( ReferenceEquals ( glyph, null ) )
+            {
+                return false;
+            }
+
+            return ( glyph.Character.Equals ( Character ) );
+        }
+
+        public override int GetHashCode ()
+        {
+            return Character.GetHashCode ();
+        }
     }
 }
