@@ -18,7 +18,7 @@ using FenixLib.IO;
 namespace FenixLib.Core.Tests.UnitTests.IO
 {
     [TestFixture]
-    public class FpgSpriteAssetDecoderTests : IDecoderTests<FpgSpriteAssetDecoder, ISpriteAsset>
+    public class FpgSpriteAssetDecoderTests
     {
 
     }

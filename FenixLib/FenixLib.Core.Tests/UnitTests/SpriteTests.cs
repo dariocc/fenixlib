@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace FenixLib.Core.Tests.UnitTests
 {
-    [TestFixture ()]
+    [TestFixture (Category = "Unit")]
     public class SpriteTests
     {
 

@@ -18,7 +18,7 @@ using System;
 
 namespace FenixLib.Core.Tests.UnitTests
 {
-    [TestFixture ()]
+    [TestFixture (Category = "Unit")]
     public class SpriteAssetTests
     {
 

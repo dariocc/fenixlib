@@ -17,7 +17,7 @@ using System.Collections;
 
 namespace FenixLib.Core.Tests.UnitTests
 {
-    [TestFixture ()]
+    [TestFixture (Category = "Unit")]
     public class GraphicFormatTests
     {
         [TestCaseSource ( "PixelsBytesForSizeTestCases" )]
