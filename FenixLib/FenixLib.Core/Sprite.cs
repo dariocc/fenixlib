@@ -14,6 +14,7 @@
 */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FenixLib.Core
 {
@@ -29,7 +30,7 @@ namespace FenixLib.Core
     {
         private IGraphic graphic;
 
-        private IDictionary<int, PivotPoint> pivotPoints = 
+        private IDictionary<int, PivotPoint> pivotPoints =
             new SortedDictionary<int, PivotPoint> ();
 
         public Sprite ( IGraphic graphic )
@@ -60,6 +61,11 @@ namespace FenixLib.Core
 
         public virtual void DefinePivotPoint ( int id, int x, int y )
         {
+            if ( !IsValidPivotPointId ( id ) )
+            {
+                throw new ArgumentOutOfRangeException ();
+            }
+
             var pivotPoint = new PivotPoint ( id, x, y );
 
             if ( pivotPoints.ContainsKey ( pivotPoint.Id ) )
@@ -71,6 +77,16 @@ namespace FenixLib.Core
             {
                 pivotPoints.Add ( pivotPoint.Id, pivotPoint );
             }
+        }
+
+        public virtual PivotPoint GetPivotPoint ( int id )
+        {
+            if ( !pivotPoints.ContainsKey ( id ) )
+            {
+                throw new ArgumentOutOfRangeException ( nameof ( id ) );
+            }
+
+            return pivotPoints[id];
         }
 
         public virtual void DeletePivotPoint ( int id )
@@ -101,40 +117,57 @@ namespace FenixLib.Core
             return pivotPoints.ContainsKey ( id );
         }
 
-        public virtual int FindFreePivotPointId ( int start = 0, 
+        public virtual int? FindFreePivotPointId ( int start = 0,
             SearchDirection direction = SearchDirection.Fordward )
         {
+            if ( !IsValidPivotPointId ( start ) )
+            {
+                throw new ArgumentOutOfRangeException ();
+            }
+
+            if ( pivotPoints.Count == 0 )
+            {
+                return start;
+            }
+
+            int firstAvailable;
+
             if ( direction == SearchDirection.Fordward )
             {
-                // TODO: What happens if all Pivot Points are defined
-                for ( var n = start ; n <= pivotPoints.Count - 1 ; n++ )
-                {
-                    if ( pivotPoints[n].Id != n )
-                        return n;
-                }
-
-                return pivotPoints.Count;
+                int from = start;
+                int count = MaxPivotPointId - start ;
+                firstAvailable = Enumerable.Range ( from, count )
+                                                .Except ( pivotPoints.Keys )
+                                                .DefaultIfEmpty (MaxPivotPointId + 1)
+                                                .First ();
             }
             else if ( direction == SearchDirection.Backward )
             {
-                for ( var n = start ; n <= 0 ; n++ )
-                {
-                    if ( pivotPoints[n].Id != n )
-                        return n;
-                }
-
-                return -1;
+                int from = MinPivotPointId;
+                int count = start + 1;
+                firstAvailable = Enumerable.Range ( from, count )
+                                                .Reverse ()
+                                                .Except ( pivotPoints.Keys )
+                                                .DefaultIfEmpty (MinPivotPointId - 1)
+                                                .First ();
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException ( nameof ( direction ) );
             }
 
-            return -1;
+            if ( IsValidPivotPointId ( firstAvailable ) )
+                return firstAvailable;
+            else
+                return null;
         }
 
         private static bool IsValidPivotPointId ( int id )
         {
-            const int MaxPivotPointId = 999;
-            const int MinPivotPointId = 0;
-
-            return id < MaxPivotPointId & id >= MinPivotPointId;
+            return id <= MaxPivotPointId & id >= MinPivotPointId;
         }
+
+        private const int MaxPivotPointId = 999;
+        private const int MinPivotPointId = 0;
     }
 }

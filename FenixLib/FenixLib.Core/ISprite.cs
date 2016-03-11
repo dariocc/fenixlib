@@ -27,7 +27,8 @@ namespace FenixLib.Core
         void ClearPivotPoints ();
         void DefinePivotPoint ( int id, int x, int y );
         void DeletePivotPoint ( int id );
-        int FindFreePivotPointId ( int start = 0, 
+        PivotPoint GetPivotPoint ( int id );
+        int? FindFreePivotPointId ( int start = 0, 
             Sprite.SearchDirection direction = Sprite.SearchDirection.Fordward );
         bool IsPivotPointDefined ( int id );
     }

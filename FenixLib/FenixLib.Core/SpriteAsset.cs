@@ -150,7 +150,7 @@ namespace FenixLib.Core
                 Sprite.DeletePivotPoint ( id );
             }
 
-            public int FindFreePivotPointId ( int start = 0,
+            public int? FindFreePivotPointId ( int start = 0,
                 Sprite.SearchDirection direction = Core.Sprite.SearchDirection.Fordward )
             {
                 return Sprite.FindFreePivotPointId ( start, direction );
@@ -160,116 +160,11 @@ namespace FenixLib.Core
             {
                 return Sprite.IsPivotPointDefined ( id );
             }
-        }
 
-
-        /*  private bool IsIdValid ( int x )
- {
-     return x >= MinCode & x <= MaxCode;
- }*/
-
-        /*  public ISprite this[int code]
-          {
-              get { return sprites[code]; }
-          }
-
-          public Palette Palette { get; private set; }
-
-          public GraphicFormat GraphicFormat => graphicsCollection.Format
-
-          ICollection<SpriteWithId<int>> IGenericSpriteAsset<int>.Sprites
-          {
-              get
-              {
-                  throw new NotImplementedException ();
-              }
-          }
-
-          public void Add ( int code, ISprite sprite )
-          {
-              if ( sprite.GraphicFormat != GraphicFormat )
-              {
-                  throw new InvalidOperationException ();
-              }
-
-              graphicsCollection.Add
-              sprites.Add ( code, sprite );
-              sprite.ParentAsset = this;
-          }
-
-          public void Update ( int code, ISprite map )
-          {
-              if ( sprites.ContainsKey ( code ) )
-              {
-                  sprites.Remove ( code );
-              }
-
-              sprites.Add ( code, map );
-          }
-
-          internal int IdOf ( ISprite sprite )
-          {
-              foreach ( KeyValuePair<int, ISprite> kvp in sprites )
-              {
-                  if ( object.ReferenceEquals ( kvp.Value, sprite ) )
-                  {
-                      return kvp.Key;
-                  }
-              }
-
-              throw new ArgumentException ();
-              // TODO customize
-          }*/
-        /*
-        public int FindFreeId ( int startId = MinCode )
-        {
-
-            if ( IsIdValid ( startId ) )
-                throw new ArgumentException ();
-            // TODO: Customize
-
-            var found = false;
-            var code = startId - 1;
-            do
+            public PivotPoint GetPivotPoint ( int id )
             {
-                code += 1;
-                if ( !sprites.ContainsKey ( code ) )
-                {
-                    found = true;
-                }
-            } while ( !( code == MaxCode | found ) );
-
-            if ( !found )
-                throw new InvalidOperationException ();
-            // TODO: Customize 
-
-            return code;
+                return Sprite.GetPivotPoint ( id );
+            }
         }
-
-        [Obsolete]
-        public int PreviousFreeCode ( int startId = MaxCode )
-        {
-            if ( IsIdValid ( startId ) )
-                throw new ArgumentException ();
-            // TODO: Customize
-
-            var found = false;
-            var code = startId + 1;
-            do
-            {
-                code -= 1;
-                if ( !sprites.ContainsKey ( code ) )
-                {
-                    found = true;
-                }
-            } while ( !( code == MinCode | found ) );
-
-            if ( !found )
-                throw new InvalidOperationException ();
-            // TODO: Customize 
-
-            return code;
-        }
-        */
     }
 }
