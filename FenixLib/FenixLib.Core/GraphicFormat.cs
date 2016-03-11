@@ -33,7 +33,7 @@ namespace FenixLib.Core
 
             if ( BitsPerPixel == 1 )
             {
-                int rowByteSize = ( width + ( 8 - ( ( ( width % 8 ) ) & 7 ) ) ) / 8;
+                int rowByteSize = ( width + ( ( ( 8 - ( width % 8 ) ) & 7 ) ) ) / 8;
                 byteLength = rowByteSize * height;
             }
             else
