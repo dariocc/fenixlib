@@ -63,11 +63,11 @@ namespace FenixLib.Core
             {
                 if ( glyphs.ContainsKey ( character ) )
                 {
-                    glyphs[character] = new FontGlyph ( character, value );
+                    glyphs[character] = PrepareGlyph ( character, value );
                 }
                 else
                 {
-                    glyphs.Add ( character, new FontGlyph ( character, value ) );
+                    glyphs.Add ( character, PrepareGlyph ( character, value ) );
                 }
             }
         }
@@ -108,6 +108,97 @@ namespace FenixLib.Core
         private char Index2Char ( int index )
         {
             return encoding.GetChars ( BitConverter.GetBytes ( index ) )[0];
+        }
+        
+        /// <summary>
+        /// Returns a <see cref="FontGlyph"/> whose palette is that of the 
+        /// <see cref="BitmapFont"/>.
+        /// </summary>
+        /// <param name="character"></param>
+        /// <param name="glyph"></param>
+        /// <returns></returns>
+        private FontGlyph PrepareGlyph (char character, IGlyph glyph)
+        {
+            return new FontGlyph ( character, new ChildGlyph ( this, glyph ) );
+        }
+
+        /// <summary>
+        /// An <see cref="IGlyph"/> decorator that replaces the Palette with the palette of a
+        /// <see cref="BitmapFont"/> which is considered the parent.
+        /// </summary>
+        private class ChildGlyph : IGlyph
+        {
+            private readonly BitmapFont parentFont;
+            private readonly IGlyph glyph;
+
+            public ChildGlyph ( BitmapFont parentFont, IGlyph glyph )
+            {
+                this.parentFont = parentFont;
+                this.glyph = glyph;
+            }
+
+            public GraphicFormat GraphicFormat => glyph.GraphicFormat;
+
+            public int Height => glyph.Height;
+
+            public Palette Palette => parentFont.Palette;
+
+            public byte[] PixelData => glyph.PixelData;
+
+            public int Width => glyph.Width;
+
+            public int XAdvance
+            {
+                get
+                {
+                    return glyph.XAdvance;
+                }
+
+                set
+                {
+                    glyph.XAdvance = value;
+                }
+            }
+
+            public int XOffset
+            {
+                get
+                {
+                    return glyph.XOffset;
+                }
+
+                set
+                {
+                    glyph.XOffset = value;
+                }
+            }
+
+            public int YAdavance
+            {
+                get
+                {
+                    return glyph.YAdavance;
+                }
+
+                set
+                {
+                    glyph.YAdavance = value;
+                }
+            }
+
+            public int YOffset
+            {
+                get
+                {
+                    return glyph.YOffset;
+                }
+
+                set
+                {
+                    glyph.YOffset = value;
+                }
+            }
+
         }
     }
 }
