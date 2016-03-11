@@ -41,6 +41,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnitTests\SpriteAssetTests.cs" />
     <Compile Include="UnitTests\SpriteTests.cs" />
     <Compile Include="UnitTests\GraphicFormatTests.cs" />
     <Compile Include="UnitTests\SpriteAssetSpriteTests.cs" />

@@ -12,6 +12,8 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+using System.Collections.Generic;
+
 namespace FenixLib.Core
 {
     public sealed class SpriteAssetSprite : Sprite
@@ -21,7 +23,32 @@ namespace FenixLib.Core
         internal SpriteAssetSprite ( int id, ISprite sprite ) : base ( sprite )
         {
             Id = id;
+
+            baseSprite = sprite;
         }
+
+        public override string Description
+        {
+            get
+            {
+                return baseSprite.Description;
+            }
+
+            set
+            {
+                baseSprite.Description = value;
+            }
+        }
+
+        public override ICollection<PivotPoint> PivotPoints
+        {
+            get
+            {
+                return baseSprite.PivotPoints;
+            }
+        }
+
+        private readonly ISprite baseSprite;
 
         public override bool Equals ( object obj )
         {

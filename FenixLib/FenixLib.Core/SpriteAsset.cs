@@ -24,31 +24,35 @@ namespace FenixLib.Core
         private const int DefaultCapacity = 100;
         private UniformFormatGraphicDictionary<int, SpriteAssetSprite> sprites;
 
-        public SpriteAsset ( GraphicFormat format, Palette palette = null )
+        public SpriteAsset ( GraphicFormat format, Palette palette = null ) :
+            this ( CreateSpriteCollection ( format ) )
         {
             if ( format == GraphicFormat.RgbIndexedPalette )
             {
                 if ( palette == null )
                 {
-                    throw new ArgumentNullException ( "palette", 
+                    throw new ArgumentNullException ( nameof ( palette ),
                         "A palette is required for RgbIndexedPalette format." );
                 }
                 Palette = palette;
             }
-
-            sprites = new UniformFormatGraphicDictionary<int, SpriteAssetSprite> ( 
-                format, DefaultCapacity );
         }
 
-        public SpriteAsset (Palette palette) : this(GraphicFormat.RgbIndexedPalette, palette) { }
+        public SpriteAsset ( Palette palette ) : this ( GraphicFormat.RgbIndexedPalette, palette ) { }
+
+        // Injecting the collection increases testability 
+        private SpriteAsset ( UniformFormatGraphicDictionary<int, SpriteAssetSprite> sprites )
+        {
+            this.sprites = sprites;
+        }
 
         public Palette Palette { get; }
 
         public ICollection<SpriteAssetSprite> Sprites => sprites.Values;
 
-        public IEnumerable<int> Ids => sprites.Select ( x => x.Value.Id ).OrderBy(x => x);
+        public IEnumerable<int> Ids => sprites.Select ( x => x.Value.Id ).OrderBy ( x => x );
 
-        public GraphicFormat GraphicFormat => sprites.GraphicFormat; 
+        public GraphicFormat GraphicFormat => sprites.GraphicFormat;
 
         public SpriteAssetSprite this[int id]
         {
@@ -60,7 +64,7 @@ namespace FenixLib.Core
 
         public void Add ( int id, ISprite sprite )
         {
-            sprites.Add ( id, PrepareSprite(id, sprite) );
+            sprites.Add ( id, PrepareSprite ( id, sprite ) );
         }
 
         public void Update ( int id, ISprite sprite )
@@ -70,17 +74,25 @@ namespace FenixLib.Core
 
         public int GetFreeId ()
         {
-            return Ids.Max(x => x ) + 1;
+            return Ids.Max ( x => x ) + 1;
         }
 
         public IEnumerator<SpriteAssetSprite> GetEnumerator ()
         {
-            return sprites.Values.OrderBy(x => x.Id).GetEnumerator ();
+            return sprites.Values.OrderBy ( x => x.Id ).GetEnumerator ();
         }
 
         IEnumerator IEnumerable.GetEnumerator ()
         {
             return GetEnumerator ();
+        }
+
+        // Convenience method
+        private static UniformFormatGraphicDictionary<int, SpriteAssetSprite>
+            CreateSpriteCollection ( GraphicFormat format )
+        {
+            return new UniformFormatGraphicDictionary<int, SpriteAssetSprite> (
+                format, DefaultCapacity );
         }
 
         /// <summary>
@@ -90,8 +102,13 @@ namespace FenixLib.Core
         /// <param name="id"></param>
         /// <param name="sprite"></param>
         /// <returns></returns>
-        private SpriteAssetSprite PrepareSprite (int id, ISprite sprite)
+        private SpriteAssetSprite PrepareSprite ( int id, ISprite sprite )
         {
+            if ( sprite == null )
+            {
+                throw new ArgumentNullException ();
+            }
+
             return new SpriteAssetSprite ( id, new ChildSprite ( this, sprite ) );
         }
 
