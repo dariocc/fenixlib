@@ -14,79 +14,14 @@
 */
 namespace FenixLib.Core
 {
-    public sealed class FontGlyph : IGlyph
+    public sealed class FontGlyph : Glyph
     {
-        internal FontGlyph ( char character, IGlyph glyph )
+        internal FontGlyph ( char character, IGlyph glyph ) : base( glyph )
         {
             Character = character;
-            BaseGlyph = glyph;
         }
 
         public char Character { get; }
-
-        private IGlyph BaseGlyph { get; }
-
-        public int XAdvance
-        {
-            get
-            {
-                return BaseGlyph.XAdvance;
-            }
-
-            set
-            {
-                BaseGlyph.XAdvance = value;
-            }
-        }
-
-        public int XOffset
-        {
-            get
-            {
-                return BaseGlyph.XOffset;
-            }
-
-            set
-            {
-                BaseGlyph.XOffset = value;
-            }
-        }
-
-        public int YAdavance
-        {
-            get
-            {
-                return BaseGlyph.YAdavance;
-            }
-
-            set
-            {
-                BaseGlyph.YAdavance = value;
-            }
-        }
-
-        public int YOffset
-        {
-            get
-            {
-                return BaseGlyph.YOffset;
-            }
-
-            set
-            {
-                BaseGlyph.YOffset = value;
-            }
-        }
-
-        public GraphicFormat GraphicFormat => BaseGlyph.GraphicFormat;
-
-        public int Height => BaseGlyph.Height;
-
-        public Palette Palette => BaseGlyph.Palette;
-
-        public int Width => BaseGlyph.Width;
-
-        public byte[] PixelData => BaseGlyph.PixelData;
 
         public override bool Equals ( object obj )
         {
