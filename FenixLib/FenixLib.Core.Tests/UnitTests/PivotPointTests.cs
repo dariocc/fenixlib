@@ -52,13 +52,13 @@ namespace FenixLib.Core.Tests.UnitTests
         }
 
         [Test]
-        public void EqualOperator_SameId_True()
+        public void EqualsToOperator_SameId_True()
         {
             Assert.IsTrue ( pivotPoint == pivotPointSameId );
         }
 
         [Test]
-        public void EqualOperator_DifferentId_False()
+        public void EqualsToOperator_DifferentId_False()
         {
             Assert.IsFalse ( pivotPoint == differentPivotPoint );
         }

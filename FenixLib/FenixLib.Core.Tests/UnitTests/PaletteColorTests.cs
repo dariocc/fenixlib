@@ -56,13 +56,13 @@ namespace FenixLib.Core.Tests.UnitTests
         }
 
         [Test]
-        public void EqualOperator_SameComponents_True ()
+        public void EqualsToOperator_SameComponents_True ()
         {
             Assert.IsTrue ( color == colorDuplicate );
         }
 
         [Test]
-        public void EqualOperator_DifferentComponents_False ()
+        public void EqualsToOperator_DifferentComponents_False ()
         {
             Assert.IsFalse ( color == differentColor );
         }

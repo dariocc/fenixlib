@@ -84,7 +84,7 @@ namespace FenixLib.Core.Tests.UnitTests
         }
 
         [Test, TestCaseSource ( typeof ( PaletteComparisonCasesFactory ), "TestCases" )]
-        public bool EqualOperator_EvaluateForPalettes_ReturnsAsTestCaseExpects ( Palette paletteA, Palette paletteB )
+        public bool EqualsToOperator_EvaluateForPalettes_ReturnsAsTestCaseExpects ( Palette paletteA, Palette paletteB )
         {
             return ( paletteA == paletteB );
         }
