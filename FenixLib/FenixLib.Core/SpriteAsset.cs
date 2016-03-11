@@ -83,17 +83,28 @@ namespace FenixLib.Core
             return GetEnumerator ();
         }
 
+        /// <summary>
+        /// Returns a <see cref="SpriteAssetElement"/> whose palette is that of the 
+        /// <see cref="SpriteAsset"/>.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="sprite"></param>
+        /// <returns></returns>
         private SpriteAssetElement PrepareSprite (int id, ISprite sprite)
         {
-            return new SpriteAssetElement ( id, new AssetSprite ( this, sprite ) );
+            return new SpriteAssetElement ( id, new ChildSprite ( this, sprite ) );
         }
 
-        private class AssetSprite : ISprite
+        /// <summary>
+        /// An <see cref="ISprite"/> decorator that replaces the Palette with the palette of a
+        /// <see cref="SpriteAsset"/> which is considered the parent.
+        /// </summary>
+        private class ChildSprite : ISprite
         {
             private ISprite Sprite { get; }
             private SpriteAsset ParentAsset { get; }
 
-            public AssetSprite ( SpriteAsset parentAsset, ISprite sprite )
+            public ChildSprite ( SpriteAsset parentAsset, ISprite sprite )
             {
                 ParentAsset = parentAsset;
                 Sprite = sprite;
