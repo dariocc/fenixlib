@@ -86,7 +86,7 @@
     <Compile Include="SpriteAssetElement.cs" />
     <Compile Include="StaticGraphic.cs" />
     <Compile Include="Util\Util.cs" />
-    <Compile Include="FontCodepage.cs" />
+    <Compile Include="FontEncoding.cs" />
     <Compile Include="IO\DivFntBitmapFontDecoder.cs" />
     <Compile Include="IO\File.cs" />
     <Compile Include="GraphicFormat.cs" />

@@ -22,25 +22,25 @@ namespace FenixLib
         private readonly int codePage;
         public int CodePage { get { return codePage; } }
 
-        private FontEncoding(int codePage)
+        private FontEncoding ( int codePage )
         {
             this.codePage = codePage;
         }
 
-        internal static FontEncoding FromEncoding(Encoding encoding)
+        internal static FontEncoding FromEncoding ( Encoding encoding )
         {
-            switch (encoding.CodePage)
+            switch ( encoding.CodePage )
             {
                 case 850:
                     return CP850;
                 case 28591:
                     return ISO85591;
                 default:
-                    throw new ArgumentOutOfRangeException ("encoding");
+                    throw new ArgumentOutOfRangeException ( nameof ( encoding ) );
             }
         }
 
-        public static FontEncoding ISO85591 = new FontEncoding(28591);
-        public static FontEncoding CP850 = new FontEncoding(850);
+        public static FontEncoding ISO85591 = new FontEncoding ( 28591 );
+        public static FontEncoding CP850 = new FontEncoding ( 850 );
     }
 }
