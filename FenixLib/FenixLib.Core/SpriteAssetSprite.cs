@@ -12,71 +12,15 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using System.Collections.Generic;
-
 namespace FenixLib.Core
 {
-    public sealed class SpriteAssetSprite : ISprite
+    public sealed class SpriteAssetSprite : Sprite
     {
         public int Id { get; }
 
-        private ISprite BaseSprite { get; }
-
-        internal SpriteAssetSprite ( int id, ISprite sprite )
+        internal SpriteAssetSprite ( int id, ISprite sprite ) : base ( sprite )
         {
             Id = id;
-            BaseSprite = sprite;
-        }
-
-        public GraphicFormat GraphicFormat => BaseSprite.GraphicFormat;
-
-        public int Height => BaseSprite.Height;
-
-        public Palette Palette => Palette;
-
-        public byte[] PixelData => BaseSprite.PixelData;
-
-        public int Width => BaseSprite.Width;
-
-        public string Description
-        {
-            get
-            {
-                return BaseSprite.Description;
-            }
-
-            set
-            {
-                BaseSprite.Description = Description;
-            }
-        }
-
-        public ICollection<PivotPoint> PivotPoints => BaseSprite.PivotPoints;
-
-        public void ClearPivotPoints ()
-        {
-            BaseSprite.ClearPivotPoints ();
-        }
-
-        public void DefinePivotPoint ( int id, int x, int y )
-        {
-            BaseSprite.DefinePivotPoint ( id, x, y );
-        }
-
-        public void DeletePivotPoint ( int id )
-        {
-            BaseSprite.DeletePivotPoint ( id );
-        }
-
-        public int FindFreePivotPointId ( int start = 0, 
-            Sprite.SearchDirection direction = Core.Sprite.SearchDirection.Fordward )
-        {
-            return BaseSprite.FindFreePivotPointId ( start, direction );
-        }
-
-        public bool IsPivotPointDefined ( int id )
-        {
-            return BaseSprite.IsPivotPointDefined ( id );
         }
 
         public override bool Equals ( object obj )
