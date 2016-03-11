@@ -41,7 +41,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FontGlyphTests.cs" />
+    <Compile Include="UnitTests\SpriteAssetSpriteTests.cs" />
+    <Compile Include="UnitTests\FontGlyphTests.cs" />
     <Compile Include="IntegrationTests\Comparison\ComparableBitmapFont.cs" />
     <Compile Include="IntegrationTests\Comparison\AbstractGraphicComparer.cs" />
     <Compile Include="IntegrationTests\Comparison\GlyphComparerByGlyphInfo.cs" />
