@@ -13,13 +13,7 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using FenixLib.Core;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FenixLib.Core.Tests.UnitTests
 {
