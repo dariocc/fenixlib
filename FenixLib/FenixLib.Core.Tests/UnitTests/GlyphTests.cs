@@ -19,14 +19,15 @@ using System;
 namespace FenixLib.Core.Tests.UnitTests
 {
     [TestFixture ( Category = "Unit" )]
-    class GlyphTests : CommonGraphicTests
+    class GlyphTests
     {
-        protected override IGraphic CreateSampleInstance ()
+        [Test]
+        public void Constructor_NullGraphic_ThrowsException ()
         {
-            return new Glyph ( CreateFakeGraphic () );
+            var glyph = new Glyph ( CreateFakeGraphic () );
         }
 
-        private static IGraphic CreateFakeGraphic ()
+        private IGraphic CreateFakeGraphic ()
         {
             IGraphic fakeGraphic = MockRepository.GenerateStub<IGraphic> ();
             fakeGraphic.Stub ( x => x.Width ).Return ( 1 );
