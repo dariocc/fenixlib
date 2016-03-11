@@ -16,13 +16,13 @@ using System.Collections.Generic;
 
 namespace FenixLib.Core
 {
-    public sealed class SpriteAssetElement : ISprite
+    public sealed class SpriteAssetSprite : ISprite
     {
         public int Id { get; }
 
         private ISprite BaseSprite { get; }
 
-        internal SpriteAssetElement ( int id, ISprite sprite )
+        internal SpriteAssetSprite ( int id, ISprite sprite )
         {
             Id = id;
             BaseSprite = sprite;
@@ -86,7 +86,7 @@ namespace FenixLib.Core
                 return false;
             }
 
-            SpriteAssetElement sprite = obj as SpriteAssetElement;
+            SpriteAssetSprite sprite = obj as SpriteAssetSprite;
             if ( ReferenceEquals ( sprite, null ) )
             {
                 return false;
@@ -95,7 +95,7 @@ namespace FenixLib.Core
             return Equals ( sprite );
         }
 
-        public bool Equals ( SpriteAssetElement sprite )
+        public bool Equals ( SpriteAssetSprite sprite )
         {
             if ( ReferenceEquals ( sprite, null ) )
             {

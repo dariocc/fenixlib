@@ -74,9 +74,9 @@ namespace FenixLib.Core.Tests.IntegrationTests
 
                 var asset = MockRepository.GenerateStub<ISpriteAsset> ();
                 asset.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Monochrome );
-                asset.Stub ( x => x[1] ).Return ( new SpriteAssetElement ( 1, sprite ) );
+                asset.Stub ( x => x[1] ).Return ( new SpriteAssetSprite ( 1, sprite ) );
 
-                asset.Stub ( x => x.Sprites ).Return ( new SpriteAssetElement[] { asset[1] } );
+                asset.Stub ( x => x.Sprites ).Return ( new SpriteAssetSprite[] { asset[1] } );
 
                 return asset;
             }
@@ -111,11 +111,11 @@ namespace FenixLib.Core.Tests.IntegrationTests
 
                 var asset = MockRepository.GenerateStub<ISpriteAsset> ();
                 asset.Stub ( x => x.GraphicFormat ).Return ( ( GraphicFormat ) bpp );
-                asset.Stub ( x => x[1] ).Return ( new SpriteAssetElement ( 1, hippo ) );
-                asset.Stub ( x => x[100] ).Return ( new SpriteAssetElement ( 100, parrot ) );
-                asset.Stub ( x => x[500] ).Return ( new SpriteAssetElement ( 500, penguin ) );
+                asset.Stub ( x => x[1] ).Return ( new SpriteAssetSprite ( 1, hippo ) );
+                asset.Stub ( x => x[100] ).Return ( new SpriteAssetSprite ( 100, parrot ) );
+                asset.Stub ( x => x[500] ).Return ( new SpriteAssetSprite ( 500, penguin ) );
 
-                SpriteAssetElement[] allSprites = new SpriteAssetElement[] {
+                SpriteAssetSprite[] allSprites = new SpriteAssetSprite[] {
                     asset[1], asset[100], asset[500] };
 
                 asset.Stub ( x => x.Sprites ).Return ( allSprites );

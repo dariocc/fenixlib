@@ -83,7 +83,7 @@
     <Compile Include="IO\ExtendedFntBitmapFontEncoder.cs" />
     <Compile Include="ISprite.cs" />
     <Compile Include="ISpriteAsset.cs" />
-    <Compile Include="SpriteAssetElement.cs" />
+    <Compile Include="SpriteAssetSprite.cs" />
     <Compile Include="StaticGraphic.cs" />
     <Compile Include="Util\Util.cs" />
     <Compile Include="FontEncoding.cs" />

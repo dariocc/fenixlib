@@ -16,10 +16,10 @@ using System.Collections.Generic;
 
 namespace FenixLib.Core
 {
-    public interface ISpriteAsset : IEnumerable<SpriteAssetElement>
+    public interface ISpriteAsset : IEnumerable<SpriteAssetSprite>
     {
-        SpriteAssetElement this[int id] { get; }
-        ICollection<SpriteAssetElement> Sprites { get; }
+        SpriteAssetSprite this[int id] { get; }
+        ICollection<SpriteAssetSprite> Sprites { get; }
         Palette Palette { get; }
         GraphicFormat GraphicFormat { get; }
 

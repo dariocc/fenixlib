@@ -51,7 +51,7 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
                 return false;
 
             if ( CompareElements )
-                foreach ( SpriteAssetElement element in Sprites )
+                foreach ( SpriteAssetSprite element in Sprites )
                 {
 
                     if ( !ElementsComparer.Equals ( element, asset[element.Id] ) )
@@ -81,7 +81,7 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
             }
         }
 
-        public SpriteAssetElement this[int id] => decorated[id];
+        public SpriteAssetSprite this[int id] => decorated[id];
 
         public GraphicFormat GraphicFormat => decorated.GraphicFormat;
 
@@ -89,14 +89,14 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
 
         public Palette Palette => decorated.Palette;
 
-        public ICollection<SpriteAssetElement> Sprites => decorated.Sprites;
+        public ICollection<SpriteAssetSprite> Sprites => decorated.Sprites;
 
         public void Add ( int id, ISprite sprite )
         {
             decorated.Add ( id, sprite );
         }
 
-        public IEnumerator<SpriteAssetElement> GetEnumerator () => decorated.GetEnumerator ();
+        public IEnumerator<SpriteAssetSprite> GetEnumerator () => decorated.GetEnumerator ();
 
         public int GetFreeId () => decorated.GetFreeId ();
 

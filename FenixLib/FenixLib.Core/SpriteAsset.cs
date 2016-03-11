@@ -22,7 +22,7 @@ namespace FenixLib.Core
     public class SpriteAsset : ISpriteAsset
     {
         private const int DefaultCapacity = 100;
-        private UniformFormatGraphicDictionary<int, SpriteAssetElement> sprites;
+        private UniformFormatGraphicDictionary<int, SpriteAssetSprite> sprites;
 
         public SpriteAsset ( GraphicFormat format, Palette palette = null )
         {
@@ -36,7 +36,7 @@ namespace FenixLib.Core
                 Palette = palette;
             }
 
-            sprites = new UniformFormatGraphicDictionary<int, SpriteAssetElement> ( 
+            sprites = new UniformFormatGraphicDictionary<int, SpriteAssetSprite> ( 
                 format, DefaultCapacity );
         }
 
@@ -44,13 +44,13 @@ namespace FenixLib.Core
 
         public Palette Palette { get; }
 
-        public ICollection<SpriteAssetElement> Sprites => sprites.Values;
+        public ICollection<SpriteAssetSprite> Sprites => sprites.Values;
 
         public IEnumerable<int> Ids => sprites.Select ( x => x.Value.Id ).OrderBy(x => x);
 
         public GraphicFormat GraphicFormat => sprites.GraphicFormat; 
 
-        public SpriteAssetElement this[int id]
+        public SpriteAssetSprite this[int id]
         {
             get
             {
@@ -73,7 +73,7 @@ namespace FenixLib.Core
             return Ids.Max(x => x ) + 1;
         }
 
-        public IEnumerator<SpriteAssetElement> GetEnumerator ()
+        public IEnumerator<SpriteAssetSprite> GetEnumerator ()
         {
             return sprites.Values.OrderBy(x => x.Id).GetEnumerator ();
         }
@@ -84,15 +84,15 @@ namespace FenixLib.Core
         }
 
         /// <summary>
-        /// Returns a <see cref="SpriteAssetElement"/> whose palette is that of the 
+        /// Returns a <see cref="SpriteAssetSprite"/> whose palette is that of the 
         /// <see cref="SpriteAsset"/>.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="sprite"></param>
         /// <returns></returns>
-        private SpriteAssetElement PrepareSprite (int id, ISprite sprite)
+        private SpriteAssetSprite PrepareSprite (int id, ISprite sprite)
         {
-            return new SpriteAssetElement ( id, new ChildSprite ( this, sprite ) );
+            return new SpriteAssetSprite ( id, new ChildSprite ( this, sprite ) );
         }
 
         /// <summary>
