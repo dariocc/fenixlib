@@ -21,7 +21,7 @@ namespace FenixLib.Core.Tests.UnitTests
     public class SpriteAssetSpriteTests
     {
         private ISprite fakeSprite;
-        private SpriteAssetSprite aSprite;
+        private SpriteAssetSprite spriteAssetSprite;
         private SpriteAssetSprite equivalentSprite;
 
         [SetUp]
@@ -32,41 +32,48 @@ namespace FenixLib.Core.Tests.UnitTests
             fakeSprite.Stub ( x => x.Height ).Return ( 1 );
             fakeSprite.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
 
-            aSprite = new SpriteAssetSprite ( 10, fakeSprite );
+            spriteAssetSprite = new SpriteAssetSprite ( 10, fakeSprite );
             equivalentSprite = new SpriteAssetSprite ( 10, fakeSprite );
         }
 
         [Test]
-        public void DescriptionGetter_SameAsBaseSprite ()
+        public void DescriptionGetter_DescriptionModifierInBaseSprite_ReturnsSameDescriptionAsBaseSprite ()
         {
             fakeSprite.Description = "A description";
-            Assert.That ( aSprite.Description, Is.EqualTo ( "A description" ) );
+            Assert.That ( spriteAssetSprite.Description, Is.EqualTo ( "A description" ) );
+        }
+
+        [Test]
+        public void DescriptionSetter_PropertyIsModified_ChangeIsReflectedInBaseSprite ()
+        {
+            spriteAssetSprite.Description = "A description";
+            Assert.That ( fakeSprite.Description, Is.EqualTo ( "A description" ) );
         }
 
         [Test]
         public void PivotPointsGetter_SameAsBaseSprite ()
         {
             fakeSprite.Stub ( x => x.PivotPoints ).Return ( new PivotPoint[0] );
-            Assert.That ( aSprite.PivotPoints, Is.EqualTo ( fakeSprite.PivotPoints ) );
+            Assert.That ( spriteAssetSprite.PivotPoints, Is.EqualTo ( fakeSprite.PivotPoints ) );
         }
 
         [Test]
         public void Equals_NullSprite_ReturnsFalse ()
         {
-            Assert.That ( aSprite.Equals ( null ), Is.False );
+            Assert.That ( spriteAssetSprite.Equals ( null ), Is.False );
         }
 
         [Test]
         public void Equals_SpriteWithSameId_ReturnsTrue ()
         {
-            Assert.That ( aSprite.Equals ( equivalentSprite ), Is.True );
+            Assert.That ( spriteAssetSprite.Equals ( equivalentSprite ), Is.True );
         }
 
         [Test]
         public void GetHashCode_TwoSpritesWithSameId_AreEqual ()
         {
 
-            Assert.AreEqual ( aSprite.GetHashCode (),
+            Assert.AreEqual ( spriteAssetSprite.GetHashCode (),
                 equivalentSprite.GetHashCode () );
         }
     }
