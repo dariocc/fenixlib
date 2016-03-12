@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace FenixLib.Core
 {
-    public class SpriteAsset : ISpriteAsset
+    public partial class SpriteAsset : ISpriteAsset
     {
         private const int DefaultCapacity = 100;
         private UniformFormatGraphicDictionary<int, SpriteAssetSprite> sprites;
@@ -112,76 +112,6 @@ namespace FenixLib.Core
             return new SpriteAssetSprite ( id, new ChildSprite ( this, sprite ) );
         }
 
-        /// <summary>
-        /// An <see cref="ISprite"/> decorator that replaces the Palette with the palette of a
-        /// <see cref="SpriteAsset"/> which is considered the parent.
-        /// </summary>
-        private class ChildSprite : ISprite
-        {
-            private ISprite Sprite { get; }
-            private SpriteAsset ParentAsset { get; }
 
-            public ChildSprite ( SpriteAsset parentAsset, ISprite sprite )
-            {
-                ParentAsset = parentAsset;
-                Sprite = sprite;
-            }
-
-            public GraphicFormat GraphicFormat => Sprite.GraphicFormat;
-
-            public int Height => Sprite.Height;
-
-            public Palette Palette => ParentAsset.Palette;
-
-            public byte[] PixelData => Sprite.PixelData;
-
-            public int Width => Sprite.Width;
-
-            public string Description
-            {
-                get
-                {
-                    return Sprite.Description;
-                }
-
-                set
-                {
-                    Sprite.Description = Description;
-                }
-            }
-
-            public ICollection<PivotPoint> PivotPoints => Sprite.PivotPoints;
-
-            public void ClearPivotPoints ()
-            {
-                Sprite.ClearPivotPoints ();
-            }
-
-            public void DefinePivotPoint ( int id, int x, int y )
-            {
-                Sprite.DefinePivotPoint ( id, x, y );
-            }
-
-            public void DeletePivotPoint ( int id )
-            {
-                Sprite.DeletePivotPoint ( id );
-            }
-
-            public int? FindFreePivotPointId ( int start = 0,
-                Sprite.SearchDirection direction = Core.Sprite.SearchDirection.Fordward )
-            {
-                return Sprite.FindFreePivotPointId ( start, direction );
-            }
-
-            public bool IsPivotPointDefined ( int id )
-            {
-                return Sprite.IsPivotPointDefined ( id );
-            }
-
-            public PivotPoint GetPivotPoint ( int id )
-            {
-                return Sprite.GetPivotPoint ( id );
-            }
-        }
     }
 }

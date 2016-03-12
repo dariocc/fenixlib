@@ -105,7 +105,7 @@ namespace FenixLib.Core.Tests.IntegrationTests.Comparison
             }
         }
 
-        public FontEncoding CodePage => decorated.CodePage;
+        public FontEncoding Encoding => decorated.Encoding;
 
         public IEnumerable<FontGlyph> Glyphs => decorated.Glyphs;
 

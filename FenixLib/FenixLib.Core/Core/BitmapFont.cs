@@ -26,7 +26,7 @@ namespace FenixLib.Core
         private readonly Encoding encoding;
         private UniformFormatGraphicDictionary<char, FontGlyph> glyphs;
 
-        public FontEncoding CodePage => FontEncoding.FromEncoding ( encoding );
+        public FontEncoding Encoding => FontEncoding.FromEncoding ( encoding );
 
         public BitmapFont ( FontEncoding encoding, GraphicFormat format,
             Palette palette = null )
@@ -41,7 +41,7 @@ namespace FenixLib.Core
                 Palette = palette;
             }
 
-            this.encoding = Encoding.GetEncoding ( encoding.CodePage );
+            this.encoding = System.Text.Encoding.GetEncoding ( encoding.CodePage );
             glyphs = new UniformFormatGraphicDictionary<char, FontGlyph> (
                 format, DefaultCapacity );
         }

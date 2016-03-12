@@ -77,7 +77,7 @@ namespace FenixLib.Core.Tests.IntegrationTests
                 FontGlyph[] glyphs = new FontGlyph[glyphsInfo.Length - 1];
                 for ( int i = 0 ; i < glyphs.Length ; i++ )
                 {
-                    Encoding encoding = Encoding.GetEncoding ( FontEncoding.CP850.CodePage );
+                    Encoding encoding = System.Text.Encoding.GetEncoding ( FontEncoding.CP850.CodePage );
                     char character = encoding.GetChars ( new byte[] { ( byte ) i } )[0];
                     glyphs[i] = new FontGlyph(character, CreateStubGlyph ( glyphsInfo[i].Width,
                         glyphsInfo[i].Height ));

@@ -18,15 +18,16 @@ namespace FenixLib.Core
 {
     public interface ISpriteAsset : IEnumerable<SpriteAssetSprite>
     {
+        GraphicFormat GraphicFormat { get; }
+        Palette Palette { get; }
+        
         SpriteAssetSprite this[int id] { get; }
         ICollection<SpriteAssetSprite> Sprites { get; }
-        Palette Palette { get; }
-        GraphicFormat GraphicFormat { get; }
 
         void Add ( int id, ISprite sprite );
         void Update ( int id, ISprite sprite );
-        IEnumerable<int> Ids { get; }
 
+        IEnumerable<int> Ids { get; }
         int GetFreeId ();
     }
 }
