@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib", "FenixLib.Core\FenixLib.csproj", "{E110DF41-CAE8-4DCC-9A41-09864E5651DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib", "FenixLib\FenixLib.csproj", "{E110DF41-CAE8-4DCC-9A41-09864E5651DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Tests", "FenixLib.Core.Tests\FenixLib.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Tests", "FenixLib.Tests\FenixLib.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
