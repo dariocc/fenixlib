@@ -14,8 +14,9 @@
 */
 using System.Linq;
 using System.Security.Cryptography;
+using FenixLib.Core;
 
-namespace FenixLib.Core.Tests.IntegrationTests.Comparison
+namespace FenixLib.Tests.Integration.Comparison
 {
     internal class GraphicComparerByPixels : AbstractGraphicComparer<IGraphic>
     {

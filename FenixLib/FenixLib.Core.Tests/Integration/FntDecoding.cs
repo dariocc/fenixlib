@@ -18,10 +18,11 @@ using System.Text;
 using System.Reflection;
 using System.IO;
 using System.Collections;
-using FenixLib.Core.Tests.IntegrationTests.Comparison;
+using FenixLib.Tests.Integration.Comparison;
+using FenixLib.Core;
 using static FenixLib.IO.File;
 
-namespace FenixLib.Core.Tests.IntegrationTests
+namespace FenixLib.Tests.Integration
 {
     [TestFixture, Category ( "Integration" )]
     public class FntDecoding

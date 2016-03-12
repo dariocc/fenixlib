@@ -12,7 +12,9 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-namespace FenixLib.Core.Tests.IntegrationTests.Comparison
+using FenixLib.Core;
+
+namespace FenixLib.Tests.Integration.Comparison
 {
     internal abstract class AbstractGraphicComparer<E> : IGraphicEqualityComparer<E>
         where E : IGraphic

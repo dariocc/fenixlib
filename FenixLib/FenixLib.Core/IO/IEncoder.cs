@@ -14,7 +14,7 @@
 */
 using System.IO;
 
-namespace FenixLib.Core
+namespace FenixLib.IO
 {
 	public interface IEncoder<T>
 	{

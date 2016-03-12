@@ -12,23 +12,12 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using NUnit.Framework;
+using System.Collections.Generic;
+using FenixLib.Core;
 
-namespace FenixLib.Core.Tests.UnitTests
+namespace FenixLib.Tests.Integration.Comparison
 {
-    [TestFixture ( Category = "Unit" )]
-    public class FontEncodingTests
+    internal interface IGraphicEqualityComparer<in E> : IEqualityComparer<E> where E : IGraphic
     {
-        [Test]
-        public void CodePage_OfISO85591_Is28591 ()
-        {
-            Assert.That ( FontEncoding.ISO85591.CodePage, Is.EqualTo ( 28591 ) );
-        }
-
-        [Test]
-        public void CodePage_OfCP850_Is850 ()
-        {
-            Assert.That ( FontEncoding.CP850.CodePage, Is.EqualTo ( 850 ) );
-        }
     }
 }

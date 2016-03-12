@@ -7,8 +7,8 @@
     <ProjectGuid>{8EDF4429-251A-416D-BB68-93F227191BCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FenixLib.Core.Tests</RootNamespace>
-    <AssemblyName>FenixLib.Core.Tests</AssemblyName>
+    <RootNamespace>FenixLib.Tests</RootNamespace>
+    <AssemblyName>FenixLib.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,32 +41,32 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTests\SpriteAssetTests.cs" />
-    <Compile Include="UnitTests\SpriteTests.cs" />
-    <Compile Include="UnitTests\GraphicFormatTests.cs" />
-    <Compile Include="UnitTests\FontGlyphTests.cs" />
-    <Compile Include="UnitTests\SpriteAssetSpriteTests.cs" />
-    <Compile Include="IntegrationTests\Comparison\ComparableBitmapFont.cs" />
-    <Compile Include="IntegrationTests\Comparison\AbstractGraphicComparer.cs" />
-    <Compile Include="IntegrationTests\Comparison\GlyphComparerByGlyphInfo.cs" />
-    <Compile Include="IntegrationTests\Comparison\IGraphicEquallyComparer.cs" />
-    <Compile Include="IntegrationTests\FntDecoding.cs" />
-    <Compile Include="IntegrationTests\Comparison\ComparableAsset.cs" />
-    <Compile Include="IntegrationTests\Comparison\SpriteComparerByDescription.cs" />
-    <Compile Include="IntegrationTests\Comparison\GraphicComparerByDimensions.cs" />
-    <Compile Include="IntegrationTests\Comparison\GraphicComparerByPixels.cs" />
-    <Compile Include="UnitTests\FontEncodingTests.cs" />
-    <Compile Include="UnitTests\GlyphTests.cs" />
-    <Compile Include="IntegrationTests\FpgDecoding.cs" />
-    <Compile Include="UnitTests\IO\IDecoderTests.cs" />
-    <Compile Include="UnitTests\PaletteColorTests.cs" />
-    <Compile Include="UnitTests\PaletteTests.cs" />
-    <Compile Include="UnitTests\PivotPointTests.cs" />
-    <Compile Include="UnitTests\StaticGraphicTests.cs" />
-    <Compile Include="UnitTests\Image\FormatConverterTests.cs" />
-    <Compile Include="UnitTests\Image\IFormatConverterTests.cs" />
-    <Compile Include="UnitTests\IO\FpgSpriteAssetDecoderTests.cs" />
-    <Compile Include="UnitTests\BitmapFontTests.cs" />
+    <Compile Include="Unit\Core\SpriteAssetTests.cs" />
+    <Compile Include="Unit\Core\SpriteTests.cs" />
+    <Compile Include="Unit\Core\GraphicFormatTests.cs" />
+    <Compile Include="Unit\Core\FontGlyphTests.cs" />
+    <Compile Include="Unit\Core\SpriteAssetSpriteTests.cs" />
+    <Compile Include="Integration\Comparison\ComparableBitmapFont.cs" />
+    <Compile Include="Integration\Comparison\AbstractGraphicComparer.cs" />
+    <Compile Include="Integration\Comparison\GlyphComparerByGlyphInfo.cs" />
+    <Compile Include="Integration\Comparison\IGraphicEquallyComparer.cs" />
+    <Compile Include="Integration\FntDecoding.cs" />
+    <Compile Include="Integration\Comparison\ComparableAsset.cs" />
+    <Compile Include="Integration\Comparison\SpriteComparerByDescription.cs" />
+    <Compile Include="Integration\Comparison\GraphicComparerByDimensions.cs" />
+    <Compile Include="Integration\Comparison\GraphicComparerByPixels.cs" />
+    <Compile Include="Unit\Core\FontEncodingTests.cs" />
+    <Compile Include="Unit\Core\GlyphTests.cs" />
+    <Compile Include="Integration\FpgDecoding.cs" />
+    <Compile Include="Unit\IO\IDecoderTests.cs" />
+    <Compile Include="Unit\Core\PaletteColorTests.cs" />
+    <Compile Include="Unit\Core\PaletteTests.cs" />
+    <Compile Include="Unit\Core\PivotPointTests.cs" />
+    <Compile Include="Unit\Core\StaticGraphicTests.cs" />
+    <Compile Include="Unit\Image\FormatConverterTests.cs" />
+    <Compile Include="Unit\Image\IFormatConverterTests.cs" />
+    <Compile Include="Unit\IO\FpgSpriteAssetDecoderTests.cs" />
+    <Compile Include="Unit\Core\BitmapFontTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

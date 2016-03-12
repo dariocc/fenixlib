@@ -14,8 +14,9 @@
 */
 using System.Collections;
 using System.Collections.Generic;
+using FenixLib.Core;
 
-namespace FenixLib.Core.Tests.IntegrationTests.Comparison
+namespace FenixLib.Tests.Integration.Comparison
 {
     internal abstract class ComparableAsset : ISpriteAsset
     {

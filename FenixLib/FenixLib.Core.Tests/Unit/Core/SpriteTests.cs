@@ -16,12 +16,8 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using FenixLib.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FenixLib.Core.Tests.UnitTests
+namespace FenixLib.Tests.Unit.Core
 {
     [TestFixture (Category = "Unit")]
     public class SpriteTests

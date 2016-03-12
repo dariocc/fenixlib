@@ -14,8 +14,9 @@
 */
 using NUnit.Framework;
 using Rhino.Mocks;
+using FenixLib.Core;
 
-namespace FenixLib.Core.Tests.UnitTests
+namespace FenixLib.Tests.Unit.Core
 {
     [TestFixture ( Category = "Unit" )]
     public class SpriteAssetSpriteTests

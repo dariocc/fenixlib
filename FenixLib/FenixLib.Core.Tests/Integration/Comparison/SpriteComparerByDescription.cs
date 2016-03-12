@@ -14,34 +14,34 @@
 */
 
 using System;
+using FenixLib.Core;
 
-namespace FenixLib.Core.Tests.IntegrationTests.Comparison
+namespace FenixLib.Tests.Integration.Comparison
 {
-    internal class GlyphComparerByGlyphInfo : AbstractGraphicComparer<IGlyph>, IGraphicEqualityComparer<IGraphic>
+    internal class SpriteComparerByDescription : AbstractGraphicComparer<ISprite>, IGraphicEqualityComparer<IGraphic>
     {
-        public GlyphComparerByGlyphInfo ( AbstractGraphicComparer<IGraphic> comparer = null ) : base ( comparer ) { }
+        public SpriteComparerByDescription ( AbstractGraphicComparer<IGraphic> comparer = null )
+            : base ( comparer )
+        { }
 
-        public override int CalculateHashCode ( IGlyph x )
+        public override int CalculateHashCode ( ISprite x )
         {
-            throw new NotImplementedException ();
+            return x.Description.GetHashCode ();
         }
 
-        public override bool CompareCore ( IGlyph x, IGlyph y )
+        public override bool CompareCore ( ISprite x, ISprite y )
         {
-            return x.XAdvance == y.XAdvance
-                && x.YAdavance == y.YAdavance
-                && x.XOffset == y.XOffset
-                && x.YOffset == y.YOffset;
+            return x.Description == y.Description;
         }
 
         public bool Equals ( IGraphic x, IGraphic y )
         {
-            return base.Equals ( ( IGlyph ) x, ( IGlyph ) y );
+            return base.Equals ( ( ISprite ) x, ( ISprite ) y );
         }
 
         public int GetHashCode ( IGraphic obj )
         {
-            return base.GetHashCode ( ( IGlyph ) obj );
+            return base.GetHashCode ( ( ISprite ) obj );
         }
     }
 }

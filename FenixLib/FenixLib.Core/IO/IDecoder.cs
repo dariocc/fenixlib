@@ -15,7 +15,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace FenixLib.Core
+namespace FenixLib.IO
 {
 	public interface IDecoder<T>
 	{

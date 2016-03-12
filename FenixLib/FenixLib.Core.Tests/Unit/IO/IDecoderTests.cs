@@ -15,8 +15,9 @@
 using NUnit.Framework;
 using FenixLib.IO;
 using System;
+using FenixLib.Core;
 
-namespace FenixLib.Core.Tests.UnitTests.IO
+namespace FenixLib.Tests.Unit.Core.IO
 {
     [TestFixture ( TypeArgs = new Type[] { typeof ( FpgSpriteAssetDecoder ), typeof ( ISpriteAsset ) }, Category = "Unit" ) ]
     [TestFixture ( TypeArgs = new Type[] { typeof ( DivFntBitmapFontDecoder ), typeof ( IBitmapFont ) }, Category = "Unit" ) ]

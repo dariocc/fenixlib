@@ -15,7 +15,7 @@
 using NUnit.Framework;
 using FenixLib.IO;
 
-namespace FenixLib.Core.Tests.UnitTests.IO
+namespace FenixLib.Tests.Unit.Core.IO
 {
     [TestFixture]
     public class FpgSpriteAssetDecoderTests
