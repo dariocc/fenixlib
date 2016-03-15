@@ -16,8 +16,8 @@ namespace TestDirty
     {
         static void Main ( string[] args )
         {
-            var decoder = new GdipImageGraphicDecoder ();
-            var graphic = decoder.Decode ( System.IO.File.Open ( "4bpp.bmp", FileMode.Open ) );
+            var decoder = new GdipBitmapGraphicDecoder ();
+            var graphic = decoder.Decode ( System.IO.File.Open ( "1bpp_8x1.bmp", FileMode.Open ) );
 
             Sprite s = new Sprite ( graphic );
             s.Description = "This is an example of a Map File";

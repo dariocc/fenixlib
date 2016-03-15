@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="FenixLib.Core.licenseheader" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FenixLib\FenixLib.csproj">
@@ -44,7 +45,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractBitmapConverter.cs" />
+    <Compile Include="BitmapToGraphicConverter.cs" />
     <Compile Include="Bitmap16bppToGraphic16bpp.cs" />
     <Compile Include="Bitmap1bppIndexedToGraphicMonochrome.cs" />
     <Compile Include="Bitmap32bppToGraphic32bpp.cs" />

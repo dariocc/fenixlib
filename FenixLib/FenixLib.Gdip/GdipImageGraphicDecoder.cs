@@ -1,8 +1,20 @@
-﻿using System;
+﻿/*  Copyright 2016 Darío Cutillas Carrillo
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*       http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FenixLib.IO;
 using FenixLib.Core;
 using System.IO;
@@ -11,13 +23,16 @@ using System.Drawing.Imaging;
 
 namespace FenixLib.Gdip
 {
-    public class GdipImageGraphicDecoder : IDecoder<IGraphic>
+    public class GdipBitmapGraphicDecoder : IDecoder<IGraphic>
     {
         public IEnumerable<string> SupportedExtensions
         {
             get
             {
-                throw new NotImplementedException ();
+                ImageCodecInfo[] myCodecs;
+                myCodecs = ImageCodecInfo.GetImageEncoders ();
+
+                return myCodecs.SelectMany(c => c.FilenameExtension.Split ( ';' ));
             }
         }
 
@@ -28,12 +43,11 @@ namespace FenixLib.Gdip
                 throw new ArgumentNullException ( nameof ( input ) );
             }
 
-
             try
             {
                 using ( Bitmap bmp = new Bitmap ( input ) )
                 {
-                    IBitmapConverter converter = GetBitmapConverter ( bmp.PixelFormat );
+                    IBitmapConverter converter = GetDefaultConverterForFormat ( bmp.PixelFormat );
                     converter.SourceBitmap = bmp;
 
                     return converter.GetGraphic ();
@@ -41,40 +55,54 @@ namespace FenixLib.Gdip
             }
             catch ( Exception e )
             {
-                throw new ArgumentException ( "Cannot decode the stream.", nameof ( input ), e );
+                throw new ArgumentException ( "Failed to decode the stream.",
+                    nameof ( input ), e );
             }
-        }
-
-        private IBitmapConverter GetBitmapConverter ( PixelFormat format )
-        {
-            IBitmapConverter converter;
-
-            if ( format == PixelFormat.Format1bppIndexed )
-            {
-                converter = new Bitmap1bppIndexedToGraphicMonochrome ();
-            }
-            else if ( format == PixelFormat.Format4bppIndexed ||
-                format == PixelFormat.Format8bppIndexed )
-            {
-                converter = new BitmapIndexedToGraphicIndexed ();
-            }
-            else if ( format == PixelFormat.Format16bppArgb1555
-                || format == PixelFormat.Format16bppRgb555
-                || format == PixelFormat.Format16bppRgb555 )
-            {
-                converter = new Bitmap16bppToGraphic16bpp ();
-            }
-            else
-            {
-                converter = new Bitmap32bppToGraphic32bpp ();
-            }
-
-            return converter;
         }
 
         public bool TryDecode ( Stream input, out IGraphic decoded )
         {
-            throw new NotImplementedException ();
+            try
+            {
+                decoded = Decode ( input );
+                return true;
+            }
+            catch
+            {
+                decoded = null;
+                return false;
+            }
+        }
+
+        // Acts as a static factory for getting the best Converter for the specified format
+        private IBitmapConverter GetDefaultConverterForFormat ( PixelFormat format )
+        {
+            IBitmapConverter converter;
+
+            switch ( format )
+            {
+                case PixelFormat.Format1bppIndexed:
+                    converter = new Bitmap1bppIndexedToGraphicMonochrome ();
+                    break;
+
+                case PixelFormat.Format4bppIndexed:
+                case PixelFormat.Format8bppIndexed:
+                    converter = new BitmapIndexedToGraphicIndexed ();
+                    break;
+
+                case PixelFormat.Format16bppArgb1555:
+                    // TODO: This format should have special treatment
+                case PixelFormat.Format16bppRgb555:
+                case PixelFormat.Format16bppRgb565:
+                    converter = new Bitmap16bppToGraphic16bpp ();
+                    break;
+
+                default: // Any other format shall be read as 32bpp format
+                    converter = new Bitmap32bppToGraphic32bpp ();
+                    break;
+            }
+
+            return converter;
         }
     }
 }
