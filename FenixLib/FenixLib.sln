@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib", "FenixLib\FenixL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Tests", "FenixLib.Tests\FenixLib.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Gdip.Tests", "TestDirty\FenixLib.Gdip.Tests.csproj", "{7AC0A191-1C8B-4D1D-978F-F1548BDA4A52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Gdip.Tests", "FenixLib.Gdip.Tests\FenixLib.Gdip.Tests.csproj", "{7AC0A191-1C8B-4D1D-978F-F1548BDA4A52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Gdip", "FenixLib.Gdip\FenixLib.Gdip.csproj", "{98E6EDD7-CC46-45F4-AC06-748EBC1BCD24}"
 EndProject
