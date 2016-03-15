@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{98E6EDD7-CC46-45F4-AC06-748EBC1BCD24}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{7AC0A191-1C8B-4D1D-978F-F1548BDA4A52}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FenixLib.Gdip</RootNamespace>
-    <AssemblyName>FenixLib.Gdip</AssemblyName>
+    <RootNamespace>TestDirty</RootNamespace>
+    <AssemblyName>TestDirty</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,30 +31,32 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FenixLib.Gdip\FenixLib.Gdip.csproj">
+      <Project>{98e6edd7-cc46-45f4-ac06-748ebc1bcd24}</Project>
+      <Name>FenixLib.Gdip</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FenixLib\FenixLib.csproj">
       <Project>{e110df41-cae8-4dcc-9a41-09864e5651dd}</Project>
       <Name>FenixLib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AbstractBitmapConverter.cs" />
-    <Compile Include="Bitmap16bppToGraphic16bpp.cs" />
-    <Compile Include="Bitmap1bppIndexedToGraphicMonochrome.cs" />
-    <Compile Include="Bitmap32bppToGraphic32bpp.cs" />
-    <Compile Include="BitmapIndexedToGraphicIndexed.cs" />
-    <Compile Include="GdipImageGraphicDecoder.cs" />
-    <Compile Include="IBitmapConverter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

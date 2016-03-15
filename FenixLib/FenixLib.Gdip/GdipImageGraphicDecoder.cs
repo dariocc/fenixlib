@@ -11,7 +11,7 @@ using System.Drawing.Imaging;
 
 namespace FenixLib.Gdip
 {
-    class GdipImageGraphicDecoder : IDecoder<IGraphic>
+    public class GdipImageGraphicDecoder : IDecoder<IGraphic>
     {
         public IEnumerable<string> SupportedExtensions
         {
@@ -28,41 +28,48 @@ namespace FenixLib.Gdip
                 throw new ArgumentNullException ( nameof ( input ) );
             }
 
-            Bitmap bmp;
 
             try
             {
-                bmp = new Bitmap ( input );
+                using ( Bitmap bmp = new Bitmap ( input ) )
+                {
+                    IBitmapConverter converter = GetBitmapConverter ( bmp.PixelFormat );
+                    converter.SourceBitmap = bmp;
+
+                    return converter.GetGraphic ();
+                }
             }
             catch ( Exception e )
             {
                 throw new ArgumentException ( "Cannot decode the stream.", nameof ( input ), e );
             }
+        }
 
-            BitmapConverter converter;
+        private IBitmapConverter GetBitmapConverter ( PixelFormat format )
+        {
+            IBitmapConverter converter;
 
-            if ( bmp.PixelFormat == PixelFormat.Format1bppIndexed )
+            if ( format == PixelFormat.Format1bppIndexed )
             {
-                converter = new MonochromeBitmapToMonochromeGraphicConverter ();
+                converter = new Bitmap1bppIndexedToGraphicMonochrome ();
             }
-            else if ( bmp.PixelFormat == PixelFormat.Format4bppIndexed ||
-                bmp.PixelFormat == PixelFormat.Format8bppIndexed )
+            else if ( format == PixelFormat.Format4bppIndexed ||
+                format == PixelFormat.Format8bppIndexed )
             {
-                converter = new IndexedBitmapToIndexedGraphicConverter ();
+                converter = new BitmapIndexedToGraphicIndexed ();
             }
-            else if ( bmp.PixelFormat == PixelFormat.Format16bppArgb1555  
-                || bmp.PixelFormat == PixelFormat.Format16bppRgb555
-                || bmp.PixelFormat == PixelFormat.Format16bppRgb555 )
+            else if ( format == PixelFormat.Format16bppArgb1555
+                || format == PixelFormat.Format16bppRgb555
+                || format == PixelFormat.Format16bppRgb555 )
             {
-                converter = new Bitmap16bppTo16bppGraphicConverter ();
+                converter = new Bitmap16bppToGraphic16bpp ();
             }
             else
             {
-                    
+                converter = new Bitmap32bppToGraphic32bpp ();
             }
 
-            converter.BitmapSource = bmp;
-            return converter.GetConvertedGraphic ();
+            return converter;
         }
 
         public bool TryDecode ( Stream input, out IGraphic decoded )
