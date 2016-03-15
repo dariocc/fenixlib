@@ -63,7 +63,7 @@ namespace FenixLib.Core
 
             Width = width;
             Height = height;
-            Palette = GraphicFormat == GraphicFormat.RgbIndexedPalette ? palette : null;
+            Palette = graphicFormat == GraphicFormat.RgbIndexedPalette ? palette : null;
             GraphicFormat = graphicFormat;
             PixelData = pixelData;
         }
