@@ -27,7 +27,8 @@ namespace FenixLib.IO
         protected override void WriteNativeFormatBody ( SpriteAsset asset, 
             NativeFormatWriter writer )
         {
-            if ( asset.Palette != null )
+            // TODO: Test palette == null and GraphicFormat = indexed
+            if ( asset.GraphicFormat == GraphicFormat.RgbIndexedPalette )
             {
                 writer.Write ( asset.Palette );
                 writer.WriteReservedPaletteGammaSection ();

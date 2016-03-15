@@ -72,11 +72,11 @@ namespace FenixLib.IO
         public void Write ( Palette palette )
         {
             byte[] bytes = new byte[palette.Colors.Length * 3];
-            for ( var n = 0 ; n <= palette.Colors.Length ; n++ )
+            for ( var n = 0 ; n < palette.Colors.Length ; n++ )
             {
-                bytes[n * 3] = Convert.ToByte ( palette[n].R );
-                bytes[n * 3 + 1] = Convert.ToByte ( palette[n].G );
-                bytes[n * 3 + 2] = Convert.ToByte ( palette[n].B );
+                bytes[n * 3] = Convert.ToByte ( palette[n].R >> 2 );
+                bytes[n * 3 + 1] = Convert.ToByte ( palette[n].G >> 2 );
+                bytes[n * 3 + 2] = Convert.ToByte ( palette[n].B >> 2 );
             }
 
             base.Write ( bytes );

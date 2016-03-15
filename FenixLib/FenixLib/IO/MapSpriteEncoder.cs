@@ -25,14 +25,18 @@ namespace FenixLib.IO
 
         protected override byte GetLastHeaderByte ( ISprite sprite ) => version;
 
-        protected override void WriteNativeFormatBody ( ISprite sprite, 
+        protected override void WriteNativeFormatBody ( ISprite sprite,
             NativeFormatWriter writer )
         {
             writer.Write ( Convert.ToUInt16 ( sprite.Width ) );
             writer.Write ( Convert.ToUInt16 ( sprite.Height ) );
             writer.Write ( Convert.ToUInt32 ( 0 ) );
+            writer.WriteAsciiZ ( sprite.Description, 32 );
 
-            if ( ( sprite.Palette != null ) )
+            // TODO: Add test case to ensure that the function fails if sprite.GraphicFormat
+            // is Indexed but palette is null
+            //if ( ( sprite.Palette != null ) )
+            if ( ( sprite.GraphicFormat == GraphicFormat.RgbIndexedPalette ) )
             {
                 writer.Write ( sprite.Palette );
                 writer.WriteReservedPaletteGammaSection ();
@@ -48,7 +52,7 @@ namespace FenixLib.IO
         protected override string GetFileMagic ( ISprite sprite )
         {
 
-            switch ( (int) sprite.GraphicFormat )
+            switch ( ( int ) sprite.GraphicFormat )
             {
                 case 1:
                     return "m01";
