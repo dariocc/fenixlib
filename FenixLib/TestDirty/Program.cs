@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FenixLib.Gdip;
-using FenixLib.Core;
+﻿using FenixLib.Core;
 using FenixLib.IO;
 using System.IO;
-
-
 
 namespace TestDirty
 {

@@ -7,7 +7,7 @@
     <ProjectGuid>{98E6EDD7-CC46-45F4-AC06-748EBC1BCD24}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FenixLib.Gdip</RootNamespace>
+    <RootNamespace>FenixLib.IO</RootNamespace>
     <AssemblyName>FenixLib.Gdip</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

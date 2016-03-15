@@ -17,7 +17,7 @@ using System.Drawing.Imaging;
 using FenixLib.Core;
 using System.Runtime.InteropServices;
 
-namespace FenixLib.Gdip
+namespace FenixLib.IO
 {
     /// <summary>
     /// Creates Monochrome Graphics from a 1bppIndexed GDIP Bitmap

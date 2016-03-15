@@ -15,7 +15,7 @@
 using System.Drawing;
 using FenixLib.Core;
 
-namespace FenixLib.Gdip
+namespace FenixLib.IO
 {
     internal interface IBitmapConverter
     {

@@ -15,13 +15,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FenixLib.IO;
 using FenixLib.Core;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace FenixLib.Gdip
+namespace FenixLib.IO
 {
     public class GdipBitmapGraphicDecoder : IDecoder<IGraphic>
     {

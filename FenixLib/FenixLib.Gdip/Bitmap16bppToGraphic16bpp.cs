@@ -17,7 +17,7 @@ using FenixLib.Core;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace FenixLib.Gdip
+namespace FenixLib.IO
 {
     internal class Bitmap16bppToGraphic16bpp : BitmapToGraphicConverter
     {
