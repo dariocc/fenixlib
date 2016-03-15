@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="FenixLib.Core.licenseheader" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FenixLib.Gdip\FenixLib.Gdip.csproj">
