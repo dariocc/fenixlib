@@ -32,10 +32,10 @@ Another example, see how easy you can create a Fnt font file from scratch:
 using FenixLib.Core;
 using FenixLib.IO;
 
-var font = new BitmapFont ( GraphicFormat.Argb32, FontEncoding.ISO85591 );
+var font = new BitmapFont ( GraphicFormat.Format32bppArgb, FontEncoding.ISO85591 );
 
 // Create a 10x10 transparent graphic
-var glyphGraphic = new StaticGraphic( GraphicFormat.ArgbInt32, 10, 10, new byte[10 * 10 * 4] );
+var glyphGraphic = new StaticGraphic( GraphicFormat.Format32bppArgb, 10, 10, new byte[10 * 10 * 4] );
 
 // Create the glyph and assign it to the letter 'å'
 font['å'] = new Glyph ( glyphGraphic );
