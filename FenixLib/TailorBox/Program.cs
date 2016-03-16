@@ -1,7 +1,7 @@
 ﻿using System;
 using Gtk;
 
-namespace FenixLib.TailorBox
+namespace TailorBox
 {
 	class MainClass
 	{

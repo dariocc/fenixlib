@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{937F152B-98BD-414A-A0BB-E20812682204}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>FenixLib.TailorBox</RootNamespace>
-    <AssemblyName>FenixLib.TailorBox</AssemblyName>
+    <RootNamespace>TailorBox</RootNamespace>
+    <AssemblyName>TailorBox</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
