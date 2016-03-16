@@ -19,12 +19,12 @@ using System.Linq;
 
 namespace FenixLib.Core
 {
-    public partial class SpriteAsset : ISpriteAsset
+    public partial class SpriteAssortment : ISpriteAssortment
     {
         private const int DefaultCapacity = 100;
-        private UniformFormatGraphicDictionary<int, SpriteAssetSprite> sprites;
+        private UniformFormatGraphicDictionary<int, SpriteAssortmentSprite> sprites;
 
-        public SpriteAsset ( GraphicFormat format, Palette palette = null ) :
+        public SpriteAssortment ( GraphicFormat format, Palette palette = null ) :
             this ( CreateSpriteCollection ( format ) )
         {
             if ( format == GraphicFormat.Format8bppIndexed )
@@ -38,23 +38,23 @@ namespace FenixLib.Core
             }
         }
 
-        public SpriteAsset ( Palette palette ) : this ( GraphicFormat.Format8bppIndexed, palette ) { }
+        public SpriteAssortment ( Palette palette ) : this ( GraphicFormat.Format8bppIndexed, palette ) { }
 
         // Injecting the collection increases testability 
-        private SpriteAsset ( UniformFormatGraphicDictionary<int, SpriteAssetSprite> sprites )
+        private SpriteAssortment ( UniformFormatGraphicDictionary<int, SpriteAssortmentSprite> sprites )
         {
             this.sprites = sprites;
         }
 
         public Palette Palette { get; }
 
-        public ICollection<SpriteAssetSprite> Sprites => sprites.Values;
+        public ICollection<SpriteAssortmentSprite> Sprites => sprites.Values;
 
         public IEnumerable<int> Ids => sprites.Select ( x => x.Value.Id ).OrderBy ( x => x );
 
         public GraphicFormat GraphicFormat => sprites.GraphicFormat;
 
-        public SpriteAssetSprite this[int id]
+        public SpriteAssortmentSprite this[int id]
         {
             get
             {
@@ -77,7 +77,7 @@ namespace FenixLib.Core
             return Ids.Max ( x => x ) + 1;
         }
 
-        public IEnumerator<SpriteAssetSprite> GetEnumerator ()
+        public IEnumerator<SpriteAssortmentSprite> GetEnumerator ()
         {
             return sprites.Values.OrderBy ( x => x.Id ).GetEnumerator ();
         }
@@ -88,28 +88,28 @@ namespace FenixLib.Core
         }
 
         // Convenience method
-        private static UniformFormatGraphicDictionary<int, SpriteAssetSprite>
+        private static UniformFormatGraphicDictionary<int, SpriteAssortmentSprite>
             CreateSpriteCollection ( GraphicFormat format )
         {
-            return new UniformFormatGraphicDictionary<int, SpriteAssetSprite> (
+            return new UniformFormatGraphicDictionary<int, SpriteAssortmentSprite> (
                 format, DefaultCapacity );
         }
 
         /// <summary>
-        /// Returns a <see cref="SpriteAssetSprite"/> whose palette is that of the 
-        /// <see cref="SpriteAsset"/>.
+        /// Returns a <see cref="SpriteAssortmentSprite"/> whose palette is that of the 
+        /// <see cref="SpriteAssortment"/>.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="sprite"></param>
         /// <returns></returns>
-        private SpriteAssetSprite PrepareSprite ( int id, ISprite sprite )
+        private SpriteAssortmentSprite PrepareSprite ( int id, ISprite sprite )
         {
             if ( sprite == null )
             {
                 throw new ArgumentNullException ();
             }
 
-            return new SpriteAssetSprite ( id, new ChildSprite ( this, sprite ) );
+            return new SpriteAssortmentSprite ( id, new ChildSprite ( this, sprite ) );
         }
 
 

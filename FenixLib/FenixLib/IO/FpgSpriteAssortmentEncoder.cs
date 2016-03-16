@@ -18,30 +18,30 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    public class FpgSpriteAssetEncoder : NativeEncoder<ISpriteAsset>
+    public class FpgSpriteAssortmentEncoder : NativeEncoder<ISpriteAssortment>
     {
         private const int version = 0x00;
 
-        protected override byte GetLastHeaderByte ( ISpriteAsset what ) => version;
+        protected override byte GetLastHeaderByte ( ISpriteAssortment what ) => version;
 
-        protected override void WriteNativeFormatBody ( ISpriteAsset asset, 
+        protected override void WriteNativeFormatBody ( ISpriteAssortment assortment, 
             NativeFormatWriter writer )
         {
             // TODO: Test palette == null and GraphicFormat = indexed
-            if ( asset.GraphicFormat == GraphicFormat.Format8bppIndexed )
+            if ( assortment.GraphicFormat == GraphicFormat.Format8bppIndexed )
             {
-                writer.Write ( asset.Palette );
+                writer.Write ( assortment.Palette );
                 writer.WriteReservedPaletteGammaSection ();
             }
 
-            foreach ( var sprite in asset )
+            foreach ( var sprite in assortment )
             {
                 // TODO: Will fail for no control points defined
                 var maxPivotPointId = Convert.ToUInt16 ( 
                     sprite.PivotPoints.Max ( p => p.Id ) );
 
                 var pixelDataSize = NativeFormat.CalculatePixelBufferBytes (
-                    (int) asset.GraphicFormat, sprite.Width, sprite.Height );
+                    (int) assortment.GraphicFormat, sprite.Width, sprite.Height );
 
                 var maplen = Convert.ToUInt32 ( 64 + pixelDataSize + maxPivotPointId * 4 );
 
@@ -56,9 +56,9 @@ namespace FenixLib.IO
             }
         }
 
-        protected override string GetFileMagic ( ISpriteAsset asset )
+        protected override string GetFileMagic ( ISpriteAssortment assortment )
         {
-            switch ( (int) asset.GraphicFormat )
+            switch ( (int) assortment.GraphicFormat )
             {
                 case 1:
                     return "f01";

@@ -29,34 +29,34 @@ namespace FenixLib.Tests.Integration
     {
 
         [Test, TestCaseSource ( "TestCases" )]
-        public void FpgFileCanBeDecoded ( string fpgFile, ISpriteAsset referenceAsset )
+        public void FpgFileCanBeDecoded ( string fpgFile, ISpriteAssortment referenceAssortment )
         {
             var assembly = Assembly.GetExecutingAssembly ();
             string folder = Path.GetDirectoryName ( assembly.Location );
             string path = Path.Combine ( folder, "TestFiles", "Fpg", fpgFile );
 
-            ISpriteAsset actualAsset = LoadFpg ( path );
+            ISpriteAssortment actualAssortment = LoadFpg ( path );
 
-            Assert.IsTrue ( referenceAsset.Equals ( actualAsset ) );
+            Assert.IsTrue ( referenceAssortment.Equals ( actualAssortment ) );
         }
 
         public static IEnumerable TestCases
         {
             get
             {
-                yield return new TestCaseData ( "1bpp-compressed.fpg", new MonochromeSampleAsset () );
-                yield return new TestCaseData ( "8bpp-uncompressed.fpg", new AnimalsFakeAsset ( 8 ) );
-                yield return new TestCaseData ( "8bpp-compressed.fpg", new AnimalsFakeAsset ( 8 ) );
-                yield return new TestCaseData ( "16bpp-uncompressed.fpg", new AnimalsFakeAsset ( 16 ) );
-                yield return new TestCaseData ( "16bpp-compressed.fpg", new AnimalsFakeAsset ( 16 ) );
-                yield return new TestCaseData ( "32bpp-compressed.fpg", new AnimalsFakeAsset ( 32 ) );
-                yield return new TestCaseData ( "32bpp-compressed.fpg", new AnimalsFakeAsset ( 32 ) );
+                yield return new TestCaseData ( "1bpp-compressed.fpg", new MonochromeSampleAssortment () );
+                yield return new TestCaseData ( "8bpp-uncompressed.fpg", new AnimalsFakeAssortment ( 8 ) );
+                yield return new TestCaseData ( "8bpp-compressed.fpg", new AnimalsFakeAssortment ( 8 ) );
+                yield return new TestCaseData ( "16bpp-uncompressed.fpg", new AnimalsFakeAssortment ( 16 ) );
+                yield return new TestCaseData ( "16bpp-compressed.fpg", new AnimalsFakeAssortment ( 16 ) );
+                yield return new TestCaseData ( "32bpp-compressed.fpg", new AnimalsFakeAssortment ( 32 ) );
+                yield return new TestCaseData ( "32bpp-compressed.fpg", new AnimalsFakeAssortment ( 32 ) );
             }
         }
 
-        private class MonochromeSampleAsset : ComparableAsset
+        private class MonochromeSampleAssortment : ComparableSpriteAssortment
         {
-            public MonochromeSampleAsset () : base ( CreateStubAsset () )
+            public MonochromeSampleAssortment () : base ( CreateStubAssortment () )
             {
                 CompareFormat = true;
                 CompareElements = true;
@@ -64,7 +64,7 @@ namespace FenixLib.Tests.Integration
                     new GraphicComparerByDimensions () ) );
             }
 
-            private static ISpriteAsset CreateStubAsset ()
+            private static ISpriteAssortment CreateStubAssortment ()
             {
                 var sprite = MockRepository.GenerateStub<ISprite> ();
                 sprite.Stub ( x => x.Width ).Return ( 10 );
@@ -73,19 +73,19 @@ namespace FenixLib.Tests.Integration
                 byte[] PixelData = Enumerable.Repeat<byte> ( 255, 2 * 10 ).ToArray ();
                 sprite.Stub ( x => x.PixelData ).Return ( PixelData );
 
-                var asset = MockRepository.GenerateStub<ISpriteAsset> ();
-                asset.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format1bppMonochrome );
-                asset.Stub ( x => x[1] ).Return ( new SpriteAssetSprite ( 1, sprite ) );
+                var assortment = MockRepository.GenerateStub<ISpriteAssortment> ();
+                assortment.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format1bppMonochrome );
+                assortment.Stub ( x => x[1] ).Return ( new SpriteAssortmentSprite ( 1, sprite ) );
 
-                asset.Stub ( x => x.Sprites ).Return ( new SpriteAssetSprite[] { asset[1] } );
+                assortment.Stub ( x => x.Sprites ).Return ( new SpriteAssortmentSprite[] { assortment[1] } );
 
-                return asset;
+                return assortment;
             }
         }
 
-        private class AnimalsFakeAsset : ComparableAsset
+        private class AnimalsFakeAssortment : ComparableSpriteAssortment
         {
-            public AnimalsFakeAsset ( int bpp ) : base ( CreateStubAsset ( bpp ) )
+            public AnimalsFakeAssortment ( int bpp ) : base ( CreateStubAssortment ( bpp ) )
             {
                 ComparePalette = false;
                 CompareFormat = true;
@@ -93,7 +93,7 @@ namespace FenixLib.Tests.Integration
                 ElementsComparer = new SpriteComparerByDescription ( new GraphicComparerByDimensions () );
             }
 
-            private static ISpriteAsset CreateStubAsset ( int bpp )
+            private static ISpriteAssortment CreateStubAssortment ( int bpp )
             {
                 var hippo = MockRepository.GenerateStub<ISprite> ();
                 hippo.Stub ( x => x.Width ).Return ( 304 );
@@ -110,18 +110,18 @@ namespace FenixLib.Tests.Integration
                 penguin.Stub ( x => x.Height ).Return ( 256 );
                 penguin.Description = "penguin";
 
-                var asset = MockRepository.GenerateStub<ISpriteAsset> ();
-                asset.Stub ( x => x.GraphicFormat ).Return ( ( GraphicFormat ) bpp );
-                asset.Stub ( x => x[1] ).Return ( new SpriteAssetSprite ( 1, hippo ) );
-                asset.Stub ( x => x[100] ).Return ( new SpriteAssetSprite ( 100, parrot ) );
-                asset.Stub ( x => x[500] ).Return ( new SpriteAssetSprite ( 500, penguin ) );
+                var assortment = MockRepository.GenerateStub<ISpriteAssortment> ();
+                assortment.Stub ( x => x.GraphicFormat ).Return ( ( GraphicFormat ) bpp );
+                assortment.Stub ( x => x[1] ).Return ( new SpriteAssortmentSprite ( 1, hippo ) );
+                assortment.Stub ( x => x[100] ).Return ( new SpriteAssortmentSprite ( 100, parrot ) );
+                assortment.Stub ( x => x[500] ).Return ( new SpriteAssortmentSprite ( 500, penguin ) );
 
-                SpriteAssetSprite[] allSprites = new SpriteAssetSprite[] {
-                    asset[1], asset[100], asset[500] };
+                SpriteAssortmentSprite[] allSprites = new SpriteAssortmentSprite[] {
+                    assortment[1], assortment[100], assortment[500] };
 
-                asset.Stub ( x => x.Sprites ).Return ( allSprites );
+                assortment.Stub ( x => x.Sprites ).Return ( allSprites );
 
-                return asset;
+                return assortment;
             }
         }
 

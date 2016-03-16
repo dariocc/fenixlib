@@ -23,7 +23,7 @@ namespace FenixLib.Core
     /// A sprite is SpritePocket concept of image data (pixel information) and
     /// pivot points information grouped.
     ///
-    /// Sprites can be collected in <see cref="SpriteAsset"></see>s and given a code
+    /// Sprites can be collected in <see cref="SpriteAssortment"></see>s and given a code
     /// from which it is possible to be retrieved later on.
     /// </summary>
     public partial class Sprite : ISprite

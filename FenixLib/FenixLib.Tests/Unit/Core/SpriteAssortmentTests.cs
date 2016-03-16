@@ -20,11 +20,11 @@ using FenixLib.Core;
 namespace FenixLib.Tests.Unit.Core
 {
     [TestFixture (Category = "Unit")]
-    public class SpriteAssetTests
+    public class SpriteAssortmentTests
     {
 
-        private SpriteAsset argb32Asset;
-        private SpriteAsset palettizedAsset;
+        private SpriteAssortment argb32Assortment;
+        private SpriteAssortment palettizedAssortment;
 
         private ISprite fakeSpriteArgb32;
         private ISprite fakeSpriteIndexed;
@@ -32,8 +32,8 @@ namespace FenixLib.Tests.Unit.Core
         [SetUp]
         public void SetUp ()
         {
-            argb32Asset = new SpriteAsset ( GraphicFormat.Format32bppArgb );
-            palettizedAsset = new SpriteAsset ( MockRepository.GenerateStub<Palette> () );
+            argb32Assortment = new SpriteAssortment ( GraphicFormat.Format32bppArgb );
+            palettizedAssortment = new SpriteAssortment ( MockRepository.GenerateStub<Palette> () );
 
             fakeSpriteArgb32 = MockRepository.GenerateStub<ISprite> ();
             fakeSpriteArgb32.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format32bppArgb );
@@ -45,53 +45,53 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void Construct_NullPaletteWhenFormatIsRgbIndexed_ThrowsException ()
         {
-            Assert.That ( () => new SpriteAsset ( GraphicFormat.Format8bppIndexed, null ),
+            Assert.That ( () => new SpriteAssortment ( GraphicFormat.Format8bppIndexed, null ),
                 Throws.ArgumentNullException );
         }
 
         [Test]
-        public void SpriteAsset_NotNullPaletteWhenFormatIsNotRgbIndexed_PaletteIsNotAssigned ()
+        public void SpriteAssortment_NotNullPaletteWhenFormatIsNotRgbIndexed_PaletteIsNotAssigned ()
         {
             var palette = MockRepository.GenerateStub<Palette> ();
-            var asset = new SpriteAsset ( GraphicFormat.Format32bppArgb, palette );
+            var assortment = new SpriteAssortment ( GraphicFormat.Format32bppArgb, palette );
 
-            Assert.That ( asset.Palette, Is.Null );
+            Assert.That ( assortment.Palette, Is.Null );
         }
 
         [Test]
-        public void Add_GraphicFormatOfSpriteIsNotThatOfTheAsset_ThrowsException ()
+        public void Add_GraphicFormatOfSpriteIsNotThatOfTheAssortment_ThrowsException ()
         {
-            Assert.That ( () => argb32Asset.Add ( 1, fakeSpriteIndexed ),
+            Assert.That ( () => argb32Assortment.Add ( 1, fakeSpriteIndexed ),
                 Throws.InstanceOf<FormatMismatchException> () );
         }
 
         [Test]
-        public void Add_IdExistsInAsset_ThrowsException ()
+        public void Add_IdExistsInAssortment_ThrowsException ()
         {
-            argb32Asset.Add ( 1, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 1, fakeSpriteArgb32 );
 
-            Assert.That ( () => argb32Asset.Add ( 1, fakeSpriteArgb32 ),
+            Assert.That ( () => argb32Assortment.Add ( 1, fakeSpriteArgb32 ),
                 Throws.InstanceOf<ArgumentException> () );
         }
 
         [Test]
         public void Add_AllInputOk_SpriteIsAdded ()
         {
-            argb32Asset.Add ( 100, fakeSpriteArgb32 );
-            Assert.That ( argb32Asset[100], Is.Not.Null );
+            argb32Assortment.Add ( 100, fakeSpriteArgb32 );
+            Assert.That ( argb32Assortment[100], Is.Not.Null );
         }
 
         [Test]
         public void Add_NullSprite_ThrowsException ()
         {
-            Assert.That ( () => argb32Asset.Add ( 100, null ),
+            Assert.That ( () => argb32Assortment.Add ( 100, null ),
                 Throws.ArgumentNullException );
         }
 
         [Test]
-        public void Update_GraphicFormatOfSpriteIsNotThatOfTheAsset_ThrowsException ()
+        public void Update_GraphicFormatOfSpriteIsNotThatOfTheAssortment_ThrowsException ()
         {
-            Assert.That ( () => argb32Asset.Update ( 1, fakeSpriteIndexed ),
+            Assert.That ( () => argb32Assortment.Update ( 1, fakeSpriteIndexed ),
                 Throws.InstanceOf<FormatMismatchException> () );
         }
 
@@ -99,7 +99,7 @@ namespace FenixLib.Tests.Unit.Core
         public void Update_AllInputOk_SpriteIsUpdated ()
         {
             fakeSpriteArgb32.Description = "If I read this is wrong";
-            argb32Asset.Add ( 100, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 100, fakeSpriteArgb32 );
 
             const string aDescription = "Another sprite";
             var anotherFakeSprite = MockRepository.GenerateStub<ISprite> ();
@@ -108,44 +108,44 @@ namespace FenixLib.Tests.Unit.Core
             anotherFakeSprite.Stub ( x => x.PivotPoints ).Return ( new PivotPoint[0] );
 
             // Assign an sprite to an id and then assign another
-            argb32Asset.Update ( 100, anotherFakeSprite );
+            argb32Assortment.Update ( 100, anotherFakeSprite );
 
-            Assert.That ( argb32Asset[100].Description, Is.EqualTo ( aDescription ) );
+            Assert.That ( argb32Assortment[100].Description, Is.EqualTo ( aDescription ) );
         }
 
         [Test]
         public void Update_NullSprite_ThrowsException ()
         {
-            Assert.That ( () => argb32Asset.Update ( 100, null ),
+            Assert.That ( () => argb32Assortment.Update ( 100, null ),
                 Throws.ArgumentNullException );
         }
 
         [Test]
-        public void GetFreeId_AssetWithSprites_ReturnedIdIsNotInAsset ()
+        public void GetFreeId_AssortmentWithSprites_ReturnedIdIsNotInAssortment ()
         {
-            argb32Asset.Add ( 1, fakeSpriteArgb32 );
-            argb32Asset.Add ( 2, fakeSpriteArgb32 );
-            argb32Asset.Add ( 3, fakeSpriteArgb32 );
-            argb32Asset.Add ( 4, fakeSpriteArgb32 );
-            argb32Asset.Add ( 100, fakeSpriteArgb32 );
-            argb32Asset.Add ( 333, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 1, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 2, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 3, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 4, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 100, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 333, fakeSpriteArgb32 );
 
-            Assert.That ( argb32Asset.Ids, Has.No.Member ( argb32Asset.GetFreeId () ) );
+            Assert.That ( argb32Assortment.Ids, Has.No.Member ( argb32Assortment.GetFreeId () ) );
         }
 
         [Test]
-        public void Ids_AssetWithSprites_ReturnsDefinedIds ()
+        public void Ids_AssortmentWithSprites_ReturnsDefinedIds ()
         {
-            argb32Asset.Add ( 1, fakeSpriteArgb32 );
-            argb32Asset.Add ( 2, fakeSpriteArgb32 );
-            argb32Asset.Add ( 3, fakeSpriteArgb32 );
-            argb32Asset.Add ( 4, fakeSpriteArgb32 );
-            argb32Asset.Add ( 100, fakeSpriteArgb32 );
-            argb32Asset.Add ( 333, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 1, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 2, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 3, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 4, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 100, fakeSpriteArgb32 );
+            argb32Assortment.Add ( 333, fakeSpriteArgb32 );
 
             CollectionAssert.AreEquivalent (
                 new int[] { 1, 2, 3, 4, 100, 333 },
-                argb32Asset.Ids );
+                argb32Assortment.Ids );
         }
     }
 }

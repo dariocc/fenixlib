@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class DivFntSpriteAssetDecoder : NativeDecoder<ISpriteAsset>
+    public class DivFntSpriteAssortmentDecoder : NativeDecoder<ISpriteAssortment>
     {
 
         public override int MaxSupportedVersion { get; }
@@ -26,7 +26,7 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics { get; }
 
-        protected override ISpriteAsset ReadBody ( Header header, NativeFormatReader reader )
+        protected override ISpriteAssortment ReadBody ( Header header, NativeFormatReader reader )
         {
 
             Palette palette = reader.ReadPalette ();
@@ -40,7 +40,7 @@ namespace FenixLib.IO
                 characters[n] = reader.ReadLegacyFntGlyphInfo ();
             }
 
-            SpriteAsset fpg = new SpriteAsset ( palette );
+            SpriteAssortment fpg = new SpriteAssortment ( palette );
 
             foreach ( var character in characters )
             {

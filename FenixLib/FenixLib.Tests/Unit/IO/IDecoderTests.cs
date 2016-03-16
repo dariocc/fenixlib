@@ -19,10 +19,10 @@ using FenixLib.Core;
 
 namespace FenixLib.Tests.Unit.Core.IO
 {
-    [TestFixture ( TypeArgs = new Type[] { typeof ( FpgSpriteAssetDecoder ), typeof ( ISpriteAsset ) }, Category = "Unit" ) ]
+    [TestFixture ( TypeArgs = new Type[] { typeof ( FpgSpriteAssortmentDecoder ), typeof ( ISpriteAssortment ) }, Category = "Unit" ) ]
     [TestFixture ( TypeArgs = new Type[] { typeof ( DivFntBitmapFontDecoder ), typeof ( IBitmapFont ) }, Category = "Unit" ) ]
     [TestFixture ( TypeArgs = new Type[] { typeof ( ExtendedFntBitmapFontDecoder ), typeof ( IBitmapFont ) }, Category = "Unit" )]
-    [TestFixture ( TypeArgs = new Type[] { typeof ( DivFntSpriteAssetDecoder ), typeof ( ISpriteAsset ) }, Category = "Unit" )]
+    [TestFixture ( TypeArgs = new Type[] { typeof ( DivFntSpriteAssortmentDecoder ), typeof ( ISpriteAssortment ) }, Category = "Unit" )]
     [TestFixture ( TypeArgs = new Type[] { typeof ( MapSpriteDecoder ), typeof ( ISprite ) } , Category = "Unit" )]
     [TestFixture ( TypeArgs = new Type[] { typeof ( DivFilePaletteDecoder ), typeof ( Palette ) }, Category = "Unit")]
     public class IDecoderTests<D, E> where D : IDecoder<E>, new()

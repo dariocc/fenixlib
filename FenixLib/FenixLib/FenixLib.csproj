@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\BitmapFont.cs" />
-    <Compile Include="Core\SpriteAsset.ChildSprite.cs" />
+    <Compile Include="Core\SpriteAssortment.ChildSprite.cs" />
     <Compile Include="Core\FontGlyph.cs" />
     <Compile Include="Core\IBitmapFont.cs" />
     <Compile Include="Core\UniformFormatGraphicDictionary.cs" />
@@ -86,8 +86,8 @@
     <Compile Include="IO\DivFntBitmapFontEncoder.cs" />
     <Compile Include="IO\ExtendedFntBitmapFontEncoder.cs" />
     <Compile Include="Core\ISprite.cs" />
-    <Compile Include="Core\ISpriteAsset.cs" />
-    <Compile Include="Core\SpriteAssetSprite.cs" />
+    <Compile Include="Core\ISpriteAssortment.cs" />
+    <Compile Include="Core\SpriteAssortmentSprite.cs" />
     <Compile Include="Core\StaticGraphic.cs" />
     <Compile Include="Util\Util.cs" />
     <Compile Include="Core\FontEncoding.cs" />
@@ -96,12 +96,12 @@
     <Compile Include="Core\GraphicFormat.cs" />
     <Compile Include="Core\Exceptions.cs" />
     <Compile Include="Core\Glyph.cs" />
-    <Compile Include="IO\DivFntSpriteAssetDecoder.cs" />
+    <Compile Include="IO\DivFntSpriteAssortmentDecoder.cs" />
     <Compile Include="IO\DivFormatlPaletteDecoder.cs" />
     <Compile Include="IO\FntAbstractBitmapFontDecoder.cs" />
     <Compile Include="IO\FntAbstractBitmapFontEncoder.cs" />
-    <Compile Include="IO\FpgSpriteAssetDecoder.cs" />
-    <Compile Include="IO\FpgSpriteAssetEncoder.cs" />
+    <Compile Include="IO\FpgSpriteAssortmentDecoder.cs" />
+    <Compile Include="IO\FpgSpriteAssortmentEncoder.cs" />
     <Compile Include="IO\IDecoder.cs" />
     <Compile Include="IO\IEncoder.cs" />
     <Compile Include="IO\MapSpriteDecoder.cs" />
@@ -118,7 +118,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Sprite.cs" />
     <Compile Include="Core\Sprite.SearchDirection.cs" />
-    <Compile Include="Core\SpriteAsset.cs" />
+    <Compile Include="Core\SpriteAssortment.cs" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />

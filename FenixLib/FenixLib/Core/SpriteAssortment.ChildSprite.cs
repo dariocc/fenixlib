@@ -16,20 +16,20 @@ using System.Collections.Generic;
 
 namespace FenixLib.Core
 {
-    public partial class SpriteAsset
+    public partial class SpriteAssortment
     {
         /// <summary>
         /// An <see cref="ISprite"/> decorator that replaces the Palette with the palette of a
-        /// <see cref="SpriteAsset"/> which is considered the parent.
+        /// <see cref="SpriteAssortment"/> which is considered the parent.
         /// </summary>
         private class ChildSprite : ISprite
         {
             private ISprite Sprite { get; }
-            private SpriteAsset ParentAsset { get; }
+            private SpriteAssortment ParentAssortment { get; }
 
-            public ChildSprite ( SpriteAsset parentAsset, ISprite sprite )
+            public ChildSprite ( SpriteAssortment parentAssortment, ISprite sprite )
             {
-                ParentAsset = parentAsset;
+                ParentAssortment = parentAssortment;
                 Sprite = sprite;
             }
 
@@ -37,7 +37,7 @@ namespace FenixLib.Core
 
             public int Height => Sprite.Height;
 
-            public Palette Palette => ParentAsset.Palette;
+            public Palette Palette => ParentAssortment.Palette;
 
             public byte[] PixelData => Sprite.PixelData;
 

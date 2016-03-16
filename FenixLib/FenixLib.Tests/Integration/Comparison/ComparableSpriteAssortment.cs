@@ -18,11 +18,11 @@ using FenixLib.Core;
 
 namespace FenixLib.Tests.Integration.Comparison
 {
-    internal abstract class ComparableAsset : ISpriteAsset
+    internal abstract class ComparableSpriteAssortment : ISpriteAssortment
     {
-        ISpriteAsset decorated;
+        ISpriteAssortment decorated;
 
-        public ComparableAsset ( ISpriteAsset decorated )
+        public ComparableSpriteAssortment ( ISpriteAssortment decorated )
         {
             this.decorated = decorated;
         }
@@ -37,25 +37,25 @@ namespace FenixLib.Tests.Integration.Comparison
 
         public IGraphicEqualityComparer<IGraphic> ElementsComparer { get; set; }
 
-        public virtual bool Equals ( ISpriteAsset asset )
+        public virtual bool Equals ( ISpriteAssortment assortment )
         {
-            if ( ReferenceEquals ( asset, null ) )
+            if ( ReferenceEquals ( assortment, null ) )
                 return false;
 
-            if ( CompareFormat && GraphicFormat != asset.GraphicFormat )
+            if ( CompareFormat && GraphicFormat != assortment.GraphicFormat )
                 return false;
 
-            if ( ComparePalette && Palette != asset.Palette )
+            if ( ComparePalette && Palette != assortment.Palette )
                 return false;
 
-            if ( CompareNumberOfElements && Sprites.Count != asset.Sprites.Count )
+            if ( CompareNumberOfElements && Sprites.Count != assortment.Sprites.Count )
                 return false;
 
             if ( CompareElements )
-                foreach ( SpriteAssetSprite element in Sprites )
+                foreach ( SpriteAssortmentSprite element in Sprites )
                 {
 
-                    if ( !ElementsComparer.Equals ( element, asset[element.Id] ) )
+                    if ( !ElementsComparer.Equals ( element, assortment[element.Id] ) )
                     {
                         return false;
                     }
@@ -71,18 +71,18 @@ namespace FenixLib.Tests.Integration.Comparison
 
         public override bool Equals ( object obj )
         {
-            ISpriteAsset objAsAsset = obj as ISpriteAsset;
-            if ( objAsAsset == null )
+            ISpriteAssortment objAsAssortment = obj as ISpriteAssortment;
+            if ( objAsAssortment == null )
             {
                 return false;
             }
             else
             {
-                return Equals ( objAsAsset );
+                return Equals ( objAsAssortment );
             }
         }
 
-        public SpriteAssetSprite this[int id] => decorated[id];
+        public SpriteAssortmentSprite this[int id] => decorated[id];
 
         public GraphicFormat GraphicFormat => decorated.GraphicFormat;
 
@@ -90,14 +90,14 @@ namespace FenixLib.Tests.Integration.Comparison
 
         public Palette Palette => decorated.Palette;
 
-        public ICollection<SpriteAssetSprite> Sprites => decorated.Sprites;
+        public ICollection<SpriteAssortmentSprite> Sprites => decorated.Sprites;
 
         public void Add ( int id, ISprite sprite )
         {
             decorated.Add ( id, sprite );
         }
 
-        public IEnumerator<SpriteAssetSprite> GetEnumerator () => decorated.GetEnumerator ();
+        public IEnumerator<SpriteAssortmentSprite> GetEnumerator () => decorated.GetEnumerator ();
 
         public int GetFreeId () => decorated.GetFreeId ();
 

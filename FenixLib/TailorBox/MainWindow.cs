@@ -26,7 +26,7 @@ public partial class MainWindow : Gtk.Window
             "Cancel", ResponseType.Cancel,
             "Open", ResponseType.Accept );
 
-        ISpriteAsset fpg = null;
+        ISpriteAssortment fpg = null;
 
         if ( dialog.Run () == ( int ) ResponseType.Accept )
         {

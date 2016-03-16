@@ -41,17 +41,17 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Unit\Core\SpriteAssetTests.cs" />
+    <Compile Include="Unit\Core\SpriteAssortmentTests.cs" />
     <Compile Include="Unit\Core\SpriteTests.cs" />
     <Compile Include="Unit\Core\GraphicFormatTests.cs" />
     <Compile Include="Unit\Core\FontGlyphTests.cs" />
-    <Compile Include="Unit\Core\SpriteAssetSpriteTests.cs" />
+    <Compile Include="Unit\Core\SpriteAssortmentSpriteTests.cs" />
     <Compile Include="Integration\Comparison\ComparableBitmapFont.cs" />
     <Compile Include="Integration\Comparison\AbstractGraphicComparer.cs" />
     <Compile Include="Integration\Comparison\GlyphComparerByGlyphInfo.cs" />
     <Compile Include="Integration\Comparison\IGraphicEquallyComparer.cs" />
     <Compile Include="Integration\FntDecoding.cs" />
-    <Compile Include="Integration\Comparison\ComparableAsset.cs" />
+    <Compile Include="Integration\Comparison\ComparableSpriteAssortment.cs" />
     <Compile Include="Integration\Comparison\SpriteComparerByDescription.cs" />
     <Compile Include="Integration\Comparison\GraphicComparerByDimensions.cs" />
     <Compile Include="Integration\Comparison\GraphicComparerByPixels.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="Unit\Core\StaticGraphicTests.cs" />
     <Compile Include="Unit\Image\FormatConverterTests.cs" />
     <Compile Include="Unit\Image\IFormatConverterTests.cs" />
-    <Compile Include="Unit\IO\FpgSpriteAssetDecoderTests.cs" />
+    <Compile Include="Unit\IO\FpgSpriteAssortmentDecoderTests.cs" />
     <Compile Include="Unit\Core\BitmapFontTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

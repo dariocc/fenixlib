@@ -20,8 +20,8 @@ namespace FenixLib.Core
     {
         string Description { get; set; }
         //int? Id { get; }
-        //bool IsInAsset { get; }
-        //SpriteAsset ParentAsset { get; set; }
+        //bool IsInAssortment { get; }
+        //SpriteAssortment ParentAssortment { get; set; }
         ICollection<PivotPoint> PivotPoints { get; }
 
         void ClearPivotPoints ();

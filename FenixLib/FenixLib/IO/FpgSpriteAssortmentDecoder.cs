@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class FpgSpriteAssetDecoder : NativeDecoder<ISpriteAsset>
+    public class FpgSpriteAssortmentDecoder : NativeDecoder<ISpriteAssortment>
     {
 
         public override int MaxSupportedVersion { get; } = 0x00;
@@ -26,9 +26,9 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics { get; } = { "f16", "f32", "fpg", "f01" };
 
-        protected override ISpriteAsset ReadBody ( Header header, NativeFormatReader reader )
+        protected override ISpriteAssortment ReadBody ( Header header, NativeFormatReader reader )
         {
-            SpriteAsset fpg;
+            SpriteAssortment fpg;
 
             Palette palette = null;
             if ( header.BitsPerPixel == 8 )
@@ -37,7 +37,7 @@ namespace FenixLib.IO
                 reader.ReadUnusedPaletteGamma ();
             }
 
-            fpg = new SpriteAsset( ( GraphicFormat ) header.BitsPerPixel, palette );
+            fpg = new SpriteAssortment( ( GraphicFormat ) header.BitsPerPixel, palette );
 
             try
             {

@@ -65,14 +65,14 @@ namespace FenixLib.Tests.Integration.Comparison
 
         public override bool Equals ( object obj )
         {
-            IBitmapFont objAsAsset = obj as IBitmapFont;
-            if ( objAsAsset == null )
+            IBitmapFont objAsAssortment = obj as IBitmapFont;
+            if ( objAsAssortment == null )
             {
                 return false;
             }
             else
             {
-                return Equals ( objAsAsset );
+                return Equals ( objAsAssortment );
             }
         }
 

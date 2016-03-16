@@ -56,14 +56,14 @@ namespace FenixLib.IO
         }
 
         /// <summary>
-        /// Opens a Fpg file, reads all the information into a <see cref="SpriteAsset"/> 
+        /// Opens a Fpg file, reads all the information into a <see cref="SpriteAssortment"/> 
         /// object, and then closes the file.
         /// </summary>
         /// <param name="path">The file to open.</param>
-        /// <returns>An instance of <see cref="SpriteAsset"/> created from the file.</returns>
-        public static ISpriteAsset LoadFpg ( string path )
+        /// <returns>An instance of <see cref="SpriteAssortment"/> created from the file.</returns>
+        public static ISpriteAssortment LoadFpg ( string path )
         {
-            var decoder = new FpgSpriteAssetDecoder ();
+            var decoder = new FpgSpriteAssortmentDecoder ();
 
             using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {
@@ -72,17 +72,17 @@ namespace FenixLib.IO
         }
 
         /// <summary>
-        /// Creates a new Fpg file, writes the information of a <see cref="ISpriteAsset"/>,
+        /// Creates a new Fpg file, writes the information of a <see cref="ISpriteAssortment"/>,
         /// and then closes the file. If the target file already exists, it is overwritten.
         /// </summary>
-        /// <param name="asset">The <see cref="SpriteAsset"/> to write to the file.</param>
+        /// <param name="assortment">The <see cref="SpriteAssortment"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-        public static void SaveFpg ( ISpriteAsset asset, string path )
+        public static void SaveFpg ( ISpriteAssortment assortment, string path )
         {
-            var encoder = new FpgSpriteAssetEncoder ();
+            var encoder = new FpgSpriteAssortmentEncoder ();
             using ( var output = System.IO.File.Open ( path, FileMode.Create ) )
             {
-                encoder.Encode ( asset, output );
+                encoder.Encode ( assortment, output );
             }
         }
 
