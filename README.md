@@ -13,7 +13,7 @@ using FenixLib.Core;
 using FenixLib.IO;
 
 // Load a Fpg file
-var spriteAssortment = File.LoadFpg ( "myfpg.fpg" );
+var spriteAssortment = NativeFile.LoadFpg ( "myfpg.fpg" );
 
 // Print out the code and description of every sprite in the Fpg
 foreach ( var sprite in spriteAssortment )
@@ -24,7 +24,7 @@ foreach ( var sprite in spriteAssortment )
 // Change the description of Sprite with code 10
 spriteAssortment[10].Description = "My graphic";
 
-File.SaveFpg ( "modified.fpg" );
+NativeFile.SaveFpg ( "modified.fpg" );
 ```
 
 Another example, see how easy you can create a Fnt font file from scratch:
@@ -42,8 +42,10 @@ var glyphGraphic = new Graphic( GraphicFormat.Format32bppArgb, 10, 10, new byte[
 font['å'] = new Glyph ( glyphGraphic );
 
 // Save the font to a Fnt file (only 'å' will contain a bitmap)
-File.SaveFnt ( 'myfont.fnt' );
+NativeFile.SaveFnt ( 'myfont.fnt' );
 ```
+
+A battery of [examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.
 
 ## Using the library
 If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fpg),  [Map](https://github.com/dacucar/fenixlib/wiki/Native-Format#Map), [Pal](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) and [Fnt](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. 
@@ -53,7 +55,7 @@ If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fp
 
 If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/Native-Formats) and then you will be ready to the topics above.
 
-Or, if you do not like to read, checkout the [Examples](https://github.com/dacucar/fenixlib/wiki/Example) project. Going through the [unit and integration tests](#Running-unit-and-integration-tests) may also be of help if you intend to go deep.
+Or, if you do not like to read, checkout the [example projects](https://github.com/dacucar/fenixlib/wiki/Examples).
 
 ## Compiling
 FenixLib core assembly (FenixLib.dll) runs in any platform with support for .NET framework 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
