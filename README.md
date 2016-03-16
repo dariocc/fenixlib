@@ -1,9 +1,9 @@
 ![FenixLib](http://dacucar.com/fenixlib/fenixlib.png "FenixLib Logo")
 
-FenixLib brings to you.NET support for opening, creating and operating with 
+FenixLib brings to you.NET support for opening, creating and operating with
+native graphic, graphic collections, bitmap fonts and palette formats of
 [PixTudio](https://pixtudio.org), [BennuGD](https://bennugd.org) and 
-[DIV](http://div-arena.co.uk/) native graphic, graphic collections, 
-fonts and palette formats.
+[DIV](http://div-arena.co.uk/) game programming languages and frameworks.
 
 The following snippet shows how easy is to open a Fpg file, print the codes
 and description of every map, change the description of map with code 10 and
@@ -38,6 +38,7 @@ var font = new BitmapFont ( GraphicFormat.Format32bppArgb, FontEncoding.ISO85591
 var glyphGraphic = new StaticGraphic( GraphicFormat.Format32bppArgb, 10, 10, new byte[10 * 10 * 4] );
 
 // Create the glyph and assign it to the letter 'å'
+// å is a character that exists in the ISO8559-1 code page.
 font['å'] = new Glyph ( glyphGraphic );
 
 // Save the font to a Fnt file (only 'å' will contain a bitmap)
@@ -62,7 +63,28 @@ Go ahead and make a clone of this repository:
     
 Then open the ```FenixLib.Sln``` within the ```./fenixlib/FenixLib``` folder with either Visual Studio, MonoDevelop or Xamarin and you are ready to go... FenixLib builds as any other class library. Note that as long as you have a C# compiler for the .NET 4.5 platform you do not need any IDE, but I guess that if you know that you already know what to do... 
 
-Other assemblies might however be dependent on additional libraries, for example [FenixLib.Cairo](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly) offers utility classes to interacting with Mono.Cairo, which requires, of course, Cairo(http://cairographics.org/).
+Additional assemblies might however be dependent on additional libraries, for example [FenixLib.Cairo](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly) offers utility classes to interacting with [Mono.Cairo](http://www.mono-project.com/docs/tools+libraries/libraries/Mono.Cairo/), which requires Mono assemblies.
+
+### Running unit and integration tests
+Along with ```FenixLib``` C# project there is a ``FenixLib.Tests``` project that contains unit and integration tests to validate the functionality of the library. 
+In a similar fashion, additional projects may be accompained by a Test project.
+
+It is my intention to cover as much work units as possible via unit tests but I do not always strictly follow a test-first pattern which makes that some part of the library might 
+not be fully covered. Once the base functionality that the library is intending to offer is completed and covered with unit-tests I intend to adopt a test-first approach for future
+modifications.
+
+I use [NUnit](http://www.nunit.org/) as testing framework and [Rhino Mocks](https://www.hibernatingrhinos.com/oss/rhino-mocks) as mocking framework. Both are available as NuGet packages
+and work seamlessly with both Visual Studio and MonoDevelop / Xamarin.
+
+For each FenixLib assembly there will be, if any, only one Test project. All test projects have a similar structure:
+* An ```Unit``` folder containing all unit tests. I put a lot of effor in doing code refractoring to minimize the overlapping between units and in most situation I try to only test public API. 
+  However, I do make use of the InternalsVisible and test ```internal``` functionality when I decide it is to early to expose a certain class outside the assembly. All unit tests are grouped under the
+  ''unit'' TestCategory.
+
+* An ```Integration``` folder containing tests of groups of functionality. These tests help me test real-case situations such as decoding real files, etc. The tests are still written 
+  as NUnit TestFixtures, but their motivation is different. They are grouped under the ''integration'' TestCategory.
+  
+When cloning the repository, make sure to run the tests to be sure that the library functionality is not broken.
 
 ## Contributing
 There basically three ways in which you can contribute:
