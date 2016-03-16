@@ -23,7 +23,7 @@ namespace FenixLib.IO
 
         protected override int GlyphInfoBlockSize { get; } = 16;
 
-        protected override int CodePageTypeForFont ( BitmapFont font )
+        protected override int CodePageTypeForFont ( IBitmapFont font )
         {
             if ( font.Encoding != FontEncoding.CP850 )
             { 
@@ -33,7 +33,7 @@ namespace FenixLib.IO
             return 0;
         }
 
-        protected override void WriteNativeFormatHeader ( BitmapFont font, 
+        protected override void WriteNativeFormatHeader ( IBitmapFont font, 
             NativeFormatWriter writer )
         {
             if ( font.GraphicFormat.BitsPerPixel != 8 )
@@ -44,9 +44,9 @@ namespace FenixLib.IO
             base.WriteNativeFormatHeader ( font, writer );
         }
 
-        protected override string GetFileMagic ( BitmapFont font ) => "fnt";
+        protected override string GetFileMagic ( IBitmapFont font ) => "fnt";
 
-        protected override byte GetLastHeaderByte ( BitmapFont font ) => Version;
+        protected override byte GetLastHeaderByte ( IBitmapFont font ) => Version;
 
         protected override void WriteGlyphInfo ( ref NativeFormat.GlyphInfo glypInfo,
             NativeFormatWriter writer )

@@ -77,7 +77,7 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="asset">The <see cref="SpriteAsset"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-        public static void SaveFpg ( SpriteAsset asset, string path )
+        public static void SaveFpg ( ISpriteAsset asset, string path )
         {
             FpgSpriteAssetEncoder encoder = new FpgSpriteAssetEncoder ();
             using ( var output = System.IO.File.Open ( path, FileMode.Create ) )

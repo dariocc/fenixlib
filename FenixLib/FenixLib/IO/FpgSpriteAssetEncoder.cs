@@ -18,13 +18,13 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    public class FpgSpriteAssetEncoder : NativeEncoder<SpriteAsset>
+    public class FpgSpriteAssetEncoder : NativeEncoder<ISpriteAsset>
     {
         private const int version = 0x00;
 
-        protected override byte GetLastHeaderByte ( SpriteAsset what ) => version;
+        protected override byte GetLastHeaderByte ( ISpriteAsset what ) => version;
 
-        protected override void WriteNativeFormatBody ( SpriteAsset asset, 
+        protected override void WriteNativeFormatBody ( ISpriteAsset asset, 
             NativeFormatWriter writer )
         {
             // TODO: Test palette == null and GraphicFormat = indexed
@@ -56,7 +56,7 @@ namespace FenixLib.IO
             }
         }
 
-        protected override string GetFileMagic ( SpriteAsset asset )
+        protected override string GetFileMagic ( ISpriteAsset asset )
         {
             switch ( (int) asset.GraphicFormat )
             {

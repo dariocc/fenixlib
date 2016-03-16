@@ -17,16 +17,16 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public abstract class FntAbstractBitmapFontEncoder : NativeEncoder<BitmapFont>
+    public abstract class FntAbstractBitmapFontEncoder : NativeEncoder<IBitmapFont>
     {
         protected abstract int GlyphInfoBlockSize { get; }
 
-        protected abstract int CodePageTypeForFont ( BitmapFont font );
+        protected abstract int CodePageTypeForFont ( IBitmapFont font );
 
         protected abstract void WriteGlyphInfo ( ref GlyphInfo glypInfo, 
             NativeFormatWriter writer );
 
-        protected override void WriteNativeFormatBody ( BitmapFont font, 
+        protected override void WriteNativeFormatBody ( IBitmapFont font, 
             NativeFormatWriter writer )
         {
             if ( (int) font.GraphicFormat == 8 )
