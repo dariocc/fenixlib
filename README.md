@@ -48,8 +48,8 @@ File.SaveFnt ( 'myfont.fnt' );
 ## Using the library
 If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fpg),  [Map](https://github.com/dacucar/fenixlib/wiki/Native-Format#Map), [Pal](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) and [Fnt](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. 
 
-* [Core Types](https://github.com/dacucar/fenixlib/wiki/CoreTypes)
-* [IO Api](https://github.com/dacucar/fenixlib/wiki/IOApi)
+* [Core Types](https://github.com/dacucar/fenixlib/wiki/Core-Types)
+* [IO Api](https://github.com/dacucar/fenixlib/wiki/IO-Api)
 
 If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/Native-Formats) and then you will be ready to the topics above.
 
