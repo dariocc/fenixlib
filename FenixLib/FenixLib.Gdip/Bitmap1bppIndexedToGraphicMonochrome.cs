@@ -41,7 +41,7 @@ namespace FenixLib.IO
                     y * bytesPerRow, bytesPerRow );
             }
 
-            return new StaticGraphic ( GraphicFormat.Format1bppMonochrome, data.Width, data.Height,
+            return new Graphic ( GraphicFormat.Format1bppMonochrome, data.Width, data.Height,
                 pixelData );
         }
     }

@@ -88,7 +88,7 @@
     <Compile Include="Core\ISprite.cs" />
     <Compile Include="Core\ISpriteAssortment.cs" />
     <Compile Include="Core\SpriteAssortmentSprite.cs" />
-    <Compile Include="Core\StaticGraphic.cs" />
+    <Compile Include="Core\Graphic.cs" />
     <Compile Include="Util\Util.cs" />
     <Compile Include="Core\FontEncoding.cs" />
     <Compile Include="IO\DivFntBitmapFontDecoder.cs" />

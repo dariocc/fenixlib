@@ -34,7 +34,7 @@ namespace FenixLib.IO
                     y * data.Width, data.Width );
             }
 
-            return new StaticGraphic ( GraphicFormat.Format16bppRgb565, data.Width, data.Height, 
+            return new Graphic ( GraphicFormat.Format16bppRgb565, data.Width, data.Height, 
                 pixelData );
         }
     }

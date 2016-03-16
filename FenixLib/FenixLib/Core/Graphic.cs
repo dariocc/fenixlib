@@ -16,7 +16,7 @@ using System;
 
 namespace FenixLib.Core
 {
-    public class StaticGraphic : IGraphic
+    public class Graphic : IGraphic
     {
         public int Width { get; }
         public int Height { get; }
@@ -24,7 +24,7 @@ namespace FenixLib.Core
         public byte[] PixelData { get; }
         public GraphicFormat GraphicFormat { get; }
 
-        public StaticGraphic ( GraphicFormat graphicFormat, int width, int height,
+        public Graphic ( GraphicFormat graphicFormat, int width, int height,
             byte[] pixelData, Palette palette = null )
         {
             if ( graphicFormat == null )

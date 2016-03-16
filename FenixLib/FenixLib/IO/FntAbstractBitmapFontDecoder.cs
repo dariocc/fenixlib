@@ -91,7 +91,7 @@ namespace FenixLib.IO
                     byte[] pixels = pixelsReader.ReadPixels ( bpp, character.Width,
                         character.Height );
 
-                    IGraphic graphic = new StaticGraphic ( ( GraphicFormat ) bpp, character.Width,
+                    IGraphic graphic = new Graphic ( ( GraphicFormat ) bpp, character.Width,
                         character.Height, pixels, palette );
                     IGlyph glyph = new Glyph ( graphic );
                     glyph.XAdvance = character.XAdvance;

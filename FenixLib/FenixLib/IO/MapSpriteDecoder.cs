@@ -48,7 +48,7 @@ namespace FenixLib.IO
             var mapDataLength = width * height * ( bpp / 8 );
 			var pixelData = reader.ReadPixels ( header.BitsPerPixel, width, height );
 
-            IGraphic graphic = new StaticGraphic ( ( GraphicFormat ) bpp, 
+            IGraphic graphic = new Graphic ( ( GraphicFormat ) bpp, 
                 width, height, pixelData, palette );
             ISprite sprite = new Sprite ( graphic );
 			sprite.Description = description;

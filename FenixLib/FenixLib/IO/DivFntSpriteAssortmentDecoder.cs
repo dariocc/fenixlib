@@ -52,7 +52,7 @@ namespace FenixLib.IO
                 var pixels = reader.ReadPixels ( header.BitsPerPixel, character.Width, 
                     character.Height );
 
-                IGraphic graphic = new StaticGraphic ( ( GraphicFormat ) header.BitsPerPixel, 
+                IGraphic graphic = new Graphic ( ( GraphicFormat ) header.BitsPerPixel, 
                     character.Width, character.Height, pixels );
 
                 ISprite sprite = new Sprite ( graphic );

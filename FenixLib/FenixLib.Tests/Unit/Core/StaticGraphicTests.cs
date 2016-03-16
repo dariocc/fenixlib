@@ -41,7 +41,7 @@ namespace FenixLib.Tests.Unit.Core
         {
             TestDelegate createGraphic = () => 
             {
-                new StaticGraphic ( GraphicFormat.Format32bppArgb, w, h, argbPixels );
+                new Graphic ( GraphicFormat.Format32bppArgb, w, h, argbPixels );
             };
 
             Assert.That ( createGraphic, Throws.InstanceOf<ArgumentOutOfRangeException> () );
@@ -53,7 +53,7 @@ namespace FenixLib.Tests.Unit.Core
         {
             TestDelegate createGraphic = () =>
             {
-                new StaticGraphic ( GraphicFormat.Format8bppIndexed, 1, 1, indexedPixels, null );
+                new Graphic ( GraphicFormat.Format8bppIndexed, 1, 1, indexedPixels, null );
             };
 
             Assert.That ( createGraphic, Throws.InstanceOf<ArgumentException> () );
@@ -65,7 +65,7 @@ namespace FenixLib.Tests.Unit.Core
             var palette = MockRepository.GenerateStub<Palette> ();
 
             // A non indexed graphic with a non null palette
-            var g = new StaticGraphic ( GraphicFormat.Format32bppArgb, 1, 1, argbPixels, palette );
+            var g = new Graphic ( GraphicFormat.Format32bppArgb, 1, 1, argbPixels, palette );
 
             // Graphic palette still needs to be null
             Assert.That ( g.Palette, Is.Null );
@@ -76,7 +76,7 @@ namespace FenixLib.Tests.Unit.Core
         {
             TestDelegate createGraphic = () =>
             {
-                new StaticGraphic ( GraphicFormat.Format32bppArgb, 1, 1, null );
+                new Graphic ( GraphicFormat.Format32bppArgb, 1, 1, null );
             };
 
             Assert.That ( createGraphic, Throws.InstanceOf<ArgumentNullException> () );
@@ -87,7 +87,7 @@ namespace FenixLib.Tests.Unit.Core
         {
             TestDelegate createGraphic = () =>
             {
-                new StaticGraphic ( null, 1, 1, argbPixels );
+                new Graphic ( null, 1, 1, argbPixels );
             };
 
             Assert.That ( createGraphic, Throws.InstanceOf<ArgumentNullException> () );
@@ -99,7 +99,7 @@ namespace FenixLib.Tests.Unit.Core
             TestDelegate createGraphic = () =>
             {
                 // The pixel data should 4bytes but we pass instead 100
-                new StaticGraphic ( GraphicFormat.Format32bppArgb, 1, 1, new byte[100] );
+                new Graphic ( GraphicFormat.Format32bppArgb, 1, 1, new byte[100] );
             };
 
             Assert.That ( createGraphic, Throws.InstanceOf<ArgumentException> () );

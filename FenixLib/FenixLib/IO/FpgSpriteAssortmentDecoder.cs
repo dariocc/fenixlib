@@ -66,7 +66,7 @@ namespace FenixLib.IO
                     }
 
                     byte[] pixels = reader.ReadPixels ( header.BitsPerPixel, width, height );
-                    IGraphic graphic = new StaticGraphic ( 
+                    IGraphic graphic = new Graphic ( 
                         ( GraphicFormat ) header. BitsPerPixel, 
                         width, height, pixels, palette );
                     ISprite sprite = new Sprite ( graphic );
