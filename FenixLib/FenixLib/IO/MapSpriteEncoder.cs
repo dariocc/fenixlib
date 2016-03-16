@@ -36,7 +36,7 @@ namespace FenixLib.IO
             // TODO: Add test case to ensure that the function fails if sprite.GraphicFormat
             // is Indexed but palette is null
             //if ( ( sprite.Palette != null ) )
-            if ( ( sprite.GraphicFormat == GraphicFormat.RgbIndexedPalette ) )
+            if ( ( sprite.GraphicFormat == GraphicFormat.Format8bppIndexed ) )
             {
                 writer.Write ( sprite.Palette );
                 writer.WriteReservedPaletteGammaSection ();

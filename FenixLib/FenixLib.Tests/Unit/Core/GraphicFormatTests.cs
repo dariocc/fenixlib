@@ -33,14 +33,14 @@ namespace FenixLib.Tests.Unit.Core
             get
             {
                 // Format, Width, Height
-                yield return new TestCaseData ( new object[] { GraphicFormat.ArgbInt32, 10, 10 } ).Returns ( 400 );
-                yield return new TestCaseData ( new object[] { GraphicFormat.RgbInt16, 10, 10 } ).Returns ( 200 );
-                yield return new TestCaseData ( new object[] { GraphicFormat.RgbIndexedPalette, 10, 10 } ).Returns ( 100 );
-                yield return new TestCaseData ( new object[] { GraphicFormat.Monochrome, 10, 10 } ).Returns ( 20 );
-                yield return new TestCaseData ( new object[] { GraphicFormat.Monochrome, 8, 1 } ).Returns ( 1 );
-                yield return new TestCaseData ( new object[] { GraphicFormat.Monochrome, 9, 1 } ).Returns ( 2 );
-                yield return new TestCaseData ( new object[] { GraphicFormat.Monochrome, 81, 2 } ).Returns ( 22 );
-                yield return new TestCaseData ( new object[] { GraphicFormat.Monochrome, 80, 10 } ).Returns ( 100 );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format32bppArgb, 10, 10 } ).Returns ( 400 );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format16bppRgb565, 10, 10 } ).Returns ( 200 );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format8bppIndexed, 10, 10 } ).Returns ( 100 );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format1bppMonochrome, 10, 10 } ).Returns ( 20 );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format1bppMonochrome, 8, 1 } ).Returns ( 1 );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format1bppMonochrome, 9, 1 } ).Returns ( 2 );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format1bppMonochrome, 81, 2 } ).Returns ( 22 );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format1bppMonochrome, 80, 10 } ).Returns ( 100 );
             }
         }
 
@@ -55,10 +55,10 @@ namespace FenixLib.Tests.Unit.Core
             get
             {
                 // Format, Width, Height
-                yield return new TestCaseData ( new object[] { 32 } ).Returns ( GraphicFormat.ArgbInt32 );
-                yield return new TestCaseData ( new object[] { 16 } ).Returns ( GraphicFormat.RgbInt16 );
-                yield return new TestCaseData ( new object[] { 8 } ).Returns ( GraphicFormat.RgbIndexedPalette );
-                yield return new TestCaseData ( new object[] { 1 } ).Returns ( GraphicFormat.Monochrome );
+                yield return new TestCaseData ( new object[] { 32 } ).Returns ( GraphicFormat.Format32bppArgb );
+                yield return new TestCaseData ( new object[] { 16 } ).Returns ( GraphicFormat.Format16bppRgb565 );
+                yield return new TestCaseData ( new object[] { 8 } ).Returns ( GraphicFormat.Format8bppIndexed );
+                yield return new TestCaseData ( new object[] { 1 } ).Returns ( GraphicFormat.Format1bppMonochrome );
             }
         }
 
@@ -73,10 +73,10 @@ namespace FenixLib.Tests.Unit.Core
             get
             {
                 // Format, Width, Height
-                yield return new TestCaseData ( new object[] { GraphicFormat.ArgbInt32 } );
-                yield return new TestCaseData ( new object[] { GraphicFormat.RgbInt16 } );
-                yield return new TestCaseData ( new object[] { GraphicFormat.RgbIndexedPalette } );
-                yield return new TestCaseData ( new object[] { GraphicFormat.Monochrome } );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format32bppArgb } );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format16bppRgb565 } );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format8bppIndexed } );
+                yield return new TestCaseData ( new object[] { GraphicFormat.Format1bppMonochrome } );
             }
         }
     }

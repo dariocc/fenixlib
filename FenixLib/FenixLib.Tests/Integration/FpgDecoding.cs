@@ -74,7 +74,7 @@ namespace FenixLib.Tests.Integration
                 sprite.Stub ( x => x.PixelData ).Return ( PixelData );
 
                 var asset = MockRepository.GenerateStub<ISpriteAsset> ();
-                asset.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Monochrome );
+                asset.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format1bppMonochrome );
                 asset.Stub ( x => x[1] ).Return ( new SpriteAssetSprite ( 1, sprite ) );
 
                 asset.Stub ( x => x.Sprites ).Return ( new SpriteAssetSprite[] { asset[1] } );

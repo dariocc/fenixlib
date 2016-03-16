@@ -27,7 +27,7 @@ namespace FenixLib.Core
         public SpriteAsset ( GraphicFormat format, Palette palette = null ) :
             this ( CreateSpriteCollection ( format ) )
         {
-            if ( format == GraphicFormat.RgbIndexedPalette )
+            if ( format == GraphicFormat.Format8bppIndexed )
             {
                 if ( palette == null )
                 {
@@ -38,7 +38,7 @@ namespace FenixLib.Core
             }
         }
 
-        public SpriteAsset ( Palette palette ) : this ( GraphicFormat.RgbIndexedPalette, palette ) { }
+        public SpriteAsset ( Palette palette ) : this ( GraphicFormat.Format8bppIndexed, palette ) { }
 
         // Injecting the collection increases testability 
         private SpriteAsset ( UniformFormatGraphicDictionary<int, SpriteAssetSprite> sprites )

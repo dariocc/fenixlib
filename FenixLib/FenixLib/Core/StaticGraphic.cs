@@ -44,7 +44,7 @@ namespace FenixLib.Core
                     nameof ( height ), height, "Negative values are not accepted." );
             }
 
-            if ( graphicFormat == GraphicFormat.RgbIndexedPalette && palette == null )
+            if ( graphicFormat == GraphicFormat.Format8bppIndexed && palette == null )
             {
                 throw new ArgumentException ( "A palette is required if, and only if, "
                     + "graphicFormat == GraphicFormat.RgbIndexedPalette.", nameof ( palette ) );
@@ -63,7 +63,7 @@ namespace FenixLib.Core
 
             Width = width;
             Height = height;
-            Palette = graphicFormat == GraphicFormat.RgbIndexedPalette ? palette : null;
+            Palette = graphicFormat == GraphicFormat.Format8bppIndexed ? palette : null;
             GraphicFormat = graphicFormat;
             PixelData = pixelData;
         }

@@ -86,7 +86,7 @@ namespace FenixLib.Tests.Integration
 
                 IBitmapFont stub = MockRepository.GenerateStub<IBitmapFont> ();
                 stub.Stub ( x => x.Glyphs ).Return ( glyphs );
-                stub.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.RgbIndexedPalette );
+                stub.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format8bppIndexed );
 
                 return stub;
             }

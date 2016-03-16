@@ -28,7 +28,7 @@ namespace FenixLib.IO
             NativeFormatWriter writer )
         {
             // TODO: Test palette == null and GraphicFormat = indexed
-            if ( asset.GraphicFormat == GraphicFormat.RgbIndexedPalette )
+            if ( asset.GraphicFormat == GraphicFormat.Format8bppIndexed )
             {
                 writer.Write ( asset.Palette );
                 writer.WriteReservedPaletteGammaSection ();

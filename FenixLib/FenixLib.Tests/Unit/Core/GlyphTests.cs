@@ -32,7 +32,7 @@ namespace FenixLib.Tests.Unit.Core
             IGraphic fakeGraphic = MockRepository.GenerateStub<IGraphic> ();
             fakeGraphic.Stub ( x => x.Width ).Return ( 1 );
             fakeGraphic.Stub ( x => x.Height ).Return ( 1 );
-            fakeGraphic.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+            fakeGraphic.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format32bppArgb );
             fakeGraphic.Stub ( x => x.PixelData ).Return ( new byte[1] );
 
             return fakeGraphic;

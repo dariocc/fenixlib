@@ -31,7 +31,7 @@ namespace FenixLib.Core
         public BitmapFont ( FontEncoding encoding, GraphicFormat format,
             Palette palette = null )
         {
-            if ( format == GraphicFormat.RgbIndexedPalette )
+            if ( format == GraphicFormat.Format8bppIndexed )
             {
                 if ( palette == null )
                 {
@@ -47,7 +47,7 @@ namespace FenixLib.Core
         }
 
         public BitmapFont ( FontEncoding encoding, Palette palette )
-            : this ( encoding, GraphicFormat.RgbIndexedPalette, palette )
+            : this ( encoding, GraphicFormat.Format8bppIndexed, palette )
         { }
 
         public IGlyph this[char character]

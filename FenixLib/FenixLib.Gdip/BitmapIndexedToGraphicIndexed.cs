@@ -50,7 +50,7 @@ namespace FenixLib.IO
 
 
             var palette = new Palette ( colors );
-            IGraphic graphic = new StaticGraphic ( GraphicFormat.RgbIndexedPalette, 
+            IGraphic graphic = new StaticGraphic ( GraphicFormat.Format8bppIndexed, 
                 SourceBitmap.Width, SourceBitmap.Height, pixelData, palette );
 
             return graphic;

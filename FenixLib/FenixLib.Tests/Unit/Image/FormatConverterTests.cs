@@ -45,7 +45,7 @@ namespace FenixLib.Core.Tests.Image
 
             stubGraphic1bpp = MockRepository.GenerateStub<IGraphic> ();
             stubGraphic1bpp.Stub ( x => x.PixelData ).Return ( pixelData1bpp );
-            stubGraphic1bpp.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Monochrome );
+            stubGraphic1bpp.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format1bppMonochrome );
         }
 
         private void SetUpIndexedStub()
@@ -76,7 +76,7 @@ namespace FenixLib.Core.Tests.Image
             stubGraphic8bpp = MockRepository.GenerateStub<IGraphic> ();
             stubGraphic8bpp.Stub ( x => x.PixelData ).Return ( pixelData8bpp );
             stubGraphic8bpp.Stub ( x => x.Palette ).Return ( new Palette ( colors ) );
-            stubGraphic8bpp.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.RgbIndexedPalette );
+            stubGraphic8bpp.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format8bppIndexed );
         }
 
         private void SetUp16bppStub()

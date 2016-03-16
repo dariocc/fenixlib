@@ -30,9 +30,9 @@ namespace FenixLib.Tests.Unit.Core
         [SetUp]
         public void SetUp ()
         {
-            stubFont32 = new BitmapFont ( FontEncoding.ISO85591, GraphicFormat.ArgbInt32 );
+            stubFont32 = new BitmapFont ( FontEncoding.ISO85591, GraphicFormat.Format32bppArgb );
 
-            stubFont16 = new BitmapFont ( FontEncoding.ISO85591, GraphicFormat.RgbInt16  );
+            stubFont16 = new BitmapFont ( FontEncoding.ISO85591, GraphicFormat.Format16bppRgb565  );
 
             stubGlyph32 = new Glyph ( CreateFakeGraphic ( 32 ) );
             stubGlyph16 = new Glyph ( CreateFakeGraphic ( 16 ) );

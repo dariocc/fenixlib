@@ -31,7 +31,7 @@ namespace FenixLib.Tests.Unit.Core
             fakeGlyph = MockRepository.GenerateStub<IGlyph> ();
             fakeGlyph.Stub ( x => x.Width ).Return ( 1 );
             fakeGlyph.Stub ( x => x.Height ).Return ( 1 );
-            fakeGlyph.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+            fakeGlyph.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format32bppArgb );
 
             aFontGlyph = new FontGlyph ( 'a', fakeGlyph );
             equivalentFontGlyph = new FontGlyph ( aFontGlyph.Character, fakeGlyph );

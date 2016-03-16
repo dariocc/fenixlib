@@ -28,8 +28,8 @@ namespace FenixLib.IO
 
         protected override IGraphic GetGraphicCore ( BitmapData data )
         {
-            int bytesPerRow = GraphicFormat.Monochrome.PixelsBytesForSize ( data.Width, 1 );
-            byte[] pixelData = new byte[GraphicFormat.Monochrome.PixelsBytesForSize (
+            int bytesPerRow = GraphicFormat.Format1bppMonochrome.PixelsBytesForSize ( data.Width, 1 );
+            byte[] pixelData = new byte[GraphicFormat.Format1bppMonochrome.PixelsBytesForSize (
                     data.Width, data.Height )];
 
             // Monochrome bitmaps are packed as the FenixLib 1bpp format, but they are differently
@@ -41,7 +41,7 @@ namespace FenixLib.IO
                     y * bytesPerRow, bytesPerRow );
             }
 
-            return new StaticGraphic ( GraphicFormat.Monochrome, data.Width, data.Height,
+            return new StaticGraphic ( GraphicFormat.Format1bppMonochrome, data.Width, data.Height,
                 pixelData );
         }
     }

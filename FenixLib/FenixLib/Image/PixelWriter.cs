@@ -61,15 +61,15 @@ namespace FenixLib.Image
 
             PixelWriter pixelWriter;
 
-            if ( format == GraphicFormat.ArgbInt32 )
+            if ( format == GraphicFormat.Format32bppArgb )
             {
                 pixelWriter = new PixelWriterArgbInt32 ();
             }
-            else if ( format == GraphicFormat.RgbInt16 )
+            else if ( format == GraphicFormat.Format16bppRgb565 )
             {
                 pixelWriter = new PixelWriterRgbInt16 ();
             }
-            else if ( format == GraphicFormat.RgbIndexedPalette )
+            else if ( format == GraphicFormat.Format8bppIndexed )
             {
                 if ( destPalette == null )
                 {
@@ -79,7 +79,7 @@ namespace FenixLib.Image
 
                 pixelWriter = new PixelWriterRgbIndexed ( destPalette );
             }
-            else if ( format == GraphicFormat.Monochrome )
+            else if ( format == GraphicFormat.Format1bppMonochrome )
             {
                 pixelWriter = new PixelWriterMonochrome ();
             }

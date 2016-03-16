@@ -49,13 +49,13 @@ namespace FenixLib.Core
             switch ( value )
             {
                 case 1:
-                    return Monochrome;
+                    return Format1bppMonochrome;
                 case 8:
-                    return RgbIndexedPalette;
+                    return Format8bppIndexed;
                 case 16:
-                    return RgbInt16;
+                    return Format16bppRgb565;
                 case 32:
-                    return ArgbInt32;
+                    return Format32bppArgb;
             }
 
             throw new ArgumentException ();
@@ -71,9 +71,9 @@ namespace FenixLib.Core
             return name;
         }
 
-        public static GraphicFormat Monochrome = new GraphicFormat ( 1, nameof ( Monochrome ) );
-        public static GraphicFormat RgbIndexedPalette = new GraphicFormat ( 8, nameof ( RgbIndexedPalette ) );
-        public static GraphicFormat RgbInt16 = new GraphicFormat ( 16, nameof ( RgbInt16 ) );
-        public static GraphicFormat ArgbInt32 = new GraphicFormat ( 32, nameof ( ArgbInt32 ) );
+        public static GraphicFormat Format1bppMonochrome = new GraphicFormat ( 1, nameof ( Format1bppMonochrome ) );
+        public static GraphicFormat Format8bppIndexed = new GraphicFormat ( 8, nameof ( Format8bppIndexed ) );
+        public static GraphicFormat Format16bppRgb565 = new GraphicFormat ( 16, nameof ( Format16bppRgb565 ) );
+        public static GraphicFormat Format32bppArgb = new GraphicFormat ( 32, nameof ( Format32bppArgb ) );
     }
 }

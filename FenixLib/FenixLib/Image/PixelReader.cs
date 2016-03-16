@@ -60,13 +60,13 @@ namespace FenixLib.Image
         {
             PixelReader pixelReader;
 
-            if ( graphic.GraphicFormat == GraphicFormat.ArgbInt32 )
+            if ( graphic.GraphicFormat == GraphicFormat.Format32bppArgb )
                 pixelReader = new PixelReaderArgbInt32 ();
-            else if ( graphic.GraphicFormat == GraphicFormat.RgbIndexedPalette )
+            else if ( graphic.GraphicFormat == GraphicFormat.Format8bppIndexed )
                 pixelReader = new PixelReaderRgbInt16 ();
-            else if ( graphic.GraphicFormat == GraphicFormat.RgbIndexedPalette )
+            else if ( graphic.GraphicFormat == GraphicFormat.Format8bppIndexed )
                 pixelReader = new PixelReaderRgbIndexed ();
-            else if ( graphic.GraphicFormat == GraphicFormat.Monochrome )
+            else if ( graphic.GraphicFormat == GraphicFormat.Format1bppMonochrome )
                 pixelReader = new PixelReaderMonochrome ();
             else
                 throw new ArgumentOutOfRangeException ( "Unsupported GraphicFormat" );

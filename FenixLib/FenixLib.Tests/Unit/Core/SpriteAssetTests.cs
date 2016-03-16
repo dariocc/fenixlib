@@ -32,20 +32,20 @@ namespace FenixLib.Tests.Unit.Core
         [SetUp]
         public void SetUp ()
         {
-            argb32Asset = new SpriteAsset ( GraphicFormat.ArgbInt32 );
+            argb32Asset = new SpriteAsset ( GraphicFormat.Format32bppArgb );
             palettizedAsset = new SpriteAsset ( MockRepository.GenerateStub<Palette> () );
 
             fakeSpriteArgb32 = MockRepository.GenerateStub<ISprite> ();
-            fakeSpriteArgb32.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+            fakeSpriteArgb32.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format32bppArgb );
 
             fakeSpriteIndexed = MockRepository.GenerateStub<ISprite> ();
-            fakeSpriteIndexed.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.RgbIndexedPalette );
+            fakeSpriteIndexed.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format8bppIndexed );
         }
 
         [Test]
         public void Construct_NullPaletteWhenFormatIsRgbIndexed_ThrowsException ()
         {
-            Assert.That ( () => new SpriteAsset ( GraphicFormat.RgbIndexedPalette, null ),
+            Assert.That ( () => new SpriteAsset ( GraphicFormat.Format8bppIndexed, null ),
                 Throws.ArgumentNullException );
         }
 
@@ -53,7 +53,7 @@ namespace FenixLib.Tests.Unit.Core
         public void SpriteAsset_NotNullPaletteWhenFormatIsNotRgbIndexed_PaletteIsNotAssigned ()
         {
             var palette = MockRepository.GenerateStub<Palette> ();
-            var asset = new SpriteAsset ( GraphicFormat.ArgbInt32, palette );
+            var asset = new SpriteAsset ( GraphicFormat.Format32bppArgb, palette );
 
             Assert.That ( asset.Palette, Is.Null );
         }
@@ -103,7 +103,7 @@ namespace FenixLib.Tests.Unit.Core
 
             const string aDescription = "Another sprite";
             var anotherFakeSprite = MockRepository.GenerateStub<ISprite> ();
-            anotherFakeSprite.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+            anotherFakeSprite.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format32bppArgb );
             anotherFakeSprite.Description = aDescription;
             anotherFakeSprite.Stub ( x => x.PivotPoints ).Return ( new PivotPoint[0] );
 

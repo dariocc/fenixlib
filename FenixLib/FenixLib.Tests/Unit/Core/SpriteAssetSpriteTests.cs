@@ -31,7 +31,7 @@ namespace FenixLib.Tests.Unit.Core
             fakeSprite = MockRepository.GenerateStub<ISprite> ();
             fakeSprite.Stub ( x => x.Width ).Return ( 1 );
             fakeSprite.Stub ( x => x.Height ).Return ( 1 );
-            fakeSprite.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.ArgbInt32 );
+            fakeSprite.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format32bppArgb );
 
             spriteAssetSprite = new SpriteAssetSprite ( 10, fakeSprite );
             equivalentSprite = new SpriteAssetSprite ( 10, fakeSprite );

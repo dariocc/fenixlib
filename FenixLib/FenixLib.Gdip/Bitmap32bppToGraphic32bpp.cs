@@ -25,7 +25,7 @@ namespace FenixLib.IO
 
         protected override IGraphic GetGraphicCore ( BitmapData data )
         {
-            byte[] pixelData = new byte[GraphicFormat.ArgbInt32.PixelsBytesForSize (
+            byte[] pixelData = new byte[GraphicFormat.Format32bppArgb.PixelsBytesForSize (
                 data.Width, data.Height )];
 
             for ( int y = 0 ; y < data.Height ; y++ )
@@ -34,7 +34,7 @@ namespace FenixLib.IO
                     y * data.Width, data.Width );
             }
 
-            return new StaticGraphic ( GraphicFormat.ArgbInt32, data.Width, data.Height,
+            return new StaticGraphic ( GraphicFormat.Format32bppArgb, data.Width, data.Height,
                 pixelData );
         }
     }

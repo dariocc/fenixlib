@@ -33,7 +33,7 @@ namespace FenixLib.Core.Tests.Image
             IFormatConverter converter = CreateConverter ();
 
             Assert.Throws<ArgumentNullException>(() => 
-                converter.Convert ( null, GraphicFormat.ArgbInt32 ));
+                converter.Convert ( null, GraphicFormat.Format32bppArgb ));
 
         }
 
