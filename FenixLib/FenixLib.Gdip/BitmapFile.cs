@@ -24,7 +24,7 @@ namespace FenixLib.IO
     /// Provides static methods for the opening and creation of Bitmap file
     /// formats.
     /// </summary>
-    static class BitmapFile
+    public static class BitmapFile
     {
         public static IGraphic Load ( string path )
         {

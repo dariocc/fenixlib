@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="FenixLib.Core.licenseheader" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\FenixLib.Gdip\FenixLib.Gdip.csproj">
@@ -58,6 +60,12 @@
       <Project>{e110df41-cae8-4dcc-9a41-09864e5651dd}</Project>
       <Name>FenixLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\TestFiles\pig.png">
+      <Link>pig.png</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
