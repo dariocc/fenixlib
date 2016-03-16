@@ -13,10 +13,10 @@ using FenixLib.Core;
 using FenixLib.IO;
 
 // Load a Fpg file
-SpriteAsset asset = File.LoadFpg ( "myfpg.fpg" );
+var asset = File.LoadFpg ( "myfpg.fpg" );
 
 // Print out the code and description of every sprite in the Fpg
-foreach ( Sprite sprite in asset )
+foreach ( var sprite in asset )
 {
 	System.Console.WriteLine ( sprite.Id.ToString() + " - " + sprite.Description );
 }
@@ -24,22 +24,23 @@ foreach ( Sprite sprite in asset )
 // Change the description of Sprite with code 10
 asset[10].Description = "My graphic";
 
-File.SaveFpg ( "modified.fpg",  );
+File.SaveFpg ( "modified.fpg" );
 ```
 
-Another cool example, see how easy it is to create a font file:
+Another example, see how easy you can create a Fnt font file from scratch:
 ```csharp
 using FenixLib.Core;
 using FenixLib.IO;
 
-BitmapFont font = BitmapFont.Create ( GraphicFormat.Argb32, FontEncoding.ISO85591 );
+var font = new BitmapFont ( GraphicFormat.Argb32, FontEncoding.ISO85591 );
 
-// Create a 10x10 useless graphic to be used by the glyph
-IGraphic glyphGraphic = new StaticGraphic( GraphicFormat.ArgbInt32, 10, 10, new byte[10 * 10 * 4] );
-// Create the glyph and assign it to the letter 'Å'
+// Create a 10x10 transparent graphic
+var glyphGraphic = new StaticGraphic( GraphicFormat.ArgbInt32, 10, 10, new byte[10 * 10 * 4] );
+
+// Create the glyph and assign it to the letter 'å'
 font['å'] = new Glyph ( glyphGraphic );
 
-// Save the font to a Fnt file
+// Save the font to a Fnt file (only 'å' will contain a bitmap)
 File.SaveFnt ( 'myfont.fnt' );
 ```
 
@@ -48,13 +49,11 @@ If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/FpgFormat),  [Ma
 
 * [Core Types](https://github.com/dacucar/fenixlib/wiki/CoreTypes)
 * [IO Api](https://github.com/dacucar/fenixlib/wiki/IOApi)
-* [Image Api](https://github.com/dacucar/fenixlib/wiki/ImageApi)
-* [Image Api Backends](https://github.com/dacucar/fenixlib/wiki/ImageBackends)
 
 If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/NativeFormats) and then you will be ready to the topics above.
 
 ## Compiling
-FenixLib core assembly runs in any platform with support for .NET 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
+FenixLib core assembly (FenixLib.dll) runs in any platform with support for .NET framework 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
 [MonoDevelop / Xamarin](http://www.monodevelop.com/) and I have succesfully built it from Windows, Linux and OSX.
 
 Go ahead and make a clone of this repository:
@@ -63,14 +62,12 @@ Go ahead and make a clone of this repository:
     
 Then open the ```FenixLib.Sln``` within the ```./fenixlib/FenixLib``` folder with either Visual Studio, MonoDevelop or Xamarin and you are ready to go... FenixLib builds as any other class library. Note that as long as you have a C# compiler for the .NET 4.5 platform you do not need any IDE, but I guess that if you know that you already know what to do... 
 
-The [Image Api Backends](https://github.com/dacucar/fenixlib/wiki/ImageBackEnds) and auxiliary assemblies might however be platform dependent. This is done on purpose, to take the most of each system. For example, the classes exposed by the FenixLib.Wpf are dependent on the [Wpf](https://msdn.microsoft.com/en-us/library/ms754130.aspx) assemblies.
-
-For more detailed instructions refer to the [Compiling FenixLib](https://github.com/dacucar/fenixlib/wiki/Compiling) section of the Wiki.
+Other assemblies might however be dependent on additional libraries, for example [FenixLib.Cairo](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly) offers utility classes to interacting with Mono.Cairo, which requires, of course, Cairo(http://cairographics.org/).
 
 ## Contributing
 There basically three ways in which you can contribute:
   1. Reporting issues or feature requests. 
-  2. Joining the development.
+  2. Sending your code contributions.
   3. Donating.
   4. Letting me know how useful is this to you.
   5. Hire me!
@@ -80,8 +77,8 @@ Well, that was 5 actually! Let's have a look on each of them:
 ### Reporting issues or feature requests
 Use the [issues](https://github.com/dacucar/fenixlib/issues) section. Any feature request shall also be written there.
 
-### Joining the development
-If you feel to contribute with actual code, you can. Make sure to read the [FenixLib Architecture](https://github.com/dacucar/fenixlib/wiki/Architecture) notes and the [Coding Conventions](https://github.com/dacucar/fenixlib/wiki/CodingConventions). Then the best is that you create a fork of this project, make your modifications and then do a pull request. I will review the submissions and merge with the main stream if they belong to scope of fenixlib. If you plan to contribute it is always good to contact me so as we avoid working on the same areas.
+### Sending your code contributions
+If you modify FenixLib or extended and you think your modifications are useful for everyone, you are welcomed to send your pull requests. Be sure to have a look at existing code so as your code is formatted consistently with FenixLib standards and so as you follow same type of naming convention.
 
 ### Donating
 If FenixLib is useful to you and you want so, you are welcomed to fund this project. For the price of a cup of coffee at your local cafeteria, I will keep my spirit fully loaded to mantain and extend this project.
@@ -93,8 +90,8 @@ If you are donating to get some particular feature done, you are very welcomed t
 ### Letting me know how useful is this to you
 If FenixLib is useful to you but donating is not an option for you, don't worry, you can still contribute by simply letting me know where and how do you use FenixLib. I am honour with every end-user and very willing to know about projects using my work.
 
-### Hire me!
-I develop FenixLib for free and for the fun of it. But as many other people I need to earn a living. If you are a talent hunter or recruiter and believe that [my skills]() suit to your project don't be shy and contact me. I offer a set of [services]() that might be of interest. Check my [profile](), you'll discover something that might be interesting.
+### Hire me! :)
+I develop FenixLib for free and for the fun of it. If you believe that something you see here might suit your projects needs don't be shy feel free to contact me.
 
 ## License
 Copyright 2016 Darío Cutillas Carrillo
