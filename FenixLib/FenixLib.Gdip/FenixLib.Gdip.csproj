@@ -45,12 +45,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapExtensions.cs" />
+    <Compile Include="BitmapFile.cs" />
     <Compile Include="BitmapToGraphicConverter.cs" />
     <Compile Include="Bitmap16bppToGraphic16bpp.cs" />
     <Compile Include="Bitmap1bppIndexedToGraphicMonochrome.cs" />
     <Compile Include="Bitmap32bppToGraphic32bpp.cs" />
     <Compile Include="BitmapIndexedToGraphicIndexed.cs" />
-    <Compile Include="GdipImageGraphicDecoder.cs" />
+    <Compile Include="BitmapGraphicDecoder.cs" />
+    <Compile Include="GraphicToBitmapConverter.cs" />
     <Compile Include="IBitmapConverter.cs" />
   </ItemGroup>
   <ItemGroup>

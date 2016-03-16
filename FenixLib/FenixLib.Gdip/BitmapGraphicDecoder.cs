@@ -22,7 +22,11 @@ using System.Drawing.Imaging;
 
 namespace FenixLib.IO
 {
-    public class GdipBitmapGraphicDecoder : IDecoder<IGraphic>
+    /// <summary>
+    /// A <see cref="IGraphic"/> decoder that can read GDI+ supported file formats such as 
+    /// PNG, BMP, TIFF, an others. The number of formats depend on the target platform.
+    /// </summary>
+    public class BitmapGraphicDecoder : IDecoder<IGraphic>
     {
         public IEnumerable<string> SupportedExtensions
         {

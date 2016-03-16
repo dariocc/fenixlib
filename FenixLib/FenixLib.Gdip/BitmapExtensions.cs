@@ -12,27 +12,18 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+using System.Drawing;
 using FenixLib.Core;
-using FenixLib.IO;
-using System.IO;
 
-namespace TestDirty
+namespace FenixLib.IO
 {
-    class Program
+    public static class BitmapExtensions
     {
-        static void Main ( string[] args )
+        public static Bitmap ToBitmap ( IGraphic graphic )
         {
-            var decoder = new BitmapGraphicDecoder ();
-            var graphic = decoder.Decode ( System.IO.File.Open ( "1bpp_8x1.bmp", FileMode.Open ) );
-
-            Sprite s = new Sprite ( graphic );
-            s.Description = "This is an example of a Map File";
-            var encoder = new MapSpriteEncoder ();
-
-            using ( var stream = new FileStream ( "saved.map", FileMode.Create ) )
-            {
-                encoder.Encode ( s, stream );
-            }
+            var converter = new GraphicToBitmapConverter ();
+            converter.SourceGraphic = graphic;
+            return converter.GetBitmap ();
         }
     }
 }

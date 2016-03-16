@@ -34,7 +34,7 @@ namespace FenixLib.IO
         {
             var decoder = new MapSpriteDecoder ();
 
-            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
+            using ( var stream = File.Open ( path, FileMode.Open ) )
             {
                 return decoder.Decode ( stream );
             }
@@ -49,7 +49,7 @@ namespace FenixLib.IO
 		public static void SaveMap ( ISprite sprite, string path )
         {
             var encoder = new MapSpriteEncoder ();
-            using ( var output = System.IO.File.Open ( path, FileMode.Create ) )
+            using ( var output = File.Open ( path, FileMode.Create ) )
             {
                 encoder.Encode ( sprite, output );
             }
@@ -65,7 +65,7 @@ namespace FenixLib.IO
         {
             var decoder = new FpgSpriteAssortmentDecoder ();
 
-            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
+            using ( var stream = File.Open ( path, FileMode.Open ) )
             {
                 return decoder.Decode ( stream );
             }
@@ -80,7 +80,7 @@ namespace FenixLib.IO
         public static void SaveFpg ( ISpriteAssortment assortment, string path )
         {
             var encoder = new FpgSpriteAssortmentEncoder ();
-            using ( var output = System.IO.File.Open ( path, FileMode.Create ) )
+            using ( var output = File.Open ( path, FileMode.Create ) )
             {
                 encoder.Encode ( assortment, output );
             }
@@ -92,7 +92,7 @@ namespace FenixLib.IO
             var divFontDecoder = new DivFntBitmapFontDecoder ();
             var extendedFontDecoder = new ExtendedFntBitmapFontDecoder ();
 
-            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
+            using ( var stream = File.Open ( path, FileMode.Open ) )
             {
                 IBitmapFont font;
                 // DivFont decoder is used by default, ExtendedFontDecoder is used
@@ -137,7 +137,7 @@ namespace FenixLib.IO
                 encoder = new ExtendedFntBitmapFontEncoder ();
             }
 
-            using ( var output = System.IO.File.Open ( path, FileMode.Create ) )
+            using ( var output = File.Open ( path, FileMode.Create ) )
             {
                 encoder.Encode ( font, output );
             }
@@ -153,7 +153,7 @@ namespace FenixLib.IO
         {
             var decoder = new DivFilePaletteDecoder ();
 
-            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
+            using ( var stream = File.Open ( path, FileMode.Open ) )
             {
                 return decoder.Decode ( stream );
             }
@@ -169,7 +169,7 @@ namespace FenixLib.IO
         {
             var encoder = new PalPaletteEncoder ();
 
-            using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
+            using ( var stream = File.Open ( path, FileMode.Open ) )
             {
                 encoder.Encode ( palette, stream );
             }
