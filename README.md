@@ -13,7 +13,7 @@ using FenixLib.Core;
 using FenixLib.IO;
 
 // Load a Fpg file
-var spriteAssortment = File.LoadFpg ( "myfpg.fpg" );
+var spriteAssortment = NativeFile.LoadFpg ( "myfpg.fpg" );
 
 // Print out the code and description of every sprite in the Fpg
 foreach ( var sprite in spriteAssortment )
@@ -24,7 +24,7 @@ foreach ( var sprite in spriteAssortment )
 // Change the description of Sprite with code 10
 spriteAssortment[10].Description = "My graphic";
 
-File.SaveFpg ( "modified.fpg" );
+NativeFile.SaveFpg ( "modified.fpg" );
 ```
 
 Another example, see how easy you can create a Fnt font file from scratch:
@@ -42,7 +42,7 @@ var glyphGraphic = new Graphic( GraphicFormat.Format32bppArgb, 10, 10, new byte[
 font['å'] = new Glyph ( glyphGraphic );
 
 // Save the font to a Fnt file (only 'å' will contain a bitmap)
-File.SaveFnt ( 'myfont.fnt' );
+NativeFile.SaveFnt ( 'myfont.fnt' );
 ```
 
 A battery of [examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.
