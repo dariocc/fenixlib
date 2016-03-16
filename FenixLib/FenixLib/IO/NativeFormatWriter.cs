@@ -29,20 +29,13 @@ namespace FenixLib.IO
 
         public NativeFormatWriter ( Stream input ) : base ( input, encoding ) { }
 
-        private void WriteHeader ( string formatHeader, byte version )
-        {
-            if ( formatHeader.Length != 3 )
-            {
-                throw new ArgumentException (); // TODO: Customize
-            }
-
-            base.Write ( encoding.GetBytes ( formatHeader ) );
-            base.Write ( NativeFormat.Terminator );
-            base.Write ( version );
-        }
-
         public void WriteAsciiZ ( string text, int maxLength )
         {
+            if ( text == null )
+            {
+                throw new ArgumentNullException ( nameof ( text ) );
+            }
+
             // Texts are encoded in ASCIZZ format
             var clippedText = text.Substring ( 0, Math.Min ( text.Length, maxLength ) );
             var bytes = encoding.GetBytes ( clippedText.ToCharArray () );
@@ -50,27 +43,32 @@ namespace FenixLib.IO
             base.Write ( bytes );
         }
 
-        public void WriteExtendedGlyphInfo ( ref NativeFormat.GlyphInfo glypInfo )
+        public void WriteExtendedGlyphInfo ( ref NativeFormat.GlyphInfo glyphInfo )
         {
-           Write ( ( int ) glypInfo.Width );
-           Write ( ( int ) glypInfo.Height );
-           Write ( ( int ) glypInfo.YOffset );
-           Write ( ( int ) glypInfo.FileOffset);
+            Write ( ( int ) glyphInfo.Width );
+            Write ( ( int ) glyphInfo.Height );
+            Write ( ( int ) glyphInfo.YOffset );
+            Write ( ( int ) glyphInfo.FileOffset );
         }
 
-        public void WriteLegacyFntGlyphInfo ( ref NativeFormat.GlyphInfo glypInfo )
+        public void WriteLegacyFntGlyphInfo ( ref NativeFormat.GlyphInfo glyphInfo )
         {
-            Write ( ( int ) glypInfo.Width );
-            Write ( ( int ) glypInfo.Height );
-            Write ( ( int ) glypInfo.XAdvance );
-            Write ( ( int ) glypInfo.XOffset );
-            Write ( ( int ) glypInfo.YOffset );
-            Write ( ( int ) glypInfo.YAdvance );
-            Write ( ( int ) glypInfo.FileOffset );
+            Write ( ( int ) glyphInfo.Width );
+            Write ( ( int ) glyphInfo.Height );
+            Write ( ( int ) glyphInfo.XAdvance );
+            Write ( ( int ) glyphInfo.XOffset );
+            Write ( ( int ) glyphInfo.YOffset );
+            Write ( ( int ) glyphInfo.YAdvance );
+            Write ( ( int ) glyphInfo.FileOffset );
         }
 
         public void Write ( Palette palette )
         {
+            if ( palette == null )
+            {
+                throw new ArgumentNullException ( nameof ( palette ) );
+            }
+
             byte[] bytes = new byte[palette.Colors.Length * 3];
             for ( var n = 0 ; n < palette.Colors.Length ; n++ )
             {
@@ -84,6 +82,11 @@ namespace FenixLib.IO
 
         public void Write ( IEnumerable<PivotPoint> pivotPoints )
         {
+            if ( pivotPoints == null )
+            {
+                throw new ArgumentNullException ( nameof ( pivotPoints ) );
+            }
+
             var ids = from p in pivotPoints select p.Id;
 
             if ( ids.Count () == 0 )
@@ -94,8 +97,8 @@ namespace FenixLib.IO
             {
                 var id = n;
                 PivotPoint? p = pivotPoints.Where ( x => x.Id == id ).FirstOrDefault ();
-                pivotPointsIncludingUndefined[n] = p == null 
-                    ? new PivotPoint ( id, -1, -1 ) 
+                pivotPointsIncludingUndefined[n] = p == null
+                    ? new PivotPoint ( id, -1, -1 )
                     : new PivotPoint ( id, p.Value.X, p.Value.Y );
             }
 
