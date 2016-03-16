@@ -45,6 +45,8 @@ font['å'] = new Glyph ( glyphGraphic );
 File.SaveFnt ( 'myfont.fnt' );
 ```
 
+A battery of [Examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.
+
 ## Using the library
 If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fpg),  [Map](https://github.com/dacucar/fenixlib/wiki/Native-Format#Map), [Pal](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) and [Fnt](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. 
 
