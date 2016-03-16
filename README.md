@@ -46,12 +46,12 @@ File.SaveFnt ( 'myfont.fnt' );
 ```
 
 ## Using the library
-If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/FpgFormat),  [Map](https://github.com/dacucar/fenixlib/wiki/MapFormat), [Pal](https://github.com/dacucar/fenixlib/wiki/PalFormat) and [Fnt](https://github.com/dacucar/fenixlib/wiki/FntFormat) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. 
+If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fpg),  [Map](https://github.com/dacucar/fenixlib/wiki/Native-Format#Map), [Pal](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) and [Fnt](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. 
 
 * [Core Types](https://github.com/dacucar/fenixlib/wiki/CoreTypes)
 * [IO Api](https://github.com/dacucar/fenixlib/wiki/IOApi)
 
-If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/NativeFormats) and then you will be ready to the topics above.
+If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/Native-Formats) and then you will be ready to the topics above.
 
 ## Compiling
 FenixLib core assembly (FenixLib.dll) runs in any platform with support for .NET framework 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
@@ -66,8 +66,7 @@ Then open the ```FenixLib.Sln``` within the ```./fenixlib/FenixLib``` folder wit
 Additional assemblies might however be dependent on additional libraries, for example [FenixLib.Cairo](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly) offers utility classes to interacting with [Mono.Cairo](http://www.mono-project.com/docs/tools+libraries/libraries/Mono.Cairo/), which requires Mono assemblies.
 
 ### Running unit and integration tests
-Along with ```FenixLib``` C# project there is a ``FenixLib.Tests``` project that contains unit and integration tests to validate the functionality of the library. 
-In a similar fashion, additional projects may be accompained by a Test project.
+Along with ```FenixLib``` C# project there is a ```FenixLib.Tests``` project that contains unit and integration tests to validate the functionality of the library. Complementary projects may be accompained by a Test project following the pattern  ```<ProjectName>.Tests>```.
 
 It is my intention to cover as much work units as possible via unit tests but I do not always strictly follow a test-first pattern which makes that some part of the library might 
 not be fully covered. Once the base functionality that the library is intending to offer is completed and covered with unit-tests I intend to adopt a test-first approach for future
