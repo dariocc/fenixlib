@@ -35,7 +35,7 @@ using FenixLib.IO;
 var font = new BitmapFont ( GraphicFormat.Format32bppArgb, FontEncoding.ISO85591 );
 
 // Create a 10x10 transparent graphic
-var glyphGraphic = new StaticGraphic( GraphicFormat.Format32bppArgb, 10, 10, new byte[10 * 10 * 4] );
+var glyphGraphic = new Graphic( GraphicFormat.Format32bppArgb, 10, 10, new byte[10 * 10 * 4] );
 
 // Create the glyph and assign it to the letter 'å'
 // å is a character that exists in the ISO8559-1 code page.
