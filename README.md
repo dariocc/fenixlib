@@ -1,6 +1,6 @@
 ![FenixLib](http://dacucar.com/fenixlib/fenixlib.png "FenixLib Logo")
 
-FenixLib brings to you.NET support for opening, creating and operating with
+FenixLib brings .Net support for opening, creating and operating with
 native graphic, graphic collections, bitmap fonts and palette formats of
 [PixTudio](https://pixtudio.org), [BennuGD](https://bennugd.org) and 
 [DIV](http://div-arena.co.uk/) game programming languages and frameworks.
@@ -13,16 +13,16 @@ using FenixLib.Core;
 using FenixLib.IO;
 
 // Load a Fpg file
-var asset = File.LoadFpg ( "myfpg.fpg" );
+var spriteAssortment = File.LoadFpg ( "myfpg.fpg" );
 
 // Print out the code and description of every sprite in the Fpg
-foreach ( var sprite in asset )
+foreach ( var sprite in spriteAssortment )
 {
 	System.Console.WriteLine ( sprite.Id.ToString() + " - " + sprite.Description );
 }
 
 // Change the description of Sprite with code 10
-asset[10].Description = "My graphic";
+spriteAssortment[10].Description = "My graphic";
 
 File.SaveFpg ( "modified.fpg" );
 ```
@@ -52,6 +52,8 @@ If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fp
 * [IO Api](https://github.com/dacucar/fenixlib/wiki/IO-Api)
 
 If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/Native-Formats) and then you will be ready to the topics above.
+
+Or, if you do not like to read, checkout the [Examples](https://github.com/dacucar/fenixlib/wiki/Example) project. Going through the [unit and integration tests](#Running-unit-and-integration-tests) may also be of help if you intend to go deep.
 
 ## Compiling
 FenixLib core assembly (FenixLib.dll) runs in any platform with support for .NET framework 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
