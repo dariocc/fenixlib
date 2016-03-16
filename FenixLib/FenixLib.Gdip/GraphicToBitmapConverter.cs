@@ -75,7 +75,9 @@ namespace FenixLib.IO
                 int srcStrideSize = SourceGraphic.GraphicFormat.PixelsBytesForSize ( width, 1 );
                 for ( int y = 0 ; y < height ; y++ )
                 {
-                    Marshal.Copy ( SourceGraphic.PixelData, y * srcStrideSize, data.Scan0, 
+                    Marshal.Copy ( SourceGraphic.PixelData, 
+                        y * srcStrideSize, 
+                        data.Scan0 + y * data.Stride, 
                         srcStrideSize );
                 }
             }

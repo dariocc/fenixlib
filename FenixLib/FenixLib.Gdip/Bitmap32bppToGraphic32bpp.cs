@@ -28,10 +28,12 @@ namespace FenixLib.IO
             byte[] pixelData = new byte[GraphicFormat.Format32bppArgb.PixelsBytesForSize (
                 data.Width, data.Height )];
 
+            int destStride = GraphicFormat.Format32bppArgb.PixelsBytesForSize ( data.Width, 1 );
+
             for ( int y = 0 ; y < data.Height ; y++ )
             {
                 Marshal.Copy ( IntPtr.Add ( data.Scan0, y * data.Stride ), pixelData,
-                    y * data.Width, data.Width );
+                    y * destStride, destStride );
             }
 
             return new Graphic ( GraphicFormat.Format32bppArgb, data.Width, data.Height,
