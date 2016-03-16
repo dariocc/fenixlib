@@ -18,10 +18,10 @@ using FenixLib.Core;
 namespace FenixLib.IO
 {
     /// <summary>
-    /// Provides static methods for the opening and creation of Bennu native file
-    /// format.
+    /// Provides static methods for the opening and creation of native file
+    /// formats.
     /// </summary>
-	public static class File
+	public static class NativeFile
     {
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace FenixLib.IO
         /// <returns>An instance of <see cref="Sprite"/> created from the file.</returns>
 		public static ISprite LoadMap ( string path )
         {
-            MapSpriteDecoder decoder = new MapSpriteDecoder ();
+            var decoder = new MapSpriteDecoder ();
 
             using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {
@@ -46,9 +46,9 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="sprite">The <see cref="Sprite"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-		public static void SaveMap ( Sprite sprite, string path )
+		public static void SaveMap ( ISprite sprite, string path )
         {
-            MapSpriteEncoder encoder = new MapSpriteEncoder ();
+            var encoder = new MapSpriteEncoder ();
             using ( var output = System.IO.File.Open ( path, FileMode.Create ) )
             {
                 encoder.Encode ( sprite, output );
@@ -63,7 +63,7 @@ namespace FenixLib.IO
         /// <returns>An instance of <see cref="SpriteAsset"/> created from the file.</returns>
         public static ISpriteAsset LoadFpg ( string path )
         {
-            FpgSpriteAssetDecoder decoder = new FpgSpriteAssetDecoder ();
+            var decoder = new FpgSpriteAssetDecoder ();
 
             using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {
@@ -72,33 +72,75 @@ namespace FenixLib.IO
         }
 
         /// <summary>
-        /// Creates a new Fpg file, writes the information of a <see cref="SpriteAsset"/>,
+        /// Creates a new Fpg file, writes the information of a <see cref="ISpriteAsset"/>,
         /// and then closes the file. If the target file already exists, it is overwritten.
         /// </summary>
         /// <param name="asset">The <see cref="SpriteAsset"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
         public static void SaveFpg ( ISpriteAsset asset, string path )
         {
-            FpgSpriteAssetEncoder encoder = new FpgSpriteAssetEncoder ();
+            var encoder = new FpgSpriteAssetEncoder ();
             using ( var output = System.IO.File.Open ( path, FileMode.Create ) )
             {
                 encoder.Encode ( asset, output );
             }
         }
 
+
         public static IBitmapFont LoadFnt ( string path )
         {
-            FntAbstractBitmapFontDecoder decoder = new DivFntBitmapFontDecoder ();
+            var divFontDecoder = new DivFntBitmapFontDecoder ();
+            var extendedFontDecoder = new ExtendedFntBitmapFontDecoder ();
 
             using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {
-                return decoder.Decode ( stream );
+                IBitmapFont font;
+                // DivFont decoder is used by default, ExtendedFontDecoder is used
+                // as fall back
+                if ( ! divFontDecoder.TryDecode ( stream, out font ) )
+                {
+                    return extendedFontDecoder.Decode ( stream);
+                }
+
+                return font;
             }
-        } 
+        }
 
-        public static void SaveFnt ( BitmapFont font, string path )
+        /// <summary>
+        /// Creates a new Fnt file, writes the information of a <see cref="IBitmapFont"/>,
+        /// and then closes the file. If the target file already exists, it is overwritten.
+        /// Bitmap fonts are encoded by default using a
+        /// <see cref="ExtendedFntBitmapFontEncoder"/>, except except when the font's 
+        /// <see cref="BitmapFont.Encoding"/> property is set to 
+        /// <seealso cref="FontEncoding.CP850"/> and the <see cref="GraphicFormat"/> 
+        /// is <see cref="GraphicFormat.Format8bppIndexed" />, in which case the encoder
+        /// used will be <see cref="DivFntBitmapFontEncoder"/>. It is possible to force the
+        /// use of <see cref="ExtendedFntBitmapFontEncoder"/> by defining the 
+        /// <paramref name="forceExtendedFontEncoding"/> parameter as true.
+        /// </summary>
+        /// <param name="font"></param>
+        /// <param name="path"></param>
+        /// <param name="forceExtendedFontEncoding"></param>
+        public static void SaveFnt ( IBitmapFont font, string path, 
+            bool forceExtendedFontEncoding = false )
         {
+            FntAbstractBitmapFontEncoder encoder;
 
+            if (font.GraphicFormat == GraphicFormat.Format8bppIndexed 
+                && font.Encoding == FontEncoding.CP850
+                && !forceExtendedFontEncoding)
+            {
+                encoder = new DivFntBitmapFontEncoder ();
+            }
+            else
+            {
+                encoder = new ExtendedFntBitmapFontEncoder ();
+            }
+
+            using ( var output = System.IO.File.Open ( path, FileMode.Create ) )
+            {
+                encoder.Encode ( font, output );
+            }
         }
 
         /// <summary>
@@ -109,7 +151,7 @@ namespace FenixLib.IO
         /// <returns>An instance of <see cref="Palette"/> created from the file.</returns>
         public static Palette LoadPal ( string path )
         {
-            DivFilePaletteDecoder decoder = new DivFilePaletteDecoder ();
+            var decoder = new DivFilePaletteDecoder ();
 
             using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {
@@ -125,7 +167,7 @@ namespace FenixLib.IO
         /// <param name="path">The file to write to.</param>
         public static void SavePal ( Palette palette, string path )
         {
-            PalPaletteEncoder encoder = new PalPaletteEncoder ();
+            var encoder = new PalPaletteEncoder ();
 
             using ( var stream = System.IO.File.Open ( path, FileMode.Open ) )
             {

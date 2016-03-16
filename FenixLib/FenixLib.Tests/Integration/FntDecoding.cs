@@ -20,7 +20,7 @@ using System.IO;
 using System.Collections;
 using FenixLib.Tests.Integration.Comparison;
 using FenixLib.Core;
-using static FenixLib.IO.File;
+using static FenixLib.IO.NativeFile;
 
 namespace FenixLib.Tests.Integration
 {

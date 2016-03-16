@@ -92,7 +92,7 @@
     <Compile Include="Util\Util.cs" />
     <Compile Include="Core\FontEncoding.cs" />
     <Compile Include="IO\DivFntBitmapFontDecoder.cs" />
-    <Compile Include="IO\File.cs" />
+    <Compile Include="IO\NativeFile.cs" />
     <Compile Include="Core\GraphicFormat.cs" />
     <Compile Include="Core\Exceptions.cs" />
     <Compile Include="Core\Glyph.cs" />

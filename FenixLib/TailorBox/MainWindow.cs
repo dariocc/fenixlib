@@ -30,7 +30,7 @@ public partial class MainWindow : Gtk.Window
 
         if ( dialog.Run () == ( int ) ResponseType.Accept )
         {
-            fpg = File.LoadFpg ( dialog.Filename );
+            fpg = NativeFile.LoadFpg ( dialog.Filename );
         }
 
         Gtk.ListStore store = new ListStore ( typeof ( string ) );
