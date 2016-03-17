@@ -46,7 +46,7 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="sprite">The <see cref="Sprite"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-		public static void SaveMap ( ISprite sprite, string path )
+		public static void SaveAsMap ( this ISprite sprite, string path )
         {
             var encoder = new MapSpriteEncoder ();
             using ( var output = File.Open ( path, FileMode.Create ) )
@@ -77,7 +77,7 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="assortment">The <see cref="SpriteAssortment"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-        public static void SaveFpg ( ISpriteAssortment assortment, string path )
+        public static void SaveAsFpg ( this ISpriteAssortment assortment, string path )
         {
             var encoder = new FpgSpriteAssortmentEncoder ();
             using ( var output = File.Open ( path, FileMode.Create ) )
@@ -121,7 +121,7 @@ namespace FenixLib.IO
         /// <param name="font"></param>
         /// <param name="path"></param>
         /// <param name="forceExtendedFontEncoding"></param>
-        public static void SaveFnt ( IBitmapFont font, string path, 
+        public static void SaveAsFnt ( this IBitmapFont font, string path, 
             bool forceExtendedFontEncoding = false )
         {
             FntAbstractBitmapFontEncoder encoder;
@@ -165,7 +165,7 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="palette">The <see cref="Palette"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-        public static void SavePal ( Palette palette, string path )
+        public static void SaveAsPal ( this Palette palette, string path )
         {
             var encoder = new PalPaletteEncoder ();
 
