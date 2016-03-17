@@ -13,17 +13,27 @@
 *   limitations under the License.
 */
 using System.Drawing;
+using System.Drawing.Imaging;
 using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    public static class BitmapExtensions
+    public static class GraphicExtensions
     {
         public static Bitmap ToBitmap ( IGraphic graphic )
         {
             var converter = new GraphicToBitmapConverter ();
             converter.SourceGraphic = graphic;
             return converter.GetBitmap ();
+        }
+    }
+
+    public static class BitmapExtensions
+    {
+        public static IGraphic ToGraphic ( this Bitmap bitmap )
+        {
+            var converter = (new Bitmap2GraphicConverterFactory ()).Create( bitmap );
+            return converter.Convert( bitmap );
         }
     }
 }

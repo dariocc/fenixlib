@@ -22,9 +22,9 @@ namespace FenixLib.IO
     /// <summary>
     /// Creates Monochrome Graphics from a 1bppIndexed GDIP Bitmap
     /// </summary>
-    internal class Bitmap1bppIndexedToGraphicMonochrome : BitmapToGraphicConverter
+    internal class Bitmap1bppIndexedToGraphicMonochrome : Bitmap2GraphicConverter
     {
-        protected override PixelFormat InputReadFormat => PixelFormat.Format1bppIndexed;
+        protected override PixelFormat ReadAsFormat => PixelFormat.Format1bppIndexed;
 
         protected override IGraphic GetGraphicCore ( BitmapData data )
         {

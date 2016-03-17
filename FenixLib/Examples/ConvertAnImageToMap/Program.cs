@@ -1,10 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿/*  Copyright 2016 Darío Cutillas Carrillo
+*
+*   Licensed under the Apache License, Version 2.0 (the "License");
+*   you may not use this file except in compliance with the License.
+*   You may obtain a copy of the License at
+*
+*       http://www.apache.org/licenses/LICENSE-2.0
+*
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*/
 using System.IO;
+using System.Drawing;
 using FenixLib.Core;
 using FenixLib.IO;
 
@@ -14,9 +23,16 @@ namespace ConvertImageToMap
     {
         static void Main ( string[] args )
         {
-            // Common image raster formats can be loaded via the functionality exposed
-            // by FenixLib.Gdip assembly (which uses System.Drawing)
+            // The FenixLib.Gdip assembly provides helper methods to load raster images
             var graphic = BitmapFile.Load ( "pig.png" );
+
+            // You can also use Bitmap > Graphic conversion facilities provided by 
+            // extension methods for the Bitmap class.
+            using ( var bitmap = new Bitmap ( "pig.png" ) )
+            {
+                var anotherGraphic = bitmap.ToGraphic ();
+            }
+
 
             // Create an sprite from that graphic
             var sprite = new Sprite ( graphic );

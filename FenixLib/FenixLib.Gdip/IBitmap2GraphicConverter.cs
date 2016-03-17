@@ -17,10 +17,8 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    internal interface IBitmapConverter
+    public interface IBitmap2GraphicConverter
     {
-        Bitmap SourceBitmap { get; set; }
-
-        IGraphic GetGraphic ();
+        IGraphic Convert (Bitmap src);
     }
 }

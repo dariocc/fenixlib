@@ -19,28 +19,29 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    internal abstract class BitmapToGraphicConverter : IBitmapConverter
+    /// <summary>
+    /// Common behvaiour of several Bitmap2Graphic converter subclasses.
+    /// </summary>
+    public abstract class Bitmap2GraphicConverter : IBitmap2GraphicConverter
     {
+        protected abstract PixelFormat[] AcceptedFormats { get; }
+        protected abstract PixelFormat ReadAsFormat { get; }
 
-        protected abstract PixelFormat InputReadFormat { get; }
+        protected abstract IGraphic GetGraphicCore ( Bitmap src, BitmapData lockedData );
 
-        protected abstract IGraphic GetGraphicCore ( BitmapData data );
-
-        public Bitmap SourceBitmap { get; set; }
-
-        public IGraphic GetGraphic ()
+        public IGraphic Convert (Bitmap src)
         {
-            if ( SourceBitmap == null )
+            if ( src == null )
             {
-                throw new InvalidOperationException ();
+                throw new ArgumentNullException (nameof( src ) );
             }
 
-            var rect = new Rectangle ( 0, 0, SourceBitmap.Width, SourceBitmap.Height );
+            var rect = new Rectangle ( 0, 0, src.Width, src.Height );
 
             BitmapData data;
             try
             {
-                data = SourceBitmap.LockBits ( rect, ImageLockMode.ReadOnly, InputReadFormat );
+                data = src.LockBits ( rect, ImageLockMode.ReadOnly, ReadAsFormat );
             }
             catch ( Exception e )
             {
@@ -50,13 +51,12 @@ namespace FenixLib.IO
 
             try
             {
-                return GetGraphicCore ( data );
+                return GetGraphicCore ( src, data );
             }
             finally
             {
-                SourceBitmap.UnlockBits ( data );
+                src.UnlockBits ( data );
             }
-
         }
     }
 }

@@ -50,10 +50,10 @@ namespace FenixLib.IO
             {
                 using ( Bitmap bmp = new Bitmap ( input ) )
                 {
-                    IBitmapConverter converter = GetDefaultConverterForFormat ( bmp.PixelFormat );
+                    IBitmap2GraphicConverter converter = GetDefaultConverterForFormat ( bmp.PixelFormat );
                     converter.SourceBitmap = bmp;
 
-                    return converter.GetGraphic ();
+                    return converter.Convert ();
                 }
             }
             catch ( Exception e )
@@ -78,9 +78,9 @@ namespace FenixLib.IO
         }
 
         // Acts as a static factory for getting the best Converter for the specified format
-        private IBitmapConverter GetDefaultConverterForFormat ( PixelFormat format )
+        private IBitmap2GraphicConverter GetDefaultConverterForFormat ( PixelFormat format )
         {
-            IBitmapConverter converter;
+            IBitmap2GraphicConverter converter;
 
             switch ( format )
             {

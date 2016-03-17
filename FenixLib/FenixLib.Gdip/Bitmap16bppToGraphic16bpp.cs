@@ -19,9 +19,9 @@ using System.Runtime.InteropServices;
 
 namespace FenixLib.IO
 {
-    internal class Bitmap16bppToGraphic16bpp : BitmapToGraphicConverter
+    internal class Bitmap16bppToGraphic16bpp : Bitmap2GraphicConverter
     {
-        protected override PixelFormat InputReadFormat => PixelFormat.Format16bppRgb565;
+        protected override PixelFormat ReadAsFormat => PixelFormat.Format16bppRgb565;
 
         protected override IGraphic GetGraphicCore ( BitmapData data )
         {
