@@ -15,6 +15,7 @@
 using FenixLib.Core;
 using FenixLib.IO;
 using System.IO;
+using FenixLib.BitmapConvert;
 
 namespace TestDirty
 {
@@ -22,17 +23,6 @@ namespace TestDirty
     {
         static void Main ( string[] args )
         {
-            var decoder = new BitmapGraphicDecoder ();
-            var graphic = decoder.Decode ( System.IO.File.Open ( "1bpp_8x1.bmp", FileMode.Open ) );
-
-            Sprite s = new Sprite ( graphic );
-            s.Description = "This is an example of a Map File";
-            var encoder = new MapSpriteEncoder ();
-
-            using ( var stream = new FileStream ( "saved.map", FileMode.Create ) )
-            {
-                encoder.Encode ( s, stream );
-            }
         }
     }
 }
