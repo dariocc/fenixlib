@@ -26,7 +26,7 @@ namespace FenixLib.IO
     /// <summary>
     /// A <see cref="IGraphic"/> decoder that can read GDI+ supported image formats.
     /// </summary>
-    public class BitmapGraphicDecoder : IDecoder<IGraphic>
+    public class BitmapFileGraphicDecoder : IDecoder<IGraphic>
     {
         public IEnumerable<string> SupportedExtensions
         {

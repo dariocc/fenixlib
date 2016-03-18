@@ -92,7 +92,7 @@ namespace FenixLib.IO
             if ( ids.Count () == 0 )
                 return;
 
-            PivotPoint[] pivotPointsIncludingUndefined = new PivotPoint[ids.Max ()];
+            PivotPoint[] pivotPointsIncludingUndefined = new PivotPoint[ids.Max () + 1];
             for ( var n = 0 ; n <= ids.Max () ; n++ )
             {
                 var id = n;

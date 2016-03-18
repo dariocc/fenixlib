@@ -16,6 +16,7 @@ using System.IO;
 using System.Drawing;
 using FenixLib.Core;
 using FenixLib.IO;
+using FenixLib.BitmapConvert;
 
 namespace ConvertImageToMap
 {
@@ -23,32 +24,56 @@ namespace ConvertImageToMap
     {
         static void Main ( string[] args )
         {
-            // The FenixLib.Gdip assembly provides helper methods to load raster images
+            /* The FenixLib.Gdip assembly provides useful classes to perform
+               System.Drawing.Bitmap > FenixLib.Core.IGraphic conversion operations.
+
+               This permits bridgin FenixLib with the System.Drawing API.
+            */
+
+            // Raster images supported by the Gdip may be loaded directly into IGraphic
+            // instances by using helper methods of the BitmapFile static class:
             var graphic = BitmapFile.Load ( "pig.png" );
 
-            // You can also use Bitmap > Graphic conversion facilities provided by 
-            // extension methods for the Bitmap class.
-            using ( var bitmap = new Bitmap ( "pig.png" ) )
+            // If the Bitmap is not contained in a file, but comes from an stream you
+            // may want to take advantage of the BitmapFileGraphicDecoder, which implements
+            // FenixLib.IO.IDecoder, just like any other decoder function of the 
+            // FenixLib.IO namespace
+            using ( var stream = new FileStream ( "pig.png", FileMode.Open ) )
             {
-                var anotherGraphic = bitmap.ToGraphic ();
+                var decoder = new BitmapFileGraphicDecoder ();
+                var aGraphic = decoder.Decode ( stream );
+
+                // do something with aGraphic
             }
 
+            // An alternative is to use FenixLib extension methods of the Bitmap class
+            // to perform conversion from System.Drawing.Bitmap to FenixLib.Core.IGraphic
+            using ( var bitmap = new Bitmap ( "pig.png" ) )
+            {
+                var aGraphic = bitmap.ToGraphic ();
 
-            // Create an sprite from that graphic
+                // do something with aGraphic
+            }
+
+            // Once you have a FenixLib.IGraphic, you might want to create an sprite
+            // from it. It is as easy as passing the graphic to the constructor of the
+            // FenixLib.Core.Sprite class
             var sprite = new Sprite ( graphic );
+
+            // Modify some Sprite-specific properties
             sprite.Description = "My converted sprite";
+            sprite.DefinePivotPoint ( 0, 100, 100 );
 
-            // The sprite can now be encoded to a Map file. Convience static methods
-            // are defined in the NativeFile static class:
-            NativeFile.SaveAsMap ( sprite, "pig.map" );
+            // And save it as a Map file using the helper functions of the NativeFile
+            // class
+            NativeFile.SaveToMap ( sprite, "pig.map" );
 
-            // Which can also be used as an extension method for ISprite
-            sprite.SaveAsMap ( "same-pig.map" );
+            // Which conveniently are defined as extension methods, so you can just write:
+            sprite.SaveToMap ( "same-pig.map" );
 
-            // NOTE: Check the bin folder to find the generated files
-
-            // Alternatively, you can gain flexibility by using directly one of the 
-            // encoders defined in the FenixLib.IO namespace.
+            // Or, for added flexibility, you can directly use any of the defined
+            // IDecoder<Sprite> classes of the FenixLib.IO namespace. You can then choose
+            // to output to any stream.
             using ( var stream = new MemoryStream () )
             {
                 var encoder = new MapSpriteEncoder ();

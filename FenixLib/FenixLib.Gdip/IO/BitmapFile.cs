@@ -26,7 +26,7 @@ namespace FenixLib.IO
     {
         public static IGraphic Load ( string path )
         {
-            var decoder = new BitmapGraphicDecoder ();
+            var decoder = new BitmapFileGraphicDecoder ();
 
             using ( var stream = File.Open ( path, FileMode.Open ) )
             {

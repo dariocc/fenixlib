@@ -46,7 +46,7 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="sprite">The <see cref="Sprite"/> to write to the file.</param>
         /// <param name="path">The file to write to.</param>
-		public static void SaveAsMap ( this ISprite sprite, string path )
+		public static void SaveToMap ( this ISprite sprite, string path )
         {
             var encoder = new MapSpriteEncoder ();
             using ( var output = File.Open ( path, FileMode.Create ) )
