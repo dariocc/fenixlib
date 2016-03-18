@@ -104,9 +104,14 @@ namespace FenixLib.IO
 
             foreach ( PivotPoint pivotPoint in pivotPointsIncludingUndefined )
             {
-                Write ( Convert.ToInt16 ( pivotPoint.X ) );
-                Write ( Convert.ToInt16 ( pivotPoint.Y ) );
+                Write ( pivotPoint );
             }
+        }
+
+        public void Write (PivotPoint pivotPoint)
+        {
+            Write ( Convert.ToInt16 ( pivotPoint.X ) );
+            Write ( Convert.ToInt16 ( pivotPoint.Y ) );
         }
 
         public void WriteReservedPaletteGammaSection ()
