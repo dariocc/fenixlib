@@ -7,7 +7,7 @@
     <ProjectGuid>{98E6EDD7-CC46-45F4-AC06-748EBC1BCD24}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FenixLib.IO</RootNamespace>
+    <RootNamespace>FenixLib</RootNamespace>
     <AssemblyName>FenixLib.Gdip</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -45,23 +45,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bitmap2GraphicConverterFactory.cs" />
-    <Compile Include="IBitmap2GraphicConverterFactory.cs" />
-    <Compile Include="BitmapExtensions.cs" />
-    <Compile Include="BitmapFile.cs" />
-    <Compile Include="BitmapToGraphicConverter.cs" />
-    <Compile Include="Bitmap16bppToGraphic16bpp.cs" />
-    <Compile Include="Bitmap1bppIndexedToGraphicMonochrome.cs" />
-    <Compile Include="Bitmap32bppToGraphic32bpp.cs" />
-    <Compile Include="BitmapIndexedToGraphicIndexed.cs" />
-    <Compile Include="BitmapGraphicDecoder.cs" />
-    <Compile Include="GraphicToBitmapConverter.cs" />
-    <Compile Include="IBitmap2GraphicConverter.cs" />
+    <Compile Include="BitmapConvert\BitmapToGraphicConverterCreator.cs" />
+    <Compile Include="BitmapConvert\GraphicConversion.cs" />
+    <Compile Include="BitmapConvert\IBitmapToGraphicConverterCreator.cs" />
+    <Compile Include="BitmapConvert\BitmapConversion.cs" />
+    <Compile Include="IO\BitmapFile.cs" />
+    <Compile Include="BitmapConvert\BitmapToGraphicConverter.cs" />
+    <Compile Include="BitmapConvert\BitmapTo16bppGraphicConverter.cs" />
+    <Compile Include="BitmapConvert\BitmapTo1bppGraphicConverter.cs" />
+    <Compile Include="BitmapConvert\BitmapTo32bppGraphicConverter.cs" />
+    <Compile Include="BitmapConvert\BitmapTo8bppGraphicConverter.cs" />
+    <Compile Include="IO\BitmapGraphicDecoder.cs" />
+    <Compile Include="BitmapConvert\GraphicToBitmapConverter.cs" />
+    <Compile Include="BitmapConvert\IBitmapToGraphicConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

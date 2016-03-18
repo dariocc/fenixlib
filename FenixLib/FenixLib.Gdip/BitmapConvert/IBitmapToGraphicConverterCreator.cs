@@ -17,11 +17,11 @@ using FenixLib.Core;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace FenixLib.IO
+namespace FenixLib.BitmapConvert
 {
-    public interface IBitmap2GraphicConverterFactory
+    public interface IBitmapToGraphicConverterCreator
     {
-        IBitmap2GraphicConverter Create (Bitmap src);
-        IBitmap2GraphicConverter Create ( Bitmap src, GraphicFormat destFormat );
+        IBitmapToGraphicConverter Create (Bitmap src);
+        IBitmapToGraphicConverter Create ( Bitmap src, GraphicFormat destFormat );
     }
 }

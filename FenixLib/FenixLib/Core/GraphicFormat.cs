@@ -44,6 +44,11 @@ namespace FenixLib.Core
             return byteLength;
         }
 
+        public int StrideForWidth (int width)
+        {
+            return PixelsBytesForSize ( width, 1 );
+        }
+
         public static explicit operator GraphicFormat ( int value )
         {
             switch ( value )

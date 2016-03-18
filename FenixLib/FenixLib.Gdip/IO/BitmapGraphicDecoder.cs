@@ -15,16 +15,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FenixLib.Core;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using FenixLib.Core;
+using FenixLib.BitmapConvert;
 
 namespace FenixLib.IO
 {
     /// <summary>
-    /// A <see cref="IGraphic"/> decoder that can read GDI+ supported file formats such as 
-    /// PNG, BMP, TIFF, an others. The number of formats depend on the target platform.
+    /// A <see cref="IGraphic"/> decoder that can read GDI+ supported image formats.
     /// </summary>
     public class BitmapGraphicDecoder : IDecoder<IGraphic>
     {
@@ -35,23 +35,32 @@ namespace FenixLib.IO
                 ImageCodecInfo[] myCodecs;
                 myCodecs = ImageCodecInfo.GetImageEncoders ();
 
-                return myCodecs.SelectMany(c => c.FilenameExtension.Split ( ';' ));
+                return myCodecs.SelectMany ( c => c.FilenameExtension.Split ( ';' ) );
             }
         }
 
         public IGraphic Decode ( Stream input )
         {
+            return Decode ( input, new BitmapToGraphicConverterCreator () );
+        }
+
+        internal IGraphic Decode ( Stream input,
+            IBitmapToGraphicConverterCreator converterCreator )
+        {
             if ( input == null )
             {
                 throw new ArgumentNullException ( nameof ( input ) );
+            }
+            else if ( converterCreator == null )
+            {
+                throw new ArgumentNullException ( nameof ( converterCreator ) );
             }
 
             try
             {
                 using ( Bitmap bmp = new Bitmap ( input ) )
                 {
-                    IBitmap2GraphicConverter converter = GetDefaultConverterForFormat ( bmp.PixelFormat );
-                    converter.SourceBitmap = bmp;
+                    var converter = converterCreator.Create ( bmp );
 
                     return converter.Convert ();
                 }
@@ -75,37 +84,6 @@ namespace FenixLib.IO
                 decoded = null;
                 return false;
             }
-        }
-
-        // Acts as a static factory for getting the best Converter for the specified format
-        private IBitmap2GraphicConverter GetDefaultConverterForFormat ( PixelFormat format )
-        {
-            IBitmap2GraphicConverter converter;
-
-            switch ( format )
-            {
-                case PixelFormat.Format1bppIndexed:
-                    converter = new Bitmap1bppIndexedToGraphicMonochrome ();
-                    break;
-
-                case PixelFormat.Format4bppIndexed:
-                case PixelFormat.Format8bppIndexed:
-                    converter = new BitmapIndexedToGraphicIndexed ();
-                    break;
-
-                case PixelFormat.Format16bppArgb1555:
-                    // TODO: This format should have special treatment
-                case PixelFormat.Format16bppRgb555:
-                case PixelFormat.Format16bppRgb565:
-                    converter = new Bitmap16bppToGraphic16bpp ();
-                    break;
-
-                default: // Any other format shall be read as 32bpp format
-                    converter = new Bitmap32bppToGraphic32bpp ();
-                    break;
-            }
-
-            return converter;
         }
     }
 }

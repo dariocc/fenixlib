@@ -18,7 +18,7 @@ using System.Drawing.Imaging;
 using FenixLib.Core;
 using System.Runtime.InteropServices;
 
-namespace FenixLib.IO
+namespace FenixLib.BitmapConvert
 {
     // TODO: Everything in here is very dirty...
     internal class GraphicToBitmapConverter

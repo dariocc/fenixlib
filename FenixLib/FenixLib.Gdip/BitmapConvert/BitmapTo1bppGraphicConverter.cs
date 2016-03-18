@@ -12,28 +12,29 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 using FenixLib.Core;
 
-namespace FenixLib.IO
+namespace FenixLib.BitmapConvert
 {
-    public static class GraphicExtensions
+    /// <summary>
+    /// Creates Monochrome Graphics from a 1bppIndexed GDIP Bitmap
+    /// </summary>
+    internal class BitmapTo1bppGraphicConverter : Bitmap2GraphicConverter
     {
-        public static Bitmap ToBitmap ( IGraphic graphic )
-        {
-            var converter = new GraphicToBitmapConverter ();
-            converter.SourceGraphic = graphic;
-            return converter.GetBitmap ();
-        }
-    }
+        public BitmapTo1bppGraphicConverter ( Bitmap src ) : base ( src )
+        { }
 
-    public static class BitmapExtensions
-    {
-        public static IGraphic ToGraphic ( this Bitmap bitmap )
+        protected override PixelFormat[] AcceptedFormats => new PixelFormat[]
         {
-            var converter = (new Bitmap2GraphicConverterFactory ()).Create( bitmap );
-            return converter.Convert( bitmap );
-        }
+            PixelFormat.Format1bppIndexed
+        };
+
+        protected override GraphicFormat DestFormat => GraphicFormat.Format1bppMonochrome;
+
+        protected override PixelFormat LockBitsFormat => PixelFormat.Format1bppIndexed;
     }
 }

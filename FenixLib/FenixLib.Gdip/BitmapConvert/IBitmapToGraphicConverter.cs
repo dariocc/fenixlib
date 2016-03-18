@@ -12,28 +12,13 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using System;
-using System.IO;
+using System.Drawing;
 using FenixLib.Core;
 
-namespace FenixLib.IO
+namespace FenixLib.BitmapConvert
 {
-    /// <summary>
-    /// Helper class.
-    /// 
-    /// Provides static methods for the opening and creation of Bitmap file
-    /// formats.
-    /// </summary>
-    public static class BitmapFile
+    public interface IBitmapToGraphicConverter
     {
-        public static IGraphic Load ( string path )
-        {
-            var decoder = new BitmapGraphicDecoder ();
-
-            using ( var stream = File.Open ( path, FileMode.Open ) )
-            {
-                return decoder.Decode ( stream );
-            }
-        }
+        IGraphic Convert ();
     }
 }
