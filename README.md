@@ -24,7 +24,7 @@ foreach ( var sprite in spriteAssortment )
 // Change the description of Sprite with code 10
 spriteAssortment[10].Description = "My graphic";
 
-NativeFile.SaveFpg ( "modified.fpg" );
+spriteAssortment.SaveToFpg ( "modified.fpg" );
 ```
 
 Another example, see how easy you can create a Fnt font file from scratch:
@@ -42,7 +42,7 @@ var glyphGraphic = new Graphic( GraphicFormat.Format32bppArgb, 10, 10, new byte[
 font['å'] = new Glyph ( glyphGraphic );
 
 // Save the font to a Fnt file (only 'å' will contain a bitmap)
-NativeFile.SaveFnt ( 'myfont.fnt' );
+font.SaveToFnt ( 'myfont.fnt' );
 ```
 
 A battery of [examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.
