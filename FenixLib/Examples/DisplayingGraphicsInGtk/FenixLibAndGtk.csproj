@@ -76,17 +76,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\TestFiles\1bpp_12x1.bmp">
-      <Link>1bpp_12x1.bmp</Link>
-    </Content>
-    <Content Include="..\..\TestFiles\1bpp_12x2.bmp">
-      <Link>1bpp_12x2.bmp</Link>
-    </Content>
-    <Content Include="..\..\TestFiles\1bpp_8x1.bmp">
-      <Link>1bpp_8x1.bmp</Link>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\FenixLib\FenixLib.csproj">
       <Project>{E110DF41-CAE8-4DCC-9A41-09864E5651DD}</Project>
       <Name>FenixLib</Name>
