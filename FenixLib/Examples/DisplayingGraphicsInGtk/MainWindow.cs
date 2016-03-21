@@ -10,19 +10,11 @@ public partial class MainWindow : Gtk.Window
     private const int GraphicColum = 0;
     private ISpriteAssortment spriteAssorment = null;
     private IBitmapFont BitmapFont = null;
-    private FileChooserDialog openDialog;
 
     public MainWindow ()
         : base ( Gtk.WindowType.Toplevel )
     {
         Build ();
-
-        openDialog = new Gtk.FileChooserDialog ( 
-            "Open file",
-            this,
-            FileChooserAction.Open,
-            "Cancel", ResponseType.Cancel,
-            "Open", ResponseType.Accept );
 
         // Define tree views as single-selection and connect the 
         // Changed signal. Notice the signal handler is the same
@@ -94,6 +86,7 @@ public partial class MainWindow : Gtk.Window
         filter.AddPattern ( "*.fpg" );
         filter.Name = "Fpg files";
 
+        var openDialog = CreateOpenDialog ();
         openDialog.Filter = null;
 
         if ( openDialog.Run () == ( int ) ResponseType.Accept )
@@ -111,6 +104,7 @@ public partial class MainWindow : Gtk.Window
         filter.Name = "Map files (*.map)";
         filter.AddPattern ( "*.map" );
 
+        var openDialog = CreateOpenDialog ();
         openDialog.Filter = filter;
 
         if ( openDialog.Run () == ( int ) ResponseType.Accept )
@@ -145,5 +139,17 @@ public partial class MainWindow : Gtk.Window
 
             UpdateViewWithGraphic ( graphic );
         }
+    }
+
+    private FileChooserDialog CreateOpenDialog()
+    {
+        var openDialog = new Gtk.FileChooserDialog ( 
+            "Open file",
+            this,
+            FileChooserAction.Open,
+            "Cancel", ResponseType.Cancel,
+            "Open", ResponseType.Accept );
+
+        return openDialog;
     }
 }
