@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Gdip.Tests", "Feni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Gdip", "FenixLib.Gdip\FenixLib.Gdip.csproj", "{98E6EDD7-CC46-45F4-AC06-748EBC1BCD24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenixLib.Gdk", "FenixLib.Gdk\FenixLib.Gdk.csproj", "{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,22 @@ Global
 		{98E6EDD7-CC46-45F4-AC06-748EBC1BCD24}.Release|x64.Build.0 = Release|Any CPU
 		{98E6EDD7-CC46-45F4-AC06-748EBC1BCD24}.Release|x86.ActiveCfg = Release|Any CPU
 		{98E6EDD7-CC46-45F4-AC06-748EBC1BCD24}.Release|x86.Build.0 = Release|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Debug|x64.Build.0 = Debug|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Debug|x86.Build.0 = Debug|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Release|ARM.Build.0 = Release|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Release|x64.ActiveCfg = Release|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Release|x64.Build.0 = Release|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Release|x86.ActiveCfg = Release|Any CPU
+		{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
