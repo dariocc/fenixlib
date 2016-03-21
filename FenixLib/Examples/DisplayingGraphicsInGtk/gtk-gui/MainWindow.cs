@@ -15,25 +15,25 @@ public partial class MainWindow
 	
 	private global::Gtk.VBox vbox4;
 	
-	private global::Gtk.Image image1;
+	private global::Gtk.Image previewImage;
 	
-	private global::Gtk.Button button4;
+	private global::Gtk.Button openMapButton;
 	
 	private global::Gtk.VBox vbox2;
 	
 	private global::Gtk.ScrolledWindow GtkScrolledWindow;
 	
-	private global::Gtk.TreeView treeview1;
+	private global::Gtk.TreeView spriteAssortmentView;
 	
-	private global::Gtk.Button Load;
+	private global::Gtk.Button openFpgButton;
 	
 	private global::Gtk.VBox vbox3;
 	
 	private global::Gtk.ScrolledWindow GtkScrolledWindow1;
 	
-	private global::Gtk.TreeView treeview2;
+	private global::Gtk.TreeView bitmapFontView;
 	
-	private global::Gtk.Button Load1;
+	private global::Gtk.Button openFntButton;
 
 	protected virtual void Build ()
 	{
@@ -84,23 +84,23 @@ public partial class MainWindow
 		this.vbox4.Name = "vbox4";
 		this.vbox4.Spacing = 6;
 		// Container child vbox4.Gtk.Box+BoxChild
-		this.image1 = new global::Gtk.Image ();
-		this.image1.WidthRequest = 400;
-		this.image1.HeightRequest = 400;
-		this.image1.Name = "image1";
-		this.vbox4.Add (this.image1);
-		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.image1]));
+		this.previewImage = new global::Gtk.Image ();
+		this.previewImage.WidthRequest = 400;
+		this.previewImage.HeightRequest = 400;
+		this.previewImage.Name = "previewImage";
+		this.vbox4.Add (this.previewImage);
+		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.previewImage]));
 		w4.Position = 0;
 		w4.Expand = false;
 		w4.Fill = false;
 		// Container child vbox4.Gtk.Box+BoxChild
-		this.button4 = new global::Gtk.Button ();
-		this.button4.CanFocus = true;
-		this.button4.Name = "button4";
-		this.button4.UseUnderline = true;
-		this.button4.Label = global::Mono.Unix.Catalog.GetString ("Open map");
-		this.vbox4.Add (this.button4);
-		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.button4]));
+		this.openMapButton = new global::Gtk.Button ();
+		this.openMapButton.CanFocus = true;
+		this.openMapButton.Name = "openMapButton";
+		this.openMapButton.UseUnderline = true;
+		this.openMapButton.Label = global::Mono.Unix.Catalog.GetString ("Open Map...");
+		this.vbox4.Add (this.openMapButton);
+		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.openMapButton]));
 		w5.Position = 1;
 		w5.Expand = false;
 		w5.Fill = false;
@@ -117,23 +117,24 @@ public partial class MainWindow
 		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 		this.GtkScrolledWindow.WidthRequest = 200;
 		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
+		this.GtkScrolledWindow.HscrollbarPolicy = ((global::Gtk.PolicyType)(2));
 		this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
 		// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
-		this.treeview1 = new global::Gtk.TreeView ();
-		this.treeview1.CanFocus = true;
-		this.treeview1.Name = "treeview1";
-		this.GtkScrolledWindow.Add (this.treeview1);
+		this.spriteAssortmentView = new global::Gtk.TreeView ();
+		this.spriteAssortmentView.CanFocus = true;
+		this.spriteAssortmentView.Name = "spriteAssortmentView";
+		this.GtkScrolledWindow.Add (this.spriteAssortmentView);
 		this.vbox2.Add (this.GtkScrolledWindow);
 		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.GtkScrolledWindow]));
 		w8.Position = 0;
 		// Container child vbox2.Gtk.Box+BoxChild
-		this.Load = new global::Gtk.Button ();
-		this.Load.CanFocus = true;
-		this.Load.Name = "Load";
-		this.Load.UseUnderline = true;
-		this.Load.Label = global::Mono.Unix.Catalog.GetString ("Open Fpg");
-		this.vbox2.Add (this.Load);
-		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.Load]));
+		this.openFpgButton = new global::Gtk.Button ();
+		this.openFpgButton.CanFocus = true;
+		this.openFpgButton.Name = "openFpgButton";
+		this.openFpgButton.UseUnderline = true;
+		this.openFpgButton.Label = global::Mono.Unix.Catalog.GetString ("Open Fpg...");
+		this.vbox2.Add (this.openFpgButton);
+		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.openFpgButton]));
 		w9.Position = 1;
 		w9.Expand = false;
 		w9.Fill = false;
@@ -150,23 +151,24 @@ public partial class MainWindow
 		this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow ();
 		this.GtkScrolledWindow1.WidthRequest = 200;
 		this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
+		this.GtkScrolledWindow1.HscrollbarPolicy = ((global::Gtk.PolicyType)(2));
 		this.GtkScrolledWindow1.ShadowType = ((global::Gtk.ShadowType)(1));
 		// Container child GtkScrolledWindow1.Gtk.Container+ContainerChild
-		this.treeview2 = new global::Gtk.TreeView ();
-		this.treeview2.CanFocus = true;
-		this.treeview2.Name = "treeview2";
-		this.GtkScrolledWindow1.Add (this.treeview2);
+		this.bitmapFontView = new global::Gtk.TreeView ();
+		this.bitmapFontView.CanFocus = true;
+		this.bitmapFontView.Name = "bitmapFontView";
+		this.GtkScrolledWindow1.Add (this.bitmapFontView);
 		this.vbox3.Add (this.GtkScrolledWindow1);
 		global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.GtkScrolledWindow1]));
 		w12.Position = 0;
 		// Container child vbox3.Gtk.Box+BoxChild
-		this.Load1 = new global::Gtk.Button ();
-		this.Load1.CanFocus = true;
-		this.Load1.Name = "Load1";
-		this.Load1.UseUnderline = true;
-		this.Load1.Label = global::Mono.Unix.Catalog.GetString ("Open Fnt");
-		this.vbox3.Add (this.Load1);
-		global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.Load1]));
+		this.openFntButton = new global::Gtk.Button ();
+		this.openFntButton.CanFocus = true;
+		this.openFntButton.Name = "openFntButton";
+		this.openFntButton.UseUnderline = true;
+		this.openFntButton.Label = global::Mono.Unix.Catalog.GetString ("Open Fnt...");
+		this.vbox3.Add (this.openFntButton);
+		global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.openFntButton]));
 		w13.Position = 1;
 		w13.Expand = false;
 		w13.Fill = false;
@@ -185,11 +187,9 @@ public partial class MainWindow
 			this.Child.ShowAll ();
 		}
 		this.DefaultWidth = 834;
-		this.DefaultHeight = 540;
+		this.DefaultHeight = 493;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
-		this.button4.Clicked += new global::System.EventHandler (this.OnOpenMapClick);
-		this.treeview1.RowActivated += new global::Gtk.RowActivatedHandler (this.OnFpgTreeRowActivate);
-		this.Load.Clicked += new global::System.EventHandler (this.OnOpenFpgClicked);
+		this.openFpgButton.Clicked += new global::System.EventHandler (this.OnOpenFpgClicked);
 	}
 }

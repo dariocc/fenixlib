@@ -4,10 +4,9 @@
     <images-root-path>..</images-root-path>
   </configuration>
   <import>
-    <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../bin/Debug/TailorBox.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="834 540">
+  <widget class="Gtk.Window" id="MainWindow" design-size="834 493">
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
     <property name="WindowPosition">CenterOnParent</property>
@@ -63,7 +62,7 @@
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.Image" id="image1">
+                  <widget class="Gtk.Image" id="previewImage">
                     <property name="MemberName" />
                     <property name="WidthRequest">400</property>
                     <property name="HeightRequest">400</property>
@@ -76,13 +75,12 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Button" id="button4">
+                  <widget class="Gtk.Button" id="openMapButton">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextOnly</property>
-                    <property name="Label" translatable="yes">Open map</property>
+                    <property name="Label" translatable="yes">Open Map...</property>
                     <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="OnOpenMapClick" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -107,13 +105,13 @@
                   <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
                     <property name="MemberName" />
                     <property name="WidthRequest">200</property>
+                    <property name="HscrollbarPolicy">Never</property>
                     <property name="ShadowType">In</property>
                     <child>
-                      <widget class="Gtk.TreeView" id="treeview1">
+                      <widget class="Gtk.TreeView" id="spriteAssortmentView">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="ShowScrollbars">True</property>
-                        <signal name="RowActivated" handler="OnFpgTreeRowActivate" />
                       </widget>
                     </child>
                   </widget>
@@ -123,11 +121,11 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Button" id="Load">
+                  <widget class="Gtk.Button" id="openFpgButton">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextOnly</property>
-                    <property name="Label" translatable="yes">Open Fpg</property>
+                    <property name="Label" translatable="yes">Open Fpg...</property>
                     <property name="UseUnderline">True</property>
                     <signal name="Clicked" handler="OnOpenFpgClicked" />
                   </widget>
@@ -154,9 +152,10 @@
                   <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow1">
                     <property name="MemberName" />
                     <property name="WidthRequest">200</property>
+                    <property name="HscrollbarPolicy">Never</property>
                     <property name="ShadowType">In</property>
                     <child>
-                      <widget class="Gtk.TreeView" id="treeview2">
+                      <widget class="Gtk.TreeView" id="bitmapFontView">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="ShowScrollbars">True</property>
@@ -169,11 +168,11 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Button" id="Load1">
+                  <widget class="Gtk.Button" id="openFntButton">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextOnly</property>
-                    <property name="Label" translatable="yes">Open Fnt</property>
+                    <property name="Label" translatable="yes">Open Fnt...</property>
                     <property name="UseUnderline">True</property>
                   </widget>
                   <packing>

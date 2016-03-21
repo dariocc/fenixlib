@@ -7,13 +7,79 @@ using FenixLib.Gdk;
 
 public partial class MainWindow : Gtk.Window
 {
-	private ISpriteAssortment spriteAssorment = null;
-	private IBitmapFont BitmapFont = null;
+    private const int GraphicColum = 0;
+    private ISpriteAssortment spriteAssorment = null;
+    private IBitmapFont BitmapFont = null;
+    private FileChooserDialog openDialog;
 
     public MainWindow ()
         : base ( Gtk.WindowType.Toplevel )
     {
         Build ();
+
+        openDialog = new Gtk.FileChooserDialog ( 
+            "Open file",
+            this,
+            FileChooserAction.Open,
+            "Cancel", ResponseType.Cancel,
+            "Open", ResponseType.Accept );
+
+        // Define tree views as single-selection and connect the 
+        // Changed signal. Notice the signal handler is the same
+        // in both cases
+
+        spriteAssortmentView.Selection.Mode = SelectionMode.Single;
+        spriteAssortmentView.Selection.Changed += OnSelectionChanged;
+
+        bitmapFontView.Selection.Mode = SelectionMode.Single;
+        bitmapFontView.Selection.Changed += OnSelectionChanged;
+
+    }
+
+    void UpdateViewWithGraphic ( IGraphic graphic )
+    {
+        previewImage.Pixbuf = graphic.ToPixBuf ();
+    }
+
+    void UpdateViewWithSpriteAssortment ( ISpriteAssortment spriteAssortment )
+    {
+        if ( spriteAssorment == null )
+        {
+            throw new ArgumentNullException ();
+        }
+
+        // The columns of the TreeView
+        var descriptionColumn = new TreeViewColumn ();
+        descriptionColumn.Title = "Description";
+        var idColumn = new TreeViewColumn ();
+        idColumn.Title = "Id";
+
+        spriteAssortmentView.AppendColumn ( idColumn );
+        spriteAssortmentView.AppendColumn ( descriptionColumn );
+
+        // A renderer for the data in the model
+        var renderer = new CellRendererText ();
+
+        idColumn.PackStart ( renderer, false );
+        idColumn.AddAttribute ( renderer, "text", 1 );
+        descriptionColumn.PackStart ( renderer, true );
+        descriptionColumn.AddAttribute ( renderer, "text", 2 );
+
+        // Model for the TreeView
+        // The first column of the model is an IGraphic. We do the same
+        // for the BitmapFont TreeView, so as the OnSelectionChanged
+        // can be reused.
+        var model = new ListStore ( 
+            typeof( IGraphic ),         // The graphic itself
+            typeof ( int ),             // Id of the sprite
+            typeof ( string )           // Description of the sprite
+            );
+        foreach ( var sprite in spriteAssorment )
+        {
+            model.AppendValues ( sprite, sprite.Id, sprite.Description );
+        }
+            
+        spriteAssortmentView.Model = model;
     }
 
     protected void OnDeleteEvent ( object sender, DeleteEventArgs a )
@@ -24,113 +90,60 @@ public partial class MainWindow : Gtk.Window
 
     protected void OnOpenFpgClicked ( object sender, EventArgs e )
     {
-        FileChooserDialog dialog = new Gtk.FileChooserDialog ( 
-            "Choose any Fpg file",
-            this,
-            FileChooserAction.Open,
-            "Cancel", ResponseType.Cancel,
-            "Open", ResponseType.Accept );
+        var filter = new FileFilter ();
+        filter.AddPattern ( "*.fpg" );
+        filter.Name = "Fpg files";
 
-		var filter = new FileFilter ();
-		filter.AddPattern ("*.fpg");
-		filter.Name = "Fpg files";
+        openDialog.Filter = null;
 
-		dialog.Filter = filter;
-
-        if ( dialog.Run () == ( int ) ResponseType.Accept )
+        if ( openDialog.Run () == ( int ) ResponseType.Accept )
         {
-            spriteAssorment = NativeFile.LoadFpg ( dialog.Filename );
+            spriteAssorment = NativeFile.LoadFpg ( openDialog.Filename );
+            UpdateViewWithSpriteAssortment ( spriteAssorment );
         }
 
-		dialog.Destroy ();
-
-		if (spriteAssorment == null) 
-		{
-			return;
-		}
-
-        Gtk.ListStore store = new ListStore ( typeof ( SpriteAssortmentSprite ) );
-        foreach ( var sprite in spriteAssorment )
-        {
-			store.AppendValues ( new FpgTreeViewElement(sprite.Id, sprite.Description) );
-        }
-			
-        TreeViewColumn column = new TreeViewColumn ();
-        column.Title = "Sprite Name";
-        treeview1.AppendColumn ( column );
-        treeview1.Model = store;
-
-        CellRendererText nameCell = new CellRendererText ();
-        column.PackStart ( nameCell, false );
-
-        column.AddAttribute ( nameCell, "text", 0 );
+        openDialog.Destroy ();
     }
 
-	protected void OnOpenMapClick (object sender, EventArgs e)
-	{
-		FileChooserDialog dialog = new Gtk.FileChooserDialog ( 
-			"Choose any Map File",
-			this,
-			FileChooserAction.Open,
-			"Cancel", ResponseType.Cancel,
-			"Open", ResponseType.Accept );
+    protected void OnOpenMapClicked ( object sender, EventArgs e )
+    {
+        var filter = new FileFilter ();
+        filter.Name = "Map files (*.map)";
+        filter.AddPattern ( "*.map" );
 
-		var filter = new FileFilter ();
-		filter.AddPattern ("*.map");
-		filter.Name = "Map files";
+        openDialog.Filter = filter;
 
-		dialog.Filter = filter;
+        if ( openDialog.Run () == ( int ) ResponseType.Accept )
+        {
+            var sprite = NativeFile.LoadMap ( openDialog.Filename );
+            UpdateViewWithGraphic ( sprite );
+        }		
 
-		if ( dialog.Run () == ( int ) ResponseType.Accept )
-		{
-			var sprite = NativeFile.LoadMap ( dialog.Filename );
-			image1.Pixbuf = sprite.ToPixBuf ();
-		}		
+        openDialog.Destroy ();
+    }
 
-		dialog.Destroy ();
-	}
+    // This event handler is used for both the sprite assortment and bitmap
+    // font tree views
+    protected void OnSelectionChanged ( object sender, EventArgs e )
+    {   
+        var treeSelection = sender as TreeSelection;
+        var selectedRows = treeSelection.GetSelectedRows ();
 
-	protected void OnFpgTreeRowActivate (object o, RowActivatedArgs args)
-	{
-		var model = treeview1.Model;
-		TreeIter iter;
-		model.GetIter (out iter, args.Path);
-		var value = (FpgTreeViewElement) model.GetValue (iter, 0);
+        if ( !( selectedRows.Length > 0 ) )
+        {
+            return;
+        }
+            
+        var treeView = treeSelection.TreeView;
+        var model = treeView.Model;
+        var iterPath = selectedRows[0];
 
-		if (value != null) 
-		{
-			var sprite = spriteAssorment [value.Id];
-			image1.Pixbuf = sprite.ToPixBuf ();
-		}
+        TreeIter iter;
+        if ( model.GetIter ( out iter, iterPath ) )
+        {
+            var graphic = (IGraphic) model.GetValue ( iter, GraphicColum);
 
-	}		
-
-
-	private class FpgTreeElementRenderer : CellRenderer
-	{
-		protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle background_area, Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
-		{
-			
-			base.Render (window, widget, background_area, cell_area, expose_area, flags);
-		}
-			
-	}
-
-		
-	private class FpgTreeViewElement
-	{
-		public int Id { get; }
-		public string Name { get; }
-
-		public FpgTreeViewElement(int id, string name)
-		{
-			this.Id = id;
-			this.Name = name;
-		}
-
-		public override string ToString ()
-		{
-			return string.Format ($"{Id}: {Name}");
-		}
-	}
+            UpdateViewWithGraphic ( graphic );
+        }
+    }
 }
