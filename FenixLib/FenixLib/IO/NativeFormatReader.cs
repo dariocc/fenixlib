@@ -135,7 +135,7 @@ namespace FenixLib.IO
                 colors[n] = new PaletteColor (
                     colorData[n * 3] << 2,
                     colorData[n * 3 + 1] << 2,
-                    colorData[n * 3 + 1] << 2 );
+                    colorData[n * 3 + 2] << 2 );
             }
             return colors;
         }
