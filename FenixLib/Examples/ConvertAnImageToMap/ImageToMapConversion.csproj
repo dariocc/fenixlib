@@ -7,8 +7,8 @@
     <ProjectGuid>{92468A8F-CB6C-4FD0-B729-62869B0AECE4}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConvertImageToMap</RootNamespace>
-    <AssemblyName>ConvertImageToMap</AssemblyName>
+    <RootNamespace>ImageToMapConversion</RootNamespace>
+    <AssemblyName>ImageToMapConversion</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

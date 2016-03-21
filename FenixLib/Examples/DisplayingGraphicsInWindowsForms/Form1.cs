@@ -11,7 +11,7 @@ using FenixLib.Core;
 using FenixLib.IO;
 using FenixLib.BitmapConvert;
 
-namespace DisplayingGraphicsInWindowsForms
+namespace FenixLibAndWindowsFormsExample
 {
     public partial class Form1 : Form
     {

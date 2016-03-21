@@ -1,4 +1,4 @@
-﻿namespace DisplayingGraphicsInWindowsForms
+﻿namespace FenixLibAndWindowsFormsExample
 {
     partial class Form1
     {
