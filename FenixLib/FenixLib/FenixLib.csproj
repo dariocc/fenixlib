@@ -65,10 +65,7 @@
     <Compile Include="Core\IGraphic.cs" />
     <Compile Include="Image\Color\HslColor.cs" />
     <Compile Include="Image\Color\RgbColor.cs" />
-    <Compile Include="Image\old\DataBuffer.cs" />
     <Compile Include="Image\IFormatConverter.cs" />
-    <Compile Include="Image\old\Raster.cs" />
-    <Compile Include="Image\old\SampleModel.cs" />
     <Compile Include="Image\FormatConverter.cs" />
     <Compile Include="Image\PixelReader.cs" />
     <Compile Include="Image\PixelReaderArgbInt32.cs" />
