@@ -28,10 +28,10 @@ namespace FenixLib.Image
         {
             int value = Reader.ReadInt32 ();
 
-            alpha = ( value >> 8 ) & 0xFF0000;
-            r = value & 0xFF0000;
-            g = value & 0xFF00;
-            b = value & 0xFF;
+            Alpha = ( value >> 8 ) & 0xFF0000;
+            R = value & 0xFF0000;
+            G = value & 0xFF00;
+            B = value & 0xFF;
         }
     }
 }

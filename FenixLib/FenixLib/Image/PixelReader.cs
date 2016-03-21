@@ -18,16 +18,16 @@ using FenixLib.Core;
 
 namespace FenixLib.Image
 {
-    internal abstract class PixelReader : IDisposable
+    public abstract class PixelReader : IDisposable
     {
         protected Stream BaseStream { get; private set; }
         protected BinaryReader Reader { get; private set; }
         protected IGraphic Graphic { get; private set; }
 
-        public int r { get; protected set; }
-        public int g { get; protected set; }
-        public int b { get; protected set; }
-        public int alpha { get; protected set; }
+        public int R { get; protected set; }
+        public int G { get; protected set; }
+        public int B { get; protected set; }
+        public int Alpha { get; protected set; }
 
         public abstract bool HasPixels { get; }
 

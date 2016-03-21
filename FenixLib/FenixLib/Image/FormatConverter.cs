@@ -37,7 +37,7 @@ namespace FenixLib.Image
                     while ( source.HasPixels )
                     {
                         source.Read ();
-                        dest.Write ( source.alpha, source.r, source.g, source.b );
+                        dest.Write ( source.Alpha, source.R, source.G, source.B );
                     }
 
                     destBuffer = dest.GetPixels ();

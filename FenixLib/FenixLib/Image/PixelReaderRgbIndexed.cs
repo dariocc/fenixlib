@@ -28,14 +28,14 @@ namespace FenixLib.Image
         {
             int value = Reader.ReadByte ();
 
-            r = Graphic.Palette[value].R;
-            g = Graphic.Palette[value].G;
-            b = Graphic.Palette[value].B;
+            R = Graphic.Palette[value].R;
+            G = Graphic.Palette[value].G;
+            B = Graphic.Palette[value].B;
 
             if ( value == 0 )
-                alpha = 0;
+                Alpha = 0;
             else
-                alpha = 255;
+                Alpha = 255;
         }
     }
 }

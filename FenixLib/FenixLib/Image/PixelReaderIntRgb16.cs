@@ -28,14 +28,14 @@ namespace FenixLib.Image
         {
             int value = Reader.ReadInt16 ();
 
-            r = value & 0xF800;
-            g = value & 0x7E0;
-            b = value & 0x1F;
+            R = value & 0xF800;
+            G = value & 0x7E0;
+            B = value & 0x1F;
 
             if ( value == 0 )
-                alpha = 0;
+                Alpha = 0;
             else
-                alpha = 255;
+                Alpha = 255;
         }
     }
 }
