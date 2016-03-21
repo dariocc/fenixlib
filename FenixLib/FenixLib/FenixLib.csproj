@@ -135,7 +135,7 @@
     <Compile Include="Core\PaletteColor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FenixLib.Core.licenseheader" />
+    <None Include="FenixLib.licenseheader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
