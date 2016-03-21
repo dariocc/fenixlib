@@ -81,6 +81,7 @@
                     <property name="Type">TextOnly</property>
                     <property name="Label" translatable="yes">Open Map...</property>
                     <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnOpenMapClicked" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -174,6 +175,7 @@
                     <property name="Type">TextOnly</property>
                     <property name="Label" translatable="yes">Open Fnt...</property>
                     <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnOpenFntClicked" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>

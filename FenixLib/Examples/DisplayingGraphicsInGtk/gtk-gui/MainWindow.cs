@@ -99,7 +99,8 @@ public partial class MainWindow
 		this.openMapButton.Name = "openMapButton";
 		this.openMapButton.UseUnderline = true;
 		this.openMapButton.Label = global::Mono.Unix.Catalog.GetString ("Open Map...");
-		this.vbox4.Add (this.openMapButton);
+        this.openMapButton.Clicked += new global::System.EventHandler ( this.OnOpenMapClicked );
+        this.vbox4.Add (this.openMapButton);
 		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.openMapButton]));
 		w5.Position = 1;
 		w5.Expand = false;
@@ -167,7 +168,8 @@ public partial class MainWindow
 		this.openFntButton.Name = "openFntButton";
 		this.openFntButton.UseUnderline = true;
 		this.openFntButton.Label = global::Mono.Unix.Catalog.GetString ("Open Fnt...");
-		this.vbox3.Add (this.openFntButton);
+        this.openFntButton.Clicked += new global::System.EventHandler ( this.OnOpenFntClicked );
+        this.vbox3.Add (this.openFntButton);
 		global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.openFntButton]));
 		w13.Position = 1;
 		w13.Expand = false;
