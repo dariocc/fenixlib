@@ -45,15 +45,16 @@ namespace FenixLib.Gdk
             using ( var reader = PixelReader.Create ( graphic ) )
             {
                 int index = -1;
-                while ( reader.HasPixels )
+                do
                 {
                     index++;
-                    destData[index * graphic.Width] = ( byte ) reader.R;
-                    destData[index * graphic.Width + 1] = (byte) reader.G;
-                    destData[index * graphic.Width + 2] = ( byte ) reader.B;
-                    destData[index * graphic.Width + 3] = ( byte ) reader.Alpha;
                     reader.Read ();
-                }
+                    destData[index * 4] = ( byte ) reader.R;
+                    destData[index * 4 + 1] = ( byte ) reader.G;
+                    destData[index * 4 + 2] = ( byte ) reader.B;
+                    destData[index * 4 + 3] = ( byte ) reader.Alpha;
+
+                } while ( reader.HasPixels );
             }
 
             return new Pixbuf ( destData, 
