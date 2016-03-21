@@ -76,9 +76,10 @@ namespace FenixLib.IO
             using ( var pixelsReader = new NativeFormatReader ( pixelsStream ) )
             {
                 // Read Glyph's pixels
-                byte characterIndex = 0;
+                int characterIndex = -1;
                 foreach ( var character in characters )
                 {
+                    characterIndex += 1;
                     bool characterInvalid = character.Height <= 0
                         || character.Width <= 0
                         || character.FileOffset <= 0;
@@ -100,8 +101,6 @@ namespace FenixLib.IO
                     glyph.YOffset = character.YOffset;
 
                     font[characterIndex] = glyph;
-
-                    characterIndex += 1;
                 }
             }
 
