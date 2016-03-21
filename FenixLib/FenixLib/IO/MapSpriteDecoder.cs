@@ -26,6 +26,7 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics => new string[] 
         {
+            "m01",
             "map",
             "m16",
             "m32"
