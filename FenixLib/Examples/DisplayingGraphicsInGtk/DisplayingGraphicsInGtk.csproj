@@ -33,10 +33,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>bin\Debug\</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>bin\Release\</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -85,8 +89,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\FenixLib\FenixLib.csproj">
-      <Project>{e110df41-cae8-4dcc-9a41-09864e5651dd}</Project>
+      <Project>{E110DF41-CAE8-4DCC-9A41-09864E5651DD}</Project>
       <Name>FenixLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FenixLib.Gdk\FenixLib.Gdk.csproj">
+      <Project>{F310FD3A-CACA-4A36-AAEE-9EE9212BD799}</Project>
+      <Name>FenixLib.Gdk</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
