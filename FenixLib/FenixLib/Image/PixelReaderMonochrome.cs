@@ -12,6 +12,7 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
+using System;
 namespace FenixLib.Image
 {
     internal class PixelReaderMonochrome : PixelReader
@@ -20,22 +21,13 @@ namespace FenixLib.Image
         {
             get
             {
-                return ( BaseStream.Position + 4 < BaseStream.Length );
+                throw new NotImplementedException ();
             }
         }
 
         public override void Read ()
         {
-            int value = Reader.ReadInt16 ();
-
-            R = value & 0xF800;
-            G = value & 0x7E0;
-            B = value & 0x1F;
-
-            if ( value == 0 )
-                Alpha = 0;
-            else
-                Alpha = 255;
+            throw new NotImplementedException ();
         }
     }
 }
