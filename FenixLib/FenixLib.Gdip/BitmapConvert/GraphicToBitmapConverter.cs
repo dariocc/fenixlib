@@ -39,11 +39,17 @@ namespace FenixLib.BitmapConvert
             else if ( format == GraphicFormat.Format8bppIndexed )
             {
                 bmp = GetBitmapForGraphic ( PixelFormat.Format8bppIndexed );
+
+                // Bitmap.Palette returns a clone of the palette
+                ColorPalette bitmapPalette = bmp.Palette;
+
                 for ( int i = 0 ; i < SourceGraphic.Palette.Colors.Length ; i++ )
                 {
                     var c = SourceGraphic.Palette[i];
-                    bmp.Palette.Entries[i] = Color.FromArgb ( c.R, c.G, c.B );
+                    bitmapPalette.Entries[i] = Color.FromArgb ( c.R, c.G, c.B );
                 }
+
+                bmp.Palette = bitmapPalette;
             }
             else if ( format == GraphicFormat.Format16bppRgb565 )
             {
