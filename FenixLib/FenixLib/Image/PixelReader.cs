@@ -62,7 +62,7 @@ namespace FenixLib.Image
 
             if ( graphic.GraphicFormat == GraphicFormat.Format32bppArgb )
                 pixelReader = new PixelReaderArgbInt32 ();
-            else if ( graphic.GraphicFormat == GraphicFormat.Format8bppIndexed )
+            else if ( graphic.GraphicFormat == GraphicFormat.Format16bppRgb565 )
                 pixelReader = new PixelReaderRgbInt16 ();
             else if ( graphic.GraphicFormat == GraphicFormat.Format8bppIndexed )
                 pixelReader = new PixelReaderRgbIndexed ();
