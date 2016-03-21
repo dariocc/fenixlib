@@ -20,11 +20,16 @@ namespace FenixLib.IO
     public class MapSpriteDecoder : NativeDecoder<ISprite>
     {
 
-        public override int MaxSupportedVersion { get; }
+        public override int MaxSupportedVersion => 0;
 
-        protected override string[] KnownFileExtensions { get; }
+        protected override string[] KnownFileExtensions => new string[] { "map" };
 
-        protected override string[] KnownFileMagics { get; }
+        protected override string[] KnownFileMagics => new string[] 
+        {
+            "map",
+            "m16",
+            "m32"
+        };
 
         protected override ISprite ReadBody ( Header header, NativeFormatReader reader )
         {
