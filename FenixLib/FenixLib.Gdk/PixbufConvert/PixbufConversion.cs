@@ -41,24 +41,18 @@ namespace FenixLib.Gdk
                 throw new ArgumentNullException ( nameof ( graphic ) );
             }
 
-            if ( graphic.GraphicFormat == GraphicFormat.Format32bppArgb )
+
+            using ( var reader = PixelReader.Create ( graphic ) )
             {
-                Array.Copy ( graphic.PixelData, destData, graphic.PixelData.Length );
-            }
-            else
-            {
-                using ( var reader = PixelReader.Create ( graphic ) )
+                int index = -1;
+                while ( reader.HasPixels )
                 {
-                    int index = -1;
-                    while ( reader.HasPixels )
-                    {
-                        reader.Read ();
-                        index++;
-                        destData[index * graphic.Width] = ( byte ) reader.Alpha;
-                        destData[index * graphic.Width] = (byte) reader.R;
-                        destData[index * graphic.Width + 1] = ( byte ) reader.G;
-                        destData[index * graphic.Width + 2] = ( byte ) reader.B;
-                    }
+                    index++;
+                    destData[index * graphic.Width] = ( byte ) reader.R;
+                    destData[index * graphic.Width + 1] = (byte) reader.G;
+                    destData[index * graphic.Width + 2] = ( byte ) reader.B;
+                    destData[index * graphic.Width + 3] = ( byte ) reader.Alpha;
+                    reader.Read ();
                 }
             }
 

@@ -93,7 +93,7 @@ namespace FenixLib.Image
             double ldiff = Math.Abs ( color1.L - color1.L );
 
             return hdiff * hdiff * weights.H
-                + ldiff * ldiff * weights.S
+                + sdiff * sdiff * weights.S
                 + ldiff * ldiff * weights.L;
         }
 
