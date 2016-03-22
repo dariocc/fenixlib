@@ -4,31 +4,34 @@
     <images-root-path>..</images-root-path>
   </configuration>
   <import>
-    <widget-library name="../bin/Debug/TailorBox.exe" internal="true" />
+    <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <widget-library name="../bin/Debug/FenixLibAndGtk.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="834 493">
+  <widget class="Gtk.Window" id="MainWindow" design-size="939 675">
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
     <property name="WindowPosition">CenterOnParent</property>
     <property name="AllowShrink">True</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
-      <widget class="Gtk.VBox" id="vbox1">
+      <widget class="Gtk.VBox" id="mainContainer">
         <property name="MemberName" />
         <property name="Spacing">6</property>
+        <property name="BorderWidth">15</property>
         <child>
-          <widget class="Gtk.VBox" id="vbox5">
+          <widget class="Gtk.VBox" id="headerContainer">
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
               <widget class="Gtk.Label" id="label1">
                 <property name="MemberName" />
+                <property name="Xalign">0</property>
                 <property name="LabelProp" translatable="yes">&lt;b&gt;Example of FenixLib use with Gtk&lt;/b&gt;</property>
                 <property name="UseMarkup">True</property>
               </widget>
               <packing>
                 <property name="Position">0</property>
-                <property name="AutoSize">True</property>
+                <property name="AutoSize">False</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
               </packing>
@@ -36,10 +39,22 @@
             <child>
               <widget class="Gtk.Label" id="label2">
                 <property name="MemberName" />
+                <property name="Xalign">0</property>
                 <property name="LabelProp" translatable="yes">Use one of the "Open" buttons below to open a PixTudio / BennuGD / Div resource.</property>
               </widget>
               <packing>
                 <property name="Position">1</property>
+                <property name="AutoSize">False</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.HSeparator" id="hseparator1">
+                <property name="MemberName" />
+              </widget>
+              <packing>
+                <property name="Position">2</property>
                 <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
@@ -54,18 +69,19 @@
           </packing>
         </child>
         <child>
-          <widget class="Gtk.HBox" id="hbox2">
+          <widget class="Gtk.HBox" id="contentsContainer">
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
-              <widget class="Gtk.VBox" id="vbox4">
+              <widget class="Gtk.VBox" id="imageContainer">
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.Image" id="previewImage">
+                  <widget class="Gtk.Label" id="label5">
                     <property name="MemberName" />
-                    <property name="WidthRequest">400</property>
-                    <property name="HeightRequest">400</property>
+                    <property name="Xalign">0</property>
+                    <property name="LabelProp" translatable="yes">Selected or loaded graphic preview:</property>
+                    <property name="UseMarkup">True</property>
                   </widget>
                   <packing>
                     <property name="Position">0</property>
@@ -75,17 +91,40 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Button" id="openMapButton">
+                  <widget class="Gtk.Image" id="previewImage">
                     <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextOnly</property>
-                    <property name="Label" translatable="yes">Open Map...</property>
-                    <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="OnOpenMapClicked" />
+                    <property name="WidthRequest">400</property>
+                    <property name="HeightRequest">400</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
-                    <property name="AutoSize">True</property>
+                    <property name="AutoSize">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.HBox" id="mapButtonsContainer">
+                    <property name="MemberName" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.Button" id="openMapButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextOnly</property>
+                        <property name="Label" translatable="yes">Open Map...</property>
+                        <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="OnOpenMapClicked" />
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">2</property>
+                    <property name="AutoSize">False</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
                   </packing>
@@ -93,19 +132,29 @@
               </widget>
               <packing>
                 <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
+                <property name="AutoSize">False</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.VBox" id="vbox2">
+              <widget class="Gtk.VBox" id="fpgContainer">
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
+                  <widget class="Gtk.Label" id="label3">
+                    <property name="MemberName" />
+                    <property name="Xalign">0</property>
+                    <property name="LabelProp" translatable="yes">Fpg contents:</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
                   <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
                     <property name="MemberName" />
-                    <property name="WidthRequest">200</property>
                     <property name="HscrollbarPolicy">Never</property>
                     <property name="ShadowType">In</property>
                     <child>
@@ -117,21 +166,33 @@
                     </child>
                   </widget>
                   <packing>
-                    <property name="Position">0</property>
+                    <property name="Position">1</property>
                     <property name="AutoSize">True</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Button" id="openFpgButton">
+                  <widget class="Gtk.HBox" id="fpgButtonsContainer">
                     <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextOnly</property>
-                    <property name="Label" translatable="yes">Open Fpg...</property>
-                    <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="OnOpenFpgClicked" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.Button" id="openFpgButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextOnly</property>
+                        <property name="Label" translatable="yes">Open Fpg...</property>
+                        <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="OnOpenFpgClicked" />
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
                   </widget>
                   <packing>
-                    <property name="Position">1</property>
+                    <property name="Position">2</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -140,19 +201,29 @@
               </widget>
               <packing>
                 <property name="Position">1</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
+                <property name="AutoSize">False</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.VBox" id="vbox3">
+              <widget class="Gtk.VBox" id="fntContainer">
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
+                  <widget class="Gtk.Label" id="label4">
+                    <property name="MemberName" />
+                    <property name="Xalign">0</property>
+                    <property name="LabelProp" translatable="yes">Fnt contents:</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
                   <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow1">
                     <property name="MemberName" />
-                    <property name="WidthRequest">200</property>
                     <property name="HscrollbarPolicy">Never</property>
                     <property name="ShadowType">In</property>
                     <child>
@@ -164,21 +235,33 @@
                     </child>
                   </widget>
                   <packing>
-                    <property name="Position">0</property>
+                    <property name="Position">1</property>
                     <property name="AutoSize">True</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Button" id="openFntButton">
+                  <widget class="Gtk.HBox" id="fntButtonsContainer">
                     <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextOnly</property>
-                    <property name="Label" translatable="yes">Open Fnt...</property>
-                    <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="OnOpenFntClicked" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.Button" id="openFntButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextOnly</property>
+                        <property name="Label" translatable="yes">Open Fnt...</property>
+                        <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="OnOpenFntClicked" />
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
                   </widget>
                   <packing>
-                    <property name="Position">1</property>
+                    <property name="Position">2</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -187,17 +270,13 @@
               </widget>
               <packing>
                 <property name="Position">2</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
+                <property name="AutoSize">False</property>
               </packing>
             </child>
           </widget>
           <packing>
             <property name="Position">1</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
+            <property name="AutoSize">False</property>
           </packing>
         </child>
       </widget>

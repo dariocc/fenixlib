@@ -26,6 +26,63 @@ public partial class MainWindow : Gtk.Window
         bitmapFontView.Selection.Mode = SelectionMode.Single;
         bitmapFontView.Selection.Changed += OnSelectionChanged;
 
+		// Configure Tree Views Columns and renderer
+		#region treeview_config
+		// A renderer for the data in the model
+		var renderer = new CellRendererText ();
+
+		var descriptionColumn = new TreeViewColumn ();
+		descriptionColumn.Title = "Description";
+		var idColumn = new TreeViewColumn ();
+		idColumn.Title = "Id";
+
+		spriteAssortmentView.AppendColumn ( idColumn );
+		spriteAssortmentView.AppendColumn ( descriptionColumn );
+
+		idColumn.PackStart ( renderer, false );
+		idColumn.AddAttribute ( renderer, "text", 1 );
+		descriptionColumn.PackStart ( renderer, true );
+		descriptionColumn.AddAttribute ( renderer, "text", 2 );
+
+		// The columns of the TreeView
+		var characterColumn = new TreeViewColumn ();
+		characterColumn.Title = "Character";
+		var widthColumn = new TreeViewColumn ();
+		widthColumn.Title = "Width";
+		var heightColumn = new TreeViewColumn ();
+		heightColumn.Title = "Height";
+		var xAdvanceColumn = new TreeViewColumn ();
+		xAdvanceColumn.Title = "XAdvance";
+		var yAdvanceColumn = new TreeViewColumn ();
+		yAdvanceColumn.Title = "YAdvance";
+		var xOffsetColumn = new TreeViewColumn ();
+		xOffsetColumn.Title = "XOffset";
+		var yOffsetColumn = new TreeViewColumn ();
+		yOffsetColumn.Title = "YOffset";
+
+		bitmapFontView.AppendColumn ( characterColumn );
+		bitmapFontView.AppendColumn ( widthColumn );
+		bitmapFontView.AppendColumn ( heightColumn );
+		bitmapFontView.AppendColumn ( xAdvanceColumn );
+		bitmapFontView.AppendColumn ( yAdvanceColumn );
+		bitmapFontView.AppendColumn ( xOffsetColumn );
+		bitmapFontView.AppendColumn ( yOffsetColumn );
+
+		characterColumn.PackStart ( renderer, false );
+		characterColumn.AddAttribute ( renderer, "text", 1 );
+		widthColumn.PackStart ( renderer, false );
+		widthColumn.AddAttribute ( renderer, "text", 2 );
+		heightColumn.PackStart ( renderer, false );
+		heightColumn.AddAttribute ( renderer, "text", 3 );
+		xAdvanceColumn.PackStart ( renderer, false );
+		xAdvanceColumn.AddAttribute ( renderer, "text", 4 );
+		yAdvanceColumn.PackStart ( renderer, false );
+		yAdvanceColumn.AddAttribute ( renderer, "text", 5 );
+		xOffsetColumn.PackStart ( renderer, false );
+		xOffsetColumn.AddAttribute ( renderer, "text", 6 );
+		yOffsetColumn.PackStart ( renderer, false );
+		yOffsetColumn.AddAttribute ( renderer, "text", 7 );
+		#endregion
     }
 
     void UpdateViewWithGraphic ( IGraphic graphic )
@@ -39,24 +96,7 @@ public partial class MainWindow : Gtk.Window
         {
             throw new ArgumentNullException ();
         }
-
-        // The columns of the TreeView
-        var descriptionColumn = new TreeViewColumn ();
-        descriptionColumn.Title = "Description";
-        var idColumn = new TreeViewColumn ();
-        idColumn.Title = "Id";
-
-        spriteAssortmentView.AppendColumn ( idColumn );
-        spriteAssortmentView.AppendColumn ( descriptionColumn );
-
-        // A renderer for the data in the model
-        var renderer = new CellRendererText ();
-
-        idColumn.PackStart ( renderer, false );
-        idColumn.AddAttribute ( renderer, "text", 1 );
-        descriptionColumn.PackStart ( renderer, true );
-        descriptionColumn.AddAttribute ( renderer, "text", 2 );
-
+			
         // Model for the TreeView
         // The first column of the model is an IGraphic. We do the same
         // for the BitmapFont TreeView, so as the OnSelectionChanged
@@ -81,49 +121,6 @@ public partial class MainWindow : Gtk.Window
         {
             throw new ArgumentNullException ();
         }
-
-        // The columns of the TreeView
-        var characterColumn = new TreeViewColumn ();
-        characterColumn.Title = "Character";
-        var widthColumn = new TreeViewColumn ();
-        widthColumn.Title = "Width";
-        var heightColumn = new TreeViewColumn ();
-        heightColumn.Title = "Height";
-        var xAdvanceColumn = new TreeViewColumn ();
-        xAdvanceColumn.Title = "XAdvance";
-        var yAdvanceColumn = new TreeViewColumn ();
-        yAdvanceColumn.Title = "YAdvance";
-        var xOffsetColumn = new TreeViewColumn ();
-        xOffsetColumn.Title = "XOffset";
-        var yOffsetColumn = new TreeViewColumn ();
-        yOffsetColumn.Title = "YOffset";
-
-        bitmapFontView.AppendColumn ( characterColumn );
-        bitmapFontView.AppendColumn ( widthColumn );
-        bitmapFontView.AppendColumn ( heightColumn );
-        bitmapFontView.AppendColumn ( xAdvanceColumn );
-        bitmapFontView.AppendColumn ( yAdvanceColumn );
-        bitmapFontView.AppendColumn ( xOffsetColumn );
-        bitmapFontView.AppendColumn ( yOffsetColumn );
-
-        // A renderer for the data in the model
-        var renderer = new CellRendererText ();
-
-        characterColumn.PackStart ( renderer, false );
-        characterColumn.AddAttribute ( renderer, "text", 1 );
-        widthColumn.PackStart ( renderer, false );
-        widthColumn.AddAttribute ( renderer, "text", 2 );
-        heightColumn.PackStart ( renderer, false );
-        heightColumn.AddAttribute ( renderer, "text", 3 );
-        xAdvanceColumn.PackStart ( renderer, false );
-        xAdvanceColumn.AddAttribute ( renderer, "text", 4 );
-        yAdvanceColumn.PackStart ( renderer, false );
-        yAdvanceColumn.AddAttribute ( renderer, "text", 5 );
-        xOffsetColumn.PackStart ( renderer, false );
-        xOffsetColumn.AddAttribute ( renderer, "text", 6 );
-        yOffsetColumn.PackStart ( renderer, false );
-        yOffsetColumn.AddAttribute ( renderer, "text", 7 );
-
 
         // Model for the TreeView
         // The first column of the model is an IGraphic. We do the same
@@ -167,7 +164,7 @@ public partial class MainWindow : Gtk.Window
         filter.Name = "Fpg files";
 
         var openDialog = CreateOpenDialog ();
-        openDialog.Filter = null;
+        openDialog.Filter = filter;
 
         if ( openDialog.Run () == ( int ) ResponseType.Accept )
         {
@@ -185,7 +182,7 @@ public partial class MainWindow : Gtk.Window
         filter.Name = "Fnt files";
 
         var openDialog = CreateOpenDialog ();
-        openDialog.Filter = null;
+        openDialog.Filter = filter;
 
         if ( openDialog.Run () == ( int ) ResponseType.Accept )
         {
