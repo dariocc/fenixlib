@@ -67,7 +67,7 @@ Go ahead and make a clone of this repository:
     
 Then open the ```FenixLib.Sln``` within the ```./fenixlib/FenixLib``` folder with either Visual Studio, MonoDevelop or Xamarin and you are ready to go... FenixLib builds as any other class library. Note that as long as you have a C# compiler for the .NET 4.5 platform you do not need any IDE, but I guess that if you know that you already know what to do... 
 
-Additional assemblies might however be dependent on additional libraries, for example [FenixLib.Cairo](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly) offers utility classes to interacting with [Mono.Cairo](http://www.mono-project.com/docs/tools+libraries/libraries/Mono.Cairo/), which requires Mono assemblies.
+Additional assemblies might however be dependent on additional libraries, for example [FenixLib.Gdk](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly) offers utility classes to interacting with [Mono.Gdk](http://docs.go-mono.com/index.aspx?link=N:Gdk), which requires Mono and Gtk to be installed.
 
 ### Running unit and integration tests
 Along with ```FenixLib``` C# project there is a ```FenixLib.Tests``` project that contains unit and integration tests to validate the functionality of the library. Complementary projects may be accompained by a Test project following the pattern  ```<ProjectName>.Tests```.
