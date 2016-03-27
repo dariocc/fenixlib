@@ -24,24 +24,49 @@ namespace FenixLib.Tests.Unit.IO
     [TestFixture ( Category = "Unit" )]
     public class NativeFormatWriterTests
     {
-        private Stream fakeStream;
+
+        private NativeFormatWriter fakeNativeFormatWriter;
+        // Keeps track of the bytes written to the fake stream
+        private byte [] currentMemory;
 
         [SetUp]
         public void SetUp ()
         {
-            fakeStream = MockRepository.GenerateMock<Stream> ();
+
+            var streamStub = MockRepository.GenerateStub<Stream> ();
+
+            streamStub.Stub ( _ => _.CanWrite ).Return ( true );
+
+            streamStub.Stub ( _ => _.Write (
+                Arg<byte []>.Is.NotNull, 
+                Arg<int>.Is.GreaterThanOrEqual ( 0 ), 
+                Arg<int>.Is.GreaterThan ( 0 ) ) )
+            .WhenCalled ( a =>
+            {
+                var bytes = a.Arguments[0] as byte [];
+                ResizeMemory ( bytes );
+            } );
+
+            streamStub.Stub ( _ => _.WriteByte ( Arg<byte>.Is.Anything ) )
+            .WhenCalled ( _ =>
+            {
+                var bytes = new byte[] { ( byte ) _.Arguments[0] };
+                ResizeMemory ( bytes );
+            } );
+
+            fakeNativeFormatWriter = new NativeFormatWriter ( streamStub );
         }
 
         [Test ()]
-        public void NativeFormatWriter_Test ()
+        public void Construct_NullArgument_Throws ()
         {
-
+            
         }
 
         [Test ()]
         public void WriteAsciiZ_Test ()
         {
-
+            
         }
 
         [Test ()]
@@ -74,81 +99,24 @@ namespace FenixLib.Tests.Unit.IO
 
         }
 
-        private class StreamFake : Stream
+        // Resizes currentMemory to hold bytes and copies the contents
+        // of bytes to it
+        private void ResizeMemory ( byte [] bytes )
         {
-            #region implemented abstract members of Stream
+            int destIndex;
 
-            public override void Flush ()
+            if ( currentMemory == null )
             {
-                throw new NotImplementedException ();
+                destIndex = 0;
+                currentMemory = new byte[bytes.Length];
+            }
+            else
+            {
+                destIndex = currentMemory.Length;
+                currentMemory = new byte[currentMemory.Length + bytes.Length];
             }
 
-            public override long Seek ( long offset, SeekOrigin origin )
-            {
-                throw new NotImplementedException ();
-            }
-
-            public override void SetLength ( long value )
-            {
-                throw new NotImplementedException ();
-            }
-
-            public override int Read ( byte[] buffer, int offset, int count )
-            {
-                throw new NotImplementedException ();
-            }
-
-            public override void Write ( byte[] buffer, int offset, int count )
-            {
-                throw new NotImplementedException ();
-            }
-
-            public override bool CanRead
-            {
-                get
-                {
-                    throw new NotImplementedException ();
-                }
-            }
-
-            public override bool CanSeek
-            {
-                get
-                {
-                    throw new NotImplementedException ();
-                }
-            }
-
-            public override bool CanWrite
-            {
-                get
-                {
-                    throw new NotImplementedException ();
-                }
-            }
-
-            public override long Length
-            {
-                get
-                {
-                    throw new NotImplementedException ();
-                }
-            }
-
-            public override long Position
-            {
-                get
-                {
-                    throw new NotImplementedException ();
-                }
-                set
-                {
-                    throw new NotImplementedException ();
-                }
-            }
-
-            #endregion
-			
+            Array.Copy ( bytes, 0, currentMemory, destIndex, bytes.Length );
         }
     }
 }
