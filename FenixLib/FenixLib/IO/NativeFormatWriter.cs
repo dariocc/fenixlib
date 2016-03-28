@@ -108,7 +108,7 @@ namespace FenixLib.IO
             }
         }
 
-        public void Write (PivotPoint pivotPoint)
+        public void Write ( PivotPoint pivotPoint )
         {
             Write ( Convert.ToInt16 ( pivotPoint.X ) );
             Write ( Convert.ToInt16 ( pivotPoint.Y ) );
@@ -117,6 +117,28 @@ namespace FenixLib.IO
         public void WriteReservedPaletteGammaSection ()
         {
             byte[] bytes = new byte[NativeFormat.ReservedBytesSize];
+            const int rowSize = 36;
+
+            // Compatibility for DIV requires that at least the byte indicating the number
+            // of colors of each Gamma stride is not 0.
+            // Note: this is not required for BennuGD / PixTudio, but it does not harm
+            for ( int row = 0 ; row < 16 ; row++ )
+            {
+                // Reference: Analysis of Div Games Studio beta map editor
+                bytes[row * rowSize + 0] = 32; // Number of colors (8, 16, 32)
+                bytes[row * rowSize + 1] = 0;  // Edit every N colors (0, 1, 4, 8)
+                bytes[row * rowSize + 2] = 0;  // Editorial / Fix (0, 1)
+                bytes[row * rowSize + 3] = 0;  // ?
+
+                // The gamma color generation is done accordingly to Div Games Studio behaviour
+                for ( int color = 0 ; color < 16 ; color++ )
+                {
+                    var value = ( byte ) ( row * 16 + color );
+                    bytes[row * rowSize + 4 + color] = value;
+                    bytes[row * rowSize + 4 + 16 + color] = ( byte ) ( ( value + 16 ) % 256 );
+                }
+            }
+
             base.Write ( bytes );
         }
     }
