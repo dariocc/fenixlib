@@ -25,26 +25,31 @@ namespace FenixLib.Tests.Unit.IO
     public class NativeFormatWriterTests
     {
 
-        private NativeFormatWriter fakeNativeFormatWriter;
+        private NativeFormatWriter fakeWriter;
         // Keeps track of the bytes written to the fake stream
-        private byte [] currentMemory;
+        // NOTE: As per https://msdn.microsoft.com/en-us/library/24e33k1w%28v=vs.110%29.aspx
+        // BinaryWriter implementation (superclass to fakeWriter) uses little-endian format
+        private byte[] currentMemory;
 
         [SetUp]
         public void SetUp ()
         {
-
+            // Stream stub that memorizes the bytes written to the field every
+            // time Write() overloads are called
             var streamStub = MockRepository.GenerateStub<Stream> ();
 
             streamStub.Stub ( _ => _.CanWrite ).Return ( true );
 
             streamStub.Stub ( _ => _.Write (
-                Arg<byte []>.Is.NotNull, 
-                Arg<int>.Is.GreaterThanOrEqual ( 0 ), 
+                Arg<byte[]>.Is.NotNull,
+                Arg<int>.Is.GreaterThanOrEqual ( 0 ),
                 Arg<int>.Is.GreaterThan ( 0 ) ) )
             .WhenCalled ( a =>
             {
-                var bytes = a.Arguments[0] as byte [];
-                ResizeMemory ( bytes );
+                var bytes = a.Arguments[0] as byte[];
+                var tmp = new byte[( int ) a.Arguments[2]];
+                Array.Copy ( bytes, tmp, tmp.Length );
+                ResizeMemory ( tmp );
             } );
 
             streamStub.Stub ( _ => _.WriteByte ( Arg<byte>.Is.Anything ) )
@@ -54,54 +59,83 @@ namespace FenixLib.Tests.Unit.IO
                 ResizeMemory ( bytes );
             } );
 
-            fakeNativeFormatWriter = new NativeFormatWriter ( streamStub );
+            fakeWriter = new NativeFormatWriter ( streamStub );
         }
 
-        [Test ()]
+        [Test]
         public void Construct_NullArgument_Throws ()
         {
-            
+            Assert.That ( () => new NativeFormatWriter ( null ),
+                Throws.ArgumentNullException );
         }
 
-        [Test ()]
-        public void WriteAsciiZ_Test ()
+        [Test]
+        public void WriteAsciiZ_StringSorterThanMaxLength_ByteAffterCharacterIs0 ()
         {
-            
+            fakeWriter.WriteAsciiZ ( "a", 2 );
+            Assert.That ( currentMemory[1], Is.EqualTo ( 0 ) );
         }
 
-        [Test ()]
+        [Test]
+        public void WriteAsciiZ_NullString_Throws ()
+        {
+            Assert.That ( () => fakeWriter.WriteAsciiZ ( null, 2 ),
+                Throws.ArgumentNullException );
+        }
+
+        [Test]
+        public void WriteAsciiZ_NegativeMaxLength_Throws ()
+        {
+            Assert.That ( () => fakeWriter.WriteAsciiZ ( "a text", -2 ),
+                Throws.InstanceOf<ArgumentOutOfRangeException> () );
+        }
+
+
+        [Test]
         public void WriteExtendedGlyphInfo_Test ()
         {
-
+            throw new NotImplementedException ();
         }
 
-        [Test ()]
+        [Test]
         public void WriteLegacyFntGlyphInfo_Test ()
         {
-
+            throw new NotImplementedException ();
         }
 
-        [Test ()]
-        public void Write_Test ()
+        [Test]
+        public void WritePalette_NullPalette_Throws ()
         {
-
+            Assert.That ( () => fakeWriter.Write ( null as Palette ),
+                Throws.ArgumentNullException );
         }
 
-        [Test ()]
-        public void WritePivotPoints_TestCases ()
+        [Test]
+        public void WritePalette_ValidPalette_Works ()
         {
-
+            // TODO: Create a Palette2Bytes converter class so as WritePalette
+            // becomes more easily testable?
+            throw new NotImplementedException ();
         }
 
-        [Test ()]
+
+        [Test]
+        public void WritePivotPoints_ValidPivotPoint_Works ()
+        {
+            fakeWriter.Write ( new PivotPoint ( 0, 0x01AA, 0x02BB ) );
+            var expected = new byte[] { 0xAA, 0x01, 0xBB, 0x02 };
+            Assert.That ( () => currentMemory, Is.EqualTo ( expected ) );
+        }
+
+        [Test]
         public void WriteReservedPaletteGammaSection_Test ()
         {
-
+            throw new NotImplementedException ();
         }
 
         // Resizes currentMemory to hold bytes and copies the contents
         // of bytes to it
-        private void ResizeMemory ( byte [] bytes )
+        private void ResizeMemory ( byte[] bytes )
         {
             int destIndex;
 
@@ -113,7 +147,9 @@ namespace FenixLib.Tests.Unit.IO
             else
             {
                 destIndex = currentMemory.Length;
+                var oldMemory = currentMemory;
                 currentMemory = new byte[currentMemory.Length + bytes.Length];
+                Array.Copy ( oldMemory, currentMemory, oldMemory.Length );
             }
 
             Array.Copy ( bytes, 0, currentMemory, destIndex, bytes.Length );
