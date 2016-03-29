@@ -20,7 +20,7 @@ using FenixLib.Core;
 namespace FenixLib.Tests.Unit.Core
 {
     [TestFixture ( Category = "Unit" )]
-    class StaticGraphicTests
+    class GraphicTests
     {
 
         private byte[] argbPixels;
