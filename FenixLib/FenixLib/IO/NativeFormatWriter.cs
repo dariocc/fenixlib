@@ -80,34 +80,6 @@ namespace FenixLib.IO
             base.Write ( bytes );
         }
 
-        public void Write ( IEnumerable<PivotPoint> pivotPoints )
-        {
-            if ( pivotPoints == null )
-            {
-                throw new ArgumentNullException ( nameof ( pivotPoints ) );
-            }
-
-            var ids = from p in pivotPoints select p.Id;
-
-            if ( ids.Count () == 0 )
-                return;
-
-            PivotPoint[] pivotPointsIncludingUndefined = new PivotPoint[ids.Max () + 1];
-            for ( var n = 0 ; n <= ids.Max () ; n++ )
-            {
-                var id = n;
-                PivotPoint? p = pivotPoints.Where ( x => x.Id == id ).FirstOrDefault ();
-                pivotPointsIncludingUndefined[n] = p == null
-                    ? new PivotPoint ( id, -1, -1 )
-                    : new PivotPoint ( id, p.Value.X, p.Value.Y );
-            }
-
-            foreach ( PivotPoint pivotPoint in pivotPointsIncludingUndefined )
-            {
-                Write ( pivotPoint );
-            }
-        }
-
         public void Write ( PivotPoint pivotPoint )
         {
             Write ( Convert.ToInt16 ( pivotPoint.X ) );
@@ -140,6 +112,34 @@ namespace FenixLib.IO
             }
 
             base.Write ( bytes );
+        }
+
+        internal void Write ( IEnumerable<PivotPoint> pivotPoints )
+        {
+            if ( pivotPoints == null )
+            {
+                throw new ArgumentNullException ( nameof ( pivotPoints ) );
+            }
+
+            var ids = from p in pivotPoints select p.Id;
+
+            if ( ids.Count () == 0 )
+                return;
+
+            PivotPoint[] pivotPointsIncludingUndefined = new PivotPoint[ids.Max () + 1];
+            for ( var n = 0 ; n <= ids.Max () ; n++ )
+            {
+                var id = n;
+                PivotPoint? p = pivotPoints.Where ( x => x.Id == id ).FirstOrDefault ();
+                pivotPointsIncludingUndefined[n] = p == null
+                    ? new PivotPoint ( id, -1, -1 )
+                    : new PivotPoint ( id, p.Value.X, p.Value.Y );
+            }
+
+            foreach ( PivotPoint pivotPoint in pivotPointsIncludingUndefined )
+            {
+                Write ( pivotPoint );
+            }
         }
     }
 }
