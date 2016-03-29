@@ -32,17 +32,36 @@ namespace FenixLib.IO
             public ArrangedPivotPointsView( IEnumerable<PivotPoint> pivotPoints, 
                 int spriteWidth, int spriteHeight )
             {
-                ArrangedPivotPoints = Arrange ( new HashSet<PivotPoint>(pivotPoints) );
+                this.pivotPoints = Arrange ( new HashSet<PivotPoint>(pivotPoints) );
                 realCenterX = spriteWidth / 2;
                 realCenterY = spriteHeight / 2;
             }
 
-            public IEnumerable<PivotPoint> ArrangedPivotPoints { get; }
+            private IEnumerable<PivotPoint> pivotPoints;
+            public IEnumerable<PivotPoint> ArrangedPivotPoints
+            {
+                get
+                {
+                    if (pivotPoints == null )
+                    {
+                        return Enumerable.Empty<PivotPoint> ();
+                    }
+                    else
+                    {
+                        return pivotPoints;
+                    }
+                }
+            }
 
             public int PivotPointsCount
             {
                 get
                 {
+                    if (ArrangedPivotPoints.Count() == 0)
+                    {
+                        return 0;
+                    }
+
                     var last = ArrangedPivotPoints.Last ();
 
                     int count;

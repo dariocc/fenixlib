@@ -122,7 +122,6 @@ namespace FenixLib.IO
                 throw new ArgumentNullException ( nameof ( arrangedPivotPointView ) );
             }
 
-
             int count = arrangedPivotPointView.PivotPointsCount;
 
             if ( pivotPointsCountFieldType == PivotPointsCountFieldType.TypeUInt16 )
@@ -138,7 +137,7 @@ namespace FenixLib.IO
                 throw new ArgumentOutOfRangeException ( nameof ( pivotPointsCountFieldType ) );
             }
 
-            for ( int i = 0 ; i <= count ; i++ )
+            for ( int i = 0 ; i < count ; i++ )
             {
                 Write ( arrangedPivotPointView.ArrangedPivotPoints.ElementAt ( i ) );
             }
