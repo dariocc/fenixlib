@@ -63,6 +63,12 @@ namespace FenixLib.Tests.Unit.IO
             formatWriter = new NativeFormatWriter ( streamStub );
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            memory = null;
+        }
+
         [Test]
         public void Construct_NullArgument_ThrowsException ()
         {
@@ -90,7 +96,6 @@ namespace FenixLib.Tests.Unit.IO
             Assert.That ( () => formatWriter.WriteAsciiZ ( "a text", -2 ),
                 Throws.InstanceOf<ArgumentOutOfRangeException> () );
         }
-
 
         [Test]
         public void WriteExtendedGlyphInfo_Test ()
