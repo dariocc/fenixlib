@@ -92,6 +92,13 @@ namespace FenixLib.Tests.Unit.IO
         }
 
         [Test]
+        public void WriteAsciiZ_StringLongerThanMaxLength_BytesWrittenDoNotExceedMaxLength ()
+        {
+            formatWriter.WriteAsciiZ ( "aaaa", 1 );
+            Assert.That ( memory.Length, Is.EqualTo ( 1 ) );
+        }
+
+        [Test]
         public void WriteAsciiZ_NullString_ThrowsException ()
         {
             Assert.That ( () => formatWriter.WriteAsciiZ ( null, 2 ),

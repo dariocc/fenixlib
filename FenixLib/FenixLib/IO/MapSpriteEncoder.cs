@@ -42,10 +42,9 @@ namespace FenixLib.IO
                 writer.WriteReservedPaletteGammaSection ();
             }
 
-            var ids = sprite.PivotPoints.Select ( p => p.Id );
-
-            writer.Write ( Convert.ToUInt16 ( ids.Count () > 0 ? ids.Max () : 0 ) );
-            writer.Write ( sprite.PivotPoints );
+            var ppView = new NativeFormatWriter.ArrangedPivotPointsView ( 
+                sprite.PivotPoints, sprite.Width, sprite.Height );
+            writer.Write ( ppView, NativeFormatWriter.PivotPointsCountFieldType.TypeUInt16 );
             writer.Write ( sprite.PixelData );
         }
 

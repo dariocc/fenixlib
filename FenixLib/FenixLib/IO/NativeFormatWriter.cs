@@ -22,7 +22,7 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    public class NativeFormatWriter : BinaryWriter
+    public partial class NativeFormatWriter : BinaryWriter
     {
 
         private static readonly Encoding encoding = Encoding.GetEncoding ( 850 );
@@ -114,32 +114,39 @@ namespace FenixLib.IO
             base.Write ( bytes );
         }
 
-        internal void Write ( IEnumerable<PivotPoint> pivotPoints )
+        internal void Write ( ArrangedPivotPointsView arrangedPivotPointView, 
+            PivotPointsCountFieldType pivotPointsCountFieldType )
         {
-            if ( pivotPoints == null )
+            if ( arrangedPivotPointView == null )
             {
-                throw new ArgumentNullException ( nameof ( pivotPoints ) );
+                throw new ArgumentNullException ( nameof ( arrangedPivotPointView ) );
             }
 
-            var ids = from p in pivotPoints select p.Id;
 
-            if ( ids.Count () == 0 )
-                return;
+            int count = arrangedPivotPointView.PivotPointsCount;
 
-            PivotPoint[] pivotPointsIncludingUndefined = new PivotPoint[ids.Max () + 1];
-            for ( var n = 0 ; n <= ids.Max () ; n++ )
+            if ( pivotPointsCountFieldType == PivotPointsCountFieldType.TypeUInt16 )
             {
-                var id = n;
-                PivotPoint? p = pivotPoints.Where ( x => x.Id == id ).FirstOrDefault ();
-                pivotPointsIncludingUndefined[n] = p == null
-                    ? new PivotPoint ( id, -1, -1 )
-                    : new PivotPoint ( id, p.Value.X, p.Value.Y );
+                Write ( Convert.ToUInt16 ( count  ) );
+            }
+            else if ( pivotPointsCountFieldType == PivotPointsCountFieldType.TypeUInt32 )
+            {
+                Write ( Convert.ToUInt32 ( count ) );
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException ( nameof ( pivotPointsCountFieldType ) );
             }
 
-            foreach ( PivotPoint pivotPoint in pivotPointsIncludingUndefined )
+            for ( int i = 0 ; i <= count ; i++ )
             {
-                Write ( pivotPoint );
+                Write ( arrangedPivotPointView.ArrangedPivotPoints.ElementAt ( i ) );
             }
+        }
+
+        public enum PivotPointsCountFieldType
+        {
+            TypeUInt16, TypeUInt32
         }
     }
 }
