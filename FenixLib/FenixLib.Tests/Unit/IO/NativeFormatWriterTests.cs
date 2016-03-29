@@ -16,6 +16,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using System;
 using System.IO;
+using System.Linq;
 using FenixLib.Core;
 using FenixLib.IO;
 
@@ -132,7 +133,6 @@ namespace FenixLib.Tests.Unit.IO
             // Stub the Colors property
             paletteStub.Stub ( _ => _.Colors ).Return ( paletteColors );
 
-            // Act
             formatWriter.Write ( paletteStub );
 
             Assert.That ( memory, Is.EqualTo ( expectedEncodedBytes ) );
@@ -150,9 +150,16 @@ namespace FenixLib.Tests.Unit.IO
         }
 
         [Test]
-        public void WriteReservedPaletteGammaSection_Test ()
+        public void WriteReservedPaletteGammaSection_Works ()
         {
-            throw new NotImplementedException ();
+            formatWriter.WriteReservedPaletteGammaSection ();
+            
+            // There are 16 gamma sections and they occupy 36bytes each.
+            Assert.That ( memory.Length, Is.EqualTo ( 16 * 36 ) );
+            // Every 16th byte needs to be 8, 16 or 32 for the format to be 
+            // compatible with DIV games studio
+            Assert.That ( memory.Where ( ( x, i ) => i % 36 == 0 ), 
+                Is.All.EqualTo(8).Or.EqualTo(16).Or.EqualTo(32) );
         }
 
         // Resizes currentMemory to hold bytes and copies the contents
