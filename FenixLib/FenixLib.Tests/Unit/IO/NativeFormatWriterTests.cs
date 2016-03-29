@@ -25,11 +25,11 @@ namespace FenixLib.Tests.Unit.IO
     public class NativeFormatWriterTests
     {
 
-        private NativeFormatWriter fakeWriter;
+        private NativeFormatWriter formatWriter;
         // Keeps track of the bytes written to the fake stream
         // NOTE: As per https://msdn.microsoft.com/en-us/library/24e33k1w%28v=vs.110%29.aspx
         // BinaryWriter implementation (superclass to fakeWriter) uses little-endian format
-        private byte[] currentMemory;
+        private byte[] memory;
 
         [SetUp]
         public void SetUp ()
@@ -59,7 +59,7 @@ namespace FenixLib.Tests.Unit.IO
                 ResizeMemory ( bytes );
             } );
 
-            fakeWriter = new NativeFormatWriter ( streamStub );
+            formatWriter = new NativeFormatWriter ( streamStub );
         }
 
         [Test]
@@ -72,21 +72,21 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WriteAsciiZ_StringSorterThanMaxLength_ByteAffterCharacterIs0 ()
         {
-            fakeWriter.WriteAsciiZ ( "a", 2 );
-            Assert.That ( currentMemory[1], Is.EqualTo ( 0 ) );
+            formatWriter.WriteAsciiZ ( "a", 2 );
+            Assert.That ( memory[1], Is.EqualTo ( 0 ) );
         }
 
         [Test]
         public void WriteAsciiZ_NullString_ThrowsException ()
         {
-            Assert.That ( () => fakeWriter.WriteAsciiZ ( null, 2 ),
+            Assert.That ( () => formatWriter.WriteAsciiZ ( null, 2 ),
                 Throws.ArgumentNullException );
         }
 
         [Test]
         public void WriteAsciiZ_NegativeMaxLength_ThrowsException ()
         {
-            Assert.That ( () => fakeWriter.WriteAsciiZ ( "a text", -2 ),
+            Assert.That ( () => formatWriter.WriteAsciiZ ( "a text", -2 ),
                 Throws.InstanceOf<ArgumentOutOfRangeException> () );
         }
 
@@ -106,25 +106,47 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WritePalette_NullPalette_Throws ()
         {
-            Assert.That ( () => fakeWriter.Write ( null as Palette ),
+            Assert.That ( () => formatWriter.Write ( null as Palette ),
                 Throws.ArgumentNullException );
         }
 
         [Test]
         public void WritePalette_ValidPalette_Works ()
         {
-            // TODO: Create a Palette2Bytes converter class so as WritePalette
-            // becomes more easily testable?
-            throw new NotImplementedException ();
-        }
+            var paletteStub = MockRepository.GenerateStub<Palette> ();
+            var paletteColors = new PaletteColor[256];
+            var expectedEncodedBytes = new byte[256 * 3];
 
+            for ( int i = 0 ; i < 256 ; i++ )
+            {
+                // A sample color that will be in the stub palette
+                var color = new PaletteColor ( i, i / 2, i / 3 );
+                paletteColors[i] = color;
+                paletteStub[i] = color;
+
+                // Color components are to be encoded in 6bits
+                expectedEncodedBytes[i * 3 + 0] = ( byte ) ( ( i ) >> 2 );
+                expectedEncodedBytes[i * 3 + 1] = ( byte ) ( ( i / 2 ) >> 2 );
+                expectedEncodedBytes[i * 3 + 2] = ( byte ) ( ( i / 3 ) >> 2 );
+            }
+            // Stub the Colors property
+            paletteStub.Stub ( _ => _.Colors ).Return ( paletteColors );
+
+            // Act
+            formatWriter.Write ( paletteStub );
+
+            Assert.That ( memory, Is.EqualTo ( expectedEncodedBytes ) );
+        }
 
         [Test]
         public void WritePivotPoints_ValidPivotPoint_Works ()
         {
-            fakeWriter.Write ( new PivotPoint ( 0, 0x01AA, 0x02BB ) );
-            var expected = new byte[] { 0xAA, 0x01, 0xBB, 0x02 };
-            Assert.That ( () => currentMemory, Is.EqualTo ( expected ) );
+            var pivotPoint = new PivotPoint ( 0, 0x01AA, 0x02BB );
+            var expectedEncodedBytes = new byte[] { 0xAA, 0x01, 0xBB, 0x02 };
+
+            formatWriter.Write ( pivotPoint );
+
+            Assert.That ( () => memory, Is.EqualTo ( expectedEncodedBytes ) );
         }
 
         [Test]
@@ -139,20 +161,20 @@ namespace FenixLib.Tests.Unit.IO
         {
             int destIndex;
 
-            if ( currentMemory == null )
+            if ( memory == null )
             {
                 destIndex = 0;
-                currentMemory = new byte[bytes.Length];
+                memory = new byte[bytes.Length];
             }
             else
             {
-                destIndex = currentMemory.Length;
-                var oldMemory = currentMemory;
-                currentMemory = new byte[currentMemory.Length + bytes.Length];
-                Array.Copy ( oldMemory, currentMemory, oldMemory.Length );
+                destIndex = memory.Length;
+                var oldMemory = memory;
+                memory = new byte[memory.Length + bytes.Length];
+                Array.Copy ( oldMemory, memory, oldMemory.Length );
             }
 
-            Array.Copy ( bytes, 0, currentMemory, destIndex, bytes.Length );
+            Array.Copy ( bytes, 0, memory, destIndex, bytes.Length );
         }
     }
 }
