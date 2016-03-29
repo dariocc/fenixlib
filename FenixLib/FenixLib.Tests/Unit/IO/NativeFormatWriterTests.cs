@@ -63,7 +63,7 @@ namespace FenixLib.Tests.Unit.IO
         }
 
         [Test]
-        public void Construct_NullArgument_Throws ()
+        public void Construct_NullArgument_ThrowsException ()
         {
             Assert.That ( () => new NativeFormatWriter ( null ),
                 Throws.ArgumentNullException );
@@ -77,14 +77,14 @@ namespace FenixLib.Tests.Unit.IO
         }
 
         [Test]
-        public void WriteAsciiZ_NullString_Throws ()
+        public void WriteAsciiZ_NullString_ThrowsException ()
         {
             Assert.That ( () => fakeWriter.WriteAsciiZ ( null, 2 ),
                 Throws.ArgumentNullException );
         }
 
         [Test]
-        public void WriteAsciiZ_NegativeMaxLength_Throws ()
+        public void WriteAsciiZ_NegativeMaxLength_ThrowsException ()
         {
             Assert.That ( () => fakeWriter.WriteAsciiZ ( "a text", -2 ),
                 Throws.InstanceOf<ArgumentOutOfRangeException> () );

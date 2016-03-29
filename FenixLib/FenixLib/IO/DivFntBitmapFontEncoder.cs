@@ -51,7 +51,7 @@ namespace FenixLib.IO
         protected override void WriteGlyphInfo ( ref NativeFormat.GlyphInfo glypInfo,
             NativeFormatWriter writer )
         {
-            writer.WriteLegacyFntGlyphInfo ( ref glypInfo );
+            writer.WriteLegacyGlyphInfo ( ref glypInfo );
         }
     }
 }
