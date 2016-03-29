@@ -95,13 +95,48 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WriteExtendedGlyphInfo_Test ()
         {
-            throw new NotImplementedException ();
+            var glyphInfo = new NativeFormat.GlyphInfo (
+                width: 0x10, 
+                height: 0x20, 
+                xAdvance: 0x30, 
+                yAdvance: 0x40, 
+                xOffset:0x50, 
+                yOffset:0x60, 
+                fileOffset:0x70 );
+
+            var expectedBytes = new byte[]
+            {
+                0x10, 0, 0, 0,
+                0x20, 0, 0, 0,
+                0x30, 0, 0, 0,
+                0x40, 0, 0, 0,
+                0x50, 0, 0, 0,
+                0x60, 0, 0, 0,
+                0x70, 0, 0, 0
+            };
+
+            formatWriter.WriteExtendedGlyphInfo ( ref glyphInfo );
+
+            Assert.That ( memory, Is.EqualTo ( expectedBytes ) );
         }
 
         [Test]
-        public void WriteLegacyFntGlyphInfo_Test ()
+        public void WriteLegacyFntGlyphInfo_ValidGlyph_Works ()
         {
-            throw new NotImplementedException ();
+            var glyphInfo = new NativeFormat.GlyphInfo (
+                0x10, 0x20, 0x30, 0x40);
+            var expectedBytes = new byte[]
+            {
+                0x10, 0, 0, 0,
+                0x20, 0, 0, 0,
+                0x30, 0, 0, 0,
+                0x40, 0, 0, 0
+            };
+
+
+            formatWriter.WriteLegacyGlyphInfo ( ref glyphInfo );
+
+            Assert.That ( memory, Is.EqualTo ( expectedBytes ) );
         }
 
         [Test]

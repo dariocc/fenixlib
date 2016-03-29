@@ -112,13 +112,25 @@ namespace FenixLib.IO
 
         public GlyphInfo ReadLegacyFntGlyphInfo ()
         {
-            return new GlyphInfo ( ReadInt32 (), ReadInt32 (), ReadInt32 (), ReadInt32 () );
+            return new GlyphInfo ( 
+                width: ReadInt32 (), 
+                height: ReadInt32 (), 
+                yOffset : ReadInt32 (), 
+                fileOffset: ReadInt32 () 
+                );
         }
 
         public GlyphInfo ReadExtendedFntGlyphInfo ()
         {
-            return new GlyphInfo ( ReadInt32 (), ReadInt32 (), ReadInt32 (),
-                ReadInt32 (), ReadInt32 (), ReadInt32 (), ReadInt32 () );
+            return new GlyphInfo (
+                width : ReadInt32 (),
+                height : ReadInt32 (),
+                xAdvance:ReadInt32 (), 
+                yAdvance:ReadInt32 (),
+                xOffset : ReadInt32 (), 
+                yOffset : ReadInt32 (), 
+                fileOffset : ReadInt32 ()
+                );
         }
 
 
