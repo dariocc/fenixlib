@@ -12,22 +12,52 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using System;
 namespace FenixLib.Image
 {
     internal class PixelReaderMonochrome : PixelReader
     {
+        private int x = 0, y = 0;
+        byte byteValue;
+
         public override bool HasPixels
         {
             get
             {
-                throw new NotImplementedException ();
+                return ( ( x + 1 ) * ( y + 1 ) <= ( Graphic.Width - 1 ) * ( Graphic.Height - 1 ) );
             }
         }
 
         public override void Read ()
         {
-            throw new NotImplementedException ();
+            int bytesPerRow =
+                Core.GraphicFormat.Format1bppMonochrome.StrideForWidth ( Graphic.Width );
+
+            if ( x % 8 == 0 )
+            {
+                byte[] buff = new byte[1];
+                BaseStream.Read ( buff, 0, 1 );
+                byteValue = buff[0];
+            }
+
+            int bitInByte = ( x % 8 );
+
+            int bitValue = ( byteValue & ( 0x01 << ( 7 - bitInByte ) ) ) >> ( 7 - bitInByte );
+            int componentValue = bitValue * 255;
+
+            if ( Core.GraphicFormat.Format1bppMonochrome.StrideForWidth ( x + 1 ) >= bytesPerRow )
+            {
+                x = 0;
+                y++;
+            }
+            else
+            {
+                x++;
+            }
+
+            R = componentValue;
+            G = componentValue;
+            B = componentValue;
+            Alpha = componentValue;
         }
     }
 }
