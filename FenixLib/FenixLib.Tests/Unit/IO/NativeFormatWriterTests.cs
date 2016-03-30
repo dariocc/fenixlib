@@ -99,10 +99,10 @@ namespace FenixLib.Tests.Unit.IO
         }
 
         [Test]
-        public void WriteAsciiZ_NullString_ThrowsException ()
+        public void WriteAsciiZ_NullString_WritesEmptyString ()
         {
-            Assert.That ( () => formatWriter.WriteAsciiZ ( null, 2 ),
-                Throws.ArgumentNullException );
+            formatWriter.WriteAsciiZ ( null, 5 );
+            Assert.That ( memory[0], Is.EqualTo ( 0 ) );
         }
 
         [Test]

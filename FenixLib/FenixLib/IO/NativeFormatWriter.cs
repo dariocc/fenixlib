@@ -33,7 +33,7 @@ namespace FenixLib.IO
         {
             if ( text == null )
             {
-                throw new ArgumentNullException ( nameof ( text ) );
+                text = "";
             }
 
             // Texts are encoded in ASCIZZ format
