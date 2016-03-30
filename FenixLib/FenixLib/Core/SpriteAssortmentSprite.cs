@@ -16,18 +16,21 @@ using System.Collections.Generic;
 
 namespace FenixLib.Core
 {
-    public sealed class SpriteAssortmentSprite : Sprite
+    public sealed class SpriteAssortmentSprite : ISprite
     {
-        public int Id { get; }
 
-        internal SpriteAssortmentSprite ( int id, ISprite sprite ) : base ( sprite )
+        internal SpriteAssortmentSprite ( int id, ISprite sprite )
         {
             Id = id;
 
             baseSprite = sprite;
         }
 
-        public override string Description
+        private readonly ISprite baseSprite;
+
+        public int Id { get; }
+
+        public string Description
         {
             get
             {
@@ -40,15 +43,17 @@ namespace FenixLib.Core
             }
         }
 
-        public override ICollection<PivotPoint> PivotPoints
-        {
-            get
-            {
-                return baseSprite.PivotPoints;
-            }
-        }
+        public ICollection<PivotPoint> PivotPoints => baseSprite.PivotPoints;
 
-        private readonly ISprite baseSprite;
+        public GraphicFormat GraphicFormat => baseSprite.GraphicFormat;
+
+        public int Height => baseSprite.Height;
+
+        public Palette Palette => baseSprite.Palette;
+
+        public int Width => baseSprite.Width;
+
+        public byte[] PixelData => baseSprite.PixelData;
 
         public override bool Equals ( object obj )
         {
@@ -76,9 +81,22 @@ namespace FenixLib.Core
             return ( sprite.Id.Equals ( Id ) );
         }
 
-        public override int GetHashCode ()
+        public override int GetHashCode () => Id.GetHashCode ();
+
+        public void ClearPivotPoints () => baseSprite.ClearPivotPoints ();
+
+        public void DefinePivotPoint ( int id, int x, int y ) => baseSprite.DefinePivotPoint ( id, x, y );
+
+        public void DeletePivotPoint ( int id ) => baseSprite.DeletePivotPoint ( id );
+
+        public PivotPoint GetPivotPoint ( int id ) => baseSprite.GetPivotPoint ( id );
+
+        public int? FindFreePivotPointId ( int start = 0, 
+            Sprite.SearchDirection direction = Sprite.SearchDirection.Fordward )
         {
-            return Id.GetHashCode ();
+            return baseSprite.FindFreePivotPointId ( start, direction );
         }
+
+        public bool IsPivotPointDefined ( int id ) => baseSprite.IsPivotPointDefined ( id );
     }
 }

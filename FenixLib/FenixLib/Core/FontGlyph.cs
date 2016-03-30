@@ -14,11 +14,11 @@
 */
 namespace FenixLib.Core
 {
-    public sealed class FontGlyph : Glyph
+    public sealed class FontGlyph : IGlyph
     {
         private readonly IGlyph baseGlyph;
 
-        internal FontGlyph ( char character, IGlyph glyph ) : base( glyph )
+        internal FontGlyph ( char character, IGlyph glyph )
         {
             Character = character;
             baseGlyph = glyph;
@@ -26,7 +26,47 @@ namespace FenixLib.Core
 
         public char Character { get; }
 
-        public override int XAdvance
+        public GraphicFormat GraphicFormat
+        {
+            get
+            {
+                return baseGlyph.GraphicFormat;
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                return baseGlyph.Height;
+            }
+        }
+
+        public Palette Palette
+        {
+            get
+            {
+                return baseGlyph.Palette;
+            }
+        }
+
+        public byte[] PixelData
+        {
+            get
+            {
+                return baseGlyph.PixelData;
+            }
+        }
+
+        public int Width
+        {
+            get
+            {
+                return baseGlyph.Width;
+            }
+        }
+
+        public int XAdvance
         {
             get
             {
@@ -39,20 +79,7 @@ namespace FenixLib.Core
             }
         }
 
-        public override int YAdavance
-        {
-            get
-            {
-                return baseGlyph.YAdavance;
-            }
-
-            set
-            {
-                baseGlyph.YAdavance = value;
-            }
-        }
-
-        public override int XOffset
+        public int XOffset
         {
             get
             {
@@ -65,7 +92,20 @@ namespace FenixLib.Core
             }
         }
 
-        public override int YOffset
+        public int YAdavance
+        {
+            get
+            {
+                return baseGlyph.YAdavance;
+            }
+
+            set
+            {
+                baseGlyph.YAdavance = value;
+            }
+        }
+
+        public int YOffset
         {
             get
             {
