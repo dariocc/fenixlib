@@ -12,14 +12,44 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-namespace FenixLib.Image
+using System;
+
+namespace FenixLib.Imaging
 {
-    internal class PixelWriterArgbInt32 : PixelWriter
+    internal class PixelWriterMonochrome : PixelWriter
     {
         public override void Write ( int alpha, int r, int g, int b )
         {
-            int value = ( alpha << 24 ) | ( r << 16 ) | ( g << 8 ) | b;
+            throw new NotImplementedException ();
+
+            byte value;
+
+            if ( alpha < 128 )
+            {
+                value = 0;
+            }
+            else
+            {
+                value = FindNearest ( r, g, b );
+            }
+
             Writer.Write ( value );
+        }
+
+        private byte FindNearest ( int r, int g, int b )
+        {
+            throw new NotImplementedException ();
+
+            double rn = r / 765.0;
+            double gn = g / 765.0;
+            double bn = b / 765.0;
+
+            double avg = rn + gn + bn;
+
+            if ( avg >= 0.5 )
+                return 1;
+            else
+                return 0;
         }
     }
 }

@@ -15,7 +15,7 @@
 using NUnit.Framework;
 using Rhino.Mocks;
 using System;
-using FenixLib.Image;
+using FenixLib.Imaging;
 
 namespace FenixLib.Core.Tests.Image
 {

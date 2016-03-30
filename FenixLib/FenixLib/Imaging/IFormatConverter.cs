@@ -12,30 +12,12 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-namespace FenixLib.Image
+using FenixLib.Core;
+
+namespace FenixLib.Imaging
 {
-    internal class PixelReaderRgbIndexed : PixelReader
+    public interface IFormatConverter
     {
-        public override bool HasPixels
-        {
-            get
-            {
-                return ( BaseStream.Position + 1 < BaseStream.Length );
-            }
-        }
-
-        public override void Read ()
-        {
-            int value = Reader.ReadByte ();
-
-            R = Graphic.Palette[value].R;
-            G = Graphic.Palette[value].G;
-            B = Graphic.Palette[value].B;
-
-            if ( value == 0 )
-                Alpha = 0;
-            else
-                Alpha = 255;
-        }
+        byte[] Convert ( IGraphic graphic, GraphicFormat format );
     }
 }

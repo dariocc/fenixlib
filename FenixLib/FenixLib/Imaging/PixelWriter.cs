@@ -17,7 +17,7 @@ using System.IO;
 using FenixLib.Core;
 using static FenixLib.IO.NativeFormat;
 
-namespace FenixLib.Image
+namespace FenixLib.Imaging
 {
     internal abstract class PixelWriter : IDisposable
     {

@@ -12,24 +12,30 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-namespace FenixLib.Image
+namespace FenixLib.Imaging
 {
-    internal class PixelWriterRgbInt16 : PixelWriter
+    internal class PixelReaderRgbIndexed : PixelReader
     {
-        public override void Write ( int alpha, int r, int g, int b )
+        public override bool HasPixels
         {
-            ushort value;
-
-            if ( alpha < 128 )
+            get
             {
-                value = 0;
+                return ( BaseStream.Position + 1 < BaseStream.Length );
             }
+        }
+
+        public override void Read ()
+        {
+            int value = Reader.ReadByte ();
+
+            R = Graphic.Palette[value].R;
+            G = Graphic.Palette[value].G;
+            B = Graphic.Palette[value].B;
+
+            if ( value == 0 )
+                Alpha = 0;
             else
-            {
-                value = ( ushort ) ( ( ( r >> 3 ) << 11 ) | ( ( g >> 2 ) << 5 ) | ( b >> 3 ) );
-            }
-
-            Writer.Write ( value );
+                Alpha = 255;
         }
     }
 }

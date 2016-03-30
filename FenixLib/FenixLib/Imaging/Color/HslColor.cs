@@ -14,7 +14,7 @@
 */
 using System;
 
-namespace FenixLib.Image.Color
+namespace FenixLib.Imaging.Color
 {
     public struct HslColor
     {

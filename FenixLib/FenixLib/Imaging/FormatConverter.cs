@@ -15,7 +15,7 @@
 using System;
 using FenixLib.Core;
 
-namespace FenixLib.Image
+namespace FenixLib.Imaging
 {
     public class FormatConverter : IFormatConverter
     {

@@ -24,7 +24,7 @@ namespace FenixLib.IO
     /// </summary>
     public static class BitmapFile
     {
-        public static IGraphic Load ( string path )
+        public static IGraphic LoadAsGraphic ( string path )
         {
             var decoder = new BitmapFileGraphicDecoder ();
 

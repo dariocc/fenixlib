@@ -15,9 +15,9 @@
 using System;
 using System.Collections.Generic;
 using FenixLib.Core;
-using FenixLib.Image.Color;
+using FenixLib.Imaging.Color;
 
-namespace FenixLib.Image
+namespace FenixLib.Imaging
 {
     internal class PixelWriterRgbIndexed : PixelWriter
     {

@@ -32,7 +32,7 @@ namespace ConvertImageToMap
 
             // Raster images supported by the Gdip may be loaded directly into IGraphic
             // instances by using helper methods of the BitmapFile static class:
-            var graphic = BitmapFile.Load ( "pig.png" );
+            var graphic = BitmapFile.LoadAsGraphic ( "pig.png" );
 
             // If the Bitmap is not contained in a file, but comes from an stream you
             // may want to take advantage of the BitmapFileGraphicDecoder, which implements

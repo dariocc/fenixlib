@@ -15,7 +15,7 @@
 using System;
 using Gdk;
 using FenixLib.Core;
-using FenixLib.Image;
+using FenixLib.Imaging;
 
 namespace FenixLib.Gdk
 {

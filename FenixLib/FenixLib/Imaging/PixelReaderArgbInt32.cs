@@ -12,7 +12,7 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-namespace FenixLib.Image
+namespace FenixLib.Imaging
 {
     internal class PixelReaderArgbInt32 : PixelReader
     {
