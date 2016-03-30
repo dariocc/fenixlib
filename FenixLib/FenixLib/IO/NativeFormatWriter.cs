@@ -114,16 +114,26 @@ namespace FenixLib.IO
             base.Write ( bytes );
         }
 
-        internal void Write ( ArrangedPivotPointsView arrangedPivotPointView, 
+        public void Write (IEnumerable<PivotPoint> pivotPoints,
+            int spriteWidth, int spriteHeight,
+            PivotPointsCountFieldType pivotPointsCountFieldType
+            )
+        {
+            var writablePoints = new WritablePivotPointsView ( pivotPoints, 
+                spriteWidth, spriteHeight );
+            Write ( writablePoints, pivotPointsCountFieldType );
+        }
+
+        internal void Write ( WritablePivotPointsView writablePoints, 
             PivotPointsCountFieldType pivotPointsCountFieldType )
         {
-            if ( arrangedPivotPointView == null )
+
+            if ( writablePoints == null )
             {
-                throw new ArgumentNullException ( nameof ( arrangedPivotPointView ) );
+                throw new ArgumentNullException ( nameof ( writablePoints ) );
             }
 
-
-            int count = arrangedPivotPointView.PivotPointsCount;
+            int count = writablePoints.Count;
 
             if ( pivotPointsCountFieldType == PivotPointsCountFieldType.TypeUInt16 )
             {
@@ -140,7 +150,7 @@ namespace FenixLib.IO
 
             for ( int i = 0 ; i <= count ; i++ )
             {
-                Write ( arrangedPivotPointView.ArrangedPivotPoints.ElementAt ( i ) );
+                Write ( writablePoints[ i ] );
             }
         }
 

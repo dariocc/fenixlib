@@ -39,17 +39,18 @@ namespace FenixLib.IO
                 var pixelDataSize = NativeFormat.CalculatePixelBufferBytes (
                     (int) assortment.GraphicFormat, sprite.Width, sprite.Height );
 
-                var ppView = new NativeFormatWriter.ArrangedPivotPointsView ( 
+                var writablePoints = new NativeFormatWriter.WritablePivotPointsView ( 
                     sprite.PivotPoints, sprite.Width, sprite.Height );
 
-                var maplen = Convert.ToUInt32 ( 64 + pixelDataSize + ppView.PivotPointsCount * 4 );
+                var maplen = Convert.ToUInt32 ( 64 + pixelDataSize + writablePoints.Count * 4 );
 
                 writer.Write ( maplen );
                 writer.WriteAsciiZ ( sprite.Description, 32 );
                 writer.WriteAsciiZ ( "FenixLib", 12 );
                 writer.Write ( Convert.ToUInt32 ( sprite.Width ) );
                 writer.Write ( Convert.ToUInt32 ( sprite.Height ) );
-                writer.Write ( ppView, NativeFormatWriter.PivotPointsCountFieldType.TypeUInt32);
+                writer.Write ( writablePoints, 
+                    NativeFormatWriter.PivotPointsCountFieldType.TypeUInt32);
                 writer.Write ( sprite.PixelData );
             }
         }

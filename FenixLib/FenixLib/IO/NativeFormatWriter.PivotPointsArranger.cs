@@ -13,6 +13,7 @@
 *   limitations under the License.
 */
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,27 +24,58 @@ namespace FenixLib.IO
 {
     public partial class NativeFormatWriter
     {
-        internal sealed class ArrangedPivotPointsView
+        /// <summary>
+        /// A collection of PivotPoints that is in a suitable format to be written to 
+        /// disk by the NativeFormatWriter.
+        /// This means that for a given IEnumerable of PivotPoints that is passed to the
+        /// constructor, the <see cref="WritablePivotPointsView"/> will produce a collection
+        /// of PivotPoints that take into account the following:
+        /// 
+        ///     - All PivotPoints whose coordinates are exactly (-1, -1) are discarded.
+        ///     
+        ///     - All PivotPoints from id = 0 to id = max of PivotPoints Id are defined.
+        ///     
+        ///     - The PivotPoints that were not defined in the original collection are
+        ///       set to coordinates (-1, -1).
+        ///       
+        ///     - If there is only one pivot point, and the id is 0, the 
+        ///       <see cref="WritablePivotPointsView"/> will only contain that pivot point,
+        ///       unless the coordinates of that pivot point are equal to the center of the
+        ///       dimension specified in the constructor via spriteWidth and spriteHeight.
+        /// </summary>
+        public sealed class WritablePivotPointsView : IEnumerable<PivotPoint>
         {
 
-            private int realCenterX;
-            private int realCenterY;
+            private readonly int realCenterX;
+            private readonly int realCenterY;
+            private readonly PivotPoint[] arrangedPoints;
 
-            public ArrangedPivotPointsView( IEnumerable<PivotPoint> pivotPoints, 
+            public WritablePivotPointsView ( IEnumerable<PivotPoint> pivotPoints,
                 int spriteWidth, int spriteHeight )
             {
-                ArrangedPivotPoints = Arrange ( new HashSet<PivotPoint>(pivotPoints) );
+                arrangedPoints = Arrange ( new HashSet<PivotPoint> ( pivotPoints ) );
                 realCenterX = spriteWidth / 2;
                 realCenterY = spriteHeight / 2;
             }
 
-            public IEnumerable<PivotPoint> ArrangedPivotPoints { get; }
-
-            public int PivotPointsCount
+            public PivotPoint this[int index]
             {
                 get
                 {
-                    var last = ArrangedPivotPoints.Last ();
+                    if (index < 0 || index >= arrangedPoints.Length)
+                    {
+                        throw new ArgumentOutOfRangeException (nameof( index ) );
+                    }
+
+                    return arrangedPoints[index];
+                }
+            }
+
+            public int Count
+            {
+                get
+                {
+                    var last = arrangedPoints.Last ();
 
                     int count;
 
@@ -60,30 +92,44 @@ namespace FenixLib.IO
                 }
             }
 
+            public IEnumerator<PivotPoint> GetEnumerator ()
+            {
+                return arrangedPoints.AsEnumerable().GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator ()
+            {
+                return GetEnumerator ();
+            }
+
             // Creates an enumerable of PivotPoint objects based on a set of pivotPoints.
             // The returned enumerable is sorted by the PivotPoint.Id and contains PivotPoint 
             // defined for every id from 0 to max ( id of pivotPoints ) with the coordinates
             // set to -1, -1.
             // 
-            private IEnumerable<PivotPoint> Arrange ( ISet<PivotPoint> pivotPoints )
+            private PivotPoint[] Arrange ( ISet<PivotPoint> pivotPoints )
             {
-                if ( pivotPoints.Count == 0 )
+                // Discard pivot points with coordinates (-1, -1)
+                var validPoints = pivotPoints.Where ( p => p.X != -1 && p.Y != -1 );
+
+                if ( validPoints.Any() == false )
                 {
                     return null;
                 }
 
-                var maxId = pivotPoints.Max ( p => p.Id );
-                var allIds = pivotPoints.Select ( p => p.Id ).OrderBy ( x => x );
+                var maxId = validPoints.Max ( p => p.Id );
+                var allIds = validPoints.Select ( p => p.Id ).OrderBy ( x => x );
 
                 var arrangedPoints = new PivotPoint[maxId + 1];
 
                 for ( int id = 0 ; id <= maxId ; id++ )
                 {
+                    // Non-defined pivot points have coordinates -1, -1
                     int x = -1; int y = -1;
 
                     if ( allIds.Contains ( id ) )
                     {
-                        var point = pivotPoints.Where ( p => p.Id == id ).First ();
+                        var point = validPoints.Where ( p => p.Id == id ).First ();
                         x = point.X;
                         y = point.Y;
                     }
