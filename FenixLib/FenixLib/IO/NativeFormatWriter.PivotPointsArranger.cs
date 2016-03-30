@@ -58,23 +58,15 @@ namespace FenixLib.IO
                 realCenterY = spriteHeight / 2;
             }
 
-            public PivotPoint this[int index]
-            {
-                get
-                {
-                    if (index < 0 || index >= arrangedPoints.Length)
-                    {
-                        throw new ArgumentOutOfRangeException (nameof( index ) );
-                    }
-
-                    return arrangedPoints[index];
-                }
-            }
-
             public int Count
             {
                 get
                 {
+                    if ( arrangedPoints == null )
+                    {
+                        return 0;
+                    }
+
                     var last = arrangedPoints.Last ();
 
                     int count;
@@ -94,7 +86,12 @@ namespace FenixLib.IO
 
             public IEnumerator<PivotPoint> GetEnumerator ()
             {
-                return arrangedPoints.AsEnumerable().GetEnumerator();
+                if ( Count == 0 )
+                {
+                    return Enumerable.Empty<PivotPoint> ().GetEnumerator ();
+                }
+
+                return arrangedPoints.AsEnumerable ().GetEnumerator ();
             }
 
             IEnumerator IEnumerable.GetEnumerator ()
@@ -112,7 +109,7 @@ namespace FenixLib.IO
                 // Discard pivot points with coordinates (-1, -1)
                 var validPoints = pivotPoints.Where ( p => p.X != -1 && p.Y != -1 );
 
-                if ( validPoints.Any() == false )
+                if ( validPoints.Any () == false )
                 {
                     return null;
                 }

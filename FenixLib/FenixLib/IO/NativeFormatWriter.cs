@@ -114,17 +114,17 @@ namespace FenixLib.IO
             base.Write ( bytes );
         }
 
-        public void Write (IEnumerable<PivotPoint> pivotPoints,
+        public void Write ( IEnumerable<PivotPoint> pivotPoints,
             int spriteWidth, int spriteHeight,
             PivotPointsCountFieldType pivotPointsCountFieldType
             )
         {
-            var writablePoints = new WritablePivotPointsView ( pivotPoints, 
+            var writablePoints = new WritablePivotPointsView ( pivotPoints,
                 spriteWidth, spriteHeight );
             Write ( writablePoints, pivotPointsCountFieldType );
         }
 
-        internal void Write ( WritablePivotPointsView writablePoints, 
+        internal void Write ( WritablePivotPointsView writablePoints,
             PivotPointsCountFieldType pivotPointsCountFieldType )
         {
 
@@ -137,7 +137,7 @@ namespace FenixLib.IO
 
             if ( pivotPointsCountFieldType == PivotPointsCountFieldType.TypeUInt16 )
             {
-                Write ( Convert.ToUInt16 ( count  ) );
+                Write ( Convert.ToUInt16 ( count ) );
             }
             else if ( pivotPointsCountFieldType == PivotPointsCountFieldType.TypeUInt32 )
             {
@@ -148,9 +148,9 @@ namespace FenixLib.IO
                 throw new ArgumentOutOfRangeException ( nameof ( pivotPointsCountFieldType ) );
             }
 
-            for ( int i = 0 ; i <= count ; i++ )
+            foreach ( var point in writablePoints )
             {
-                Write ( writablePoints[ i ] );
+                Write ( point );
             }
         }
 
