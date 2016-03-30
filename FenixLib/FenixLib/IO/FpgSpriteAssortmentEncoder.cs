@@ -24,7 +24,7 @@ namespace FenixLib.IO
 
         protected override byte GetLastHeaderByte ( ISpriteAssortment what ) => version;
 
-        protected override void WriteNativeFormatBody ( ISpriteAssortment assortment, 
+        protected override void WriteNativeFormatBody ( ISpriteAssortment assortment,
             NativeFormatWriter writer )
         {
             // TODO: Test palette == null and GraphicFormat = indexed
@@ -37,27 +37,28 @@ namespace FenixLib.IO
             foreach ( var sprite in assortment )
             {
                 var pixelDataSize = NativeFormat.CalculatePixelBufferBytes (
-                    (int) assortment.GraphicFormat, sprite.Width, sprite.Height );
+                    ( int ) assortment.GraphicFormat, sprite.Width, sprite.Height );
 
-                var writablePoints = new NativeFormatWriter.WritablePivotPointsView ( 
+                var writablePoints = new NativeFormatWriter.WritablePivotPointsView (
                     sprite.PivotPoints, sprite.Width, sprite.Height );
 
                 var maplen = Convert.ToUInt32 ( 64 + pixelDataSize + writablePoints.Count * 4 );
 
+                writer.Write ( Convert.ToUInt32 ( sprite.Id ) );
                 writer.Write ( maplen );
                 writer.WriteAsciiZ ( sprite.Description, 32 );
                 writer.WriteAsciiZ ( "FenixLib", 12 );
                 writer.Write ( Convert.ToUInt32 ( sprite.Width ) );
                 writer.Write ( Convert.ToUInt32 ( sprite.Height ) );
-                writer.Write ( writablePoints, 
-                    NativeFormatWriter.PivotPointsCountFieldType.TypeUInt32);
+                writer.Write ( writablePoints,
+                    NativeFormatWriter.PivotPointsCountFieldType.TypeUInt32 );
                 writer.Write ( sprite.PixelData );
             }
         }
 
         protected override string GetFileMagic ( ISpriteAssortment assortment )
         {
-            switch ( (int) assortment.GraphicFormat )
+            switch ( ( int ) assortment.GraphicFormat )
             {
                 case 1:
                     return "f01";
