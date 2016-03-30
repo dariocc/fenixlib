@@ -46,7 +46,7 @@ namespace FenixLib.IO
 
                 writer.Write ( maplen );
                 writer.WriteAsciiZ ( sprite.Description, 32 );
-                writer.WriteAsciiZ ( "SpritePocket", 12 );
+                writer.WriteAsciiZ ( "FenixLib", 12 );
                 writer.Write ( Convert.ToUInt32 ( sprite.Width ) );
                 writer.Write ( Convert.ToUInt32 ( sprite.Height ) );
                 writer.Write ( ppView, NativeFormatWriter.PivotPointsCountFieldType.TypeUInt32);
