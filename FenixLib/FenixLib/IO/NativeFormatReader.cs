@@ -62,9 +62,9 @@ namespace FenixLib.IO
             // Next 4 bytes are MS-DOS termination, and last is the MAP version
             var terminator = ReadBytes ( 4 );
             // Last byte of the header is the version number
-            var version = ReadByte ();
+            var lastByte = ReadByte ();
 
-            return new Header ( fileType, terminator, version );
+            return new Header ( fileType, terminator, lastByte );
         }
 
         public Palette ReadPalette ()
