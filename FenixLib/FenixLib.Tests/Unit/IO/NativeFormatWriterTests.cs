@@ -160,7 +160,7 @@ namespace FenixLib.Tests.Unit.IO
         }
 
         [Test]
-        public void WritePalette_NullPalette_Throws ()
+        public void WritePalette_NullPalette_ThrowsException ()
         {
             Assert.That ( () => formatWriter.Write ( null as Palette ),
                 Throws.ArgumentNullException );
