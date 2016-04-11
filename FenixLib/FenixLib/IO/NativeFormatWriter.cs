@@ -43,7 +43,7 @@ namespace FenixLib.IO
             base.Write ( bytes );
         }
 
-        public void WriteLegacyGlyphInfo ( ref NativeFormat.GlyphInfo glyphInfo )
+        public void WriteLegacyGlyphInfo ( ref GlyphInfo glyphInfo )
         {
             Write ( ( int ) glyphInfo.Width );
             Write ( ( int ) glyphInfo.Height );
@@ -51,7 +51,7 @@ namespace FenixLib.IO
             Write ( ( int ) glyphInfo.FileOffset );
         }
 
-        public void WriteExtendedGlyphInfo ( ref NativeFormat.GlyphInfo glyphInfo )
+        public void WriteExtendedGlyphInfo ( ref GlyphInfo glyphInfo )
         {
             Write ( ( int ) glyphInfo.Width );
             Write ( ( int ) glyphInfo.Height );

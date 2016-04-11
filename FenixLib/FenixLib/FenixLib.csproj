@@ -83,7 +83,13 @@
     <Compile Include="Core\ISpriteAssortment.cs" />
     <Compile Include="Core\SpriteAssortmentSprite.cs" />
     <Compile Include="Core\Graphic.cs" />
+    <Compile Include="IO\GlyphInfo.cs" />
+    <Compile Include="IO\ExtendedGlyphInfoBuilder.cs" />
+    <Compile Include="IO\IExtendedGlyphInfoBuilder.cs" />
+    <Compile Include="IO\IGlyphInfoBuilderData.cs" />
+    <Compile Include="IO\ILegacyGlyphInfoBuilder.cs" />
     <Compile Include="IO\NativeFormatWriter.PivotPointsArranger.cs" />
+    <Compile Include="IO\LegacyGlyphInfoBuilder.cs" />
     <Compile Include="Util\Util.cs" />
     <Compile Include="Core\FontEncoding.cs" />
     <Compile Include="IO\DivFntBitmapFontDecoder.cs" />

@@ -23,13 +23,13 @@ namespace FenixLib.IO
 
         protected abstract int CodePageTypeForFont ( IBitmapFont font );
 
-        protected abstract void WriteGlyphInfo ( ref GlyphInfo glypInfo, 
+        protected abstract void WriteGlyphInfo ( ref GlyphInfo glypInfo,
             NativeFormatWriter writer );
 
-        protected override void WriteNativeFormatBody ( IBitmapFont font, 
+        protected override void WriteNativeFormatBody ( IBitmapFont font,
             NativeFormatWriter writer )
         {
-            if ( (int) font.GraphicFormat == 8 )
+            if ( ( int ) font.GraphicFormat == 8 )
             {
                 writer.Write ( font.Palette );
                 writer.WriteReservedPaletteGammaSection ();
@@ -55,9 +55,15 @@ namespace FenixLib.IO
                 if ( font[i] != null )
                 {
                     glyph = font[i];
-                    glyphsInfo[i] = new GlyphInfo ( glyph.Width, glyph.Height,
-                        glyph.XOffset, glyph.YOffset, glyph.XAdvance, glyph.YAdavance,
-                        pixelsDataOffset + GlyphInfoBlockSize + 12); // 8 header + 4 font info
+                    glyphsInfo[i] = new ExtendedGlyphInfoBuilder ()
+                        .Width ( glyph.Width )
+                        .Height ( glyph.Height )
+                        .XOffset ( glyph.XOffset )
+                        .YOffset ( glyph.YOffset )
+                        .XAdvance ( glyph.XAdvance )
+                        .YAdvance ( glyph.YAdavance )
+                        .FileOffset ( pixelsDataOffset + GlyphInfoBlockSize + 12 ) // 8 header + 4 font info
+                        .Build (); 
                 }
 
                 pixelsDataOffset += font.GraphicFormat.PixelsBytesForSize (

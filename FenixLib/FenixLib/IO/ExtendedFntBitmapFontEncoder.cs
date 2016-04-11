@@ -36,7 +36,7 @@ namespace FenixLib.IO
 
         protected override byte GetLastHeaderByte ( IBitmapFont font ) => ( byte ) font.GraphicFormat;
 
-        protected override void WriteGlyphInfo ( ref NativeFormat.GlyphInfo glypInfo,
+        protected override void WriteGlyphInfo ( ref GlyphInfo glypInfo,
             NativeFormatWriter writer )
         {
             writer.WriteExtendedGlyphInfo ( ref glypInfo );

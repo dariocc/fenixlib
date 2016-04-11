@@ -14,6 +14,7 @@
 */
 using static System.Collections.StructuralComparisons;
 using FenixLib.Core;
+using System;
 
 namespace FenixLib.IO
 {
@@ -90,88 +91,15 @@ namespace FenixLib.IO
                 int bpp;
 
                 if ( int.TryParse ( Magic.Substring ( 1, 2 ), out bpp ) )
-                { 
+                {
                     return bpp;
                 }
                 else
-                { 
+                {
                     return 8;
                 }
             }
 
-        }
-
-        public struct GlyphInfo
-        {
-            /// <summary>
-            /// The width of the character's glyph
-            /// </summary>
-			public int Width { get; }
-            /// <summary>
-            /// The height of the characters's glyph
-            /// </summary>
-			public int Height { get; }
-            /// <summary>
-            /// Displacement in the x-axis from the left side
-            /// </summary>
-            public int XOffset { get; }
-            /// <summary>
-            /// Displacement in the Y-axis from the top side
-            /// </summary>
-			public int YOffset { get; }
-            /// <summary>
-            /// 
-            /// </summary>
-            public int XAdvance { get; }
-            /// <summary>
-            /// 
-            /// </summary>
-            public int YAdvance { get; }
-            /// <summary>
-            /// The byte-location of the glyph's graphic data (pixels) in the
-            /// file.
-            /// </summary>
-            public int FileOffset { get; }
-
-            /// <summary>
-            /// Constructor.
-            /// </summary>
-            /// <param name="width"></param>
-            /// <param name="height"></param>
-            /// <param name="yOffset"></param>
-            /// <param name="fileOffset"></param>
-            public GlyphInfo ( int width, int height, int yOffset, int fileOffset )
-            {
-                Width = width;
-                Height = height;
-                XOffset = 0;
-                YOffset = yOffset;
-                XAdvance = width;
-                YAdvance = height + yOffset;
-                FileOffset = fileOffset;
-            }
-
-            /// <summary>
-            /// Constructor.
-            /// </summary>
-            /// <param name="width"></param>
-            /// <param name="height"></param>
-            /// <param name="xOffset"></param>
-            /// <param name="yOffset"></param>
-            /// <param name="xAdvance"></param>
-            /// <param name="yAdvance"></param>
-            /// <param name="fileOffset"></param>
-            public GlyphInfo ( int width, int height, int xOffset,
-                int yOffset, int xAdvance, int yAdvance, int fileOffset )
-            {
-                Width = width;
-                Height = height;
-                XOffset = xOffset;
-                YOffset = yOffset;
-                XAdvance = xAdvance;
-                YAdvance = yAdvance;
-                FileOffset = fileOffset;
-            }
         }
     }
 }

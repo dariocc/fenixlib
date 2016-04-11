@@ -112,25 +112,25 @@ namespace FenixLib.IO
 
         public GlyphInfo ReadLegacyFntGlyphInfo ()
         {
-            return new GlyphInfo (
-                width: ReadInt32 (),
-                height: ReadInt32 (),
-                yOffset: ReadInt32 (),
-                fileOffset: ReadInt32 ()
-                );
+            return new LegacyGlyphInfoBuilder ()
+                .Width ( ReadInt32 () )
+                .Height ( ReadInt32 () )
+                .YOffset ( ReadInt32 () )
+                .FileOffset ( ReadInt32 () )
+                .Build ();
         }
 
         public GlyphInfo ReadExtendedFntGlyphInfo ()
         {
-            return new GlyphInfo (
-                width: ReadInt32 (),
-                height: ReadInt32 (),
-                xAdvance: ReadInt32 (),
-                yAdvance: ReadInt32 (),
-                xOffset: ReadInt32 (),
-                yOffset: ReadInt32 (),
-                fileOffset: ReadInt32 ()
-                );
+            return new ExtendedGlyphInfoBuilder ()
+                .Width ( ReadInt32 () )
+                .Height ( ReadInt32 () )
+                .XAdvance ( ReadInt32 () )
+                .YAdvance ( ReadInt32 () )
+                .XOffset ( ReadInt32 () )
+                .YOffset ( ReadInt32 () )
+                .FileOffset ( ReadInt32 () )
+                .Build ();
         }
 
 

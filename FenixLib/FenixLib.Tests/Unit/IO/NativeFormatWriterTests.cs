@@ -115,14 +115,18 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WriteExtendedGlyphInfo_Test ()
         {
-            var glyphInfo = new NativeFormat.GlyphInfo (
-                width: 0x10,
-                height: 0x20,
-                xAdvance: 0x30,
-                yAdvance: 0x40,
-                xOffset: 0x50,
-                yOffset: 0x60,
-                fileOffset: 0x70 );
+            // TODO: Builder should be mocked to ensure test independency
+            var builder = new ExtendedGlyphInfoBuilder ();
+            builder
+                .Width ( 0x10 )
+                .Height ( 0x20 )
+                .XAdvance ( 0x30 )
+                .YAdvance ( 0x40 )
+                .XOffset ( 0x50 )
+                .YOffset ( 0x60 )
+                .FileOffset ( 0x70 );
+
+            var glyphInfo = builder.Build ();
 
             var expectedBytes = new byte[]
             {
@@ -143,8 +147,16 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WriteLegacyFntGlyphInfo_ValidGlyph_Works ()
         {
-            var glyphInfo = new NativeFormat.GlyphInfo (
-                0x10, 0x20, 0x30, 0x40 );
+            // TODO: Builder should be mocked to ensure test independency
+            var builder = new LegacyGlyphInfoBuilder ();
+            builder
+                .Width ( 0x10 )
+                .Height ( 0x20 )
+                .YOffset ( 0x30 )
+                .FileOffset ( 0x40 );
+
+            var glyphInfo = builder.Build ();
+
             var expectedBytes = new byte[]
             {
                 0x10, 0, 0, 0,
