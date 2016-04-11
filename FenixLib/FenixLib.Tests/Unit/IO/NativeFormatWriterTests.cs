@@ -115,18 +115,16 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WriteExtendedGlyphInfo_Test ()
         {
-            // TODO: Builder should be mocked to ensure test independency
-            var builder = new ExtendedGlyphInfoBuilder ();
-            builder
-                .Width ( 0x10 )
-                .Height ( 0x20 )
-                .XAdvance ( 0x30 )
-                .YAdvance ( 0x40 )
-                .XOffset ( 0x50 )
-                .YOffset ( 0x60 )
-                .FileOffset ( 0x70 );
+            var stub = MockRepository.GenerateStub<IGlyphInfoProperties> ();
+            stub.Stub ( _ => _.Width ).Return ( 0x10 );
+            stub.Stub ( _ => _.Height ).Return ( 0x20 );
+            stub.Stub ( _ => _.XAdvance ).Return ( 0x30 );
+            stub.Stub ( _ => _.YAdvance ).Return ( 0x40 );
+            stub.Stub ( _ => _.XOffset ).Return ( 0x50 );
+            stub.Stub ( _ => _.YOffset ).Return ( 0x60 );
+            stub.Stub ( _ => _.FileOffset ).Return ( 0x70 );
 
-            var glyphInfo = builder.Build ();
+            var glyphInfo = new GlyphInfo ( stub );
 
             var expectedBytes = new byte[]
             {
@@ -147,15 +145,13 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WriteLegacyFntGlyphInfo_ValidGlyph_Works ()
         {
-            // TODO: Builder should be mocked to ensure test independency
-            var builder = new LegacyGlyphInfoBuilder ();
-            builder
-                .Width ( 0x10 )
-                .Height ( 0x20 )
-                .YOffset ( 0x30 )
-                .FileOffset ( 0x40 );
+            var stub = MockRepository.GenerateStub<IGlyphInfoProperties> ();
+            stub.Stub ( _ => _.Width ).Return ( 0x10 );
+            stub.Stub ( _ => _.Height ).Return ( 0x20 );
+            stub.Stub ( _ => _.YOffset ).Return ( 0x30 );
+            stub.Stub ( _ => _.FileOffset ).Return ( 0x40 );
 
-            var glyphInfo = builder.Build ();
+            var glyphInfo = new GlyphInfo ( stub );
 
             var expectedBytes = new byte[]
             {
@@ -164,7 +160,6 @@ namespace FenixLib.Tests.Unit.IO
                 0x30, 0, 0, 0,
                 0x40, 0, 0, 0
             };
-
 
             formatWriter.WriteLegacyGlyphInfo ( ref glyphInfo );
 
