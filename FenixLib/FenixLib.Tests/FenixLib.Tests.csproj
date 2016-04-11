@@ -68,6 +68,7 @@
     <Compile Include="Unit\Core\BitmapFontTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\IO\NativeFormatWriterTests.cs" />
+    <Compile Include="Unit\IO\NativeFormatReaderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\TestFiles\1bpp-compressed.fpg">
