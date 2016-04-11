@@ -30,14 +30,16 @@ namespace FenixLib.IO
         {
             SpriteAssortment fpg;
 
+            var bpp = header.ParseBitsPerPixelFromMagic ();
             Palette palette = null;
-            if ( header.BitsPerPixel == 8 )
+
+            if ( bpp == 8 )
             {
                 palette = reader.ReadPalette ();
                 reader.ReadUnusedPaletteGamma ();
             }
 
-            fpg = new SpriteAssortment( ( GraphicFormat ) header.BitsPerPixel, palette );
+            fpg = new SpriteAssortment( ( GraphicFormat ) bpp, palette );
 
             try
             {
@@ -52,7 +54,8 @@ namespace FenixLib.IO
                     var numberOfPivotPoints = reader.ReadPivotPointsNumberLong ();
                     var pivotPoints = reader.ReadPivotPoints ( numberOfPivotPoints );
 
-                    var mapDataLength = width * height * ( header.BitsPerPixel / 8 );
+                    // TODO: Not true for 1bpp
+                    var mapDataLength = width * height * ( bpp / 8 );
 
                     // Some tools such as FPG Edit are non conformant with the standard
                     // FPG files and will add data at the end. 
@@ -65,10 +68,14 @@ namespace FenixLib.IO
                         // kind of event
                     }
 
-                    byte[] pixels = reader.ReadPixels ( header.BitsPerPixel, width, height );
+                    byte[] pixels = reader.ReadPixels ( bpp, width, height );
                     IGraphic graphic = new Graphic ( 
-                        ( GraphicFormat ) header. BitsPerPixel, 
-                        width, height, pixels, palette );
+                        ( GraphicFormat ) bpp, 
+                        width, 
+                        height, 
+                        pixels, 
+                        palette );
+
                     ISprite sprite = new Sprite ( graphic );
                     sprite.Description = description;
                     foreach ( var point in pivotPoints )

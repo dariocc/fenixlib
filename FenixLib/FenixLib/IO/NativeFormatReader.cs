@@ -93,7 +93,7 @@ namespace FenixLib.IO
 
         public byte[] ReadUnusedPaletteGamma ()
         {
-            return ReadBytes ( NativeFormat.ReservedBytesSize );
+            return ReadBytes ( NativeFormat.PaletteGammaBytesSize );
         }
 
         public int ReadPivotPointsNumber ()

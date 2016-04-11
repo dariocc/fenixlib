@@ -16,34 +16,38 @@ using static System.Collections.StructuralComparisons;
 
 namespace FenixLib.IO
 {
-	public static class NativeFormat
-	{
+    public static class NativeFormat
+    {
+        /// <summary>
+        /// Sequence of bytes that that follows first three bytes for all
+        /// native formats.
+        /// </summary>
 		public static readonly byte[] Terminator = {
-			0x1a,
-			0xd,
-			0xa,
-			0x0
-		};
-	    
+            0x1a,
+            0xd,
+            0xa,
+            0x0
+        };
+
         /// <summary>
         /// The size of the color palette area, in bytes
         /// </summary>
-		public const int PaletteBytesSize = 768;
+        public const int PaletteBytesSize = 768;
 
         /// <summary>
         /// The size of the gamma color area, in bytes
         /// </summary>
-		public const int ReservedBytesSize = 576;
-		
+		public const int PaletteGammaBytesSize = 576;
+
         /// <summary>
         /// Bit mask used to separate the number of pivot points from the animation flags
         /// </summary>
-		public const int PivotPointsNumberBitMask = 0xfff;
-		
+        public const int PivotPointsNumberBitMask = 0xfff;
+
         /// <summary>
         /// Bit mask used to get the animation bit flag. Animation is not supported.
         /// </summary>
-		public const int AnimationFlagBitMask = 0x1000;
+        public const int AnimationFlagBitMask = 0x1000;
 
         /// <summary>
         /// Computes the size in bytes of the area containing the pixel data for the specified 
@@ -53,7 +57,7 @@ namespace FenixLib.IO
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        public static int CalculatePixelBufferBytes(int bpp, int width, int height)
+        public static int CalculatePixelBufferBytes ( int bpp, int width, int height )
         {
             int byteLength;
 
@@ -76,51 +80,54 @@ namespace FenixLib.IO
         /// of the graphic information (1, 8, 16 or 32bpp).
         /// </summary>
 		public sealed class Header
-		{
+        {
 
-            private string magic;
-			public string Magic { get { return magic; } }
+            private readonly string magic;
+            private readonly int lastByte;
+            private readonly byte[] terminator = new byte[5];
 
-            private int lastByte;
-			public int LastByte { get { return lastByte; } }
+            public string Magic { get { return magic; } }
 
-			private readonly byte[] terminator = new byte[5];
-            public byte[] Terminator { get { return terminator;  } }
-			
-			public Header(string magic, byte[] terminator, int lastByte)
-			{
-				this.magic = magic.ToLower();
-				this.lastByte = lastByte;
-				this.terminator = terminator;
-			}
+            public int LastByte { get { return lastByte; } }
 
-			public bool IsTerminatorValid()
+            public byte[] Terminator { get { return terminator; } }
+
+            public Header ( string magic, byte[] terminator, int lastByte )
             {
-                    return StructuralEqualityComparer.Equals(NativeFormat.Terminator, Terminator);
-			}
+                this.magic = magic.ToLower ();
+                this.lastByte = lastByte;
+                this.terminator = terminator;
+            }
+
+            public bool IsTerminatorValid ()
+            {
+                return StructuralEqualityComparer.Equals ( NativeFormat.Terminator,
+                    Terminator );
+            }
 
             /// <summary>
-            /// All native format's magic follow the pattern 'aXY' where XY indicates, for
+            /// Most native format's magic follow the pattern 'aXY' where XY indicates, for
             /// non 8bpp formats, the bpp (01, 16 or 32). For 8bpp formats, XY ar two 
             /// characters.
             /// </summary>
-			public int BitsPerPixel
+			public int ParseBitsPerPixelFromMagic ()
             {
-                get
-                {
-                    int bpp;
+                int bpp;
 
-                    if (int.TryParse(Magic.Substring(1, 2), out bpp ) )
-                        return bpp;
-                    else
-                        return 8;
+                if ( int.TryParse ( Magic.Substring ( 1, 2 ), out bpp ) )
+                { 
+                    return bpp;
+                }
+                else
+                { 
+                    return 8;
                 }
             }
 
-		}
+        }
 
-		public struct GlyphInfo
-		{
+        public struct GlyphInfo
+        {
             /// <summary>
             /// The width of the character's glyph
             /// </summary>
@@ -158,8 +165,8 @@ namespace FenixLib.IO
             /// <param name="height"></param>
             /// <param name="yOffset"></param>
             /// <param name="fileOffset"></param>
-            public GlyphInfo(int width, int height, int yOffset, int fileOffset)
-			{
+            public GlyphInfo ( int width, int height, int yOffset, int fileOffset )
+            {
                 Width = width;
                 Height = height;
                 XOffset = 0;
@@ -179,17 +186,17 @@ namespace FenixLib.IO
             /// <param name="xAdvance"></param>
             /// <param name="yAdvance"></param>
             /// <param name="fileOffset"></param>
-            public GlyphInfo(int width, int height, int xOffset, 
-                int yOffset, int xAdvance, int yAdvance, int fileOffset)
+            public GlyphInfo ( int width, int height, int xOffset,
+                int yOffset, int xAdvance, int yAdvance, int fileOffset )
             {
                 Width = width;
                 Height = height;
                 XOffset = xOffset;
                 YOffset = yOffset;
                 XAdvance = xAdvance;
-                YAdvance = yAdvance; 
+                YAdvance = yAdvance;
                 FileOffset = fileOffset;
             }
-		}
-	}
+        }
+    }
 }

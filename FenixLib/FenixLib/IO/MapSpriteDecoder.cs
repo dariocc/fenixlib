@@ -40,7 +40,7 @@ namespace FenixLib.IO
 
             var description = reader.ReadAsciiZ ( 32 );
 
-            var bpp = header.BitsPerPixel;
+            var bpp = header.ParseBitsPerPixelFromMagic ();
 			Palette palette = null;
             if ( bpp == 8 )
             {
@@ -52,7 +52,7 @@ namespace FenixLib.IO
             var pivotPoints = reader.ReadPivotPoints ( numberOfPivotPoints );
 
             var mapDataLength = width * height * ( bpp / 8 );
-			var pixelData = reader.ReadPixels ( header.BitsPerPixel, width, height );
+			var pixelData = reader.ReadPixels ( bpp, width, height );
 
             IGraphic graphic = new Graphic ( ( GraphicFormat ) bpp, 
                 width, height, pixelData, palette );

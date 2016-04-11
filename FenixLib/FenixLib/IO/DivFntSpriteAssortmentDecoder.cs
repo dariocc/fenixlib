@@ -40,6 +40,7 @@ namespace FenixLib.IO
                 characters[n] = reader.ReadLegacyFntGlyphInfo ();
             }
 
+            var bpp = header.ParseBitsPerPixelFromMagic ();
             SpriteAssortment fpg = new SpriteAssortment ( palette );
 
             foreach ( var character in characters )
@@ -49,10 +50,10 @@ namespace FenixLib.IO
                 if ( character.FileOffset == 0 | dataLength == 0 )
                     continue;
 
-                var pixels = reader.ReadPixels ( header.BitsPerPixel, character.Width, 
+                var pixels = reader.ReadPixels ( bpp, character.Width, 
                     character.Height );
 
-                IGraphic graphic = new Graphic ( ( GraphicFormat ) header.BitsPerPixel, 
+                IGraphic graphic = new Graphic ( ( GraphicFormat ) bpp, 
                     character.Width, character.Height, pixels );
 
                 ISprite sprite = new Sprite ( graphic );

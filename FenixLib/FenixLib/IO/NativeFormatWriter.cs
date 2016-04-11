@@ -88,7 +88,7 @@ namespace FenixLib.IO
 
         public void WriteReservedPaletteGammaSection ()
         {
-            byte[] bytes = new byte[NativeFormat.ReservedBytesSize];
+            byte[] bytes = new byte[NativeFormat.PaletteGammaBytesSize];
             const int rowSize = 36;
 
             // Compatibility for DIV requires that at least the byte indicating the number
