@@ -91,7 +91,7 @@ namespace FenixLib.IO
             return points.ToArray ();
         }
 
-        public byte[] ReadUnusedPaletteGamma ()
+        public byte[] ReadPaletteGamma ()
         {
             return ReadBytes ( NativeFormat.PaletteGammaBytesSize );
         }

@@ -30,7 +30,7 @@ namespace FenixLib.IO
         {
 
             Palette palette = reader.ReadPalette ();
-            reader.ReadUnusedPaletteGamma ();
+            reader.ReadPaletteGamma ();
 
             int fontInfo = reader.ReadInt32 ();
 

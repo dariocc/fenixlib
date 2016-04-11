@@ -45,7 +45,7 @@ namespace FenixLib.IO
             if ( bpp == 8 )
             {
                 palette = reader.ReadPalette ();
-				reader.ReadUnusedPaletteGamma ();
+				reader.ReadPaletteGamma ();
             }
 
             var numberOfPivotPoints = reader.ReadPivotPointsNumber ();

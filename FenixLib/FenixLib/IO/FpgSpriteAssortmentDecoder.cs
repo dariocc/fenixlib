@@ -36,7 +36,7 @@ namespace FenixLib.IO
             if ( bpp == 8 )
             {
                 palette = reader.ReadPalette ();
-                reader.ReadUnusedPaletteGamma ();
+                reader.ReadPaletteGamma ();
             }
 
             fpg = new SpriteAssortment( ( GraphicFormat ) bpp, palette );
