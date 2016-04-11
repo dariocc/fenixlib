@@ -39,7 +39,7 @@ namespace FenixLib.IO
             if ( ( sprite.GraphicFormat == GraphicFormat.Format8bppIndexed ) )
             {
                 writer.Write ( sprite.Palette );
-                writer.WriteReservedPaletteGammaSection ();
+                writer.WritePaletteGammaSection ();
             }
 
             writer.Write ( sprite.PivotPoints, sprite.Width, sprite.Height, 

@@ -31,7 +31,7 @@ namespace FenixLib.IO
             if ( assortment.GraphicFormat == GraphicFormat.Format8bppIndexed )
             {
                 writer.Write ( assortment.Palette );
-                writer.WriteReservedPaletteGammaSection ();
+                writer.WritePaletteGammaSection ();
             }
 
             foreach ( var sprite in assortment )

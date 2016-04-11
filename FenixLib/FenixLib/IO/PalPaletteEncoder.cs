@@ -26,7 +26,7 @@ namespace FenixLib.IO
             NativeFormatWriter writer)
 		{
 			writer.Write(palette);
-			writer.WriteReservedPaletteGammaSection();
+			writer.WritePaletteGammaSection();
 		}
 
 		protected override string GetFileMagic(Palette palette)

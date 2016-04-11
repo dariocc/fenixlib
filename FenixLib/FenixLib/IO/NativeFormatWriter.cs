@@ -86,7 +86,7 @@ namespace FenixLib.IO
             Write ( Convert.ToInt16 ( pivotPoint.Y ) );
         }
 
-        public void WriteReservedPaletteGammaSection ()
+        public void WritePaletteGammaSection ()
         {
             byte[] bytes = new byte[NativeFormat.PaletteGammaBytesSize];
             const int rowSize = 36;

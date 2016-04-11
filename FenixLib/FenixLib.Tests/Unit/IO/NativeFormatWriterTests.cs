@@ -219,7 +219,7 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WriteReservedPaletteGammaSection_Works ()
         {
-            formatWriter.WriteReservedPaletteGammaSection ();
+            formatWriter.WritePaletteGammaSection ();
 
             // There are 16 gamma sections and they occupy 36bytes each.
             Assert.That ( memory.Length, Is.EqualTo ( 16 * 36 ) );

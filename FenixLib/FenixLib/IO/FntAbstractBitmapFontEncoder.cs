@@ -32,7 +32,7 @@ namespace FenixLib.IO
             if ( ( int ) font.GraphicFormat == 8 )
             {
                 writer.Write ( font.Palette );
-                writer.WriteReservedPaletteGammaSection ();
+                writer.WritePaletteGammaSection ();
             }
 
             writer.Write ( CodePageTypeForFont ( font ) );
