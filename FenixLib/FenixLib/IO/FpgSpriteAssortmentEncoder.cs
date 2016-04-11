@@ -36,8 +36,8 @@ namespace FenixLib.IO
 
             foreach ( var sprite in assortment )
             {
-                var pixelDataSize = NativeFormat.CalculatePixelBufferBytes (
-                    ( int ) assortment.GraphicFormat, sprite.Width, sprite.Height );
+                var pixelDataSize = assortment.GraphicFormat.PixelsBytesForSize ( 
+                    sprite.Width, sprite.Height );
 
                 var writablePoints = new NativeFormatWriter.WritablePivotPointsView (
                     sprite.PivotPoints, sprite.Width, sprite.Height );

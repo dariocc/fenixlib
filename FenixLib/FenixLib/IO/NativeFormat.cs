@@ -13,6 +13,7 @@
 *   limitations under the License.
 */
 using static System.Collections.StructuralComparisons;
+using FenixLib.Core;
 
 namespace FenixLib.IO
 {
@@ -50,38 +51,12 @@ namespace FenixLib.IO
         public const int AnimationFlagBitMask = 0x1000;
 
         /// <summary>
-        /// Computes the size in bytes of the area containing the pixel data for the specified 
-        /// depth
-        /// </summary>
-        /// <param name="bpp"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <returns></returns>
-        public static int CalculatePixelBufferBytes ( int bpp, int width, int height )
-        {
-            int byteLength;
-
-            if ( bpp == 1 )
-            {
-                int rowByteSize = ( width + ( 8 - ( ( ( width % 8 ) ) & 7 ) ) ) / 8;
-                byteLength = rowByteSize * height;
-            }
-            else
-            {
-                byteLength = width * height * bpp / 8;
-            }
-
-            return byteLength;
-        }
-
-        /// <summary>
         /// Represents the header of the native formats, i.e. a section describing type
         /// type of file (graphic, graphic collection, font or palettes), and the bpp
         /// of the graphic information (1, 8, 16 or 32bpp).
         /// </summary>
 		public sealed class Header
         {
-
             private readonly string magic;
             private readonly int lastByte;
             private readonly byte[] terminator = new byte[5];
@@ -159,7 +134,7 @@ namespace FenixLib.IO
             public int FileOffset { get; }
 
             /// <summary>
-            /// 
+            /// Constructor.
             /// </summary>
             /// <param name="width"></param>
             /// <param name="height"></param>
@@ -177,7 +152,7 @@ namespace FenixLib.IO
             }
 
             /// <summary>
-            /// 
+            /// Constructor.
             /// </summary>
             /// <param name="width"></param>
             /// <param name="height"></param>

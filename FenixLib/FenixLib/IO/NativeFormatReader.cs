@@ -112,31 +112,32 @@ namespace FenixLib.IO
 
         public GlyphInfo ReadLegacyFntGlyphInfo ()
         {
-            return new GlyphInfo ( 
-                width: ReadInt32 (), 
-                height: ReadInt32 (), 
-                yOffset : ReadInt32 (), 
-                fileOffset: ReadInt32 () 
+            return new GlyphInfo (
+                width: ReadInt32 (),
+                height: ReadInt32 (),
+                yOffset: ReadInt32 (),
+                fileOffset: ReadInt32 ()
                 );
         }
 
         public GlyphInfo ReadExtendedFntGlyphInfo ()
         {
             return new GlyphInfo (
-                width : ReadInt32 (),
-                height : ReadInt32 (),
-                xAdvance:ReadInt32 (), 
-                yAdvance:ReadInt32 (),
-                xOffset : ReadInt32 (), 
-                yOffset : ReadInt32 (), 
-                fileOffset : ReadInt32 ()
+                width: ReadInt32 (),
+                height: ReadInt32 (),
+                xAdvance: ReadInt32 (),
+                yAdvance: ReadInt32 (),
+                xOffset: ReadInt32 (),
+                yOffset: ReadInt32 (),
+                fileOffset: ReadInt32 ()
                 );
         }
 
 
         public byte[] ReadPixels ( int bpp, int width, int height )
         {
-            return ReadBytes ( CalculatePixelBufferBytes ( bpp, width, height ) );
+            var format = ( GraphicFormat ) bpp;
+            return ReadBytes ( format.PixelsBytesForSize ( width, height ) );
         }
 
         private static PaletteColor[] Vga2PaleetteColors ( byte[] colorData )

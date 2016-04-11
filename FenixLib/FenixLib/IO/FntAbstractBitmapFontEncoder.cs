@@ -60,7 +60,7 @@ namespace FenixLib.IO
                         pixelsDataOffset + GlyphInfoBlockSize + 12); // 8 header + 4 font info
                 }
 
-                pixelsDataOffset += CalculatePixelBufferBytes ( (int) font.GraphicFormat, 
+                pixelsDataOffset += font.GraphicFormat.PixelsBytesForSize (
                     glyphsInfo[i].Width,
                     glyphsInfo[i].Height );
 

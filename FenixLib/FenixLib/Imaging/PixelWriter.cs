@@ -56,7 +56,7 @@ namespace FenixLib.Imaging
             Palette destPalette = null )
         {
             if ( width <= 0 || height <= 0 )
-                throw new ArgumentOutOfRangeException ( 
+                throw new ArgumentOutOfRangeException (
                     "Width and Height need to be greater than 0." );
 
             PixelWriter pixelWriter;
@@ -91,8 +91,7 @@ namespace FenixLib.Imaging
             pixelWriter.Width = width;
             pixelWriter.Height = height;
 
-            int destBufferLength = CalculatePixelBufferBytes ( format.BitsPerPixel,
-                width, height );
+            int destBufferLength = format.PixelsBytesForSize ( width, height );
 
             byte[] destBuffer = new byte[destBufferLength];
 
