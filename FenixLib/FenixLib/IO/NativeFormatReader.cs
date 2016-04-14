@@ -80,7 +80,9 @@ namespace FenixLib.IO
             List<PivotPoint> points = new List<PivotPoint> ();
             for ( int n = 0 ; n < number ; n++ )
             {
-                PivotPoint point = new PivotPoint ( n, ReadInt16 (), ReadInt16 () );
+                var x = ReadInt16 ();
+                var y = ReadInt16 ();
+                PivotPoint point = new PivotPoint ( n, x, y );
 
                 // If the X and Y are -1, there is no need to add
                 if ( !( point.X == -1 & point.Y == -1 ) )
