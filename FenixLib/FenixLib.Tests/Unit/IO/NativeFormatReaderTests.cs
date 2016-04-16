@@ -13,10 +13,7 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
-using System;
 using System.IO;
-using System.Linq;
 using FenixLib.Core;
 using FenixLib.IO;
 
