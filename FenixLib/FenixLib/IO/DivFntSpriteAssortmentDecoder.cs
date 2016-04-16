@@ -30,7 +30,7 @@ namespace FenixLib.IO
         {
 
             Palette palette = reader.ReadPalette ();
-            reader.ReadPaletteGamma ();
+            reader.ReadPaletteGammas ();
 
             int fontInfo = reader.ReadInt32 ();
 
@@ -50,7 +50,7 @@ namespace FenixLib.IO
                 if ( character.FileOffset == 0 | dataLength == 0 )
                     continue;
 
-                var pixels = reader.ReadPixels ( bpp, character.Width, 
+                var pixels = reader.ReadPixels ( (GraphicFormat) bpp, character.Width, 
                     character.Height );
 
                 IGraphic graphic = new Graphic ( ( GraphicFormat ) bpp, 

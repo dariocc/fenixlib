@@ -93,19 +93,19 @@ namespace FenixLib.IO
             return points.ToArray ();
         }
 
-        public byte[] ReadPaletteGamma ()
+        public byte[] ReadPaletteGammas ()
         {
             return ReadBytes ( NativeFormat.PaletteGammaBytesSize );
         }
 
-        public int ReadPivotPointsNumber ()
+        public int ReadPivotPointsMaxIdUint16 ()
         {
             var flags = ReadUInt16 ();
             var numberPivotPoints = Convert.ToInt16 ( flags & PivotPointsNumberBitMask );
             return numberPivotPoints;
         }
 
-        public int ReadPivotPointsNumberLong ()
+        public int ReadPivotPointsMaxIdInt32 ()
         {
             var flags = ReadUInt32 ();
             var numberPivotPoints = Convert.ToInt16 ( flags & PivotPointsNumberBitMask );
@@ -136,9 +136,8 @@ namespace FenixLib.IO
         }
 
 
-        public byte[] ReadPixels ( int bpp, int width, int height )
+        public byte[] ReadPixels ( GraphicFormat format, int width, int height )
         {
-            var format = ( GraphicFormat ) bpp;
             return ReadBytes ( format.PixelsBytesForSize ( width, height ) );
         }
 

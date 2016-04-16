@@ -45,17 +45,17 @@ namespace FenixLib.IO
             if ( bpp == 8 )
             {
                 palette = reader.ReadPalette ();
-				reader.ReadPaletteGamma ();
+				reader.ReadPaletteGammas ();
             }
 
-            var numberOfPivotPoints = reader.ReadPivotPointsNumber ();
+            var numberOfPivotPoints = reader.ReadPivotPointsMaxIdUint16 ();
             var pivotPoints = reader.ReadPivotPoints ( numberOfPivotPoints );
 
             var mapDataLength = width * height * ( bpp / 8 );
-			var pixelData = reader.ReadPixels ( bpp, width, height );
+            var format = ( GraphicFormat ) bpp;
+			var pixelData = reader.ReadPixels ( format, width, height );
 
-            IGraphic graphic = new Graphic ( ( GraphicFormat ) bpp, 
-                width, height, pixelData, palette );
+            IGraphic graphic = new Graphic ( format, width, height, pixelData, palette );
             ISprite sprite = new Sprite ( graphic );
 			sprite.Description = description;
 

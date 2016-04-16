@@ -55,7 +55,7 @@ namespace FenixLib.IO
             if ( bpp == 8 )
             {
                 palette = reader.ReadPalette ();
-                reader.ReadPaletteGamma ();
+                reader.ReadPaletteGammas ();
             }
 
             int fontInfoField = reader.ReadInt32 ();
@@ -89,10 +89,11 @@ namespace FenixLib.IO
 
                     pixelsStream.Seek ( character.FileOffset, SeekOrigin.Begin );
 
-                    byte[] pixels = pixelsReader.ReadPixels ( bpp, character.Width,
+                    var format = ( GraphicFormat ) bpp;
+                    byte[] pixels = pixelsReader.ReadPixels ( format, character.Width,
                         character.Height );
 
-                    IGraphic graphic = new Graphic ( ( GraphicFormat ) bpp, character.Width,
+                    IGraphic graphic = new Graphic ( format, character.Width,
                         character.Height, pixels, palette );
                     IGlyph glyph = new Glyph ( graphic );
                     glyph.XAdvance = character.XAdvance;

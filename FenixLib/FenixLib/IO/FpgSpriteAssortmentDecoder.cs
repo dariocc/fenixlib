@@ -36,7 +36,7 @@ namespace FenixLib.IO
             if ( bpp == 8 )
             {
                 palette = reader.ReadPalette ();
-                reader.ReadPaletteGamma ();
+                reader.ReadPaletteGammas ();
             }
 
             fpg = new SpriteAssortment( ( GraphicFormat ) bpp, palette );
@@ -51,7 +51,7 @@ namespace FenixLib.IO
                     var name = reader.ReadAsciiZ ( 12 );
                     var width = reader.ReadInt32 ();
                     var height = reader.ReadInt32 ();
-                    var numberOfPivotPoints = reader.ReadPivotPointsNumberLong ();
+                    var numberOfPivotPoints = reader.ReadPivotPointsMaxIdInt32 ();
                     var pivotPoints = reader.ReadPivotPoints ( numberOfPivotPoints );
 
                     // TODO: Not true for 1bpp
@@ -68,9 +68,10 @@ namespace FenixLib.IO
                         // kind of event
                     }
 
-                    byte[] pixels = reader.ReadPixels ( bpp, width, height );
+                    var format = ( GraphicFormat ) bpp;
+                    byte[] pixels = reader.ReadPixels ( format, width, height );
                     IGraphic graphic = new Graphic ( 
-                        ( GraphicFormat ) bpp, 
+                        format, 
                         width, 
                         height, 
                         pixels, 
