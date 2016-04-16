@@ -14,35 +14,123 @@
 */
 using System;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace FenixLib.Core
 {
 
-	public class UnsuportedFileFormatException : IOException
-	{
-	}
-
-    public abstract class GraphicCollectionException : Exception
+    [Serializable]
+    public class UnsuportedFileFormatException : IOException
     {
+        #region CommonConstructors
+        public UnsuportedFileFormatException ()
+            : base ()
+        {
+        }
 
+        public UnsuportedFileFormatException ( string message )
+            : base ( message )
+        {
+        }
+
+        public UnsuportedFileFormatException ( string message, Exception inner )
+            : base ( message, inner )
+        {
+        }
+
+        protected UnsuportedFileFormatException ( SerializationInfo info, StreamingContext context )
+            : base ( info, context )
+        {
+        }
+        #endregion
     }
 
+    [Serializable]
+    public abstract class GraphicCollectionException : Exception
+    {
+        #region CommonConstructors
+        public GraphicCollectionException ()
+            : base ()
+        {
+        }
+
+        public GraphicCollectionException ( string message )
+            : base ( message )
+        {
+        }
+
+        public GraphicCollectionException ( string message, Exception inner )
+            : base ( message, inner )
+        {
+        }
+
+        protected GraphicCollectionException ( SerializationInfo info, StreamingContext context )
+            : base ( info, context )
+        {
+        }
+        #endregion
+    }
+
+    [Serializable]
     public class FormatMismatchException : GraphicCollectionException
     {
         public GraphicFormat Expected { get; }
         public GraphicFormat Was { get; }
 
-        public FormatMismatchException(GraphicFormat expected, 
-            GraphicFormat was)
+        public FormatMismatchException ( GraphicFormat expected = null,
+            GraphicFormat was = null )
         {
             Expected = expected;
             Was = was;
         }
 
-        public override string ToString ()
+        #region CommonConstructors
+        public FormatMismatchException ()
+            : base ()
         {
-            return $"Attempt to insert graphic of format '{Was}' to a graphic " +
-                $"collection restricted to '{Expected}' graphics.";
+        }
+
+        public FormatMismatchException ( string message )
+            : base ( message )
+        {
+        }
+
+        public FormatMismatchException ( string message, Exception inner )
+            : base ( message, inner )
+        {
+        }
+
+        protected FormatMismatchException ( SerializationInfo info, StreamingContext context )
+            : base ( info, context )
+        {
+        }
+        #endregion
+
+        public override string Message
+        {
+            get
+            {
+                string msg;
+
+                if ( Expected != null && Was != null )
+                {
+                    msg = $", invalid graphic format (was:'{Was}', expected: '{Expected}')";
+                }
+                else if ( Was != null )
+                {
+                    msg = $", invalid graphic format (was:'{Was}')";
+                }
+                else if ( Expected != null )
+                {
+                    msg = $", invalid graphic format (expected: '{Expected}')";
+                }
+                else
+                {
+                    msg = $", invalid graphic format";
+                }
+
+                return base.Message + msg;
+            }
         }
     }
 }
