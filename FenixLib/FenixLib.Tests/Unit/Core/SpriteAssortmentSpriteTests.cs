@@ -40,28 +40,28 @@ namespace FenixLib.Tests.Unit.Core
         // Verification of propeties delegation
 
         [Test]
-        public void DescriptionGetter_DescriptionModifierInBaseSprite_ReturnsSameDescriptionAsBaseSprite ()
+        public void DescriptionGet_DescriptionModifierInBaseSprite_ReturnsSameDescriptionAsBaseSprite ()
         {
             fakeSprite.Description = "A description";
             Assert.That ( spriteAssortmentSprite.Description, Is.EqualTo ( "A description" ) );
         }
 
         [Test]
-        public void DescriptionSetter_PropertyIsModified_ChangeIsReflectedInBaseSprite ()
+        public void DescriptionSet_PropertyIsModified_ChangeIsReflectedInBaseSprite ()
         {
             spriteAssortmentSprite.Description = "A description";
             Assert.That ( fakeSprite.Description, Is.EqualTo ( "A description" ) );
         }
 
         [Test]
-        public void PivotPointsGetter_SameAsBaseSprite ()
+        public void PivotPointsGet_SameAsBaseSprite ()
         {
             fakeSprite.Stub ( x => x.PivotPoints ).Return ( new PivotPoint[0] );
             Assert.That ( spriteAssortmentSprite.PivotPoints, Is.SameAs ( fakeSprite.PivotPoints ) );
         }
 
         [Test]
-        public void PixelDataGetter_SameAsBaseSprite ()
+        public void PixelDataGet_SameAsBaseSprite ()
         {
             var bytes = new byte[1];
 
@@ -70,7 +70,7 @@ namespace FenixLib.Tests.Unit.Core
         }
 
         [Test]
-        public void PaletteGetter_SameAsBaseSprite ()
+        public void PaletteGet_SameAsBaseSprite ()
         {
             var palette = new Palette ();
 
@@ -79,7 +79,7 @@ namespace FenixLib.Tests.Unit.Core
         }
 
         [Test]
-        public void GraphicFormatGetter_SameAsBaseSprite ()
+        public void GraphicFormatGet_SameAsBaseSprite ()
         {
             Assert.That ( spriteAssortmentSprite.GraphicFormat, 
                 Is.SameAs ( fakeSprite.GraphicFormat ) );

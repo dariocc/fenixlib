@@ -47,7 +47,7 @@ namespace FenixLib.Tests.Unit.Core
 
         [TestCase ( -1 )]
         [TestCase ( 256 )]
-        public void IndexerGetter_IndexOutOfRange_ThrowsException ( int index )
+        public void IndexerGet_IndexOutOfRange_ThrowsException ( int index )
         {
             TestDelegate colorAtIndex = () => new Func<PaletteColor> ( () =>
             {
@@ -58,7 +58,7 @@ namespace FenixLib.Tests.Unit.Core
 
         [TestCase ( -1 )]
         [TestCase ( 256 )]
-        public void IndexerSetter_IndexOutOfRange_ThrowsException ( int index )
+        public void IndexerSet_IndexOutOfRange_ThrowsException ( int index )
         {
             TestDelegate changeColorAtIndex = () => new Action ( () =>
             {

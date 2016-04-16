@@ -73,14 +73,14 @@ namespace FenixLib.Tests.Unit.Core
         }
 
         [Test]
-        public void IntIndexerGet_DefinedGlypWithIndexerSetterChar_NotNull ()
+        public void IntIndexerGet_DefinedGlypWithIndexerSetChar_NotNull ()
         {
             stubFont32['æ'] = stubGlyph32;
             Assert.IsNotNull ( stubFont32[230] );
         }
 
         [Test]
-        public void IntIndexerGet_DefinedGlyphWithIndexerSetterInt_NotNull ()
+        public void IntIndexerGet_DefinedGlyphWithIndexerSetInt_NotNull ()
         {
             stubFont32[230] = stubGlyph32;
             Assert.IsNotNull ( stubFont32['æ'] );
