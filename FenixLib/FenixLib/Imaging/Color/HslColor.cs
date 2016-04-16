@@ -16,7 +16,7 @@ using System;
 
 namespace FenixLib.Imaging.Color
 {
-    public struct HslColor
+    internal struct HslColor
     {
         public int H { get; }
         public double S { get; }

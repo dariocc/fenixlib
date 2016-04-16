@@ -16,7 +16,7 @@ using System;
 
 namespace FenixLib.Imaging.Color
 {
-    public class RgbColor
+    internal class RgbColor
     {
         private int? cachedHashCode = null;
 
