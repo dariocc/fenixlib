@@ -16,8 +16,9 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using System;
 using FenixLib.Imaging;
+using FenixLib.Core;
 
-namespace FenixLib.Core.Tests.Image
+namespace FenixLib.Tests.Imaging
 {
     [TestFixture ( typeof ( FormatConverter ) )]
     class IFormatConverterContract<T> where T : IFormatConverter, new()

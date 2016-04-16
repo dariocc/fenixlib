@@ -14,8 +14,9 @@
 */
 using NUnit.Framework;
 using Rhino.Mocks;
+using FenixLib.Core;
 
-namespace FenixLib.Core.Tests.Image
+namespace FenixLib.Tests.Imaging
 {
     [TestFixture]
     class FormatConverterTests

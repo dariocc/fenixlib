@@ -62,8 +62,8 @@
     <Compile Include="Unit\Core\PaletteTests.cs" />
     <Compile Include="Unit\Core\PivotPointTests.cs" />
     <Compile Include="Unit\Core\GraphicTests.cs" />
-    <Compile Include="Unit\Image\FormatConverterTests.cs" />
-    <Compile Include="Unit\Image\IFormatConverterTests.cs" />
+    <Compile Include="Unit\Imaging\FormatConverterTests.cs" />
+    <Compile Include="Unit\Imaging\IFormatConverterTests.cs" />
     <Compile Include="Unit\IO\FpgSpriteAssortmentDecoderTests.cs" />
     <Compile Include="Unit\Core\BitmapFontTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
