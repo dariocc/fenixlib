@@ -32,45 +32,10 @@ namespace FenixLib.Tests.Unit.IO
             The basic idea for the test methods in this test fixture are:
             - Arrange an array of bytes initialized to known values.
             - Create a NativeFormatReader via MemoryStream that backs that byte array.
-            - Test function invokes method under test of the NativeFormatReader class.
-            - The objects returned by the function under test is compared against what it
-              is expected, based on the fact that we know how the MemoryStream was initialized.
+            - Test function invokes method under test of the NativeFormatReader class..
         */
 
         private NativeFormatReader formatReader;
-
-        private readonly static byte[] samplePaletteBytes = new byte[]
-        {
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-        };
 
         [SetUp]
         public void SetUp ()
@@ -84,6 +49,15 @@ namespace FenixLib.Tests.Unit.IO
         {
             // Satisfied the contract of the IDisposable
             formatReader.Dispose ();
+        }
+
+        [Test]
+        public void ReadAsciiZ_InsufficientStreamBytes_ThrowsException ()
+        {
+            var bytes = new byte[1] { 0xFF };
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( () => formatReader.ReadAsciiZ ( 3 ), Throws.InstanceOf<EndOfStreamException> () );
         }
 
         [Test]
@@ -123,13 +97,22 @@ namespace FenixLib.Tests.Unit.IO
         }
 
         [Test]
+        public void ReadHeader_InsufficientStreamBytes_ThrowsException ()
+        {
+            var bytes = new byte[1];
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( () => formatReader.ReadHeader (), Throws.InstanceOf<EndOfStreamException> () );
+        }
+
+        [Test]
         public void ReadHeader_Works ()
         {
             var bytes = new byte[]
             {
-                0x61, 0x62, 0x63,
-                0x01, 0x02, 0x03, 0x04,
-                0x99
+                0x61, 0x62, 0x63,           // a b c
+                0x01, 0x02, 0x03, 0x04,     // Terminator
+                0x99                        // Lastyte
             };
 
             formatReader = CreateFormatReader ( bytes );
@@ -137,28 +120,51 @@ namespace FenixLib.Tests.Unit.IO
 
             Assert.That ( header.Magic, Is.EqualTo ( "abc" ) );
             Assert.That ( header.Terminator,
-                Is.EquivalentTo ( new byte[] { 0x01, 0x02, 0x03, 0x04 } ) );
+                Is.EqualTo ( new byte[] { 0x01, 0x02, 0x03, 0x04 } ) );
             Assert.That ( header.LastByte, Is.EqualTo ( 0x99 ) );
         }
 
         [Test]
-        [Ignore ( "WIP" )]
-        public void ReadPalette_ValidStream_Works ()
+        public void ReadPalette_InsufficientBytes_ThrowsException ()
         {
-            var bytes = new byte[256 * 3];
+            var bytes = new byte[1];
             formatReader = CreateFormatReader ( bytes );
 
-            throw new NotImplementedException ();
+            Assert.That ( () => formatReader.ReadPalette (), Throws.InstanceOf<EndOfStreamException> () );
         }
 
         [Test]
-        [Ignore ( "WIP" )]
-        public void ReadPalette_EntriesGreaterThan64_Throws ()
+        public void ReadPalette_ValidStream_Works ()
         {
             var bytes = new byte[256 * 3];
+            bytes[100 * 3] = 63;
+            bytes[100 * 3 + 1] = 20;
+            bytes[100 * 3 + 2] = 12;
+            formatReader = CreateFormatReader ( bytes );
+            var palette = formatReader.ReadPalette ();
+
+            Assert.That ( palette.Colors[100].R, Is.EqualTo ( 252 ) );
+            Assert.That ( palette.Colors[100].G, Is.EqualTo ( 20 << 2 ) );
+            Assert.That ( palette.Colors[100].B, Is.EqualTo ( 12 << 2 ) );
+        }
+
+        [Test]
+        public void ReadPalette_EntriesGreaterThan64_ThrowsException ()
+        {
+            var bytes = new byte[256 * 3];
+            bytes[100] = 64;
             formatReader = CreateFormatReader ( bytes );
 
-            throw new NotImplementedException ();
+            Assert.That ( () => formatReader.ReadPalette (), Throws.InstanceOf<IOException> () );
+        }
+
+        [Test]
+        public void ReadPivotPoints_InsufficientBytes_ThrowsException ()
+        {
+            var bytes = new byte[1];
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( () => formatReader.ReadPivotPoints (3), Throws.InstanceOf<EndOfStreamException> () );
         }
 
         [Test]
@@ -203,8 +209,8 @@ namespace FenixLib.Tests.Unit.IO
         {
             var bytes = new byte[]
             {
-                0x0A, 0x00, 0x0B, 0x00, 
-                0x0C, 0x00, 0x0D, 0x00 
+                0x0A, 0x00, 0x0B, 0x00,
+                0x0C, 0x00, 0x0D, 0x00
             };
 
             formatReader = CreateFormatReader ( bytes );
@@ -214,6 +220,126 @@ namespace FenixLib.Tests.Unit.IO
             Assert.That ( pivotPoints[0].Y, Is.EqualTo ( 0xB ) );
             Assert.That ( pivotPoints[1].X, Is.EqualTo ( 0xC ) );
             Assert.That ( pivotPoints[1].Y, Is.EqualTo ( 0xD ) );
+        }
+
+        [Test]
+        public void ReadPaletteGammas_InsufficientBytes_ThrowsException ()
+        {
+            var bytes = new byte[1];
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( () => formatReader.ReadPaletteGammas (), Throws.InstanceOf<EndOfStreamException> () );
+        }
+
+        [Test]
+        public void ReadPivotPointsMaxIdUnit16_InsufficientBytes_ThrowsException ()
+        {
+            var bytes = new byte[1];
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( () => formatReader.ReadPivotPointsMaxIdUint16 (), Throws.InstanceOf<EndOfStreamException> () );
+        }
+
+        [Test]
+        public void ReadPivotPointMaxIdUint16_FlagsGreaterThan0xFFF_BitMaskIsApplied ()
+        {
+            var bytes = new byte[] { 0xFF, 0xFF };
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( formatReader.ReadPivotPointsMaxIdUint16 (), Is.EqualTo ( 0xFFF ) );
+        }
+
+        [Test]
+        public void ReadPivotPointsMaxIdInt32_InsufficientBytes_ThrowsException ()
+        {
+            var bytes = new byte[1];
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( () => formatReader.ReadPivotPointsMaxIdInt32 (), Throws.InstanceOf<EndOfStreamException> () );
+        }
+
+        [Test]
+        public void ReadPivotPointMaxIdInt32_FlagsGreaterThan0xFFF_BitMaskIsApplied ()
+        {
+            var bytes = new byte[] { 0xFF, 0xFF, 0xFF, 0x01 };
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( formatReader.ReadPivotPointsMaxIdInt32 (), Is.EqualTo ( 0xFFF ) );
+        }
+
+        [Test]
+        public void ReadLegacyGlyphInfo_InsufficientBytes_ThrowsException ()
+        {
+            var bytes = new byte[1];
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( () => formatReader.ReadLegacyFntGlyphInfo (), Throws.InstanceOf<EndOfStreamException> () );
+        }
+
+        [Test]
+        public void ReadExtendedGlyphInfo_InsufficientBytes_ThrowsException ()
+        {
+            var bytes = new byte[1];
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( () => formatReader.ReadExtendedFntGlyphInfo (), Throws.InstanceOf<EndOfStreamException> () );
+        }
+
+        [Test]
+        public void ReadLegacyFntGlyphInfo_ValidStreamData_Works ()
+        {
+            var bytes = new byte[]
+            {
+                0x0A, 0x00, 0x00, 0x00,
+                0x0B, 0x00, 0x00, 0x00,
+                0x0C, 0x00, 0x00, 0x00,
+                0x0D, 0x00, 0x00, 0x00
+            };
+            formatReader = CreateFormatReader ( bytes );
+            var info = formatReader.ReadLegacyFntGlyphInfo ();
+
+            Assert.That ( info.Width, Is.EqualTo ( 0xA ) );
+            Assert.That ( info.Height, Is.EqualTo ( 0xB ) );
+            Assert.That ( info.XAdvance, Is.EqualTo ( 0xA ) );
+            Assert.That ( info.YAdvance, Is.EqualTo ( 0xB + 0xC ) );
+            Assert.That ( info.XOffset, Is.EqualTo ( 0x0 ) );
+            Assert.That ( info.YOffset, Is.EqualTo ( 0xC ) );
+            Assert.That ( info.FileOffset, Is.EqualTo ( 0xD ) );
+        }
+
+        [Test]
+        public void ReadPixels_InsufficientBytes_ThrowsException ()
+        {
+            var bytes = new byte[1];
+            formatReader = CreateFormatReader ( bytes );
+
+            Assert.That ( () => formatReader.ReadPixels (GraphicFormat.Format32bppArgb, 3, 3), 
+                Throws.InstanceOf<EndOfStreamException> () );
+        }
+
+        [Test]
+        public void ReadExtendedFntGlyphInfo_ValidStreamData_Works ()
+        {
+            var bytes = new byte[]
+            {
+                0x0A, 0x00, 0x00, 0x00,
+                0x0B, 0x00, 0x00, 0x00,
+                0x0C, 0x00, 0x00, 0x00,
+                0x0D, 0x00, 0x00, 0x00,
+                0x0E, 0x00, 0x00, 0x00,
+                0x0F, 0x00, 0x00, 0x00,
+                0x10, 0x00, 0x00, 0x00
+            };
+            formatReader = CreateFormatReader ( bytes );
+            var info = formatReader.ReadExtendedFntGlyphInfo ();
+
+            Assert.That ( info.Width, Is.EqualTo ( 0xA ) );
+            Assert.That ( info.Height, Is.EqualTo ( 0xB ) );
+            Assert.That ( info.XAdvance, Is.EqualTo ( 0xC ) );
+            Assert.That ( info.YAdvance, Is.EqualTo ( 0xD ) );
+            Assert.That ( info.XOffset, Is.EqualTo ( 0xE ) );
+            Assert.That ( info.YOffset, Is.EqualTo ( 0xF ) );
+            Assert.That ( info.FileOffset, Is.EqualTo ( 0x10 ) );
         }
 
         private NativeFormatReader CreateFormatReader ( byte[] bytes )

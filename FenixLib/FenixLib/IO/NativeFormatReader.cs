@@ -33,6 +33,11 @@ namespace FenixLib.IO
         {
             byte[] bytes = ReadBytes ( length );
 
+            if (bytes.Length < length )
+            {
+                throw new EndOfStreamException ();
+            }
+
             int n = 0;
             for ( n = 0 ; n < length ; n++ )
             {
@@ -70,9 +75,21 @@ namespace FenixLib.IO
         public Palette ReadPalette ()
         {
             var paletteColors = ReadBytes ( PaletteBytesSize );
-            Palette palette = new Palette ( Vga2PaleetteColors ( paletteColors ) );
 
-            return palette;
+            if (paletteColors.Length < PaletteBytesSize)
+            {
+                throw new EndOfStreamException ();
+            }
+
+            try
+            { 
+                Palette palette = new Palette ( Vga2PaleetteColors ( paletteColors ) );
+                return palette;
+            }
+            catch (Exception e)
+            {
+                throw new IOException ( "Invalid palette data.", e );
+            }
         }
 
         public PivotPoint[] ReadPivotPoints ( int number )
@@ -95,7 +112,13 @@ namespace FenixLib.IO
 
         public byte[] ReadPaletteGammas ()
         {
-            return ReadBytes ( NativeFormat.PaletteGammaBytesSize );
+            var bytes = ReadBytes ( PaletteGammaBytesSize );
+            if (bytes.Length < PaletteGammaBytesSize)
+            {
+                throw new EndOfStreamException ();
+            }
+
+            return bytes;
         }
 
         public int ReadPivotPointsMaxIdUint16 ()
@@ -138,7 +161,15 @@ namespace FenixLib.IO
 
         public byte[] ReadPixels ( GraphicFormat format, int width, int height )
         {
-            return ReadBytes ( format.PixelsBytesForSize ( width, height ) );
+            var size = format.PixelsBytesForSize ( width, height );
+            var bytes = ReadBytes ( size );
+
+            if ( bytes.Length < size )
+            {
+                throw new EndOfStreamException ();
+            }
+
+            return bytes;
         }
 
         private static PaletteColor[] Vga2PaleetteColors ( byte[] colorData )
