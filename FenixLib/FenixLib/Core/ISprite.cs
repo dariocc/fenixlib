@@ -19,9 +19,6 @@ namespace FenixLib.Core
     public interface ISprite : IGraphic
     {
         string Description { get; set; }
-        //int? Id { get; }
-        //bool IsInAssortment { get; }
-        //SpriteAssortment ParentAssortment { get; set; }
         ICollection<PivotPoint> PivotPoints { get; }
 
         void ClearPivotPoints ();
