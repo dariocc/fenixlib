@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FenixLib.Core.Sprite" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="FenixLib.Core.Sprite.SearchDirection" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Core\Sprite.SearchDirection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAFIAgCAAAAAgACGBAAAQgBCAAAAAAAANAAAA=</HashCode>
+      <FileName>Core\Sprite.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="graphic" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FenixLib.Core.SpriteAssortment" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="FenixLib.Core.SpriteAssortment.ChildSprite">
+        <TypeIdentifier>
+          <NewMemberFileName>Core\SpriteAssortment.ChildSprite.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="sprites" Type="FenixLib.Core.UniformFormatGraphicDictionary&lt;K, E&gt;" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12.25" Y="10.671" />
+        <Point X="12.625" Y="10.671" />
+        <Point X="12.625" Y="10.312" />
+        <Point X="13.5" Y="10.312" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAYCAAAAAAAAARAAGAAAGCAgAAAAAAAEAIAAAACAAAA=</HashCode>
+      <FileName>Core\SpriteAssortment.ChildSprite.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="sprites" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FenixLib.Core.SpriteAssortmentSprite" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="7.5" Width="2" />
+    <AssociationLine Name="baseSprite" Type="FenixLib.Core.ISprite" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.188" Y="7.5" />
+        <Point X="5.188" Y="7.125" />
+        <Point X="5" Y="7.125" />
+        <Point X="5" Y="5.184" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAABAAgCAAAgAAACGBAIAQABKAAAAAAAANAAAA=</HashCode>
+      <FileName>Core\SpriteAssortmentSprite.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="baseSprite" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FenixLib.Core.UniformFormatGraphicDictionary&lt;K, E&gt;" Collapsed="true">
+    <Position X="13.5" Y="9.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>CAIAAAAAAAAEABAQCAAADAQAAAAAAAAEACAgAABQIAA=</HashCode>
+      <FileName>Core\UniformFormatGraphicDictionary.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FenixLib.Core.FontGlyph">
+    <Position X="13" Y="4.5" Width="3.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAAAAAABBAAAAAAAgAAACGAAAAAAALAAAAAAAAABCAA=</HashCode>
+      <FileName>Core\FontGlyph.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FenixLib.Core.BitmapFont">
+    <Position X="17.5" Y="3" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="FenixLib.Core.BitmapFont.ChildGlyph">
+        <Compartments>
+          <Compartment Name="Properties" Collapsed="true" />
+          <Compartment Name="Methods" Collapsed="true" />
+        </Compartments>
+        <TypeIdentifier>
+          <NewMemberFileName>Core\BitmapFont.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAGAAASCAAgAAAAoAEAgIAAAAAAAA=</HashCode>
+      <FileName>Core\BitmapFont.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="glyphs" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Glyphs" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FenixLib.Core.Graphic">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAACGAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Graphic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="FenixLib.Core.ISprite">
+    <Position X="4.25" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="FenixLib.Core.IGraphic" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="2.623" />
+        <Point X="6.5" Y="3.125" />
+        <Point X="5" Y="3.125" />
+        <Point X="5" Y="3.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgCAAAAAAAAABAAAQABAAAAAAAAANAAAA=</HashCode>
+      <FileName>Core\ISprite.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FenixLib.Core.IGraphic">
+    <Position X="5.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAACGAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\IGraphic.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FenixLib.Core.ISpriteAssortment">
+    <Position X="9.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAYCAAAAAAAAAQAACAAACCAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Core\ISpriteAssortment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Sprites" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="FenixLib.Core.IBitmapFont">
+    <Position X="16.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAACCAAgAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Core\IBitmapFont.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Glyphs" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="FenixLib.Core.IGlyph">
+    <Position X="13.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAADAAAAAAAAABAAA=</HashCode>
+      <FileName>Core\IGlyph.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
