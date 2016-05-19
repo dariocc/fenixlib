@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Design\CoreClasses.cd" />
+    <None Include="Design\Decoders.cd" />
     <None Include="FenixLib.licenseheader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
