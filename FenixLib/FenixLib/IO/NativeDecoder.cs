@@ -56,7 +56,7 @@ namespace FenixLib.IO
         /// <param name="reader">A <see cref="NativeFormatReader"/> that is used to read the
         /// stream</param>
         /// <returns></returns>
-        protected abstract T ReadBody ( Header header, NativeFormatReader reader );
+        protected abstract T ReadBody ( Header header, INativeFormatReader reader );
 
         /// <summary>
         /// The list of magic

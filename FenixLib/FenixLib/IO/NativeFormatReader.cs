@@ -21,7 +21,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class NativeFormatReader : BinaryReader
+    public class NativeFormatReader : BinaryReader, INativeFormatReader
     {
         private static readonly Encoding encoding = Encoding.GetEncoding ( 850 );
 
@@ -183,6 +183,11 @@ namespace FenixLib.IO
                     colorData[n * 3 + 2] << 2 );
             }
             return colors;
+        }
+
+        int INativeFormatReader.ReadUInt16AsInt32 ()
+        {
+            return ReadUInt16 ();
         }
     }
 }

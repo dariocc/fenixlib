@@ -40,9 +40,9 @@ namespace FenixLib.IO
 
         protected abstract FontEncoding Encoding { get; }
 
-        protected abstract GlyphInfo ReadGlyphInfo ( NativeFormatReader reader );
+        protected abstract GlyphInfo ReadGlyphInfo ( INativeFormatReader reader );
 
-        protected override IBitmapFont ReadBody ( Header header, NativeFormatReader reader )
+        protected override IBitmapFont ReadBody ( Header header, INativeFormatReader reader )
         {
             int bpp = ParseBitsPerPixel ( header );
 
@@ -72,9 +72,10 @@ namespace FenixLib.IO
             BitmapFont font = new BitmapFont ( Encoding, ( GraphicFormat) bpp, palette );
 
             Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream );
-
-            using ( var pixelsReader = new NativeFormatReader ( pixelsStream ) )
+            try
             {
+                var pixelsReader = CreatePixelReader ( pixelsStream );
+
                 // Read Glyph's pixels
                 int characterIndex = -1;
                 foreach ( var character in characters )
@@ -104,8 +105,17 @@ namespace FenixLib.IO
                     font[characterIndex] = glyph;
                 }
             }
+            finally
+            {
+                pixelsStream.Dispose ();
+            }
 
             return font;
+        }
+
+        protected virtual INativeFormatReader CreatePixelReader( Stream pixelStream )
+        {
+            return new NativeFormatReader ( pixelStream );
         }
 
         private static Stream GetSeekablePixelsStream ( Stream stream )
