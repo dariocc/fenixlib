@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class DivFilePaletteDecoder : NativeDecoder<Palette>
+    public sealed class DivFilePaletteDecoder : NativeDecoder<Palette>
     {
 
         public override int MaxSupportedVersion { get; }

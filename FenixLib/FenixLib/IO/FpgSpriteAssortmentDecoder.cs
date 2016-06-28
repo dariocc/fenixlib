@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class FpgSpriteAssortmentDecoder : NativeDecoder<ISpriteAssortment>
+    public sealed class FpgSpriteAssortmentDecoder : NativeDecoder<ISpriteAssortment>
     {
 
         public override int MaxSupportedVersion { get; } = 0x00;

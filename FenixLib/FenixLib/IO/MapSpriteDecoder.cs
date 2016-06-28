@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class MapSpriteDecoder : NativeDecoder<ISprite>
+    public sealed class MapSpriteDecoder : NativeDecoder<ISprite>
     {
 
         public override int MaxSupportedVersion => 0;
