@@ -2,7 +2,8 @@
 
 FenixLib brings .Net support for opening, creating and operating with
 native graphic, graphic collections, bitmap fonts and palette formats of
-[PixTudio](https://pixtudio.org), [BennuGD](https://bennugd.org) and 
+[PixTudio](https://pixtudio.org), [BennuGD](https://bennugd.org), 
+[Div GO](http://www.amakasoft.com/herramientas/div-go.html) and 
 [DIV](http://div-arena.co.uk/) game programming languages and frameworks.
 
 The following snippet shows how easy is to open a Fpg file, print the codes
@@ -42,7 +43,7 @@ var glyphGraphic = new Graphic( GraphicFormat.Format32bppArgb, 10, 10, new byte[
 font['å'] = new Glyph ( glyphGraphic );
 
 // Save the font to a Fnt file (only 'å' will contain a bitmap)
-font.SaveToFnt ( 'myfont.fnt' );
+font.SaveToFnt ( "myfont.fnt" );
 ```
 
 A battery of [examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.

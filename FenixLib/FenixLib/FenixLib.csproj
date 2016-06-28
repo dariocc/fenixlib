@@ -88,6 +88,7 @@
     <Compile Include="IO\IExtendedGlyphInfoBuilder.cs" />
     <Compile Include="IO\IGlyphInfoProperties.cs" />
     <Compile Include="IO\ILegacyGlyphInfoBuilder.cs" />
+    <Compile Include="IO\INativeFormatReader.cs" />
     <Compile Include="IO\NativeFormatWriter.PivotPointsArranger.cs" />
     <Compile Include="IO\LegacyGlyphInfoBuilder.cs" />
     <Compile Include="Util\Util.cs" />

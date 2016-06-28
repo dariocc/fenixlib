@@ -26,7 +26,7 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics { get; }
 
-        protected override Palette ReadBody ( Header header, NativeFormatReader reader )
+        protected override Palette ReadBody ( Header header, INativeFormatReader reader )
         {
             // Map files have the Palette data in a different position than the 
             // rest of the files

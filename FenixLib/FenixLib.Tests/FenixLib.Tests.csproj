@@ -56,6 +56,7 @@
     <Compile Include="Unit\Core\FontEncodingTests.cs" />
     <Compile Include="Unit\Core\GlyphTests.cs" />
     <Compile Include="Integration\FpgDecoding.cs" />
+    <Compile Include="Unit\IO\FntAbstractBitmapFontDecoderTests.cs" />
     <Compile Include="Unit\IO\IDecoderTests.cs" />
     <Compile Include="Unit\Core\PaletteColorTests.cs" />
     <Compile Include="Unit\Core\PaletteTests.cs" />
