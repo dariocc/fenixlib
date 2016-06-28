@@ -27,7 +27,7 @@ namespace FenixLib.Tests.Unit.IO
         //     FntAstractBitmapFontDecoder abstract methods and properties.   
         private int[] validBitsPerPixelDepths;
         private string[] knownFileMagics;
-        private INativeFormatReader createPixelReaderValue;
+        private AbstractNativeFormatReader createNativeFormatReaderValue;
         private int parseBitsPerPixelValue;
         private FontEncoding encoding;
 
@@ -46,7 +46,7 @@ namespace FenixLib.Tests.Unit.IO
             // Clean-up to avoid test interference
             validBitsPerPixelDepths = null;
             knownFileMagics = null;
-            createPixelReaderValue = null;
+            createNativeFormatReaderValue = null;
             parseBitsPerPixelValue = 0;
             encoding = null;
 
@@ -59,9 +59,12 @@ namespace FenixLib.Tests.Unit.IO
             parseBitsPerPixelValue = 55;
             validBitsPerPixelDepths = new int[] { 10 };
 
-            var headerStub = new NativeFormat.Header ( "abc", new byte[1], 0 );
-            var readerStub = MockRepository.GenerateStub<INativeFormatReader> ();
+            var streamStub = MockRepository.GenerateStub<Stream> ();
+            streamStub.Stub ( _ => _.CanRead ).Return ( true );
 
+            var headerStub = new NativeFormat.Header ( "abc", new byte[1], 0 );
+            var readerStub = MockRepository.GenerateStub<AbstractNativeFormatReader> 
+                ( streamStub );
 
             Assert.Catch<UnsuportedFileFormatException> (
                 () => ReadBody ( headerStub, readerStub ) );
@@ -84,10 +87,9 @@ namespace FenixLib.Tests.Unit.IO
             streamStub.Stub ( _ => _.CanRead ).Return ( true );
 
             // The mocked INativeFormatReader to interact with ReadBody ()
-            var readerMock = MockRepository.GenerateStrictMock<INativeFormatReader> ();
-            createPixelReaderValue = readerMock;
-            readerMock.Stub ( _ => _.BaseStream ).Repeat.Any ()
-                .Return ( streamStub );
+            var readerMock = MockRepository.GenerateStrictMock<AbstractNativeFormatReader> 
+                ( streamStub );
+            createNativeFormatReaderValue = readerMock;
 
             using ( readerMock.GetMockRepository ().Ordered () )
             {
@@ -119,15 +121,15 @@ namespace FenixLib.Tests.Unit.IO
             Assert.That ( readGlyphInfoCount, Is.EqualTo ( 256 ) );
         }
 
-        #region FntAbstractBitmapFontDecoder implementation
+        #region virtual methods implementation
 
-        protected override INativeFormatReader CreatePixelReader ( Stream pixelStream )
+        protected override AbstractNativeFormatReader CreateNativeFormatReader ( Stream stream )
         {
-            return createPixelReaderValue;
+            return createNativeFormatReaderValue;
         }
 
         protected override IBitmapFont ReadBody ( NativeFormat.Header header,
-            INativeFormatReader reader )
+            AbstractNativeFormatReader reader )
         {
             return base.ReadBody ( header, reader );
         }
@@ -150,7 +152,7 @@ namespace FenixLib.Tests.Unit.IO
             // do nothing
         }
 
-        protected override GlyphInfo ReadGlyphInfo ( INativeFormatReader reader )
+        protected override GlyphInfo ReadGlyphInfo ( AbstractNativeFormatReader reader )
         {
             readGlyphInfoCount++;
             var properties = MockRepository.GenerateStub<IGlyphInfoProperties> ();

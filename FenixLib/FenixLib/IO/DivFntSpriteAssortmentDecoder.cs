@@ -26,7 +26,7 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics { get; }
 
-        protected override ISpriteAssortment ReadBody ( Header header, INativeFormatReader reader )
+        protected override ISpriteAssortment ReadBody ( Header header, AbstractNativeFormatReader reader )
         {
 
             Palette palette = reader.ReadPalette ();

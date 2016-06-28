@@ -21,17 +21,20 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public class NativeFormatReader : BinaryReader, INativeFormatReader
+    public sealed class NativeFormatReader : AbstractNativeFormatReader
     {
         private static readonly Encoding encoding = Encoding.GetEncoding ( 850 );
 
-        public NativeFormatReader ( Stream input ) : base ( input, encoding )
+        private BinaryReader binaryReader;
+
+        public NativeFormatReader ( Stream input ) : base ( input )
         {
+            binaryReader = new BinaryReader ( input );
         }
 
-        public string ReadAsciiZ ( int length )
+        public override string ReadAsciiZ ( int length )
         {
-            byte[] bytes = ReadBytes ( length );
+            byte[] bytes = binaryReader.ReadBytes ( length );
 
             if (bytes.Length < length )
             {
@@ -60,21 +63,21 @@ namespace FenixLib.IO
             return result;
         }
 
-        public Header ReadHeader ()
+        public override Header ReadHeader ()
         {
             // 3 first bytes describe the graphic format of the MAP
-            var fileType = encoding.GetString ( ReadBytes ( 3 ) );
+            var fileType = encoding.GetString ( binaryReader.ReadBytes ( 3 ) );
             // Next 4 bytes are MS-DOS termination, and last is the MAP version
-            var terminator = ReadBytes ( 4 );
+            var terminator = binaryReader.ReadBytes ( 4 );
             // Last byte of the header is the version number
-            var lastByte = ReadByte ();
+            var lastByte = binaryReader.ReadByte ();
 
             return new Header ( fileType, terminator, lastByte );
         }
 
-        public Palette ReadPalette ()
+        public override Palette ReadPalette ()
         {
-            var paletteColors = ReadBytes ( PaletteBytesSize );
+            var paletteColors = binaryReader.ReadBytes ( PaletteBytesSize );
 
             if (paletteColors.Length < PaletteBytesSize)
             {
@@ -92,13 +95,13 @@ namespace FenixLib.IO
             }
         }
 
-        public PivotPoint[] ReadPivotPoints ( int number )
+        public override PivotPoint[] ReadPivotPoints ( int number )
         {
             List<PivotPoint> points = new List<PivotPoint> ();
             for ( int n = 0 ; n < number ; n++ )
             {
-                var x = ReadInt16 ();
-                var y = ReadInt16 ();
+                var x = binaryReader.ReadInt16 ();
+                var y = binaryReader.ReadInt16 ();
                 PivotPoint point = new PivotPoint ( n, x, y );
 
                 // If the X and Y are -1, there is no need to add
@@ -110,9 +113,9 @@ namespace FenixLib.IO
             return points.ToArray ();
         }
 
-        public byte[] ReadPaletteGammas ()
+        public override byte[] ReadPaletteGammas ()
         {
-            var bytes = ReadBytes ( PaletteGammaBytesSize );
+            var bytes = binaryReader.ReadBytes ( PaletteGammaBytesSize );
             if (bytes.Length < PaletteGammaBytesSize)
             {
                 throw new EndOfStreamException ();
@@ -121,48 +124,47 @@ namespace FenixLib.IO
             return bytes;
         }
 
-        public int ReadPivotPointsMaxIdUint16 ()
+        public override int ReadPivotPointsMaxIdUint16 ()
         {
-            var flags = ReadUInt16 ();
+            var flags = binaryReader.ReadUInt16 ();
             var numberPivotPoints = Convert.ToInt16 ( flags & PivotPointsNumberBitMask );
             return numberPivotPoints;
         }
 
-        public int ReadPivotPointsMaxIdInt32 ()
+        public override int ReadPivotPointsMaxIdInt32 ()
         {
-            var flags = ReadUInt32 ();
+            var flags = binaryReader.ReadUInt32 ();
             var numberPivotPoints = Convert.ToInt16 ( flags & PivotPointsNumberBitMask );
             return numberPivotPoints;
         }
 
-        public GlyphInfo ReadLegacyFntGlyphInfo ()
+        public override GlyphInfo ReadLegacyFntGlyphInfo ()
         {
             return new LegacyGlyphInfoBuilder ()
-                .Width ( ReadInt32 () )
-                .Height ( ReadInt32 () )
-                .YOffset ( ReadInt32 () )
-                .FileOffset ( ReadInt32 () )
+                .Width ( binaryReader.ReadInt32 () )
+                .Height ( binaryReader.ReadInt32 () )
+                .YOffset ( binaryReader.ReadInt32 () )
+                .FileOffset ( binaryReader.ReadInt32 () )
                 .Build ();
         }
 
-        public GlyphInfo ReadExtendedFntGlyphInfo ()
+        public override GlyphInfo ReadExtendedFntGlyphInfo ()
         {
             return new ExtendedGlyphInfoBuilder ()
-                .Width ( ReadInt32 () )
-                .Height ( ReadInt32 () )
-                .XAdvance ( ReadInt32 () )
-                .YAdvance ( ReadInt32 () )
-                .XOffset ( ReadInt32 () )
-                .YOffset ( ReadInt32 () )
-                .FileOffset ( ReadInt32 () )
+                .Width ( binaryReader.ReadInt32 () )
+                .Height ( binaryReader.ReadInt32 () )
+                .XAdvance ( binaryReader.ReadInt32 () )
+                .YAdvance ( binaryReader.ReadInt32 () )
+                .XOffset ( binaryReader.ReadInt32 () )
+                .YOffset ( binaryReader.ReadInt32 () )
+                .FileOffset ( binaryReader.ReadInt32 () )
                 .Build ();
         }
 
-
-        public byte[] ReadPixels ( GraphicFormat format, int width, int height )
+        public override byte[] ReadPixels ( GraphicFormat format, int width, int height )
         {
             var size = format.PixelsBytesForSize ( width, height );
-            var bytes = ReadBytes ( size );
+            var bytes = binaryReader.ReadBytes ( size );
 
             if ( bytes.Length < size )
             {
@@ -185,9 +187,42 @@ namespace FenixLib.IO
             return colors;
         }
 
-        int INativeFormatReader.ReadUInt16AsInt32 ()
+        public override int ReadUInt16 () => binaryReader.ReadUInt16 ();
+
+        public override int ReadInt32 () => binaryReader.ReadInt32 ();
+
+        public override short ReadInt16 () => binaryReader.ReadInt16 ();
+
+        public override byte ReadByte () => binaryReader.ReadByte ();
+
+        public override byte[] ReadBytes ( int number )
         {
-            return ReadUInt16 ();
+            // TODO, check returned bytes length
+            return binaryReader.ReadBytes (number);
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        private void Dispose ( bool disposing )
+        {
+            if ( !disposedValue )
+            {
+                if ( disposing )
+                {
+                    binaryReader.Dispose ();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        // This code added to correctly implement the disposable pattern.
+        public override void Dispose ()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose ( true );
+        }
+        #endregion
     }
 }

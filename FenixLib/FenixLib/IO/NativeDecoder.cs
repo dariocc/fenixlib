@@ -56,7 +56,7 @@ namespace FenixLib.IO
         /// <param name="reader">A <see cref="NativeFormatReader"/> that is used to read the
         /// stream</param>
         /// <returns></returns>
-        protected abstract T ReadBody ( Header header, INativeFormatReader reader );
+        protected abstract T ReadBody ( Header header, AbstractNativeFormatReader reader );
 
         /// <summary>
         /// The list of magic
@@ -150,7 +150,7 @@ namespace FenixLib.IO
 
             using ( MemoryStream headerStream = new MemoryStream ( headerBytes ) )
             {
-                using ( NativeFormatReader reader = new NativeFormatReader ( headerStream ) )
+                using ( var reader = CreateNativeFormatReader ( headerStream ) )
                 {
                     header = reader.ReadHeader ();
 
@@ -165,11 +165,27 @@ namespace FenixLib.IO
                 }
             }
 
-            using ( NativeFormatReader reader = new NativeFormatReader ( bodyStream ) )
+            using ( var reader = new NativeFormatReader ( bodyStream ) )
             {
                 return ReadBody ( header, reader );
             }
 
+        }
+
+        /// <summary>
+        /// Creates an <see cref="AbstractNativeFormatReader"/>.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// This method is necessary to avoid dependency on the <see cref="NativeFormatReader"/>
+        /// class, which is not advisable for unit-testing.
+        /// </remarks>
+        protected virtual AbstractNativeFormatReader CreateNativeFormatReader ( Stream stream )
+        {
+            // An alternative to this template method would be an optional parameter
+            // with a factory object that creates the NativeFormatReader
+            return new NativeFormatReader ( stream );
         }
 
         /// <summary>
