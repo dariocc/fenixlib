@@ -23,8 +23,8 @@ namespace FenixLib.Tests.Unit.IO
     [TestFixture ( Category = "Unit" )]
     class FntBitmapFontDecoderTests : FntBitmapFontDecoder
     {
-        // Following member variables control the return values of the 
-        //     FntAstractBitmapFontDecoder abstract methods and properties.   
+        // Following member variables control the return values of the
+        //     FntAstractBitmapFontDecoder abstract methods and properties.
         private int[] validBitsPerPixelDepths;
         private string[] knownFileMagics;
         private NativeFormatReader createNativeFormatReaderValue;
@@ -37,7 +37,7 @@ namespace FenixLib.Tests.Unit.IO
         [SetUp]
         public void SetUp ()
         {
-            
+
         }
 
         [TearDown]
@@ -63,7 +63,7 @@ namespace FenixLib.Tests.Unit.IO
             streamStub.Stub ( _ => _.CanRead ).Return ( true );
 
             var headerStub = new NativeFormat.Header ( "abc", new byte[1], 0 );
-            var readerStub = MockRepository.GenerateStub<NativeFormatReader> 
+            var readerStub = MockRepository.GenerateStub<NativeFormatReader>
                 ( streamStub );
 
             Assert.Catch<UnsuportedFileFormatException> (
@@ -72,8 +72,8 @@ namespace FenixLib.Tests.Unit.IO
 
         [Test]
         public void ReadBody_BitsPerPixelIs8_ReadingOccursAsExpected ()
-        {   
-            // Interaction testing of the ReadBody method through the 
+        {
+            // Interaction testing of the ReadBody method through the
             // INativeFormatReader interface
 
             // Arrange
@@ -87,7 +87,7 @@ namespace FenixLib.Tests.Unit.IO
             streamStub.Stub ( _ => _.CanRead ).Return ( true );
 
             // The mocked INativeFormatReader to interact with ReadBody ()
-            var readerMock = MockRepository.GenerateStrictMock<NativeFormatReader> 
+            var readerMock = MockRepository.GenerateStrictMock<NativeFormatReader>
                 ( streamStub );
             createNativeFormatReaderValue = readerMock;
 
@@ -105,7 +105,7 @@ namespace FenixLib.Tests.Unit.IO
                 readerMock.Expect ( _ => _.ReadInt32 () )
                     .Return ( 1 ); // Font Info
 
-                // 256 calls to ReadGlyphInfo 
+                // 256 calls to ReadGlyphInfo
                 // will be loged in readGlyphInfoCount member variable
 
                 readerMock.Expect ( _ => _.ReadPixels ( null, 0, 0 ) )

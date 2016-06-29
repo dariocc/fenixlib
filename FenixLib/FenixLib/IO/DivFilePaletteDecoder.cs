@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public sealed class DivFilePaletteDecoder : NativeDecoder<Palette>
+    public class DivFilePaletteDecoder : NativeDecoder<Palette>
     {
 
         public override int MaxSupportedVersion { get; } = 0;
@@ -31,7 +31,7 @@ namespace FenixLib.IO
 
         protected override Palette ReadBody ( Header header, NativeFormatReader reader )
         {
-            // Map files have the Palette data in a different position than the 
+            // Map files have the Palette data in a different position than the
             // rest of the files
             if ( header.Magic == "map" )
                 reader.ReadBytes ( 40 );
