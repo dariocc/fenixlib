@@ -99,7 +99,7 @@
     <Compile Include="Core\Exceptions.cs" />
     <Compile Include="Core\Glyph.cs" />
     <Compile Include="IO\DivFntSpriteAssortmentDecoder.cs" />
-    <Compile Include="IO\DivFormatlPaletteDecoder.cs" />
+    <Compile Include="IO\DivFilePaletteDecoder.cs" />
     <Compile Include="IO\FntBitmapFontDecoder.cs" />
     <Compile Include="IO\FntBitmapFontEncoder.cs" />
     <Compile Include="IO\FpgSpriteAssortmentDecoder.cs" />
