@@ -100,8 +100,8 @@
     <Compile Include="Core\Glyph.cs" />
     <Compile Include="IO\DivFntSpriteAssortmentDecoder.cs" />
     <Compile Include="IO\DivFormatlPaletteDecoder.cs" />
-    <Compile Include="IO\FntAbstractBitmapFontDecoder.cs" />
-    <Compile Include="IO\FntAbstractBitmapFontEncoder.cs" />
+    <Compile Include="IO\FntBitmapFontDecoder.cs" />
+    <Compile Include="IO\FntBitmapFontEncoder.cs" />
     <Compile Include="IO\FpgSpriteAssortmentDecoder.cs" />
     <Compile Include="IO\FpgSpriteAssortmentEncoder.cs" />
     <Compile Include="IO\IDecoder.cs" />

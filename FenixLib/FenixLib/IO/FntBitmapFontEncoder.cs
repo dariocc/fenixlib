@@ -17,7 +17,7 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
-    public abstract class FntAbstractBitmapFontEncoder : NativeEncoder<IBitmapFont>
+    public abstract class FntBitmapFontEncoder : NativeEncoder<IBitmapFont>
     {
         protected abstract int GlyphInfoBlockSize { get; }
 

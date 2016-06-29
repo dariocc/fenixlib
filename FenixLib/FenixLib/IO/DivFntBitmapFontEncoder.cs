@@ -17,7 +17,7 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    public class DivFntBitmapFontEncoder : FntAbstractBitmapFontEncoder
+    public class DivFntBitmapFontEncoder : FntBitmapFontEncoder
     {
         private const byte Version = 0x00;
 

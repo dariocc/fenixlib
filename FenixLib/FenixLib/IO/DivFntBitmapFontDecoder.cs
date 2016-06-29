@@ -16,7 +16,7 @@ using System;
 
 namespace FenixLib.IO
 {
-    public sealed class DivFntBitmapFontDecoder : FntAbstractBitmapFontDecoder
+    public sealed class DivFntBitmapFontDecoder : FntBitmapFontDecoder
     {
 
         public override int MaxSupportedVersion { get; } = 0x00;

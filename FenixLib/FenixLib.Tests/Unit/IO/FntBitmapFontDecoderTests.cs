@@ -21,7 +21,7 @@ using FenixLib.IO;
 namespace FenixLib.Tests.Unit.IO
 {
     [TestFixture ( Category = "Unit" )]
-    class FntAbstractBitmapFontDecoderTests : FntAbstractBitmapFontDecoder
+    class FntBitmapFontDecoderTests : FntBitmapFontDecoder
     {
         // Following member variables control the return values of the 
         //     FntAstractBitmapFontDecoder abstract methods and properties.   

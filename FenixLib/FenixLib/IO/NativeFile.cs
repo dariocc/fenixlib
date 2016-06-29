@@ -124,7 +124,7 @@ namespace FenixLib.IO
         public static void SaveToFnt ( this IBitmapFont font, string path, 
             bool forceExtendedFontEncoding = false )
         {
-            FntAbstractBitmapFontEncoder encoder;
+            FntBitmapFontEncoder encoder;
 
             if (font.GraphicFormat == GraphicFormat.Format8bppIndexed 
                 && font.Encoding == FontEncoding.CP850

@@ -18,7 +18,7 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
-    public class ExtendedFntBitmapFontEncoder : FntAbstractBitmapFontEncoder
+    public class ExtendedFntBitmapFontEncoder : FntBitmapFontEncoder
     {
         protected override int GlyphInfoBlockSize { get; } = 28;
 
