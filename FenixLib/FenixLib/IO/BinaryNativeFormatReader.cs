@@ -21,6 +21,13 @@ using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO
 {
+    /// <summary>
+    /// Reads primitive and native format data types.
+    /// </summary>
+    /// <remarks>
+    /// Reading of primitive datatypes is done via <seealso cref="BinaryReader"/>, therefore
+    /// the read functions read data in little-endian format.
+    /// </remarks>
     public sealed class BinaryNativeFormatReader : NativeFormatReader
     {
         private static readonly Encoding encoding = Encoding.GetEncoding ( 850 );
@@ -194,6 +201,8 @@ namespace FenixLib.IO
         public override short ReadInt16 () => binaryReader.ReadInt16 ();
 
         public override byte ReadByte () => binaryReader.ReadByte ();
+
+        public override long ReadUInt32 () => binaryReader.ReadUInt32 ();
 
         public override byte[] ReadBytes ( int number )
         {

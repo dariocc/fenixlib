@@ -18,8 +18,13 @@ using FenixLib.Core;
 
 namespace FenixLib.IO
 {
+    /// <summary>
+    /// Reads primitive and native format data types from a <seealso cref="Stream"/>.
+    /// </summary>
     public abstract class NativeFormatReader : IDisposable
     {
+        public Stream BaseStream { get; }
+
         public NativeFormatReader ( Stream input )
         {
             if ( input == null )
@@ -30,6 +35,16 @@ namespace FenixLib.IO
             BaseStream = input;
         }
 
+        // Primitive data types
+        // CLS-compatibility imposes that ReadUIntXX functions return a non-unsigned type
+        public abstract int ReadInt32 ();
+        public abstract short ReadInt16 ();
+        public abstract byte ReadByte ();
+        public abstract byte[] ReadBytes ( int number );
+        public abstract int ReadUInt16 ();
+        public abstract long ReadUInt32 ();
+
+        // Native format data types
         public abstract string ReadAsciiZ ( int length );
         public abstract GlyphInfo ReadExtendedFntGlyphInfo ();
         public abstract NativeFormat.Header ReadHeader ();
@@ -40,13 +55,8 @@ namespace FenixLib.IO
         public abstract int ReadPivotPointsMaxIdInt32 ();
         public abstract int ReadPivotPointsMaxIdUint16 ();
         public abstract byte[] ReadPixels ( GraphicFormat format, int width, int height );
-        public abstract int ReadInt32();
-        public abstract short ReadInt16();
-        public abstract byte ReadByte();
-        public abstract byte[] ReadBytes ( int number );
-        public abstract int ReadUInt16 ();
-
-        public Stream BaseStream { get; }
+      
+        // IDisposable
         public abstract void Dispose ();
     }
 }
