@@ -23,7 +23,7 @@ namespace FenixLib.Tests.Unit.IO
     public class BinaryNativeFormatReaderTests
     {
 
-        /* 
+        /*
             NOTICE FOR DEVELOPERS
 
             The basic idea for the test methods in this test fixture are:
@@ -310,7 +310,7 @@ namespace FenixLib.Tests.Unit.IO
             var bytes = new byte[1];
             formatReader = CreateFormatReader ( bytes );
 
-            Assert.That ( () => formatReader.ReadPixels (GraphicFormat.Format32bppArgb, 3, 3), 
+            Assert.That ( () => formatReader.ReadPixels (GraphicFormat.Format32bppArgb, 3, 3),
                 Throws.InstanceOf<EndOfStreamException> () );
         }
 
