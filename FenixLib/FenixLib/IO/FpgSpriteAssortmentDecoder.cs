@@ -54,8 +54,8 @@ namespace FenixLib.IO
                     var numberOfPivotPoints = reader.ReadPivotPointsMaxIdInt32 ();
                     var pivotPoints = reader.ReadPivotPoints ( numberOfPivotPoints );
 
-                    // TODO: Not true for 1bpp
-                    var mapDataLength = width * height * ( bpp / 8 );
+                    var format = ( GraphicFormat ) bpp;
+                    var mapDataLength = format.PixelsBytesForSize ( width, height );
 
                     // Some tools such as FPG Edit are non conformant with the standard
                     // FPG files and will add data at the end. 
@@ -68,7 +68,6 @@ namespace FenixLib.IO
                         // kind of event
                     }
 
-                    var format = ( GraphicFormat ) bpp;
                     byte[] pixels = reader.ReadPixels ( format, width, height );
                     IGraphic graphic = new Graphic ( 
                         format, 
