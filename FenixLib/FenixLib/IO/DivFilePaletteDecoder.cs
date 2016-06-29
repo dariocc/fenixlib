@@ -20,11 +20,14 @@ namespace FenixLib.IO
     public sealed class DivFilePaletteDecoder : NativeDecoder<Palette>
     {
 
-        public override int MaxSupportedVersion { get; }
+        public override int MaxSupportedVersion { get; } = 0;
 
-        protected override string[] KnownFileExtensions { get; }
+        protected override string[] KnownFileExtensions { get; } = { "pal", "map", "fpg", "fnt" };
 
-        protected override string[] KnownFileMagics { get; }
+        protected override string[] KnownFileMagics { get; } =
+        {
+            "fnt", "map", "fpg", "pal"
+        };
 
         protected override Palette ReadBody ( Header header, NativeFormatReader reader )
         {
