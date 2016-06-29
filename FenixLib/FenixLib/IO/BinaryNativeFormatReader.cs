@@ -22,11 +22,10 @@ using static FenixLib.IO.NativeFormat;
 namespace FenixLib.IO
 {
     /// <summary>
-    /// Reads primitive and native format data types.
+    /// Reads primitive and native format data types in a little-endian format.
     /// </summary>
     /// <remarks>
-    /// Reading of primitive datatypes is done via <seealso cref="BinaryReader"/>, therefore
-    /// the read functions read data in little-endian format.
+    /// This class uses internally a <seealso cref="BinaryReader"/>.
     /// </remarks>
     public sealed class BinaryNativeFormatReader : NativeFormatReader
     {
@@ -206,8 +205,11 @@ namespace FenixLib.IO
 
         public override byte[] ReadBytes ( int number )
         {
-            // TODO, check returned bytes length
-            return binaryReader.ReadBytes (number);
+            var bytes = binaryReader.ReadBytes (number);
+            if ( bytes.Length < number )
+                throw new EndOfStreamException ();
+
+            return bytes;
         }
 
         #region IDisposable Support

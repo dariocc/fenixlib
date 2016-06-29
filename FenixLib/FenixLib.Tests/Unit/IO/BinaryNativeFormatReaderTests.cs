@@ -339,6 +339,103 @@ namespace FenixLib.Tests.Unit.IO
             Assert.That ( info.FileOffset, Is.EqualTo ( 0x10 ) );
         }
 
+        [Test]
+        public void ReadUInt16_ValidStreamData_Works ()
+        {
+            var bytes = new byte[]
+            {
+                0x0A, 0x0B
+            };
+
+            formatReader = CreateFormatReader ( bytes );
+            var uint16 = formatReader.ReadUInt16 ();
+
+            Assert.That ( uint16, Is.EqualTo ( 0x0B0A ) );
+        }
+
+        [Test]
+        public void ReadUInt32_ValidStreamData_Works ()
+        {
+            var bytes = new byte[]
+            {
+                0x0A, 0x0B, 0x0C, 0x0D
+            };
+
+            formatReader = CreateFormatReader ( bytes );
+            var uint32 = formatReader.ReadUInt32 ();
+
+            Assert.That ( uint32, Is.EqualTo ( 0x0D0C0B0A ) );
+        }
+
+        [Test]
+        public void ReadInt16_ValidStreamData_Works ()
+        {
+            var bytes = new byte[]
+            {
+                0x0A, 0x0B
+            };
+
+            formatReader = CreateFormatReader ( bytes );
+            var int16 = formatReader.ReadInt16 ();
+
+            Assert.That ( int16, Is.EqualTo ( 0x0B0A ) );
+        }
+
+        [Test]
+        public void ReadInt32_ValidStreamData_Works ()
+        {
+            var bytes = new byte[]
+            {
+                0x0A, 0x0B, 0x0C, 0x0D
+            };
+
+            formatReader = CreateFormatReader ( bytes );
+            var int32 = formatReader.ReadInt32 ();
+
+            Assert.That ( int32, Is.EqualTo ( 0x0D0C0B0A ) );
+        }
+
+        [Test]
+        public void ReadByte_ValidStreamData_Works ()
+        {
+            var bytes = new byte[]
+            {
+                0x0A
+            };
+
+            formatReader = CreateFormatReader ( bytes );
+            var aByte = formatReader.ReadByte ();
+
+            Assert.That ( aByte, Is.EqualTo ( 0x0A ) );
+        }
+
+        [Test]
+        public void ReadBytes_ValidStreamData_Works ()
+        {
+            var bytes = new byte[]
+            {
+                0x0A, 0x0B
+            };
+
+            formatReader = CreateFormatReader ( bytes );
+            var readBytes = formatReader.ReadBytes (2);
+
+            Assert.That ( readBytes, Is.EqualTo ( bytes ) );
+        }
+
+        [Test]
+        public void ReadBytes_InsufficientBytes_ThrowsException ()
+        {
+            var bytes = new byte[]
+            {
+                0x0A, 0x0B
+            };
+
+            formatReader = CreateFormatReader ( bytes );
+            Assert.That ( () => formatReader.ReadBytes ( 3 ),
+                Throws.InstanceOf<EndOfStreamException> () );
+        }
+
         private BinaryNativeFormatReader CreateFormatReader ( byte[] bytes )
         {
             var stream = new MemoryStream ( bytes, false );
