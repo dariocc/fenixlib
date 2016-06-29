@@ -40,9 +40,9 @@ namespace FenixLib.IO
 
         protected abstract FontEncoding Encoding { get; }
 
-        protected abstract GlyphInfo ReadGlyphInfo ( AbstractNativeFormatReader reader );
+        protected abstract GlyphInfo ReadGlyphInfo ( NativeFormatReader reader );
 
-        protected override IBitmapFont ReadBody ( Header header, AbstractNativeFormatReader reader )
+        protected override IBitmapFont ReadBody ( Header header, NativeFormatReader reader )
         {
             int bpp = ParseBitsPerPixel ( header );
 

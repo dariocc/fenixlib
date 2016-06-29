@@ -20,7 +20,7 @@ using FenixLib.IO;
 namespace FenixLib.Tests.Unit.IO
 {
     [TestFixture ( Category = "Unit" )]
-    public class NativeFormatReaderTests
+    public class BinaryNativeFormatReaderTests
     {
 
         /* 
@@ -32,7 +32,7 @@ namespace FenixLib.Tests.Unit.IO
             - Test function invokes method under test of the NativeFormatReader class..
         */
 
-        private NativeFormatReader formatReader;
+        private BinaryNativeFormatReader formatReader;
 
         [SetUp]
         public void SetUp ()
@@ -339,11 +339,11 @@ namespace FenixLib.Tests.Unit.IO
             Assert.That ( info.FileOffset, Is.EqualTo ( 0x10 ) );
         }
 
-        private NativeFormatReader CreateFormatReader ( byte[] bytes )
+        private BinaryNativeFormatReader CreateFormatReader ( byte[] bytes )
         {
             var stream = new MemoryStream ( bytes, false );
             stream.Flush ();
-            return new NativeFormatReader ( stream );
+            return new BinaryNativeFormatReader ( stream );
         }
     }
 }

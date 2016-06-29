@@ -32,7 +32,7 @@ namespace FenixLib.IO
             "m32"
         };
 
-        protected override ISprite ReadBody ( Header header, AbstractNativeFormatReader reader )
+        protected override ISprite ReadBody ( Header header, NativeFormatReader reader )
         {
             int width = reader.ReadUInt16 ();
             int height = reader.ReadUInt16 ();

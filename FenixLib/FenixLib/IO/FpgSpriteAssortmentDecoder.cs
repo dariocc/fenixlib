@@ -26,7 +26,7 @@ namespace FenixLib.IO
 
         protected override string[] KnownFileMagics { get; } = { "f16", "f32", "fpg", "f01" };
 
-        protected override ISpriteAssortment ReadBody ( Header header, AbstractNativeFormatReader reader )
+        protected override ISpriteAssortment ReadBody ( Header header, NativeFormatReader reader )
         {
             SpriteAssortment fpg;
 

@@ -88,7 +88,7 @@
     <Compile Include="IO\IExtendedGlyphInfoBuilder.cs" />
     <Compile Include="IO\IGlyphInfoProperties.cs" />
     <Compile Include="IO\ILegacyGlyphInfoBuilder.cs" />
-    <Compile Include="IO\AbstractNativeFormatReader.cs" />
+    <Compile Include="IO\NativeFormatReader.cs" />
     <Compile Include="IO\NativeFormatWriter.PivotPointsArranger.cs" />
     <Compile Include="IO\LegacyGlyphInfoBuilder.cs" />
     <Compile Include="Util\Util.cs" />
@@ -112,7 +112,7 @@
     <Compile Include="IO\NativeEncoder.cs" />
     <Compile Include="IO\ExtendedFntBitmapFontDecoder.cs" />
     <Compile Include="IO\NativeFormat.cs" />
-    <Compile Include="IO\NativeFormatReader.cs" />
+    <Compile Include="IO\BinaryNativeFormatReader.cs" />
     <Compile Include="IO\NativeFormatWriter.cs" />
     <Compile Include="IO\PalPaletteEncoder.cs" />
     <Compile Include="Core\Palette.cs" />

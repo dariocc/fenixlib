@@ -27,7 +27,7 @@ namespace FenixLib.Tests.Unit.IO
         //     FntAstractBitmapFontDecoder abstract methods and properties.   
         private int[] validBitsPerPixelDepths;
         private string[] knownFileMagics;
-        private AbstractNativeFormatReader createNativeFormatReaderValue;
+        private NativeFormatReader createNativeFormatReaderValue;
         private int parseBitsPerPixelValue;
         private FontEncoding encoding;
 
@@ -63,7 +63,7 @@ namespace FenixLib.Tests.Unit.IO
             streamStub.Stub ( _ => _.CanRead ).Return ( true );
 
             var headerStub = new NativeFormat.Header ( "abc", new byte[1], 0 );
-            var readerStub = MockRepository.GenerateStub<AbstractNativeFormatReader> 
+            var readerStub = MockRepository.GenerateStub<NativeFormatReader> 
                 ( streamStub );
 
             Assert.Catch<UnsuportedFileFormatException> (
@@ -87,7 +87,7 @@ namespace FenixLib.Tests.Unit.IO
             streamStub.Stub ( _ => _.CanRead ).Return ( true );
 
             // The mocked INativeFormatReader to interact with ReadBody ()
-            var readerMock = MockRepository.GenerateStrictMock<AbstractNativeFormatReader> 
+            var readerMock = MockRepository.GenerateStrictMock<NativeFormatReader> 
                 ( streamStub );
             createNativeFormatReaderValue = readerMock;
 
@@ -123,13 +123,13 @@ namespace FenixLib.Tests.Unit.IO
 
         #region virtual methods implementation
 
-        protected override AbstractNativeFormatReader CreateNativeFormatReader ( Stream stream )
+        protected override NativeFormatReader CreateNativeFormatReader ( Stream stream )
         {
             return createNativeFormatReaderValue;
         }
 
         protected override IBitmapFont ReadBody ( NativeFormat.Header header,
-            AbstractNativeFormatReader reader )
+            NativeFormatReader reader )
         {
             return base.ReadBody ( header, reader );
         }
@@ -152,7 +152,7 @@ namespace FenixLib.Tests.Unit.IO
             // do nothing
         }
 
-        protected override GlyphInfo ReadGlyphInfo ( AbstractNativeFormatReader reader )
+        protected override GlyphInfo ReadGlyphInfo ( NativeFormatReader reader )
         {
             readGlyphInfoCount++;
             var properties = MockRepository.GenerateStub<IGlyphInfoProperties> ();

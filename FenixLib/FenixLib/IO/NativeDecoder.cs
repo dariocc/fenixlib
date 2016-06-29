@@ -53,10 +53,10 @@ namespace FenixLib.IO
         /// </summary>
         /// <param name="header">A header object containing information of the magic, terminator
         /// and version.</param>
-        /// <param name="reader">A <see cref="NativeFormatReader"/> that is used to read the
+        /// <param name="reader">A <see cref="BinaryNativeFormatReader"/> that is used to read the
         /// stream</param>
         /// <returns></returns>
-        protected abstract T ReadBody ( Header header, AbstractNativeFormatReader reader );
+        protected abstract T ReadBody ( Header header, NativeFormatReader reader );
 
         /// <summary>
         /// The list of magic
@@ -165,7 +165,7 @@ namespace FenixLib.IO
                 }
             }
 
-            using ( var reader = new NativeFormatReader ( bodyStream ) )
+            using ( var reader = new BinaryNativeFormatReader ( bodyStream ) )
             {
                 return ReadBody ( header, reader );
             }
@@ -173,19 +173,19 @@ namespace FenixLib.IO
         }
 
         /// <summary>
-        /// Creates an <see cref="AbstractNativeFormatReader"/>.
+        /// Creates an <see cref="NativeFormatReader"/>.
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
         /// <remarks>
-        /// This method is necessary to avoid dependency on the <see cref="NativeFormatReader"/>
+        /// This method is necessary to avoid dependency on the <see cref="BinaryNativeFormatReader"/>
         /// class, which is not advisable for unit-testing.
         /// </remarks>
-        protected virtual AbstractNativeFormatReader CreateNativeFormatReader ( Stream stream )
+        protected virtual NativeFormatReader CreateNativeFormatReader ( Stream stream )
         {
             // An alternative to this template method would be an optional parameter
             // with a factory object that creates the NativeFormatReader
-            return new NativeFormatReader ( stream );
+            return new BinaryNativeFormatReader ( stream );
         }
 
         /// <summary>

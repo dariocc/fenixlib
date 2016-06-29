@@ -57,7 +57,7 @@ namespace FenixLib.IO
             return 8;
         }
 
-        protected override GlyphInfo ReadGlyphInfo ( AbstractNativeFormatReader reader )
+        protected override GlyphInfo ReadGlyphInfo ( NativeFormatReader reader )
         {
             return reader.ReadLegacyFntGlyphInfo ();
         }
