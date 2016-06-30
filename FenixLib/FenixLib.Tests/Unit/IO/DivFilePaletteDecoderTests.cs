@@ -24,48 +24,49 @@ namespace FenixLib.Tests.Unit.IO
     [TestFixture ( Category = "Unit")]
     class DivFilePaletteDecoderTests :  DivFilePaletteDecoder
     {
-        private NativeFormatReader Reader { get; set; }
-
-        [SetUp]
-        public void SetUp ()
-        {
-
-        }
-
-        [TearDown]
-        public void TearDown ()
-        {
-        }
-
         [Test]
         public void ReadBody_HeaderMagicIsMap_First40BytesAreSkipped ()
         {
-            var stubHeader = new NativeFormat.Header ( "map", null, 0 );
-            var stubStream = new MemoryStream ( new byte[41] );
-            var mockedReader = MockRepository.GenerateMock<NativeFormatReader>
-                ( stubStream );
+            // Configure a stream with 40 bytes initialized to 1 and the rest to 0
+            var streamData = new byte[40 + 256 * 3];
+            for (int i = 0 ; i < 40 ;  i++)
+            {
+                streamData[i] = 0xFF;
+            }
 
+            var header = new NativeFormat.Header ( "map", null, 0 );
+            var stream = new MemoryStream ( streamData );
+            var reader = new BinaryNativeFormatReader ( stream );
+
+            var palette = ReadBody ( header, reader );
+
+            Assert.That ( palette, Is.EqualTo ( new Palette () ) );
         }
 
         [Test]
-        public void ReadBody_ValidInputs_ReadPaletteIsCalled ()
+        public void ReadBody_ValidInput_PaletteIsRead ()
         {
-            var stubHeader = new NativeFormat.Header ( "abc", new byte[] { 0 }, 0 );
+            // A palette with some non-black colors
+            var colors = new PaletteColor[256];
+            for ( int i = 0 ; i < colors.Length ; i++ )
+                colors[i] = new PaletteColor ( i, i, i );
+            var palette = new Palette ( colors );
+
+            var header = new NativeFormat.Header ( "abc", new byte[] { 0 }, 0 );
             var stubStream = MockRepository.GenerateStub<Stream> ();
-            var mockedReader = MockRepository.GenerateMock<NativeFormatReader>
-                ( stubStream );
+            // Stub a NativeFormatReader that returns the generated palette
+            var stubReader = MockRepository.GenerateStub<NativeFormatReader> ( stubStream );
+            stubReader.Stub ( _ => _.ReadPalette () ).Return ( palette );
 
-            var decoder = new DivFilePaletteDecoderTests ();
-            decoder.Reader = mockedReader;
+            // Act
+            var readBodyResult = ReadBody ( header, stubReader );
 
-            mockedReader.Expect ( _ => _.ReadPalette () ).Return ( null );
-            mockedReader.Stub ( _ => _.ReadHeader () ).Return ( null );
-
-            decoder.Decode ( stubStream );
-
-            mockedReader.VerifyAllExpectations ();
+            // ReadBody should have returned a palette equivalent to the one that the reader
+            // returned
+            Assert.That ( readBodyResult, Is.EqualTo ( palette ) );
         }
 
+        #region abstract implementation
         public override int MaxSupportedVersion => 0;
 
         protected override string[] KnownFileMagics => new string[] { "abc" };
@@ -77,31 +78,6 @@ namespace FenixLib.Tests.Unit.IO
                 throw new NotImplementedException ();
             }
         }
-
-        protected override Palette ReadBody ( NativeFormat.Header header,
-            NativeFormatReader reader )
-        {
-            return base.ReadBody ( header, Reader );
-        }
-
-        protected override bool ValidateHeaderMagic ( string magic, NativeFormat.Header header )
-        {
-            return true;
-        }
-
-        protected override bool ValidateHeaderTerminator ( byte[] terminator, NativeFormat.Header header )
-        {
-            return true;
-        }
-
-        protected override bool ValidateHeaderVersion ( int version, NativeFormat.Header header )
-        {
-            return true;
-        }
-
-        protected override NativeFormatReader CreateNativeFormatReader ( Stream stream )
-        {
-            return Reader;
-        }
+        #endregion
     }
 }
