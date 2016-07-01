@@ -19,7 +19,7 @@ namespace FenixLib.IO
     public sealed class ExtendedFntBitmapFontDecoder : FntBitmapFontDecoder
     {
         /// <summary>
-        /// Extended fonts (fnx) fonts do not have a version byte so this 
+        /// Extended fonts (fnx) fonts do not have a version byte so this
         /// information is not used.
         /// </summary>
         public override int MaxSupportedVersion { get; } = 0x00;
