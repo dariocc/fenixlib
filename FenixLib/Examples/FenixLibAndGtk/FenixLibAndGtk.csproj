@@ -75,6 +75,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\FenixLib\FenixLib.csproj">
       <Project>{E110DF41-CAE8-4DCC-9A41-09864E5651DD}</Project>
@@ -85,5 +86,4 @@
       <Name>FenixLib.Gdk</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
