@@ -90,20 +90,24 @@ namespace FenixLib.IO
         public static IBitmapFont LoadFnt ( string path )
         {
             var divFontDecoder = new DivFntBitmapFontDecoder ();
-            var extendedFontDecoder = new ExtendedFntBitmapFontDecoder ();
 
+			// DivFont decoder is used by default
             using ( var stream = File.Open ( path, FileMode.Open ) )
             {
                 IBitmapFont font;
-                // DivFont decoder is used by default, ExtendedFontDecoder is used
-                // as fall back
-                if ( ! divFontDecoder.TryDecode ( stream, out font ) )
+                if ( divFontDecoder.TryDecode ( stream, out font ) )
                 {
-                    return extendedFontDecoder.Decode ( stream);
+					return font;
                 }
-
-                return font;
             }
+
+			// Fallback to the ExtendedFontBitmapFontDecoder
+			var extendedFontDecoder = new ExtendedFntBitmapFontDecoder ();
+
+			using ( var stream = File.Open ( path, FileMode.Open ) )
+			{
+				return extendedFontDecoder.Decode ( stream );
+			}
         }
 
         /// <summary>
