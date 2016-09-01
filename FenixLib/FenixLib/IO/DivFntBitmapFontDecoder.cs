@@ -61,5 +61,7 @@ namespace FenixLib.IO
         {
             return reader.ReadLegacyFntGlyphInfo ();
         }
+
+		protected override int GetPixelDataStart ( int bpp ) => 5452;
     }
 }

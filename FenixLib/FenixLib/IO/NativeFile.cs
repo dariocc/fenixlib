@@ -89,9 +89,9 @@ namespace FenixLib.IO
 
         public static IBitmapFont LoadFnt ( string path )
         {
-            var divFontDecoder = new DivFntBitmapFontDecoder ();
+            // DivFont decoder is used by default
+			var divFontDecoder = new DivFntBitmapFontDecoder ();
 
-			// DivFont decoder is used by default
             using ( var stream = File.Open ( path, FileMode.Open ) )
             {
                 IBitmapFont font;

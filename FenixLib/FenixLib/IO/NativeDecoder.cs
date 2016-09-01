@@ -204,7 +204,7 @@ namespace FenixLib.IO
                 decoded = Decode ( input );
                 return true;
             }
-            catch ( Exception )
+            catch ( UnsuportedFileFormatException e )
             {
                 decoded = default ( T );
                 return false;

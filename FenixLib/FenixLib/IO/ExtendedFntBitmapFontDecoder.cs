@@ -78,5 +78,11 @@ namespace FenixLib.IO
         {
             return true;
         }
+
+		protected override int GetPixelDataStart ( int bpp )
+		{
+			// 1344 = Palette + Gamma
+			return 7180 + ( bpp == 8 ? 1344 : 0);
+		}
     }
 }

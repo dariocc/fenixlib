@@ -36,6 +36,8 @@ namespace FenixLib.IO
 
         protected abstract int ParseBitsPerPixel ( Header header );
 
+		protected abstract int GetPixelDataStart ( int bpp );
+
         protected abstract void ProcessFontInfoField ( int codePageType );
 
         protected abstract FontEncoding Encoding { get; }
@@ -71,7 +73,8 @@ namespace FenixLib.IO
             // Create the font
             BitmapFont font = new BitmapFont ( Encoding, ( GraphicFormat) bpp, palette );
 
-            Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream );
+			int pixelDataOffset = GetPixelDataStart ( bpp );
+			Stream pixelsStream = GetSeekablePixelsStream ( reader.BaseStream, pixelDataOffset );
             try
             {
                 var pixelsReader = CreateNativeFormatReader ( pixelsStream );
@@ -113,7 +116,7 @@ namespace FenixLib.IO
             return font;
         }
 
-        private static Stream GetSeekablePixelsStream ( Stream stream )
+		private static Stream GetSeekablePixelsStream ( Stream stream, int offset )
         {
             if ( stream.CanSeek )
                 return stream;
@@ -123,9 +126,8 @@ namespace FenixLib.IO
 
             MemoryStream memory = new MemoryStream ( InitialMemorySize );
 
-            // Offset the position where the data will be buffered
-            // to match the position of the original stream.
-            memory.Seek ( stream.Position, SeekOrigin.Begin );
+            // Offset the position where the data will be copied to
+            memory.Seek ( offset, SeekOrigin.Begin );
 
             stream.CopyTo ( memory );
             memory.Flush ();
