@@ -72,6 +72,11 @@ namespace FenixLib.Core
             sprites[id] = PrepareSprite ( id, sprite );
         }
 
+        public void Remove ( int id )
+        {
+            sprites.Keys.Remove ( id );
+        }
+
         public int GetFreeId ()
         {
             return Ids.Max ( x => x ) + 1;

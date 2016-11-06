@@ -26,6 +26,7 @@ namespace FenixLib.Core
 
         void Add ( int id, ISprite sprite );
         void Update ( int id, ISprite sprite );
+        void Remove ( int id );
 
         IEnumerable<int> Ids { get; }
         int GetFreeId ();
