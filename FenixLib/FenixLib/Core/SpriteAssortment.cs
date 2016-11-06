@@ -74,7 +74,7 @@ namespace FenixLib.Core
 
         public void Remove ( int id )
         {
-            sprites.Keys.Remove ( id );
+            sprites.Remove ( id );
         }
 
         public int GetFreeId ()
