@@ -43,6 +43,8 @@ namespace FenixLib.Core
             }
         }
 
+        public PivotPoint Center => baseSprite.Center;
+
         public ICollection<PivotPoint> PivotPoints => baseSprite.PivotPoints;
 
         public GraphicFormat GraphicFormat => baseSprite.GraphicFormat;
@@ -84,6 +86,11 @@ namespace FenixLib.Core
         public override int GetHashCode () => Id.GetHashCode ();
 
         public void ClearPivotPoints () => baseSprite.ClearPivotPoints ();
+
+        public void SetCenter ( int x, int y )
+        {
+            DefinePivotPoint ( 0, x, y);
+        }
 
         public void DefinePivotPoint ( int id, int x, int y ) => baseSprite.DefinePivotPoint ( id, x, y );
 

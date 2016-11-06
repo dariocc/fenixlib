@@ -19,14 +19,24 @@ namespace FenixLib.Core
     public interface ISprite : IGraphic
     {
         string Description { get; set; }
+
+        PivotPoint Center { get; }
+
         ICollection<PivotPoint> PivotPoints { get; }
 
         void ClearPivotPoints ();
-        void DefinePivotPoint ( int id, int x, int y );
-        void DeletePivotPoint ( int id );
-        PivotPoint GetPivotPoint ( int id );
-        int? FindFreePivotPointId ( int start = 0, 
-            Sprite.SearchDirection direction = Sprite.SearchDirection.Fordward );
-        bool IsPivotPointDefined ( int id );
+
+        void SetCenter (int x, int y);
+
+        void DefinePivotPoint (int id, int x, int y);
+
+        void DeletePivotPoint (int id);
+
+        PivotPoint GetPivotPoint (int id);
+
+        int? FindFreePivotPointId (int start = 0, 
+                                    Sprite.SearchDirection direction = Sprite.SearchDirection.Fordward);
+
+        bool IsPivotPointDefined (int id);
     }
 }

@@ -59,6 +59,26 @@ namespace FenixLib.Core
         /// <returns></returns>
         public virtual string Description { get; set; }
 
+        public virtual PivotPoint Center
+        {
+            get
+            {
+                if (IsPivotPointDefined(0))
+                {
+                    return GetPivotPoint(0);
+                }
+                else
+                {
+                    return new PivotPoint(0, Width / 2, Height / 2);
+                }
+            }
+        }
+
+        public virtual void SetCenter ( int x, int y )
+        {
+            DefinePivotPoint ( 0, x, y );
+        }
+
         public virtual void DefinePivotPoint ( int id, int x, int y )
         {
             if ( !IsValidPivotPointId ( id ) )

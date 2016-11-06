@@ -33,6 +33,8 @@ namespace FenixLib.Core
                 Sprite = sprite;
             }
 
+			public PivotPoint Center => Sprite.Center;
+
             public GraphicFormat GraphicFormat => Sprite.GraphicFormat;
 
             public int Height => Sprite.Height;
@@ -62,6 +64,11 @@ namespace FenixLib.Core
             {
                 Sprite.ClearPivotPoints ();
             }
+
+			public void SetCenter ( int x, int y )
+			{
+				Sprite.SetCenter ( x, y );
+			}
 
             public void DefinePivotPoint ( int id, int x, int y )
             {
