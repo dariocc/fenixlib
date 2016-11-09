@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -44,18 +45,8 @@
     <Compile Include="Unit\Core\GraphicFormatTests.cs" />
     <Compile Include="Unit\Core\FontGlyphTests.cs" />
     <Compile Include="Unit\Core\SpriteAssortmentSpriteTests.cs" />
-    <Compile Include="Integration\Comparison\ComparableBitmapFont.cs" />
-    <Compile Include="Integration\Comparison\AbstractGraphicComparer.cs" />
-    <Compile Include="Integration\Comparison\GlyphComparerByGlyphInfo.cs" />
-    <Compile Include="Integration\Comparison\IGraphicEquallyComparer.cs" />
-    <Compile Include="Integration\FntDecoding.cs" />
-    <Compile Include="Integration\Comparison\ComparableSpriteAssortment.cs" />
-    <Compile Include="Integration\Comparison\SpriteComparerByDescription.cs" />
-    <Compile Include="Integration\Comparison\GraphicComparerByDimensions.cs" />
-    <Compile Include="Integration\Comparison\GraphicComparerByPixels.cs" />
     <Compile Include="Unit\Core\FontEncodingTests.cs" />
     <Compile Include="Unit\Core\GlyphTests.cs" />
-    <Compile Include="Integration\FpgDecoding.cs" />
     <Compile Include="Unit\IO\DivFilePaletteDecoderTests.cs" />
     <Compile Include="Unit\IO\FntBitmapFontDecoderTests.cs" />
     <Compile Include="Unit\IO\IDecoderTests.cs" />
