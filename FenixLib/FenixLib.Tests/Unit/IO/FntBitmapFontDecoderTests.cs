@@ -29,6 +29,7 @@ namespace FenixLib.Tests.Unit.IO
         private string[] knownFileMagics;
         private NativeFormatReader createNativeFormatReaderValue;
         private int parseBitsPerPixelValue;
+		private int getPixelDataStartValue;
         private FontEncoding encoding;
 
         // Tracks the number of times the ReadGlyphInfo functions is called
@@ -146,6 +147,11 @@ namespace FenixLib.Tests.Unit.IO
         {
             return parseBitsPerPixelValue;
         }
+
+		protected override int GetPixelDataStart (int bpp)
+		{
+			return getPixelDataStartValue;
+		}
 
         protected override void ProcessFontInfoField ( int codePageType )
         {
