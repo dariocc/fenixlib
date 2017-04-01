@@ -26,45 +26,15 @@ namespace FenixLib.Core
 
         public char Character { get; }
 
-        public GraphicFormat GraphicFormat
-        {
-            get
-            {
-                return baseGlyph.GraphicFormat;
-            }
-        }
+        public GraphicFormat GraphicFormat => baseGlyph.GraphicFormat;
 
-        public int Height
-        {
-            get
-            {
-                return baseGlyph.Height;
-            }
-        }
+        public int Height => baseGlyph.Height;
 
-        public Palette Palette
-        {
-            get
-            {
-                return baseGlyph.Palette;
-            }
-        }
+        public Palette Palette => baseGlyph.Palette;
 
-        public byte[] PixelData
-        {
-            get
-            {
-                return baseGlyph.PixelData;
-            }
-        }
+        public byte[] PixelData => baseGlyph.PixelData;
 
-        public int Width
-        {
-            get
-            {
-                return baseGlyph.Width;
-            }
-        }
+        public int Width => baseGlyph.Width;
 
         public int XAdvance
         {
