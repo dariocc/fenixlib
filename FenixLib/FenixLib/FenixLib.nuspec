@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>FenixLib</id>
+    <version>$version$</version>
+    <title>FenixLib</title>
+    <authors>Darío Cutillas Carrillo</authors>
+    <owners>Darío Cutillas Carrillo</owners>
+    <licenseUrl>https://raw.githubusercontent.com/dacucar/fenixlib/master/LICENSE</licenseUrl>
+    <projectUrl>http://github.com/dacucar/fenixlib</projectUrl>
+    <iconUrl>hhttps://raw.githubusercontent.com/dacucar/fenixlib/master/Media/nuget-icon.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>.NET support for manipulating PixTudio, BennuGD, DivGO and DivDx native formats</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2016-2017 Darío Cutillas Carrillo</copyright>
+    <tags>Game Bennu Graphics Fpg Font BitmapFont Editor</tags>
+  </metadata>
+  <files>
+    <file src="../../README.md" target="" />
+    <file src="bin/Release/FenixLib.dll" target="lib\net46" />
+  </files>
+</package>

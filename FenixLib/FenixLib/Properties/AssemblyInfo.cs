@@ -23,9 +23,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle ( "FenixLib Class Library" )]
 [assembly: AssemblyDescription ( ".NET support for manipulating PixTudio, Bennu GD and DivDx native formats" )]
 [assembly: AssemblyConfiguration ( "" )]
-[assembly: AssemblyCompany ( "Dacucar OSS" )]
+[assembly: AssemblyCompany ( "Darío Cutillas Carrillo" )]
 [assembly: AssemblyProduct ( "FenixLib" )]
-[assembly: AssemblyCopyright ( "Copyright ©  2016 Dacucar OSS" )]
+[assembly: AssemblyCopyright ( "Copyright ©  2016-2017 Darío Cutillas Carrillo" )]
 [assembly: AssemblyTrademark ( "" )]
 [assembly: AssemblyCulture ( "" )]
 
