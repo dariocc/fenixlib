@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+<package>
   <metadata>
     <id>FenixLib</id>
     <version>$version$</version>
@@ -7,8 +7,8 @@
     <authors>Darío Cutillas Carrillo</authors>
     <owners>Darío Cutillas Carrillo</owners>
     <licenseUrl>https://raw.githubusercontent.com/dacucar/fenixlib/master/LICENSE</licenseUrl>
-    <projectUrl>http://github.com/dacucar/fenixlib</projectUrl>
-    <iconUrl>hhttps://raw.githubusercontent.com/dacucar/fenixlib/master/Media/nuget-icon.png</iconUrl>
+    <projectUrl>https://github.com/dacucar/fenixlib</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/dacucar/fenixlib/master/Media/nuget-icon.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>.NET support for manipulating PixTudio, BennuGD, DivGO and DivDx native formats</description>
     <releaseNotes></releaseNotes>
