@@ -9,7 +9,8 @@ native graphic, graphic collections, bitmap fonts and palette formats of
 The following snippet shows how easy is to open a Fpg file, print the codes
 and description of every map, change the description of map with code 10 and
 save the changes in a new file.
-``csharp
+
+```csharp
 using FenixLib.Core;
 using FenixLib.IO;
 
@@ -26,10 +27,11 @@ foreach ( var sprite in spriteAssortment )
 spriteAssortment[10].Description = "My graphic";
 
 spriteAssortment.SaveToFpg ( "modified.fpg" );
-``
+```
 
 Another example, see how easy you can create a Fnt font file from scratch:
-``csharp
+
+```csharp
 using FenixLib.Core;
 using FenixLib.IO;
 
@@ -44,7 +46,7 @@ font['å'] = new Glyph ( glyphGraphic );
 
 // Save the font to a Fnt file (only 'å' will contain a bitmap)
 font.SaveToFnt ( "myfont.fnt" );
-``
+```
 
 A battery of [examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.
 
