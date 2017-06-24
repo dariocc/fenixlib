@@ -49,6 +49,9 @@ font.SaveToFnt ( "myfont.fnt" );
 A battery of [examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.
 
 ## Using the library
+Add a reference to your .NET project by using the [nuget package](https://www.nuget.org/packages/FenixLib/)
+or building it from the sources.
+
 If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fpg),  [Map](https://github.com/dacucar/fenixlib/wiki/Native-Format#Map), [Pal](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) and [Fnt](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. 
 
 * [Core Types](https://github.com/dacucar/fenixlib/wiki/Core-Types)
@@ -58,7 +61,7 @@ If you don't, just have a look to the [native formats introduction](https://gith
 
 Or, if you do not like to read, checkout the [example projects](https://github.com/dacucar/fenixlib/wiki/Examples).
 
-## Compiling
+## Building
 FenixLib core assembly (FenixLib.dll) runs in any platform with support for .NET framework 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
 [MonoDevelop / Xamarin](http://www.monodevelop.com/) and I have succesfully built it from Windows, Linux and OSX.
 
@@ -120,10 +123,10 @@ If FenixLib is useful to you but donating is not an option for you, don't worry,
 I develop FenixLib for free and for the fun of it. If you believe that something you see here might suit your projects needs don't be shy feel free to contact me.
 
 ## License
-Copyright 2016 Darío Cutillas Carrillo
+Copyright 2016-2017 Darío Cutillas Carrillo
 
 FenixLib is distributed under the very permisive 
-[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+ [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 You are free to use FenixLib in both commercial and non commercial and 
 open or close source applications as long as you follow the terms of the 
