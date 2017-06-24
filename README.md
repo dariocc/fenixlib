@@ -9,7 +9,7 @@ native graphic, graphic collections, bitmap fonts and palette formats of
 The following snippet shows how easy is to open a Fpg file, print the codes
 and description of every map, change the description of map with code 10 and
 save the changes in a new file.
-```csharp
+``csharp
 using FenixLib.Core;
 using FenixLib.IO;
 
@@ -26,10 +26,10 @@ foreach ( var sprite in spriteAssortment )
 spriteAssortment[10].Description = "My graphic";
 
 spriteAssortment.SaveToFpg ( "modified.fpg" );
-```
+``
 
 Another example, see how easy you can create a Fnt font file from scratch:
-```csharp
+``csharp
 using FenixLib.Core;
 using FenixLib.IO;
 
@@ -44,7 +44,7 @@ font['å'] = new Glyph ( glyphGraphic );
 
 // Save the font to a Fnt file (only 'å' will contain a bitmap)
 font.SaveToFnt ( "myfont.fnt" );
-```
+``
 
 A battery of [examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.
 
@@ -65,13 +65,13 @@ FenixLib core assembly (FenixLib.dll) runs in any platform with support for .NET
 Go ahead and make a clone of this repository:
 
     git clone https://github.com/dacucar/fenixlib.git
-    
-Then open the ```FenixLib.Sln``` within the ```./fenixlib/FenixLib``` folder with either Visual Studio, MonoDevelop or Xamarin and you are ready to go... FenixLib builds as any other class library.
+
+Then open the ``FenixLib.Sln`` within the ``./fenixlib/FenixLib`` folder with either Visual Studio, MonoDevelop or Xamarin and you are ready to go... FenixLib builds as any other class library.
 
 Additional assemblies might however be dependent on additional libraries, for example [FenixLib.Gdk](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly) offers utility classes to interacting with [Mono.Gdk](http://docs.go-mono.com/index.aspx?link=N:Gdk), which requires Mono and Gtk to be installed.
 
 ### Running unit and integration tests
-Along with ```FenixLib``` C# project there is a ```FenixLib.Tests``` project that contains unit and integration tests to validate the functionality of the library. Complementary projects may be accompained by a Test project following the pattern  ```<ProjectName>.Tests```.
+Along with ``FenixLib`` C# project there is a ``FenixLib.Tests`` project that contains unit and integration tests to validate the functionality of the library. Complementary projects may be accompained by a Test project following the pattern  ``<ProjectName>.Tests``.
 
 It is my intention to cover as much work units as possible via unit tests but I do not always strictly follow a test-first pattern which makes that some part of the library might 
 not be fully covered. Once the base functionality that the library is intending to offer is completed and covered with unit-tests I intend to adopt a test-first approach for future
@@ -81,11 +81,11 @@ I use [NUnit](http://www.nunit.org/) as testing framework and [Rhino Mocks](http
 and work seamlessly with both Visual Studio and MonoDevelop / Xamarin.
 
 For each FenixLib assembly there will be, if any, only one Test project. All test projects have a similar structure:
-* An ```Unit``` folder containing all unit tests. I put a lot of effor in doing code refractoring to minimize the overlapping between units and in most situation I try to only test public API. 
-  However, I do make use of the InternalsVisible and test ```internal``` functionality when I decide it is to early to expose a certain class outside the assembly. All unit tests are grouped under the
+* An ``Unit`` folder containing all unit tests. I put a lot of effor in doing code refractoring to minimize the overlapping between units and in most situation I try to only test public API. 
+  However, I do make use of the InternalsVisible and test ``internal`` functionality when I decide it is to early to expose a certain class outside the assembly. All unit tests are grouped under the
   ''unit'' TestCategory.
 
-* An ```Integration``` folder containing tests of groups of functionality. These tests help me test real-case situations such as decoding real files, etc. The tests are still written 
+* An ``Integration`` folder containing tests of groups of functionality. These tests help me test real-case situations such as decoding real files, etc. The tests are still written 
   as NUnit TestFixtures, but their motivation is different. They are grouped under the ''integration'' TestCategory.
   
 When cloning the repository, make sure to run the tests to be sure that the library functionality is not broken.
@@ -123,7 +123,7 @@ I develop FenixLib for free and for the fun of it. If you believe that something
 Copyright 2016 Darío Cutillas Carrillo
 
 FenixLib is distributed under the very permisive 
-[Apache License, Version 2.0] (http://www.apache.org/licenses/LICENSE-2.0)
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 You are free to use FenixLib in both commercial and non commercial and 
 open or close source applications as long as you follow the terms of the 
