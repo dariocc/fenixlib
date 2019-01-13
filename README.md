@@ -1,4 +1,4 @@
-![FenixLib](http://dacucar.com/fenixlib/fenixlib.png "FenixLib Logo")
+![FenixLib](Media/fenixlib.png "FenixLib Logo")
 
 FenixLib brings .Net support for opening, creating and operating with
 native graphic, graphic collections, bitmap fonts and palette formats of
