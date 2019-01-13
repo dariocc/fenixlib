@@ -99,9 +99,8 @@ When cloning the repository, make sure to run the tests to be sure that the libr
 There basically three ways in which you can contribute:
   1. Reporting issues or feature requests. 
   2. Sending your code contributions.
-  3. Donating.
-  4. Letting me know how useful is this to you.
-  5. Hire me!
+  3. Letting me know how useful is this to you.
+  4. Hire me!
 
 Well, that was 5 actually! Let's have a look on each of them:
 
