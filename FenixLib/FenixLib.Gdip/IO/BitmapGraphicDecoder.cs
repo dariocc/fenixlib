@@ -45,7 +45,7 @@ namespace FenixLib.IO
         }
 
         internal IGraphic Decode ( Stream input,
-            IBitmapToGraphicConverterCreator converterCreator )
+            IConverterFactory converterCreator )
         {
             if ( input == null )
             {

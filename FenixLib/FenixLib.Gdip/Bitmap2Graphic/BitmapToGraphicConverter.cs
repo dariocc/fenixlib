@@ -24,7 +24,7 @@ namespace FenixLib.BitmapConvert
     /// <summary>
     /// Common behvaiour of several Bitmap2Graphic converter subclasses.
     /// </summary>
-    public abstract class Bitmap2GraphicConverter : IBitmapToGraphicConverter
+    public abstract class Bitmap2GraphicConverter : IConverter
     {
         protected Bitmap2GraphicConverter ( Bitmap src )
         {

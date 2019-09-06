@@ -17,8 +17,19 @@ using FenixLib.Core;
 
 namespace FenixLib.BitmapConvert
 {
-    public interface IBitmapToGraphicConverter
+    public static class ConversionExtensions
     {
-        IGraphic Convert ();
+        public static IGraphic ToGraphic ( this Bitmap bitmap )
+        {
+            var converter = ( new BitmapToGraphicConverterCreator () ).Create ( bitmap );
+            return converter.Convert ();
+        }
+
+        public static IGraphic ToGraphic ( this Bitmap bitmap, GraphicFormat destFormat )
+        {
+            var converter = ( new BitmapToGraphicConverterCreator () ).Create ( 
+                bitmap, destFormat );
+            return converter.Convert ();
+        }
     }
 }

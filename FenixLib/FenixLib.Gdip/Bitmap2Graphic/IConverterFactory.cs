@@ -19,9 +19,9 @@ using System.Drawing.Imaging;
 
 namespace FenixLib.BitmapConvert
 {
-    public interface IBitmapToGraphicConverterCreator
+    public interface IConverterFactory
     {
-        IBitmapToGraphicConverter Create (Bitmap src);
-        IBitmapToGraphicConverter Create ( Bitmap src, GraphicFormat destFormat );
+        IConverter Create (Bitmap src);
+        IConverter Create (Bitmap src, GraphicFormat destFormat);
     }
 }

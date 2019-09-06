@@ -42,19 +42,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitmapConvert\BitmapToGraphicConverterCreator.cs" />
-    <Compile Include="BitmapConvert\GraphicConversion.cs" />
-    <Compile Include="BitmapConvert\IBitmapToGraphicConverterCreator.cs" />
-    <Compile Include="BitmapConvert\BitmapConversion.cs" />
+    <Compile Include="Bitmap2Graphic\BitmapToGraphicConverterCreator.cs" />
+    <Compile Include="Graphic2Bitmap\GraphicConversion.cs" />
+    <Compile Include="Bitmap2Graphic\IConverterFactory.cs" />
+    <Compile Include="Bitmap2Graphic\ConversionExtensions.cs" />
     <Compile Include="IO\BitmapFile.cs" />
-    <Compile Include="BitmapConvert\BitmapToGraphicConverter.cs" />
-    <Compile Include="BitmapConvert\BitmapTo16bppGraphicConverter.cs" />
-    <Compile Include="BitmapConvert\BitmapTo1bppGraphicConverter.cs" />
-    <Compile Include="BitmapConvert\BitmapTo32bppGraphicConverter.cs" />
-    <Compile Include="BitmapConvert\BitmapTo8bppGraphicConverter.cs" />
+    <Compile Include="Bitmap2Graphic\BitmapToGraphicConverter.cs" />
+    <Compile Include="Bitmap2Graphic\BitmapTo16bppGraphicConverter.cs" />
+    <Compile Include="Bitmap2Graphic\BitmapTo1bppGraphicConverter.cs" />
+    <Compile Include="Bitmap2Graphic\BitmapTo32bppGraphicConverter.cs" />
+    <Compile Include="Bitmap2Graphic\BitmapTo8bppGraphicConverter.cs" />
     <Compile Include="IO\BitmapGraphicDecoder.cs" />
-    <Compile Include="BitmapConvert\GraphicToBitmapConverter.cs" />
-    <Compile Include="BitmapConvert\IBitmapToGraphicConverter.cs" />
+    <Compile Include="Graphic2Bitmap\GraphicToBitmapConverter.cs" />
+    <Compile Include="Bitmap2Graphic\IConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

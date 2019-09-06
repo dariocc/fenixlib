@@ -19,16 +19,16 @@ using FenixLib.Core;
 
 namespace FenixLib.BitmapConvert
 {
-    public class BitmapToGraphicConverterCreator : IBitmapToGraphicConverterCreator
+    public class BitmapToGraphicConverterCreator : IConverterFactory
     {
-        public IBitmapToGraphicConverter Create ( Bitmap src )
+        public IConverter Create ( Bitmap src )
         {
             if ( src == null )
             {
                 throw new ArgumentNullException ( nameof ( src ) );
             }
 
-            IBitmapToGraphicConverter converter;
+            IConverter converter;
             var format = src.PixelFormat;
 
             switch ( format )
@@ -57,9 +57,9 @@ namespace FenixLib.BitmapConvert
             return converter;
         }
 
-        public IBitmapToGraphicConverter Create ( Bitmap src, GraphicFormat destFormat )
+        public IConverter Create ( Bitmap src, GraphicFormat destFormat )
         {
-            IBitmapToGraphicConverter converter;
+            IConverter converter;
 
             if (destFormat == GraphicFormat.Format1bppMonochrome)
             {
@@ -81,14 +81,6 @@ namespace FenixLib.BitmapConvert
             {
                 throw new ArgumentOutOfRangeException ( nameof ( destFormat ) );
             }
-
-            /* TODO: Conversion possible verification
-            if ( ! converter.CanConvert (src.PixelFormat) )
-            {
-                throw new ArgumentException ( "There conversion from the Bitmap to the " +
-                    "specified format is not possible" );
-            }
-            */
 
             return converter;
         }
