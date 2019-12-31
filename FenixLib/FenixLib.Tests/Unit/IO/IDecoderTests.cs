@@ -49,8 +49,12 @@ namespace FenixLib.Tests.Unit.Core.IO
         [Test]
         public void TryDecode_NullStream_ReturnsFalse ()
         {
-            E decoded;
-            Assert.That ( decoder.TryDecode ( null, out decoded ), Is.False );
+            bool isDecoded;
+            using ( var stream = new System.IO.MemoryStream () )
+            {
+                isDecoded = decoder.TryDecode ( stream, out E decoded );
+            }
+            Assert.That ( isDecoded, Is.False );
         }
     }
 }
