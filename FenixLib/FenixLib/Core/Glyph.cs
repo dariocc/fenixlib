@@ -21,7 +21,7 @@ namespace FenixLib.Core
         public virtual int YOffset { get; set; } = 0;
         public virtual int XOffset { get; set; } = 0;
         public virtual int XAdvance { get; set; } = 0;
-        public virtual int YAdavance { get; set; } = 0;
+        public virtual int YAdvance { get; set; } = 0;
 
         // The implementation to satisfy the IGraphic interface will be delegated
         // to a graphic object that is injected in the constructor. This allows for 

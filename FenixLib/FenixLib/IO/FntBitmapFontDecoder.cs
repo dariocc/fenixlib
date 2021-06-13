@@ -101,7 +101,7 @@ namespace FenixLib.IO
                         character.Height, pixels, palette );
                     IGlyph glyph = new Glyph ( graphic );
                     glyph.XAdvance = character.XAdvance;
-                    glyph.YAdavance = character.YAdvance;
+                    glyph.YAdvance = character.YAdvance;
                     glyph.XOffset = character.XOffset;
                     glyph.YOffset = character.YOffset;
 

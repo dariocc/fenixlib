@@ -61,7 +61,7 @@ namespace FenixLib.IO
                         .XOffset ( glyph.XOffset )
                         .YOffset ( glyph.YOffset )
                         .XAdvance ( glyph.XAdvance )
-                        .YAdvance ( glyph.YAdavance )
+                        .YAdvance ( glyph.YAdvance )
                         .FileOffset ( pixelsDataOffset + GlyphInfoBlockSize + 12 ) // 8 header + 4 font info
                         .Build (); 
                 }

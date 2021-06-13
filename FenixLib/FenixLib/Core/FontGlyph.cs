@@ -62,16 +62,16 @@ namespace FenixLib.Core
             }
         }
 
-        public int YAdavance
+        public int YAdvance
         {
             get
             {
-                return baseGlyph.YAdavance;
+                return baseGlyph.YAdvance;
             }
 
             set
             {
-                baseGlyph.YAdavance = value;
+                baseGlyph.YAdvance = value;
             }
         }
 

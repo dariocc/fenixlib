@@ -39,23 +39,23 @@ namespace FenixLib.Tests.Unit.Core
         }
 
         [Test]
-        public void XAdvanceGet_SameAsBaseGlyph()
+        public void XAdvanceGet_SameAsBaseGlyph ()
         {
-            fakeGlyph.Object.XAdvance = 10;
+            fakeGlyph.Setup ( x => x.XAdvance ).Returns ( 10 );
             Assert.AreEqual ( 10, aFontGlyph.XAdvance );
         }
 
         [Test]
         public void YAdvanceGet_SameAsBaseGlyph ()
         {
-            fakeGlyph.Object.YAdavance = 10;
-            Assert.AreEqual ( 10, aFontGlyph.YAdavance );
+            fakeGlyph.Setup ( x => x.YAdvance ).Returns ( 10 );
+            Assert.AreEqual ( 10, aFontGlyph.YAdvance );
         }
 
         [Test]
         public void XOffsetGet_SameAsBaseGlyph ()
         {
-            fakeGlyph.Object.XOffset = 10;
+            fakeGlyph.Setup ( x => x.XOffset ).Returns ( 10 );
             Assert.AreEqual ( 10, aFontGlyph.XOffset );
         }
 
@@ -63,7 +63,7 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void YOffsetGet_SameAsBaseGlyph ()
         {
-            fakeGlyph.Object.YOffset = 10;
+            fakeGlyph.Setup ( x => x.YOffset ).Returns ( 10 );
             Assert.AreEqual ( 10, aFontGlyph.YOffset );
         }
 
@@ -76,6 +76,7 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void XAdvanceSet_ChangeReflectedInBaseGlyph ()
         {
+            fakeGlyph.SetupProperty( x => x.XAdvance );
             aFontGlyph.XAdvance = 10;
             Assert.AreEqual ( 10, fakeGlyph.Object.XAdvance );
         }
@@ -83,13 +84,15 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void YAdvanceSet_ChangeReflectedInBaseGlyph ()
         {
-            aFontGlyph.YAdavance = 10;
-            Assert.AreEqual ( 10, fakeGlyph.Object.YAdavance );
+            fakeGlyph.SetupProperty( x => x.YAdvance );
+            aFontGlyph.YAdvance = 10;
+            Assert.AreEqual ( 10, fakeGlyph.Object.YAdvance );
         }
 
         [Test]
         public void XOffsetSet_ChangeReflectedInBaseGlyph ()
         {
+            fakeGlyph.SetupProperty( x => x.XOffset );
             aFontGlyph.XOffset = 10;
             Assert.AreEqual ( 10, fakeGlyph.Object.XOffset );
         }
@@ -98,6 +101,7 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void YOffsetSet_ChangeReflectedInBaseGlyph ()
         {
+            fakeGlyph.SetupProperty( x => x.YOffset );
             aFontGlyph.YOffset = 10;
             Assert.AreEqual ( 10, fakeGlyph.Object.YOffset );
         }
@@ -119,8 +123,8 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void GetHashCode_TwoFontGlyphsWithSameCharacter_AreEqual ()
         {
-            
-            Assert.AreEqual ( aFontGlyph.GetHashCode (), 
+
+            Assert.AreEqual ( aFontGlyph.GetHashCode (),
                 equivalentFontGlyph.GetHashCode () );
         }
     }

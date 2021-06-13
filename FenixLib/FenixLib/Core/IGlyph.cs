@@ -18,7 +18,7 @@ namespace FenixLib.Core
     {
         int XAdvance { get; set; }
         int XOffset { get; set; }
-        int YAdavance { get; set; }
+        int YAdvance { get; set; }
         int YOffset { get; set; }
     }
 }
