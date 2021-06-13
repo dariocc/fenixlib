@@ -55,7 +55,7 @@ namespace FenixLib.Tests.Unit.IO
             var header = new NativeFormat.Header ( "abc", new byte[] { 0 }, 0 );
             var stubStream = new Mock<Stream> ();
             // Stub a NativeFormatReader that returns the generated palette
-            var stubReader = new Mock<NativeFormatReader> ( stubStream );
+            var stubReader = new Mock<NativeFormatReader> ( stubStream.Object );
             stubReader.Setup ( _ => _.ReadPalette () ).Returns ( palette );
 
             // Act
