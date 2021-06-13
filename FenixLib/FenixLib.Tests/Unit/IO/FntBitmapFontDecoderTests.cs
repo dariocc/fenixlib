@@ -64,7 +64,7 @@ namespace FenixLib.Tests.Unit.IO
             streamSetup.Setup ( _ => _.CanRead ).Returns ( true );
 
             var headerSetup = new NativeFormat.Header ( "abc", new byte[1], 0 );
-            var readerSetup = new Mock<NativeFormatReader> ( streamSetup );
+            var readerSetup = new Mock<NativeFormatReader> ( streamSetup.Object );
 
             Assert.Catch<UnsuportedFileFormatException> (
                 () => ReadBody ( headerSetup, readerSetup.Object ) );
@@ -87,8 +87,7 @@ namespace FenixLib.Tests.Unit.IO
             streamSetup.Setup ( _ => _.CanRead ).Returns ( true );
 
             // The mocked INativeFormatReader to interact with ReadBody ()
-            var readerMock = new Mock<NativeFormatReader>
-                ( streamSetup );
+            var readerMock = new Mock<NativeFormatReader>( streamSetup.Object );
             createNativeFormatReaderValue = readerMock.Object;
 
             // TODO: Verify calle din order
