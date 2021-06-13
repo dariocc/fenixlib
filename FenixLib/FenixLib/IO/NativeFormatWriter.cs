@@ -31,6 +31,7 @@ namespace FenixLib.IO
 
         public void WriteAsciiZ ( string text, int maxLength )
         {
+            // TODO: Should we really be doing this?
             if ( text == null )
             {
                 text = "";

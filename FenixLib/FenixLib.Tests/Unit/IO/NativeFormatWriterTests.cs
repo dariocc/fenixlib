@@ -47,12 +47,13 @@ namespace FenixLib.Tests.Unit.IO
             // time Write() overloads are called
             var streamStub = new Mock<Stream> ();
 
+            streamStub.CallBase = true;
             streamStub.Setup ( _ => _.CanWrite ).Returns ( true );
 
             streamStub.Setup ( _ => _.Write (
                 It.IsAny<byte[]> (),
-                It.Is<int> ( i => i > 0 ),
-                It.Is<int> ( i => i > 0 ) ) )
+                It.IsAny<int> (),
+                It.IsAny<int> () ) )
             .Callback<byte[], int, int> ( ( bytes, offset, size ) =>
                {
                    var tmp = new byte[size];
@@ -66,6 +67,7 @@ namespace FenixLib.Tests.Unit.IO
                 var bytes = new byte[] { b };
                 ResizeMemory ( bytes );
             } );
+
 
             formatWriter = new NativeFormatWriter ( streamStub.Object );
         }
@@ -184,7 +186,7 @@ namespace FenixLib.Tests.Unit.IO
                 // A sample color that will be in the stub palette
                 var color = new PaletteColor ( i, i / 2, i / 3 );
                 paletteColors[i] = color;
-                paletteStub.Object[i] = color;
+                paletteStub.Setup ( x => x[i] ).Returns ( color );
 
                 // Color components are to be encoded in 6bits
                 expectedBytes[i * 3 + 0] = ( byte ) ( ( i ) >> 2 );
