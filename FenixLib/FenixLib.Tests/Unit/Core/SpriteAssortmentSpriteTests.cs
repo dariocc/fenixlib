@@ -44,13 +44,14 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void DescriptionGet_DescriptionModifierInBaseSprite_ReturnssSameDescriptionAsBaseSprite ()
         {
-            FakeSprite.Description = "A description";
+            fakeSprite.Setup ( x => x.Description ).Returns ( "A description" );
             Assert.That ( spriteAssortmentSprite.Description, Is.EqualTo ( "A description" ) );
         }
 
         [Test]
         public void DescriptionSet_PropertyIsModified_ChangeIsReflectedInBaseSprite ()
         {
+            fakeSprite.SetupProperty ( x => x.Description );
             spriteAssortmentSprite.Description = "A description";
             Assert.That ( FakeSprite.Description, Is.EqualTo ( "A description" ) );
         }
@@ -83,7 +84,7 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void GraphicFormatGet_SameAsBaseSprite ()
         {
-            Assert.That ( spriteAssortmentSprite.GraphicFormat, 
+            Assert.That ( spriteAssortmentSprite.GraphicFormat,
                 Is.SameAs ( FakeSprite.GraphicFormat ) );
         }
 
@@ -110,8 +111,8 @@ namespace FenixLib.Tests.Unit.Core
 
             mock.Verify ( x => x.DefinePivotPoint (
                 It.Is<int> ( i => i == 2 ),
-                It.Is<int> ( i  => i == 100 ),
-                It.Is<int> (  i => i == 200 ) )
+                It.Is<int> ( i => i == 100 ),
+                It.Is<int> ( i => i == 200 ) )
                 );
         }
 
@@ -123,7 +124,7 @@ namespace FenixLib.Tests.Unit.Core
             s.DeletePivotPoint ( 2 );
 
             mock.Verify ( x => x.DeletePivotPoint (
-                It.Is<int>( i => i == 2 )
+                It.Is<int> ( i => i == 2 )
                 ) );
         }
 
@@ -135,7 +136,7 @@ namespace FenixLib.Tests.Unit.Core
             s.GetPivotPoint ( 2 );
 
             mock.Verify ( x => x.GetPivotPoint (
-                It.Is<int>( i => i == 2 )) );
+                It.Is<int> ( i => i == 2 ) ) );
         }
 
         [Test]
@@ -143,12 +144,14 @@ namespace FenixLib.Tests.Unit.Core
         {
             var mock = new Mock<ISprite> ();
             var s = new SpriteAssortmentSprite ( 0, mock.Object );
-            s.FindFreePivotPointId ( 2, Sprite.SearchDirection.Backward );
+            var result = s.FindFreePivotPointId ( 2, Sprite.SearchDirection.Backward );
+
+            Assert.That ( result, Is.Null );
 
             mock.Verify ( x => x.FindFreePivotPointId (
-                It.Is<int>( i => i == 2),
-                It.Is<Sprite.SearchDirection>( d => d == Sprite.SearchDirection.Backward )
-                ) == null);
+                It.Is<int> ( i => i == 2 ),
+                It.Is<Sprite.SearchDirection> ( d => d == Sprite.SearchDirection.Backward )
+                ) );
         }
 
         [Test]
@@ -156,10 +159,12 @@ namespace FenixLib.Tests.Unit.Core
         {
             var mock = new Mock<ISprite> ();
             var s = new SpriteAssortmentSprite ( 0, mock.Object );
-            s.IsPivotPointDefined ( 2 );
+            var result = s.IsPivotPointDefined ( 2 );
+
+            Assert.That ( result, Is.False );
 
             mock.Verify ( x => x.IsPivotPointDefined (
-                It.Is<int>( i => i== 2 ) ) == false );
+                It.Is<int> ( i => i == 2 ) ) );
         }
 
         // Equality & Hash
