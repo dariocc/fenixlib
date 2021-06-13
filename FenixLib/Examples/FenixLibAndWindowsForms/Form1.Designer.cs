@@ -1,4 +1,4 @@
-﻿namespace FenixLibAndWindowsFormsExample
+namespace FenixLibAndWindowsFormsExample
 {
     partial class Form1
     {

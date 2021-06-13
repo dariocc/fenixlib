@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,9 +13,9 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using FenixLib.Core;
 using System;
+using Moq;
 
 namespace FenixLib.Tests.Unit.Core
 {
@@ -28,8 +28,8 @@ namespace FenixLib.Tests.Unit.Core
         [SetUp]
         public void SetUp ()
         {
-            var fakeGraphic = MockRepository.GenerateStub<IGraphic> ();
-            sprite = new Sprite ( fakeGraphic );
+            var fakeGraphic = new Mock<IGraphic> ();
+            sprite = new Sprite ( fakeGraphic.Object );
         }
 
         [Test]
@@ -114,7 +114,7 @@ namespace FenixLib.Tests.Unit.Core
         }
 
         [Test]
-        public void IsPivotPointDefined_PivotPointExists_ReturnsTrue ()
+        public void IsPivotPointDefined_PivotPointExists_ReturnssTrue ()
         {
             sprite.DefinePivotPoint ( 10, 100, 100 );
 
@@ -122,7 +122,7 @@ namespace FenixLib.Tests.Unit.Core
         }
 
         [Test]
-        public void IsPivotPointDefined_PivotPointDoesNotExist_ReturnsFalse ()
+        public void IsPivotPointDefined_PivotPointDoesNotExist_ReturnssFalse ()
         {
             Assert.That ( sprite.IsPivotPointDefined ( 10 ), Is.False );
         }

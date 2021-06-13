@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,36 +13,38 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using FenixLib.Core;
+using Moq;
 
 namespace FenixLib.Tests.Unit.Core
 {
     [TestFixture ( Category = "Unit" )]
     public class SpriteAssortmentSpriteTests
     {
-        private ISprite fakeSprite;
+        private Mock<ISprite> fakeSprite;
         private SpriteAssortmentSprite spriteAssortmentSprite;
         private SpriteAssortmentSprite equivalentSprite;
+
+        private ISprite FakeSprite { get => fakeSprite.Object; }
 
         [SetUp]
         public void SetUp ()
         {
-            fakeSprite = MockRepository.GenerateStub<ISprite> ();
-            fakeSprite.Stub ( x => x.Width ).Return ( 1 );
-            fakeSprite.Stub ( x => x.Height ).Return ( 1 );
-            fakeSprite.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format32bppArgb );
+            fakeSprite = new Mock<ISprite> ();
+            fakeSprite.Setup ( x => x.Width ).Returns ( 1 );
+            fakeSprite.Setup ( x => x.Height ).Returns ( 1 );
+            fakeSprite.Setup ( x => x.GraphicFormat ).Returns ( GraphicFormat.Format32bppArgb );
 
-            spriteAssortmentSprite = new SpriteAssortmentSprite ( 10, fakeSprite );
-            equivalentSprite = new SpriteAssortmentSprite ( 10, fakeSprite );
+            spriteAssortmentSprite = new SpriteAssortmentSprite ( 10, FakeSprite );
+            equivalentSprite = new SpriteAssortmentSprite ( 10, FakeSprite );
         }
 
         // Verification of propeties delegation
 
         [Test]
-        public void DescriptionGet_DescriptionModifierInBaseSprite_ReturnsSameDescriptionAsBaseSprite ()
+        public void DescriptionGet_DescriptionModifierInBaseSprite_ReturnssSameDescriptionAsBaseSprite ()
         {
-            fakeSprite.Description = "A description";
+            FakeSprite.Description = "A description";
             Assert.That ( spriteAssortmentSprite.Description, Is.EqualTo ( "A description" ) );
         }
 
@@ -50,14 +52,14 @@ namespace FenixLib.Tests.Unit.Core
         public void DescriptionSet_PropertyIsModified_ChangeIsReflectedInBaseSprite ()
         {
             spriteAssortmentSprite.Description = "A description";
-            Assert.That ( fakeSprite.Description, Is.EqualTo ( "A description" ) );
+            Assert.That ( FakeSprite.Description, Is.EqualTo ( "A description" ) );
         }
 
         [Test]
         public void PivotPointsGet_SameAsBaseSprite ()
         {
-            fakeSprite.Stub ( x => x.PivotPoints ).Return ( new PivotPoint[0] );
-            Assert.That ( spriteAssortmentSprite.PivotPoints, Is.SameAs ( fakeSprite.PivotPoints ) );
+            fakeSprite.Setup ( x => x.PivotPoints ).Returns ( new PivotPoint[0] );
+            Assert.That ( spriteAssortmentSprite.PivotPoints, Is.SameAs ( FakeSprite.PivotPoints ) );
         }
 
         [Test]
@@ -65,7 +67,7 @@ namespace FenixLib.Tests.Unit.Core
         {
             var bytes = new byte[1];
 
-            fakeSprite.Stub ( x => x.PixelData ).Return ( bytes );
+            fakeSprite.Setup ( x => x.PixelData ).Returns ( bytes );
             Assert.That ( spriteAssortmentSprite.PixelData, Is.SameAs ( bytes ) );
         }
 
@@ -74,7 +76,7 @@ namespace FenixLib.Tests.Unit.Core
         {
             var palette = new Palette ();
 
-            fakeSprite.Stub ( x => x.Palette ).Return ( palette );
+            fakeSprite.Setup ( x => x.Palette ).Returns ( palette );
             Assert.That ( spriteAssortmentSprite.Palette, Is.SameAs ( palette ) );
         }
 
@@ -82,7 +84,7 @@ namespace FenixLib.Tests.Unit.Core
         public void GraphicFormatGet_SameAsBaseSprite ()
         {
             Assert.That ( spriteAssortmentSprite.GraphicFormat, 
-                Is.SameAs ( fakeSprite.GraphicFormat ) );
+                Is.SameAs ( FakeSprite.GraphicFormat ) );
         }
 
         // Verification of delegated methods invocation
@@ -90,97 +92,86 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void ClearPivotPoints_CallsMethodInBaseSprite ()
         {
-            var mock = MockRepository.GenerateMock<ISprite> ();
-            mock.Expect ( x => x.ClearPivotPoints () );
+            var mock = new Mock<ISprite> ();
 
-            var s = new SpriteAssortmentSprite ( 0, mock );
+            var s = new SpriteAssortmentSprite ( 0, mock.Object );
             s.ClearPivotPoints ();
 
-            mock.VerifyAllExpectations ();
+            mock.Verify ( x => x.ClearPivotPoints () );
         }
 
         [Test]
         public void DefinePivotPoint_CallsMethodInBaseSprite ()
         {
-            var mock = MockRepository.GenerateMock<ISprite> ();
-            mock.Expect ( x => x.DefinePivotPoint (
-                Arg<int>.Is.Equal ( 2 ),
-                Arg<int>.Is.Equal ( 100 ),
-                Arg<int>.Is.Equal ( 200 ) )
-                );
+            var mock = new Mock<ISprite> ();
 
-            var s = new SpriteAssortmentSprite ( 0, mock );
+            var s = new SpriteAssortmentSprite ( 0, mock.Object );
             s.DefinePivotPoint ( 2, 100, 200 );
 
-            mock.VerifyAllExpectations ();
+            mock.Verify ( x => x.DefinePivotPoint (
+                It.Is<int> ( i => i == 2 ),
+                It.Is<int> ( i  => i == 100 ),
+                It.Is<int> (  i => i == 200 ) )
+                );
         }
 
         [Test]
         public void DeletePivotPoint_CallsMethodInBaseSprite ()
         {
-            var mock = MockRepository.GenerateMock<ISprite> ();
-            mock.Expect ( x => x.DeletePivotPoint (
-                Arg<int>.Is.Equal ( 2 )
-                ) );
-
-            var s = new SpriteAssortmentSprite ( 0, mock );
+            var mock = new Mock<ISprite> ();
+            var s = new SpriteAssortmentSprite ( 0, mock.Object );
             s.DeletePivotPoint ( 2 );
 
-            mock.VerifyAllExpectations ();
+            mock.Verify ( x => x.DeletePivotPoint (
+                It.Is<int>( i => i == 2 )
+                ) );
         }
 
         [Test]
         public void GetPivotPoint_CallsMethodInBaseSprite ()
         {
-            var mock = MockRepository.GenerateMock<ISprite> ();
-            mock.Expect ( x => x.GetPivotPoint (
-                Arg<int>.Is.Equal ( 2 ) )
-                ).Return ( new PivotPoint () );
-
-            var s = new SpriteAssortmentSprite ( 0, mock );
+            var mock = new Mock<ISprite> ();
+            var s = new SpriteAssortmentSprite ( 0, mock.Object );
             s.GetPivotPoint ( 2 );
 
-            mock.VerifyAllExpectations ();
+            mock.Verify ( x => x.GetPivotPoint (
+                It.Is<int>( i => i == 2 )) );
         }
 
         [Test]
         public void FindFreePivotPointId_CallsMethodInBaseSprite ()
         {
-            var mock = MockRepository.GenerateMock<ISprite> ();
-            mock.Expect ( x => x.FindFreePivotPointId (
-                Arg<int>.Is.Equal ( 2 ),
-                Arg<Sprite.SearchDirection>.Is.Equal ( Sprite.SearchDirection.Backward )
-                ) ).Return ( null );
-
-            var s = new SpriteAssortmentSprite ( 0, mock );
+            var mock = new Mock<ISprite> ();
+            var s = new SpriteAssortmentSprite ( 0, mock.Object );
             s.FindFreePivotPointId ( 2, Sprite.SearchDirection.Backward );
 
-            mock.VerifyAllExpectations ();
+            mock.Verify ( x => x.FindFreePivotPointId (
+                It.Is<int>( i => i == 2),
+                It.Is<Sprite.SearchDirection>( d => d == Sprite.SearchDirection.Backward )
+                ) == null);
         }
 
         [Test]
         public void IsPivotPointDefined_CallsMethodInBaseSprite ()
         {
-            var mock = MockRepository.GenerateMock<ISprite> ();
-            mock.Expect ( x => x.IsPivotPointDefined (
-                Arg<int>.Is.Equal ( 2 ) ) ).Return ( false );
-
-            var s = new SpriteAssortmentSprite ( 0, mock );
+            var mock = new Mock<ISprite> ();
+            var s = new SpriteAssortmentSprite ( 0, mock.Object );
             s.IsPivotPointDefined ( 2 );
 
-            mock.VerifyAllExpectations ();
+            mock.Verify ( x => x.IsPivotPointDefined (
+                It.Is<int>( i => i== 2 ) ) == false );
         }
 
         // Equality & Hash
 
         [Test]
-        public void Equals_NullSprite_ReturnsFalse ()
+        public void Equals_NullSprite_ReturnssFalse ()
         {
             Assert.That ( spriteAssortmentSprite.Equals ( null ), Is.False );
         }
 
         [Test]
-        public void Equals_SpriteWithSameId_ReturnsTrue ()
+        public void Equals_SpriteWithSameId_ReturnssTrue ()
         {
             Assert.That ( spriteAssortmentSprite.Equals ( equivalentSprite ), Is.True );
         }

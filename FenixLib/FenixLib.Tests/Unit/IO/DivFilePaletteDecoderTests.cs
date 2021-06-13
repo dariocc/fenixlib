@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,11 +13,11 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using System.IO;
 using FenixLib.Core;
 using FenixLib.IO;
 using System;
+using Moq;
 
 namespace FenixLib.Tests.Unit.IO
 {
@@ -53,13 +53,13 @@ namespace FenixLib.Tests.Unit.IO
             var palette = new Palette ( colors );
 
             var header = new NativeFormat.Header ( "abc", new byte[] { 0 }, 0 );
-            var stubStream = MockRepository.GenerateStub<Stream> ();
+            var stubStream = new Mock<Stream> ();
             // Stub a NativeFormatReader that returns the generated palette
-            var stubReader = MockRepository.GenerateStub<NativeFormatReader> ( stubStream );
-            stubReader.Stub ( _ => _.ReadPalette () ).Return ( palette );
+            var stubReader = new Mock<NativeFormatReader> ( stubStream );
+            stubReader.Setup ( _ => _.ReadPalette () ).Returns ( palette );
 
             // Act
-            var readBodyResult = ReadBody ( header, stubReader );
+            var readBodyResult = ReadBody ( header, stubReader.Object );
 
             // ReadBody should have returned a palette equivalent to the one that the reader
             // returned

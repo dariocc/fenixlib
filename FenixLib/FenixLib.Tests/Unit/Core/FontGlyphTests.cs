@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,49 +13,49 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using FenixLib.Core;
+using Moq;
 
 namespace FenixLib.Tests.Unit.Core
 {
     [TestFixture ( Category = "Unit" )]
     public class FontGlyphTests
     {
-        private IGlyph fakeGlyph;
+        private Mock<IGlyph> fakeGlyph;
         private FontGlyph aFontGlyph;
         private FontGlyph equivalentFontGlyph;
 
         [SetUp]
         public void SetUp ()
         {
-            fakeGlyph = MockRepository.GenerateStub<IGlyph> ();
-            fakeGlyph.Stub ( x => x.Width ).Return ( 1 );
-            fakeGlyph.Stub ( x => x.Height ).Return ( 1 );
-            fakeGlyph.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format32bppArgb );
-            fakeGlyph.Stub ( x => x.PixelData ).Return ( new byte[10] );
+            fakeGlyph = new Mock<IGlyph> ();
+            fakeGlyph.Setup ( x => x.Width ).Returns ( 1 );
+            fakeGlyph.Setup ( x => x.Height ).Returns ( 1 );
+            fakeGlyph.Setup ( x => x.GraphicFormat ).Returns ( GraphicFormat.Format32bppArgb );
+            fakeGlyph.Setup ( x => x.PixelData ).Returns ( new byte[10] );
 
-            aFontGlyph = new FontGlyph ( 'a', fakeGlyph );
-            equivalentFontGlyph = new FontGlyph ( aFontGlyph.Character, fakeGlyph );
+            aFontGlyph = new FontGlyph ( 'a', fakeGlyph.Object );
+            equivalentFontGlyph = new FontGlyph ( aFontGlyph.Character, fakeGlyph.Object );
         }
 
         [Test]
         public void XAdvanceGet_SameAsBaseGlyph()
         {
-            fakeGlyph.XAdvance = 10;
+            fakeGlyph.Object.XAdvance = 10;
             Assert.AreEqual ( 10, aFontGlyph.XAdvance );
         }
 
         [Test]
         public void YAdvanceGet_SameAsBaseGlyph ()
         {
-            fakeGlyph.YAdavance = 10;
+            fakeGlyph.Object.YAdavance = 10;
             Assert.AreEqual ( 10, aFontGlyph.YAdavance );
         }
 
         [Test]
         public void XOffsetGet_SameAsBaseGlyph ()
         {
-            fakeGlyph.XOffset = 10;
+            fakeGlyph.Object.XOffset = 10;
             Assert.AreEqual ( 10, aFontGlyph.XOffset );
         }
 
@@ -63,7 +63,7 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void YOffsetGet_SameAsBaseGlyph ()
         {
-            fakeGlyph.YOffset = 10;
+            fakeGlyph.Object.YOffset = 10;
             Assert.AreEqual ( 10, aFontGlyph.YOffset );
         }
 
@@ -77,21 +77,21 @@ namespace FenixLib.Tests.Unit.Core
         public void XAdvanceSet_ChangeReflectedInBaseGlyph ()
         {
             aFontGlyph.XAdvance = 10;
-            Assert.AreEqual ( 10, fakeGlyph.XAdvance );
+            Assert.AreEqual ( 10, fakeGlyph.Object.XAdvance );
         }
 
         [Test]
         public void YAdvanceSet_ChangeReflectedInBaseGlyph ()
         {
             aFontGlyph.YAdavance = 10;
-            Assert.AreEqual ( 10, fakeGlyph.YAdavance );
+            Assert.AreEqual ( 10, fakeGlyph.Object.YAdavance );
         }
 
         [Test]
         public void XOffsetSet_ChangeReflectedInBaseGlyph ()
         {
             aFontGlyph.XOffset = 10;
-            Assert.AreEqual ( 10, fakeGlyph.XOffset );
+            Assert.AreEqual ( 10, fakeGlyph.Object.XOffset );
         }
 
 
@@ -99,7 +99,7 @@ namespace FenixLib.Tests.Unit.Core
         public void YOffsetSet_ChangeReflectedInBaseGlyph ()
         {
             aFontGlyph.YOffset = 10;
-            Assert.AreEqual ( 10, fakeGlyph.YOffset );
+            Assert.AreEqual ( 10, fakeGlyph.Object.YOffset );
         }
 
         // Equality and hashing

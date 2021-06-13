@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,8 +13,8 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using FenixLib.Core;
+using Moq;
 
 namespace FenixLib.Tests.Unit.Core
 {
@@ -29,13 +29,13 @@ namespace FenixLib.Tests.Unit.Core
 
         private IGraphic CreateFakeGraphic ()
         {
-            IGraphic fakeGraphic = MockRepository.GenerateStub<IGraphic> ();
-            fakeGraphic.Stub ( x => x.Width ).Return ( 1 );
-            fakeGraphic.Stub ( x => x.Height ).Return ( 1 );
-            fakeGraphic.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format32bppArgb );
-            fakeGraphic.Stub ( x => x.PixelData ).Return ( new byte[1] );
+            Mock<IGraphic> fakeGraphic = new Mock<IGraphic>();
+            fakeGraphic.Setup ( x => x.Width ).Returns ( 1 );
+            fakeGraphic.Setup ( x => x.Height ).Returns ( 1 );
+            fakeGraphic.Setup ( x => x.GraphicFormat ).Returns ( GraphicFormat.Format32bppArgb );
+            fakeGraphic.Setup ( x => x.PixelData ).Returns ( new byte[1] );
 
-            return fakeGraphic;
+            return fakeGraphic.Object;
         }
     }
 }

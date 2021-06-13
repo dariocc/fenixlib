@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using System.IO;
 using FenixLib.Core;
 using FenixLib.IO;
+using Moq;
 
 namespace FenixLib.Tests.Unit.IO
 {
@@ -29,7 +29,7 @@ namespace FenixLib.Tests.Unit.IO
         private string[] knownFileMagics;
         private NativeFormatReader createNativeFormatReaderValue;
         private int parseBitsPerPixelValue;
-		private int getPixelDataStartValue;
+        private int getPixelDataStartValue;
         private FontEncoding encoding;
 
         // Tracks the number of times the ReadGlyphInfo functions is called
@@ -60,15 +60,14 @@ namespace FenixLib.Tests.Unit.IO
             parseBitsPerPixelValue = 55;
             validBitsPerPixelDepths = new int[] { 10 };
 
-            var streamStub = MockRepository.GenerateStub<Stream> ();
-            streamStub.Stub ( _ => _.CanRead ).Return ( true );
+            var streamSetup = new Mock<Stream> ();
+            streamSetup.Setup ( _ => _.CanRead ).Returns ( true );
 
-            var headerStub = new NativeFormat.Header ( "abc", new byte[1], 0 );
-            var readerStub = MockRepository.GenerateStub<NativeFormatReader>
-                ( streamStub );
+            var headerSetup = new NativeFormat.Header ( "abc", new byte[1], 0 );
+            var readerSetup = new Mock<NativeFormatReader> ( streamSetup );
 
             Assert.Catch<UnsuportedFileFormatException> (
-                () => ReadBody ( headerStub, readerStub ) );
+                () => ReadBody ( headerSetup, readerSetup.Object ) );
         }
 
         [Test]
@@ -82,43 +81,31 @@ namespace FenixLib.Tests.Unit.IO
             validBitsPerPixelDepths = new int[] { 8 };
             encoding = FontEncoding.ISO85591;
 
-            var headerStub = new NativeFormat.Header ( "abc", new byte[1], 0 );
+            var headerSetup = new NativeFormat.Header ( "abc", new byte[1], 0 );
 
-            var streamStub = MockRepository.GenerateStub<Stream> ();
-            streamStub.Stub ( _ => _.CanRead ).Return ( true );
+            var streamSetup = new Mock<Stream> ();
+            streamSetup.Setup ( _ => _.CanRead ).Returns ( true );
 
             // The mocked INativeFormatReader to interact with ReadBody ()
-            var readerMock = MockRepository.GenerateStrictMock<NativeFormatReader>
-                ( streamStub );
-            createNativeFormatReaderValue = readerMock;
+            var readerMock = new Mock<NativeFormatReader>
+                ( streamSetup );
+            createNativeFormatReaderValue = readerMock.Object;
 
-            using ( readerMock.GetMockRepository ().Ordered () )
-            {
-                readerMock.Expect ( _ => _.ReadPalette () ).Return ( null )
-                    .WhenCalled ( _ =>
-                {
-                    _.ReturnValue = new Palette ();
-                } );
-
-                readerMock.Expect ( _ => _.ReadPaletteGammas () )
-                    .Return ( null );
-
-                readerMock.Expect ( _ => _.ReadInt32 () )
-                    .Return ( 1 ); // Font Info
-
-                // 256 calls to ReadGlyphInfo
-                // will be loged in readGlyphInfoCount member variable
-
-                readerMock.Expect ( _ => _.ReadPixels ( null, 0, 0 ) )
-                    .IgnoreArguments ().Repeat.Times ( 256 )
-                    .Return ( new byte[] { 0 } );
-            }
+            // TODO: Verify calle din order
+            readerMock.Setup ( x => x.ReadPalette () ).Returns ( new Palette () );
+            readerMock.Setup ( x => x.ReadPaletteGammas () ).Returns ( new byte[0] { } );
+            readerMock.Setup ( x => x.ReadInt32 () ).Returns ( 1 ); // FontInfo
+            readerMock.Setup ( x => x.ReadPixels ( It.IsAny<GraphicFormat> (), It.IsAny<int> (), It.IsAny<int> () ) ).Returns ( new byte[] { 0 } );
 
             // Act
-            ReadBody ( headerStub, readerMock );
+            ReadBody ( headerSetup, readerMock.Object );
 
             // Assert
-            readerMock.VerifyAllExpectations ();
+            readerMock.Verify ( x => x.ReadPaletteGammas () );
+            readerMock.Verify ( x => x.ReadInt32 () );
+            readerMock.Verify ( x => x.ReadPixels ( It.IsAny<GraphicFormat> (), It.IsAny<int> (), It.IsAny<int> () ), Times.Exactly(256));
+            readerMock.Verify ( x => x.ReadPalette () );
+
             Assert.That ( readGlyphInfoCount, Is.EqualTo ( 256 ) );
         }
 
@@ -148,10 +135,10 @@ namespace FenixLib.Tests.Unit.IO
             return parseBitsPerPixelValue;
         }
 
-		protected override int GetPixelDataStart (int bpp)
-		{
-			return getPixelDataStartValue;
-		}
+        protected override int GetPixelDataStart ( int bpp )
+        {
+            return getPixelDataStartValue;
+        }
 
         protected override void ProcessFontInfoField ( int codePageType )
         {
@@ -161,12 +148,12 @@ namespace FenixLib.Tests.Unit.IO
         protected override GlyphInfo ReadGlyphInfo ( NativeFormatReader reader )
         {
             readGlyphInfoCount++;
-            var properties = MockRepository.GenerateStub<IGlyphInfoProperties> ();
-            properties.Stub ( _ => _.Width ).Return ( 1 );
-            properties.Stub ( _ => _.Height ).Return ( 1 );
-            properties.Stub ( _ => _.FileOffset ).Return ( 1 );
+            var properties = new Mock<IGlyphInfoProperties> ();
+            properties.Setup ( _ => _.Width ).Returns ( 1 );
+            properties.Setup ( _ => _.Height ).Returns ( 1 );
+            properties.Setup ( _ => _.FileOffset ).Returns ( 1 );
 
-            return new GlyphInfo ( properties );
+            return new GlyphInfo ( properties.Object );
         }
 
         #endregion

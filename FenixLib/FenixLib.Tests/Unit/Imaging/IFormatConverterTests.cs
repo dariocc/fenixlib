@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,10 +13,10 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using System;
 using FenixLib.Imaging;
 using FenixLib.Core;
+using Moq;
 
 namespace FenixLib.Tests.Imaging
 {
@@ -41,7 +41,7 @@ namespace FenixLib.Tests.Imaging
         [Test]
         public void Convert_NullFormat_ThrowsNullArgumentException ()
         {
-            IGraphic stubGraphic = MockRepository.GenerateStub<IGraphic> ();
+            IGraphic stubGraphic = new Mock<IGraphic> ().Object;
             IFormatConverter converter = CreateConverter ();
 
             Assert.Throws<ArgumentNullException> ( () =>

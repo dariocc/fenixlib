@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,9 +13,9 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using System;
 using FenixLib.Core;
+using Moq;
 
 namespace FenixLib.Tests.Unit.Core
 {
@@ -62,10 +62,10 @@ namespace FenixLib.Tests.Unit.Core
         [Test]
         public void Construct_PaletteIsPassedButFormatIsNotIndexed_PaletteIsSetToNull ()
         {
-            var palette = MockRepository.GenerateStub<Palette> ();
+            var palette = new Mock<Palette> ();
 
             // A non indexed graphic with a non null palette
-            var g = new Graphic ( GraphicFormat.Format32bppArgb, 1, 1, argbPixels, palette );
+            var g = new Graphic ( GraphicFormat.Format32bppArgb, 1, 1, argbPixels, palette.Object );
 
             // Graphic palette still needs to be null
             Assert.That ( g.Palette, Is.Null );

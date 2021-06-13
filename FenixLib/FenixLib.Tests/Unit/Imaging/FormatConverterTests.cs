@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,27 +13,32 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using FenixLib.Core;
+using Moq;
 
 namespace FenixLib.Tests.Imaging
 {
     [TestFixture]
     class FormatConverterTests
     {
-        private IGraphic stubGraphic1bpp;
-        private IGraphic stubGraphic8bpp;
-        private IGraphic stubGraphic16bpp;
-        private IGraphic stubGraphic32bpp;
+        private Mock<IGraphic> stubGraphic1bpp;
+        private Mock<IGraphic> stubGraphic8bpp;
+        private Mock<IGraphic> stubGraphic16bpp;
+        private Mock<IGraphic> stubGraphic32bpp;
+
+        private IGraphic StubGraphic1bpp => stubGraphic1bpp.Object;
+        private IGraphic StubGraphic8bpp => stubGraphic8bpp.Object; 
+        private IGraphic StubGraphic16bpp => stubGraphic16bpp.Object; 
+        private IGraphic StubGraphic32bpp => stubGraphic32bpp.Object;
 
         [SetUp]
         public void SetUp ()
         {
-            SetUpMonochromeStub ();
-            SetUpIndexedStub ();
+            SetUpMonochromeSetup ();
+            SetUpIndexedSetup ();
         }
 
-        private void SetUpMonochromeStub()
+        private void SetUpMonochromeSetup()
         {
             // 10x3 1bpp data
             // 11111111 11xxxxx
@@ -44,12 +49,12 @@ namespace FenixLib.Tests.Imaging
             pixelData1bpp[2] = 0x1 << 7; pixelData1bpp[3] = 0x1 << 6;
             pixelData1bpp[4] = 0xFF; pixelData1bpp[5] = 0x3 << 6;
 
-            stubGraphic1bpp = MockRepository.GenerateStub<IGraphic> ();
-            stubGraphic1bpp.Stub ( x => x.PixelData ).Return ( pixelData1bpp );
-            stubGraphic1bpp.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format1bppMonochrome );
+            stubGraphic1bpp = new Mock<IGraphic> ();
+            stubGraphic1bpp.Setup ( x => x.PixelData ).Returns ( pixelData1bpp );
+            stubGraphic1bpp.Setup ( x => x.GraphicFormat ).Returns ( GraphicFormat.Format1bppMonochrome );
         }
 
-        private void SetUpIndexedStub()
+        private void SetUpIndexedSetup()
         {
             // 10x3 8bpp data
             // 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF
@@ -74,13 +79,13 @@ namespace FenixLib.Tests.Imaging
             colors[2] = new PaletteColor ( 255, 0, 0 );
             colors[3] = new PaletteColor ( 0, 255, 0 );
             colors[4] = new PaletteColor ( 0, 0, 255 );
-            stubGraphic8bpp = MockRepository.GenerateStub<IGraphic> ();
-            stubGraphic8bpp.Stub ( x => x.PixelData ).Return ( pixelData8bpp );
-            stubGraphic8bpp.Stub ( x => x.Palette ).Return ( new Palette ( colors ) );
-            stubGraphic8bpp.Stub ( x => x.GraphicFormat ).Return ( GraphicFormat.Format8bppIndexed );
+            stubGraphic8bpp = new Mock<IGraphic> ();
+            stubGraphic8bpp.Setup ( x => x.PixelData ).Returns ( pixelData8bpp );
+            stubGraphic8bpp.Setup ( x => x.Palette ).Returns ( new Palette ( colors ) );
+            stubGraphic8bpp.Setup ( x => x.GraphicFormat ).Returns ( GraphicFormat.Format8bppIndexed );
         }
 
-        private void SetUp16bppStub()
+        private void SetUp16bppSetup()
         {
             ushort[,] pixelData = new ushort[10, 3];
             for (int i = 0 ; i < pixelData.GetLength(0) ; i++ )

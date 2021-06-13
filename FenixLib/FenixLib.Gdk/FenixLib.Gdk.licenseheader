@@ -1,4 +1,4 @@
-﻿extensions: designer.cs generated.cs
+extensions: designer.cs generated.cs
 extensions: .cs .cpp .h
 /*  Copyright 2016 Darío Cutillas Carrillo
 *

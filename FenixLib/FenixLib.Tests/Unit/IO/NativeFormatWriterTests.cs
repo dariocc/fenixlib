@@ -1,4 +1,4 @@
-﻿/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darío Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,12 +13,12 @@
 *   limitations under the License.
 */
 using NUnit.Framework;
-using Rhino.Mocks;
 using System;
 using System.IO;
 using System.Linq;
 using FenixLib.Core;
 using FenixLib.IO;
+using Moq;
 
 namespace FenixLib.Tests.Unit.IO
 {
@@ -45,30 +45,29 @@ namespace FenixLib.Tests.Unit.IO
         {
             // Stream stub that memorizes the bytes written to the field every
             // time Write() overloads are called
-            var streamStub = MockRepository.GenerateStub<Stream> ();
+            var streamStub = new Mock<Stream> ();
 
-            streamStub.Stub ( _ => _.CanWrite ).Return ( true );
+            streamStub.Setup ( _ => _.CanWrite ).Returns ( true );
 
-            streamStub.Stub ( _ => _.Write (
-                Arg<byte[]>.Is.NotNull,
-                Arg<int>.Is.GreaterThanOrEqual ( 0 ),
-                Arg<int>.Is.GreaterThan ( 0 ) ) )
-            .WhenCalled ( a =>
+            streamStub.Setup ( _ => _.Write (
+                It.IsAny<byte[]> (),
+                It.Is<int> ( i => i > 0 ),
+                It.Is<int> ( i => i > 0 ) ) )
+            .Callback<byte[], int, int> ( ( bytes, offset, size ) =>
+               {
+                   var tmp = new byte[size];
+                   Array.Copy ( bytes, tmp, tmp.Length );
+                   ResizeMemory ( tmp );
+               } );
+
+            streamStub.Setup ( _ => _.WriteByte ( It.IsAny<byte> () ) )
+            .Callback<byte> ( b =>
             {
-                var bytes = a.Arguments[0] as byte[];
-                var tmp = new byte[( int ) a.Arguments[2]];
-                Array.Copy ( bytes, tmp, tmp.Length );
-                ResizeMemory ( tmp );
-            } );
-
-            streamStub.Stub ( _ => _.WriteByte ( Arg<byte>.Is.Anything ) )
-            .WhenCalled ( _ =>
-            {
-                var bytes = new byte[] { ( byte ) _.Arguments[0] };
+                var bytes = new byte[] { b };
                 ResizeMemory ( bytes );
             } );
 
-            formatWriter = new NativeFormatWriter ( streamStub );
+            formatWriter = new NativeFormatWriter ( streamStub.Object );
         }
 
         [TearDown]
@@ -115,16 +114,16 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WriteExtendedGlyphInfo_Test ()
         {
-            var stub = MockRepository.GenerateStub<IGlyphInfoProperties> ();
-            stub.Stub ( _ => _.Width ).Return ( 0x10 );
-            stub.Stub ( _ => _.Height ).Return ( 0x20 );
-            stub.Stub ( _ => _.XAdvance ).Return ( 0x30 );
-            stub.Stub ( _ => _.YAdvance ).Return ( 0x40 );
-            stub.Stub ( _ => _.XOffset ).Return ( 0x50 );
-            stub.Stub ( _ => _.YOffset ).Return ( 0x60 );
-            stub.Stub ( _ => _.FileOffset ).Return ( 0x70 );
+            var stub = new Mock<IGlyphInfoProperties> ();
+            stub.Setup ( _ => _.Width ).Returns ( 0x10 );
+            stub.Setup ( _ => _.Height ).Returns ( 0x20 );
+            stub.Setup ( _ => _.XAdvance ).Returns ( 0x30 );
+            stub.Setup ( _ => _.YAdvance ).Returns ( 0x40 );
+            stub.Setup ( _ => _.XOffset ).Returns ( 0x50 );
+            stub.Setup ( _ => _.YOffset ).Returns ( 0x60 );
+            stub.Setup ( _ => _.FileOffset ).Returns ( 0x70 );
 
-            var glyphInfo = new GlyphInfo ( stub );
+            var glyphInfo = new GlyphInfo ( stub.Object );
 
             var expectedBytes = new byte[]
             {
@@ -145,13 +144,13 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WriteLegacyFntGlyphInfo_ValidGlyph_Works ()
         {
-            var stub = MockRepository.GenerateStub<IGlyphInfoProperties> ();
-            stub.Stub ( _ => _.Width ).Return ( 0x10 );
-            stub.Stub ( _ => _.Height ).Return ( 0x20 );
-            stub.Stub ( _ => _.YOffset ).Return ( 0x30 );
-            stub.Stub ( _ => _.FileOffset ).Return ( 0x40 );
+            var stub = new Mock<IGlyphInfoProperties> ();
+            stub.Setup ( _ => _.Width ).Returns ( 0x10 );
+            stub.Setup ( _ => _.Height ).Returns ( 0x20 );
+            stub.Setup ( _ => _.YOffset ).Returns ( 0x30 );
+            stub.Setup ( _ => _.FileOffset ).Returns ( 0x40 );
 
-            var glyphInfo = new GlyphInfo ( stub );
+            var glyphInfo = new GlyphInfo ( stub.Object );
 
             var expectedBytes = new byte[]
             {
@@ -176,7 +175,7 @@ namespace FenixLib.Tests.Unit.IO
         [Test]
         public void WritePalette_ValidPalette_Works ()
         {
-            var paletteStub = MockRepository.GenerateStub<Palette> ();
+            var paletteStub = new Mock<Palette> ();
             var paletteColors = new PaletteColor[256];
             var expectedBytes = new byte[256 * 3];
 
@@ -185,7 +184,7 @@ namespace FenixLib.Tests.Unit.IO
                 // A sample color that will be in the stub palette
                 var color = new PaletteColor ( i, i / 2, i / 3 );
                 paletteColors[i] = color;
-                paletteStub[i] = color;
+                paletteStub.Object[i] = color;
 
                 // Color components are to be encoded in 6bits
                 expectedBytes[i * 3 + 0] = ( byte ) ( ( i ) >> 2 );
@@ -193,9 +192,9 @@ namespace FenixLib.Tests.Unit.IO
                 expectedBytes[i * 3 + 2] = ( byte ) ( ( i / 3 ) >> 2 );
             }
             // Stub the Colors property
-            paletteStub.Stub ( _ => _.Colors ).Return ( paletteColors );
+            paletteStub.Setup ( _ => _.Colors ).Returns ( paletteColors );
 
-            formatWriter.Write ( paletteStub );
+            formatWriter.Write ( paletteStub.Object );
 
             Assert.That ( memory, Is.EqualTo ( expectedBytes ) );
         }

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="FenixLib.Core.Sprite" BaseTypeListCollapsed="true">
     <Position X="5.5" Y="6.75" Width="1.5" />
