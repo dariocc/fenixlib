@@ -29,7 +29,7 @@ namespace FenixLib.IO
     /// </remarks>
     public sealed class BinaryNativeFormatReader : NativeFormatReader
     {
-        private static readonly Encoding encoding = Encoding.GetEncoding ( 850 );
+        private static readonly Encoding encoding = CodePagesEncodingProvider.Instance.GetEncoding ( 850 );
 
         private BinaryReader binaryReader;
 

@@ -25,7 +25,7 @@ namespace FenixLib.IO
     public partial class NativeFormatWriter : BinaryWriter
     {
 
-        private static readonly Encoding encoding = Encoding.GetEncoding ( 850 );
+        private static readonly Encoding encoding = CodePagesEncodingProvider.Instance.GetEncoding ( 850 );
 
         public NativeFormatWriter ( Stream input ) : base ( input, encoding ) { }
 
