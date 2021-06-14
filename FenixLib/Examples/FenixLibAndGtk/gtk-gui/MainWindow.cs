@@ -54,9 +54,8 @@ public partial class MainWindow
 		global::Stetic.Gui.Initialize (this);
 		// Widget MainWindow
 		this.Name = "MainWindow";
-		this.Title = global::Mono.Unix.Catalog.GetString ("MainWindow");
+		this.Title = "Application";
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
-		this.AllowShrink = true;
 		// Container child MainWindow.Gtk.Container+ContainerChild
 		this.mainContainer = new global::Gtk.VBox ();
 		this.mainContainer.Name = "mainContainer";
@@ -70,36 +69,20 @@ public partial class MainWindow
 		this.label1 = new global::Gtk.Label ();
 		this.label1.Name = "label1";
 		this.label1.Xalign = 0F;
-		this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Example of FenixLib use with Gtk</b>");
+		this.label1.LabelProp = "<b>Example of FenixLib use with Gtk</b>";
 		this.label1.UseMarkup = true;
 		this.headerContainer.Add (this.label1);
-		global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.headerContainer [this.label1]));
-		w1.Position = 0;
-		w1.Expand = false;
-		w1.Fill = false;
-		// Container child headerContainer.Gtk.Box+BoxChild
+			// Container child headerContainer.Gtk.Box+BoxChild
 		this.label2 = new global::Gtk.Label ();
 		this.label2.Name = "label2";
 		this.label2.Xalign = 0F;
-		this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Use one of the \"Open\" buttons below to open a PixTudio / BennuGD / Div resource.");
+		this.label2.LabelProp = "Use one of the \"Open\" buttons below to open a PixTudio / BennuGD / Div resource.";
 		this.headerContainer.Add (this.label2);
-		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.headerContainer [this.label2]));
-		w2.Position = 1;
-		w2.Expand = false;
-		w2.Fill = false;
 		// Container child headerContainer.Gtk.Box+BoxChild
 		this.hseparator1 = new global::Gtk.HSeparator ();
 		this.hseparator1.Name = "hseparator1";
 		this.headerContainer.Add (this.hseparator1);
-		global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.headerContainer [this.hseparator1]));
-		w3.Position = 2;
-		w3.Expand = false;
-		w3.Fill = false;
 		this.mainContainer.Add (this.headerContainer);
-		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.mainContainer [this.headerContainer]));
-		w4.Position = 0;
-		w4.Expand = false;
-		w4.Fill = false;
 		// Container child mainContainer.Gtk.Box+BoxChild
 		this.contentsContainer = new global::Gtk.HBox ();
 		this.contentsContainer.Name = "contentsContainer";
@@ -112,21 +95,15 @@ public partial class MainWindow
 		this.label5 = new global::Gtk.Label ();
 		this.label5.Name = "label5";
 		this.label5.Xalign = 0F;
-		this.label5.LabelProp = global::Mono.Unix.Catalog.GetString ("Selected or loaded graphic preview:");
+		this.label5.LabelProp = "Selected or loaded graphic preview:";
 		this.label5.UseMarkup = true;
 		this.imageContainer.Add (this.label5);
-		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.imageContainer [this.label5]));
-		w5.Position = 0;
-		w5.Expand = false;
-		w5.Fill = false;
 		// Container child imageContainer.Gtk.Box+BoxChild
 		this.previewImage = new global::Gtk.Image ();
 		this.previewImage.WidthRequest = 400;
 		this.previewImage.HeightRequest = 400;
 		this.previewImage.Name = "previewImage";
 		this.imageContainer.Add (this.previewImage);
-		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.imageContainer [this.previewImage]));
-		w6.Position = 1;
 		// Container child imageContainer.Gtk.Box+BoxChild
 		this.mapButtonsContainer = new global::Gtk.HBox ();
 		this.mapButtonsContainer.Name = "mapButtonsContainer";
@@ -136,20 +113,10 @@ public partial class MainWindow
 		this.openMapButton.CanFocus = true;
 		this.openMapButton.Name = "openMapButton";
 		this.openMapButton.UseUnderline = true;
-		this.openMapButton.Label = global::Mono.Unix.Catalog.GetString ("Open Map...");
+		this.openMapButton.Label = "Open Map...";
 		this.mapButtonsContainer.Add (this.openMapButton);
-		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.mapButtonsContainer [this.openMapButton]));
-		w7.Position = 0;
-		w7.Expand = false;
-		w7.Fill = false;
 		this.imageContainer.Add (this.mapButtonsContainer);
-		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.imageContainer [this.mapButtonsContainer]));
-		w8.Position = 2;
-		w8.Expand = false;
-		w8.Fill = false;
 		this.contentsContainer.Add (this.imageContainer);
-		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.contentsContainer [this.imageContainer]));
-		w9.Position = 0;
 		// Container child contentsContainer.Gtk.Box+BoxChild
 		this.fpgContainer = new global::Gtk.VBox ();
 		this.fpgContainer.Name = "fpgContainer";
@@ -158,12 +125,8 @@ public partial class MainWindow
 		this.label3 = new global::Gtk.Label ();
 		this.label3.Name = "label3";
 		this.label3.Xalign = 0F;
-		this.label3.LabelProp = global::Mono.Unix.Catalog.GetString ("Fpg contents:");
+		this.label3.LabelProp = "Fpg contents:";
 		this.fpgContainer.Add (this.label3);
-		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.fpgContainer [this.label3]));
-		w10.Position = 0;
-		w10.Expand = false;
-		w10.Fill = false;
 		// Container child fpgContainer.Gtk.Box+BoxChild
 		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
@@ -175,8 +138,6 @@ public partial class MainWindow
 		this.spriteAssortmentView.Name = "spriteAssortmentView";
 		this.GtkScrolledWindow.Add (this.spriteAssortmentView);
 		this.fpgContainer.Add (this.GtkScrolledWindow);
-		global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.fpgContainer [this.GtkScrolledWindow]));
-		w12.Position = 1;
 		// Container child fpgContainer.Gtk.Box+BoxChild
 		this.fpgButtonsContainer = new global::Gtk.HBox ();
 		this.fpgButtonsContainer.Name = "fpgButtonsContainer";
@@ -186,20 +147,10 @@ public partial class MainWindow
 		this.openFpgButton.CanFocus = true;
 		this.openFpgButton.Name = "openFpgButton";
 		this.openFpgButton.UseUnderline = true;
-		this.openFpgButton.Label = global::Mono.Unix.Catalog.GetString ("Open Fpg...");
+		this.openFpgButton.Label = "Open Fpg...";
 		this.fpgButtonsContainer.Add (this.openFpgButton);
-		global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.fpgButtonsContainer [this.openFpgButton]));
-		w13.Position = 0;
-		w13.Expand = false;
-		w13.Fill = false;
 		this.fpgContainer.Add (this.fpgButtonsContainer);
-		global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.fpgContainer [this.fpgButtonsContainer]));
-		w14.Position = 2;
-		w14.Expand = false;
-		w14.Fill = false;
 		this.contentsContainer.Add (this.fpgContainer);
-		global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.contentsContainer [this.fpgContainer]));
-		w15.Position = 1;
 		// Container child contentsContainer.Gtk.Box+BoxChild
 		this.fntContainer = new global::Gtk.VBox ();
 		this.fntContainer.Name = "fntContainer";
@@ -208,12 +159,8 @@ public partial class MainWindow
 		this.label4 = new global::Gtk.Label ();
 		this.label4.Name = "label4";
 		this.label4.Xalign = 0F;
-		this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("Fnt contents:");
+		this.label4.LabelProp = "Fnt contents:";
 		this.fntContainer.Add (this.label4);
-		global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.fntContainer [this.label4]));
-		w16.Position = 0;
-		w16.Expand = false;
-		w16.Fill = false;
 		// Container child fntContainer.Gtk.Box+BoxChild
 		this.GtkScrolledWindow1 = new global::Gtk.ScrolledWindow ();
 		this.GtkScrolledWindow1.Name = "GtkScrolledWindow1";
@@ -225,8 +172,6 @@ public partial class MainWindow
 		this.bitmapFontView.Name = "bitmapFontView";
 		this.GtkScrolledWindow1.Add (this.bitmapFontView);
 		this.fntContainer.Add (this.GtkScrolledWindow1);
-		global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.fntContainer [this.GtkScrolledWindow1]));
-		w18.Position = 1;
 		// Container child fntContainer.Gtk.Box+BoxChild
 		this.fntButtonsContainer = new global::Gtk.HBox ();
 		this.fntButtonsContainer.Name = "fntButtonsContainer";
@@ -236,23 +181,11 @@ public partial class MainWindow
 		this.openFntButton.CanFocus = true;
 		this.openFntButton.Name = "openFntButton";
 		this.openFntButton.UseUnderline = true;
-		this.openFntButton.Label = global::Mono.Unix.Catalog.GetString ("Open Fnt...");
+		this.openFntButton.Label = "Open Fnt...";
 		this.fntButtonsContainer.Add (this.openFntButton);
-		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.fntButtonsContainer [this.openFntButton]));
-		w19.Position = 0;
-		w19.Expand = false;
-		w19.Fill = false;
 		this.fntContainer.Add (this.fntButtonsContainer);
-		global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.fntContainer [this.fntButtonsContainer]));
-		w20.Position = 2;
-		w20.Expand = false;
-		w20.Fill = false;
 		this.contentsContainer.Add (this.fntContainer);
-		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.contentsContainer [this.fntContainer]));
-		w21.Position = 2;
 		this.mainContainer.Add (this.contentsContainer);
-		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.mainContainer [this.contentsContainer]));
-		w22.Position = 1;
 		this.Add (this.mainContainer);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();

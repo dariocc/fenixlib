@@ -143,7 +143,7 @@ public partial class MainWindow : Gtk.Window
                 glyph.Width, 
                 glyph.Height,
                 glyph.XAdvance, 
-                glyph.YAdavance,
+                glyph.YAdvance,
                 glyph.XOffset, 
                 glyph.YOffset );
         }
