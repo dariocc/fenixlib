@@ -22,7 +22,7 @@ using FenixLib.Core;
 namespace FenixLib.BitmapConvert
 {
     /// <summary>
-    /// Common behvaiour of several Bitmap2Graphic converter subclasses.
+    /// Common behavior of several Bitmap2Graphic converter subclasses.
     /// </summary>
     public abstract class Bitmap2GraphicConverter : IConverter
     {
