@@ -1,4 +1,4 @@
-![FenixLib](Media/fenixlib.png "FenixLib Logo")
+[FenixLib](Media/fenixlib.png "FenixLib Logo")
 
 FenixLib brings .Net support for opening, creating and operating with
 native graphic, graphic collections, bitmap fonts and palette formats of
@@ -9,6 +9,10 @@ native graphic, graphic collections, bitmap fonts and palette formats of
 The following snippet shows how easy is to open a Fpg file, print the codes
 and description of every map, change the description of map with code 10 and
 save the changes in a new file.
+
+> NOTE: This is an old project, but I've rescued it for some learning purposes
+> such as migration to .NET Standard and automating deployments with Github
+> actions.
 
 ```csharp
 using FenixLib.Core;
@@ -61,63 +65,66 @@ If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fp
 
 If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/Native-Formats) and then you will be ready to the topics above.
 
-Or, if you do not like to read, checkout the [example projects](https://github.com/dacucar/fenixlib/wiki/Examples).
+You may also check the [example projects](https://github.com/dacucar/fenixlib/wiki/Examples) for some inspiration, although these are very basic.
 
 ## Building
-FenixLib core assembly (FenixLib.dll) runs in any platform with support for .NET framework 4.5 and C# as it has no other dependencies. I alternate development in [VisualStudio.NET](https://www.visualstudio.com/en-us/products/vs-2015-product-editions.aspx) and
-[MonoDevelop / Xamarin](http://www.monodevelop.com/) and I have succesfully built it from Windows, Linux and OSX.
+Fenixlib core assembly (FenixLib.dll) was originally written to target .NET framework 4.5 but it has 
+been migrated to .NET Standard 2.0 and therefore it should run on any .NET impelementation that
+supports it, including .NET Framework > 4.5, Mono, .NET Core and .NET 5.0.
 
 Go ahead and make a clone of this repository:
 
     git clone https://github.com/dacucar/fenixlib.git
 
-Then open the ``FenixLib.Sln`` within the ``./fenixlib/FenixLib`` folder with either Visual Studio, MonoDevelop or Xamarin and you are ready to go... FenixLib builds as any other class library.
+Then build the fenixlib classlibrary. If using .NET 5.0 SDK, run:
 
-Additional assemblies might however be dependent on additional libraries, for example [FenixLib.Gdk](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly) offers utility classes to interacting with [Mono.Gdk](http://docs.go-mono.com/index.aspx?link=N:Gdk), which requires Mono and Gtk to be installed.
+    dotnet build Src/FenixLib
+
+There exists some additional projects in the `Src` folder:
+
+* `FenixLib.Tests`: Test for fenix core assembly.
+* [`FenixLib.Gdk`](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly). Basic functionality
+  for mapping fenixlib images to `Gdk` pixbuffs and be therefore able to visualize images in
+  Gdk applications.
+* `FenixLib.Gdip`: Provides types for mapping fenixlib image data to Gdi+ images and to create
+  fenixlib images from Gdi+ bitmaps.
+* `FenixLib.Gdip.Tests`: Tests for `FenixLib.Gdip`.
+
+And also some Examples under `Src/Examples` with a basic Winforms and Gdk applications. The winforms application
+will not work on Linux environments, but who cares nowadays? :)
 
 ### Running unit and integration tests
-Along with ``FenixLib`` C# project there is a ``FenixLib.Tests`` project that contains unit and integration tests to validate the functionality of the library. Complementary projects may be accompained by a Test project following the pattern  ``<ProjectName>.Tests``.
+[NUnit](http://www.nunit.org/) is the test framework used. At the time the test were being written I was still
+learning about NUnit and .NET testing in general.
 
-It is my intention to cover as much work units as possible via unit tests but I do not always strictly follow a test-first pattern which makes that some part of the library might 
-not be fully covered. Once the base functionality that the library is intending to offer is completed and covered with unit-tests I intend to adopt a test-first approach for future
-modifications.
-
-I use [NUnit](http://www.nunit.org/) as testing framework and [Rhino Mocks](https://www.hibernatingrhinos.com/oss/rhino-mocks) as mocking framework. Both are available as NuGet packages
-and work seamlessly with both Visual Studio and MonoDevelop / Xamarin.
+[Rhino Mocks](https://www.hibernatingrhinos.com/oss/rhino-mocks) was the mocking framework used at the time,
+but because it doesn't work on .NET 5.0 I did a small migration effort to [Moq](https://github.com/Moq/moq).
+I didn't spend lot of time making _the best possible migration_, just did the minimum to get them to 
+build and pass the tests.
 
 For each FenixLib assembly there will be, if any, only one Test project. All test projects have a similar structure:
-* An ``Unit`` folder containing all unit tests. I put a lot of effor in doing code refractoring to minimize the overlapping between units and in most situation I try to only test public API. 
-  However, I do make use of the InternalsVisible and test ``internal`` functionality when I decide it is to early to expose a certain class outside the assembly. All unit tests are grouped under the
-  ''unit'' TestCategory.
 
-* An ``Integration`` folder containing tests of groups of functionality. These tests help me test real-case situations such as decoding real files, etc. The tests are still written 
-  as NUnit TestFixtures, but their motivation is different. They are grouped under the ''integration'' TestCategory.
+* A ``Unit`` folder containing all unit tests. I put a lot of effor in doing code refractoring to minimize the overlapping 
+  between units and in most situation I try to only test public API. 
+  However, I do make use of the InternalsVisible and test ``internal`` functionality when I decide it is to early to expose 
+  a certain class outside the assembly. All unit tests are grouped under the ''unit'' `TestCategory`.
+
+* A ``Integration`` folder containing tests of groups of functionality. These tests help me test real-case situations 
+  such as decoding real files, etc. The tests are still written They are grouped under the ''integration'' TestCategory.
+
+> I'd normally prefer two separate assemblies for unit and integration tests, but this is an olde project where
+> my testing habits were still in development.
+
+Use whatever test runner your .NET implementation provides you. If using .NET 5.0:
+
+    dotnet test Src/FenixLib.Tests
   
-When cloning the repository, make sure to run the tests to be sure that the library functionality is not broken.
-
 ## Contributing
-There basically three ways in which you can contribute:
-  1. Reporting issues or feature requests. 
-  2. Sending your code contributions.
-  3. Letting me know how useful is this to you.
-  4. Hire me!
-
-Well, that was 5 actually! Let's have a look on each of them:
-
-### Reporting issues or feature requests
-Use the [issues](https://github.com/dacucar/fenixlib/issues) section. Any feature request shall also be written there.
-
-### Sending your code contributions
-If you modify FenixLib or extended and you think your modifications are useful for everyone, you are welcomed to send your pull requests. Be sure to have a look at existing code so as your code is formatted consistently with FenixLib standards and so as you follow same type of naming convention.
-
-### Letting me know how useful is this to you
-If FenixLib is useful to you but donating is not an option for you, don't worry, you can still contribute by simply letting me know where and how do you use FenixLib. I am honour with every end-user and very willing to know about projects using my work.
-
-### Hire me! :)
-I develop FenixLib for free and for the fun of it. If you believe that something you see here might suit your projects needs don't be shy feel free to contact me.
+This project is not actively maintained but if for whatever reasons you find it useful don't hesitate
+to contact me, open an issue or send your PRs and I'll look at them.
 
 ## License
-Copyright 2016-2017 Darío Cutillas Carrillo
+Copyright 2016-2021 Darío Cutillas Carrillo
 
 FenixLib is distributed under the very permisive 
  [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
