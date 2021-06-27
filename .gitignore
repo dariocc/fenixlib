@@ -1,3 +1,4 @@
+.vscode/
 .idea/
 
 ## Ignore Visual Studio temporary files, build results, and
@@ -212,3 +213,6 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+
+.fake
+.ionide

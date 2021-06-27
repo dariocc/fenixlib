@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.12.0\build\NUnit.props')" />
+  <Import Project="..\packages\NUnit3TestAdapter.3.15.1\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.15.1\build\net35\NUnit3TestAdapter.props')" />
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\TestFiles\1bpp-compressed.fpg">
+      <Link>TestFiles\Fpg\1bpp-compressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\1bpp-uncompressed.fpg">
+      <Link>TestFiles\Fpg\1bpp-uncompressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\8bpp-div-extendid.fnt">
+      <Link>TestFiles\Fnt\8bpp-div-extendid.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\8bpp-div-mayuscul.fnt">
+      <Link>TestFiles\Fnt\8bpp-div-mayuscul.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\8bpp-div-minusc.fnt">
+      <Link>TestFiles\Fnt\8bpp-div-minusc.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\8bpp-div-numeros.fnt">
+      <Link>TestFiles\Fnt\8bpp-div-numeros.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\8bpp-div-simbolos.fnt">
+      <Link>TestFiles\Fnt\8bpp-div-simbolos.fnt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\16bpp-compressed.fpg">
+      <Link>TestFiles\Fpg\16bpp-compressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\16bpp-uncompressed.fpg">
+      <Link>TestFiles\Fpg\16bpp-uncompressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\32bpp-compressed.fpg">
+      <Link>TestFiles\Fpg\32bpp-compressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\32bpp-uncompressed.fpg">
+      <Link>TestFiles\Fpg\32bpp-uncompressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\8bpp-compressed.fpg">
+      <Link>TestFiles\Fpg\8bpp-compressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\TestFiles\8bpp-uncompressed.fpg">
+      <Link>TestFiles\Fpg\8bpp-uncompressed.fpg</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FenixLib\FenixLib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Unit\IO\Util\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Integration\Comparison\AbstractGraphicComparer.cs" />
+    <Compile Remove="Integration\Comparison\ComparableBitmapFont.cs" />
+    <Compile Remove="Integration\Comparison\ComparableSpriteAssortment.cs" />
+    <Compile Remove="Integration\Comparison\GlyphComparerByGlyphInfo.cs" />
+    <Compile Remove="Integration\Comparison\GraphicComparerByDimensions.cs" />
+    <Compile Remove="Integration\Comparison\GraphicComparerByPixels.cs" />
+    <Compile Remove="Integration\Comparison\IGraphicEquallyComparer.cs" />
+    <Compile Remove="Integration\Comparison\SpriteComparerByDescription.cs" />
+    <Compile Remove="Integration\FntDecoding.cs" />
+    <Compile Remove="Integration\FpgDecoding.cs" />
+  </ItemGroup>
+</Project>
