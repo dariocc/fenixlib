@@ -1,6 +1,6 @@
 ![.NET](https://github.com/dariocc/fenixlib/actions/workflows/dotnet.yml/badge.svg)
 
-[FenixLib](Media/fenixlib.png "FenixLib Logo")
+![FenixLib](Media/fenixlib.png "FenixLib Logo")
 
 FenixLib brings .Net support for opening, creating and operating with
 native graphic, graphic collections, bitmap fonts and palette formats of
@@ -11,10 +11,6 @@ native graphic, graphic collections, bitmap fonts and palette formats of
 The following snippet shows how easy is to open a Fpg file, print the codes
 and description of every map, change the description of map with code 10 and
 save the changes in a new file.
-
-> NOTE: This is an old project, but I've rescued it for some learning purposes
-> such as migration to .NET Standard and automating deployments with Github
-> actions.
 
 ```csharp
 using FenixLib.Core;
@@ -57,19 +53,26 @@ font.SaveToFnt ( "myfont.fnt" );
 A battery of [examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.
 
 ## Using the library
+
 Add a reference to your .NET project by using the [nuget package](https://www.nuget.org/packages/FenixLib/)
 or building it from the sources.
 
-If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fpg),  [Map](https://github.com/dacucar/fenixlib/wiki/Native-Format#Map), [Pal](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) and [Fnt](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) files, working with FenixLib should be quite strightforward, just make sure to go through the information in the following topics. 
+If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fpg),
+[Map](https://github.com/dacucar/fenixlib/wiki/Native-Format#Map), 
+[Pal](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) and
+[Fnt](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) files, working with FenixLib should 
+be quite straightforward, just make sure to go through the information in the following topics. 
 
 * [Core Types](https://github.com/dacucar/fenixlib/wiki/Core-Types)
 * [IO Api](https://github.com/dacucar/fenixlib/wiki/IO-Api)
 
-If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/Native-Formats) and then you will be ready to the topics above.
+If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/Native-Formats) 
+and then you will be ready to the topics above.
 
-You may also check the [example projects](https://github.com/dacucar/fenixlib/wiki/Examples) for some inspiration, although these are very basic.
+You may also check the [example projects](https://github.com/dacucar/fenixlib/wiki/Examples) for some inspiration.
 
 ## Building
+
 Fenixlib core assembly (FenixLib.dll) was originally written to target .NET framework 4.5 but it has 
 been migrated to .NET Standard 2.0 and therefore it should run on any .NET impelementation that
 supports it, including .NET Framework > 4.5, Mono, .NET Core and .NET 5.0.
@@ -96,6 +99,7 @@ And also some Examples under `Src/Examples` with a basic Winforms and Gdk applic
 will not work on Linux environments, but who cares nowadays? :)
 
 ### Running unit and integration tests
+
 [NUnit](http://www.nunit.org/) is the test framework used. At the time the test were being written I was still
 learning about NUnit and .NET testing in general.
 
@@ -120,12 +124,14 @@ For each FenixLib assembly there will be, if any, only one Test project. All tes
 Use whatever test runner your .NET implementation provides you. If using .NET 5.0:
 
     dotnet test Src/FenixLib.Tests
-  
+
 ## Contributing
+
 This project is not actively maintained but if for whatever reasons you find it useful don't hesitate
 to contact me, open an issue or send your PRs and I'll look at them.
 
 ## License
+
 Copyright 2016-2021 Darío Cutillas Carrillo
 
 FenixLib is distributed under the very permisive 
