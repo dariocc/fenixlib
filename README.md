@@ -1,6 +1,7 @@
 ![FenixLib](Media/fenixlib.png "FenixLib Logo")
 
 ![.NET](https://github.com/dariocc/fenixlib/actions/workflows/dotnet.yml/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 FenixLib brings .Net support for opening, creating and operating with
 native graphic, graphic collections, bitmap fonts and palette formats of
