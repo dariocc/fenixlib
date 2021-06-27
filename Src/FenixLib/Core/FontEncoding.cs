@@ -27,6 +27,12 @@ namespace FenixLib
             this.codePage = codePage;
         }
 
+        // TODO: Review
+        static FontEncoding()
+        {
+            System.Text.Encoding.RegisterProvider( System.Text.CodePagesEncodingProvider.Instance );
+        }
+
         internal static FontEncoding FromEncoding ( Encoding encoding )
         {
             switch ( encoding.CodePage )
