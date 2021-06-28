@@ -1,4 +1,4 @@
-/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darï¿½o Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -20,25 +20,25 @@ namespace FenixLib.Core
 {
 
     [Serializable]
-    public class UnsuportedFileFormatException : IOException
+    public class UnsupportedFileFormatException : IOException
     {
         #region CommonConstructors
-        public UnsuportedFileFormatException ()
+        public UnsupportedFileFormatException ()
             : base ()
         {
         }
 
-        public UnsuportedFileFormatException ( string message )
+        public UnsupportedFileFormatException ( string message )
             : base ( message )
         {
         }
 
-        public UnsuportedFileFormatException ( string message, Exception inner )
+        public UnsupportedFileFormatException ( string message, Exception inner )
             : base ( message, inner )
         {
         }
 
-        protected UnsuportedFileFormatException ( SerializationInfo info, StreamingContext context )
+        protected UnsupportedFileFormatException ( SerializationInfo info, StreamingContext context )
             : base ( info, context )
         {
         }

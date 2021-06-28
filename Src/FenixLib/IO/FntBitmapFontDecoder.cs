@@ -50,7 +50,7 @@ namespace FenixLib.IO
 
             if ( !ValidBitPerPixelDepths.Contains ( bpp ) )
             {
-                throw new UnsuportedFileFormatException (); // TODO Customize
+                throw new UnsupportedFileFormatException (); // TODO Customize
             }
 
             Palette palette = null;

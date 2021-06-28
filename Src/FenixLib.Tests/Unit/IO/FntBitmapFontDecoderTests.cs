@@ -66,7 +66,7 @@ namespace FenixLib.Tests.Unit.IO
             var headerSetup = new NativeFormat.Header ( "abc", new byte[1], 0 );
             var readerSetup = new Mock<NativeFormatReader> ( streamSetup.Object );
 
-            Assert.Catch<UnsuportedFileFormatException> (
+            Assert.Catch<UnsupportedFileFormatException> (
                 () => ReadBody ( headerSetup, readerSetup.Object ) );
         }
 

@@ -1,4 +1,4 @@
-/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darï¿½o Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -124,7 +124,7 @@ namespace FenixLib.IO
             byte[] headerBytes = new byte[8];
 
             if ( input.Read ( headerBytes, 0, 2 ) != 2 )
-                throw new UnsuportedFileFormatException (); // TODO: Customize
+                throw new UnsupportedFileFormatException (); // TODO: Customize
 
             if ( HeaderIsGZip ( headerBytes ) )
             {
@@ -136,14 +136,14 @@ namespace FenixLib.IO
                     bodyStream = new GZipStream ( concatenated, CompressionMode.Decompress );
 
                     if ( bodyStream.Read ( headerBytes, 0, 8 ) != 8 )
-                        throw new UnsuportedFileFormatException ();
+                        throw new UnsupportedFileFormatException ();
                 }
             }
             else
             {
                 // Read the remaining 6 bytes of the header
                 if ( input.Read ( headerBytes, 2, 6 ) != 6 )
-                    throw new UnsuportedFileFormatException ();
+                    throw new UnsupportedFileFormatException ();
 
                 bodyStream = input;
             }
@@ -155,13 +155,13 @@ namespace FenixLib.IO
                     header = reader.ReadHeader ();
 
                     if ( !ValidateHeaderMagic ( header.Magic, header ) )
-                        throw new UnsuportedFileFormatException (); // TODO: Customize
+                        throw new UnsupportedFileFormatException (); // TODO: Customize
 
                     if ( !ValidateHeaderTerminator ( header.Terminator, header ) ) // TODO: Customize
-                        throw new UnsuportedFileFormatException ();
+                        throw new UnsupportedFileFormatException ();
 
                     if ( !ValidateHeaderVersion ( header.LastByte, header ) ) // TODO: Customize
-                        throw new UnsuportedFileFormatException ();
+                        throw new UnsupportedFileFormatException ();
                 }
             }
 
@@ -204,7 +204,7 @@ namespace FenixLib.IO
                 decoded = Decode ( input );
                 return true;
             }
-            catch ( UnsuportedFileFormatException )
+            catch ( UnsupportedFileFormatException )
             {
                 decoded = default ( T );
                 return false;
