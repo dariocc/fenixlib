@@ -81,7 +81,7 @@ namespace FenixLib.Imaging
             }
             else if ( format == GraphicFormat.Format1bppMonochrome )
             {
-                pixelWriter = new PixelWriterMonochrome ();
+                throw new ArgumentOutOfRangeException( "Sub-pixel graphic formats are not supported.");
             }
             else
             {
