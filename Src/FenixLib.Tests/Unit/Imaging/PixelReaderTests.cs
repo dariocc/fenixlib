@@ -53,6 +53,23 @@ namespace FenixLib.Imaging
                 color0, color1, color2,
                 color2, color1, color0
             };
+
+            Assert.That(pixels, Is.EquivalentTo(expectedPixels));
+        }
+
+        [Test]
+        public void ReadingPixels_16bppGraphic_Works()
+        {
+            var pixels = ReadAllPixels(Create16bppGraphicStub());
+            var color0 = (0, 0, 0, 0);
+            var color1 = (0, 0, 8, 255);
+            var color2 = (248, 0, 8, 255);
+            var expectedPixels = new List<(int R, int G, int B, int A)>()
+            {
+                color0, color1, color2
+            };
+
+            Assert.That(pixels, Is.EquivalentTo(expectedPixels));
         }
 
         private static List<(int R, int G, int B, int A)> ReadAllPixels(IGraphic graphic)
@@ -110,6 +127,25 @@ namespace FenixLib.Imaging
             graphic.Setup(x => x.GraphicFormat).Returns(GraphicFormat.Format8bppIndexed);
             graphic.Setup(x => x.Width).Returns(4);
             graphic.Setup(x => x.Height).Returns(3);
+            return graphic.Object;
+        }
+
+        private static IGraphic Create16bppGraphicStub()
+        {
+            // 3x1 1bpp data
+            // 00000 000000 00000, 00000 000000 00001, 11111 000000 00001
+            // 0000 0000 0000 0000, 0000 0000 0000 0001, 1111 1000 0000 0001
+            byte[] pixelData = new byte[6]
+            {
+                0x00, 0x00, 0x01, 0x00, 0x01, 0xF8
+            };
+
+            var graphic = new Mock<IGraphic>();
+            graphic.Setup(x => x.PixelData).Returns(pixelData);
+            graphic.Setup(x => x.GraphicFormat).Returns(GraphicFormat.Format16bppRgb565);
+            graphic.Setup(x => x.Width).Returns(3);
+            graphic.Setup(x => x.Height).Returns(1);
+
             return graphic.Object;
         }
     }
