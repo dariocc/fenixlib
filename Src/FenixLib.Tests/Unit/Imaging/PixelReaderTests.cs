@@ -26,7 +26,7 @@ namespace FenixLib.Imaging
     {
 
         [Test]
-        public void Read_WorksAsExpectedForMonochromeGraphics()
+        public void ReadingPixels_MonochromeGraphic_Works()
         {
             var pixels = ReadAllPixels(Create1bppGraphicStub());
             var white = (255, 255, 255, 255);
@@ -42,7 +42,7 @@ namespace FenixLib.Imaging
         }
 
         [Test]
-        public void Read_WorksAsExpectedForIndexedGraphics()
+        public void ReadingPixels_IndexedGraphic_Works()
         {
             var pixels = ReadAllPixels(Create8bbpGraphicStub());
             var color0 = (0, 0, 0, 0);
