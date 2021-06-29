@@ -14,6 +14,7 @@
 */
 using System;
 using System.IO;
+using System.Collections.Generic;
 using FenixLib.Core;
 using NUnit.Framework;
 using Moq;
@@ -25,10 +26,50 @@ namespace FenixLib.Imaging
     {
 
         [Test]
-        public void test()
+        public void Read_WorksAsExpectedForMonochromeGraphics()
         {
-            var graphic = Create8bbpGraphicStub();
+            var graphic = Create1bppGraphicStub();
             var pixelReader = PixelReader.Create(graphic);
+
+            var pixels = new List<(int R, int G, int B)>();
+            while (pixelReader.HasPixels)
+            {
+                pixelReader.Read();
+                var color = (R: pixelReader.R, G: pixelReader.G, B: pixelReader.B);
+                pixels.Add(color);
+            }
+
+            var white = (255, 255, 255);
+            var black = (0, 0, 0);
+            var expectedPixels = new List<(int R, int G, int B)>()
+            {
+                white, white, white, white, white, white, white, white, white, white,
+                white, black, black, black, black, black, black, black, black, white,
+                white, white, white, white, white, white, white, white, white, white,
+            };
+
+            Assert.That(pixels, Has.Count.EqualTo(30));
+            Assert.That(pixels, Is.EquivalentTo(expectedPixels));
+        }
+
+        private static IGraphic Create1bppGraphicStub()
+        {
+            // 10x3 1bpp data
+            // 11111111 11xxxxx
+            // 10000000 01xxxxx
+            // 11111111 11xxxxx
+            byte[] pixelData1bpp = new byte[6];
+            pixelData1bpp[0] = 0xFF; pixelData1bpp[1] = 0x3 << 6;
+            pixelData1bpp[2] = 0x1 << 7; pixelData1bpp[3] = 0x1 << 6;
+            pixelData1bpp[4] = 0xFF; pixelData1bpp[5] = 0x3 << 6;
+
+            var graphic = new Mock<IGraphic>();
+            graphic.Setup(x => x.PixelData).Returns(pixelData1bpp);
+            graphic.Setup(x => x.GraphicFormat).Returns(GraphicFormat.Format1bppMonochrome);
+            graphic.Setup(x => x.Width).Returns(10);
+            graphic.Setup(x => x.Height).Returns(3);
+
+            return graphic.Object;
         }
 
         private static IGraphic Create8bbpGraphicStub()

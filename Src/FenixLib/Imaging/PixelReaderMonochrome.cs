@@ -16,48 +16,42 @@ namespace FenixLib.Imaging
 {
     internal class PixelReaderMonochrome : PixelReader
     {
-        private int x = 0, y = 0;
-        byte byteValue;
+        private int pixelIndex;
+        private byte byteValue;
 
         public override bool HasPixels
         {
             get
             {
-                return ( ( x + 1 ) * ( y + 1 ) <= ( Graphic.Width - 1 ) * ( Graphic.Height - 1 ) );
+                return pixelIndex < Graphic.Width * Graphic.Height;
             }
         }
 
         public override void Read ()
         {
-            int bytesPerRow =
-                Core.GraphicFormat.Format1bppMonochrome.StrideForWidth ( Graphic.Width );
+            var bytesPerStride = Core.GraphicFormat.Format1bppMonochrome.StrideForWidth ( Graphic.Width );
+            var usedBitsInStride = Graphic.Width;
+            var totalBitsInStride = bytesPerStride * 8;
 
-            if ( x % 8 == 0 )
+            var alignedBitIndex = pixelIndex + ( pixelIndex / usedBitsInStride ) * (totalBitsInStride - usedBitsInStride);
+            var bitInByte = 7 - ( alignedBitIndex % totalBitsInStride ) % 8;
+
+            if (alignedBitIndex % totalBitsInStride == 0 || alignedBitIndex % 8 == 0)
             {
                 byte[] buff = new byte[1];
                 BaseStream.Read ( buff, 0, 1 );
                 byteValue = buff[0];
             }
 
-            int bitInByte = ( x % 8 );
-
-            int bitValue = ( byteValue & ( 0x01 << ( 7 - bitInByte ) ) ) >> ( 7 - bitInByte );
+            int bitValue = ( byteValue & ( 0x01 << bitInByte ) ) >> bitInByte;
             int componentValue = bitValue * 255;
-
-            if ( Core.GraphicFormat.Format1bppMonochrome.StrideForWidth ( x + 1 ) >= bytesPerRow )
-            {
-                x = 0;
-                y++;
-            }
-            else
-            {
-                x++;
-            }
 
             R = componentValue;
             G = componentValue;
             B = componentValue;
             Alpha = componentValue;
+
+            pixelIndex++;
         }
     }
 }
