@@ -28,28 +28,46 @@ namespace FenixLib.Imaging
         [Test]
         public void Read_WorksAsExpectedForMonochromeGraphics()
         {
-            var graphic = Create1bppGraphicStub();
-            var pixelReader = PixelReader.Create(graphic);
-
-            var pixels = new List<(int R, int G, int B)>();
-            while (pixelReader.HasPixels)
-            {
-                pixelReader.Read();
-                var color = (R: pixelReader.R, G: pixelReader.G, B: pixelReader.B);
-                pixels.Add(color);
-            }
-
-            var white = (255, 255, 255);
-            var black = (0, 0, 0);
-            var expectedPixels = new List<(int R, int G, int B)>()
+            var pixels = ReadAllPixels(Create1bppGraphicStub());
+            var white = (255, 255, 255, 255);
+            var black = (0, 0, 0, 0);
+            var expectedPixels = new List<(int R, int G, int B, int A)>()
             {
                 white, white, white, white, white, white, white, white, white, white,
                 white, black, black, black, black, black, black, black, black, white,
                 white, white, white, white, white, white, white, white, white, white,
             };
 
-            Assert.That(pixels, Has.Count.EqualTo(30));
             Assert.That(pixels, Is.EquivalentTo(expectedPixels));
+        }
+
+        [Test]
+        public void Read_WorksAsExpectedForIndexedGraphics()
+        {
+            var pixels = ReadAllPixels(Create8bbpGraphicStub());
+            var color0 = (0, 0, 0, 0);
+            var color1 = (128, 0, 255, 255);
+            var color2 = (0, 0, 0, 255);
+            var expectedPixels = new List<(int R, int G, int B, int A)>()
+            {
+                color0, color1, color2,
+                color2, color1, color0
+            };
+        }
+
+        private static List<(int R, int G, int B, int A)> ReadAllPixels(IGraphic graphic)
+        {
+            var pixelReader = PixelReader.Create(graphic);
+
+            var pixels = new List<(int R, int G, int B, int A)>();
+            while (pixelReader.HasPixels)
+            {
+                pixelReader.Read();
+                var color = (R: pixelReader.R, G: pixelReader.G, B: pixelReader.B, A: pixelReader.Alpha);
+                pixels.Add(color);
+            }
+
+            return pixels;
         }
 
         private static IGraphic Create1bppGraphicStub()
@@ -58,13 +76,13 @@ namespace FenixLib.Imaging
             // 11111111 11xxxxx
             // 10000000 01xxxxx
             // 11111111 11xxxxx
-            byte[] pixelData1bpp = new byte[6];
-            pixelData1bpp[0] = 0xFF; pixelData1bpp[1] = 0x3 << 6;
-            pixelData1bpp[2] = 0x1 << 7; pixelData1bpp[3] = 0x1 << 6;
-            pixelData1bpp[4] = 0xFF; pixelData1bpp[5] = 0x3 << 6;
+            byte[] pixelData = new byte[6];
+            pixelData[0] = 0xFF; pixelData[1] = 0x3 << 6;
+            pixelData[2] = 0x1 << 7; pixelData[3] = 0x1 << 6;
+            pixelData[4] = 0xFF; pixelData[5] = 0x3 << 6;
 
             var graphic = new Mock<IGraphic>();
-            graphic.Setup(x => x.PixelData).Returns(pixelData1bpp);
+            graphic.Setup(x => x.PixelData).Returns(pixelData);
             graphic.Setup(x => x.GraphicFormat).Returns(GraphicFormat.Format1bppMonochrome);
             graphic.Setup(x => x.Width).Returns(10);
             graphic.Setup(x => x.Height).Returns(3);
@@ -74,34 +92,23 @@ namespace FenixLib.Imaging
 
         private static IGraphic Create8bbpGraphicStub()
         {
-            // 10x3 8bpp data
-            // 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF
-            // 0xFF 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0xFF
-            // 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF
-            byte[] pixelData8bpp = new byte[30];
-            for (int i = 0; i < 10; i++)
-            {
-                pixelData8bpp[i] = 0xFF;
-                pixelData8bpp[29 - i] = 0xFF;
-            }
-            pixelData8bpp[10] = 0xFF;
-            for (int i = 11; i < 19; i++)
-            {
-                pixelData8bpp[i] = 0x00;
-            }
-            pixelData8bpp[19] = 0xFF;
             // Palette colors
             PaletteColor[] colors = new PaletteColor[256];
             colors[0] = new PaletteColor(0, 0, 0);
-            colors[1] = new PaletteColor(255, 255, 255);
-            colors[2] = new PaletteColor(255, 0, 0);
-            colors[3] = new PaletteColor(0, 255, 0);
-            colors[4] = new PaletteColor(0, 0, 255);
+            colors[1] = new PaletteColor(128, 0, 255);
+            colors[2] = new PaletteColor(0, 0, 0);
+            // 3x2 8bpp data
+            // 0 1 2
+            // 2 1 0 
+            byte[] pixelData = new byte[] {
+                0, 1, 2,
+                2, 1, 0
+            };
             var graphic = new Mock<IGraphic>();
-            graphic.Setup(x => x.PixelData).Returns(pixelData8bpp);
+            graphic.Setup(x => x.PixelData).Returns(pixelData);
             graphic.Setup(x => x.Palette).Returns(new Palette(colors));
             graphic.Setup(x => x.GraphicFormat).Returns(GraphicFormat.Format8bppIndexed);
-            graphic.Setup(x => x.Width).Returns(10);
+            graphic.Setup(x => x.Width).Returns(4);
             graphic.Setup(x => x.Height).Returns(3);
             return graphic.Object;
         }

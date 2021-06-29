@@ -20,7 +20,7 @@ namespace FenixLib.Imaging
         {
             get
             {
-                return ( BaseStream.Position + 1 < BaseStream.Length );
+                return ( BaseStream.Position < BaseStream.Length );
             }
         }
 
@@ -32,10 +32,7 @@ namespace FenixLib.Imaging
             G = Graphic.Palette[value].G;
             B = Graphic.Palette[value].B;
 
-            if ( value == 0 )
-                Alpha = 0;
-            else
-                Alpha = 255;
+            Alpha = value == 0 ? 0 : 255;
         }
     }
 }
