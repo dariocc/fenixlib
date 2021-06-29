@@ -15,6 +15,7 @@
 using NUnit.Framework;
 using FenixLib.Core;
 using Moq;
+using FenixLib.Imaging;
 
 namespace FenixLib.Tests.Imaging
 {
@@ -52,6 +53,8 @@ namespace FenixLib.Tests.Imaging
             stubGraphic1bpp = new Mock<IGraphic> ();
             stubGraphic1bpp.Setup ( x => x.PixelData ).Returns ( pixelData1bpp );
             stubGraphic1bpp.Setup ( x => x.GraphicFormat ).Returns ( GraphicFormat.Format1bppMonochrome );
+            stubGraphic1bpp.Setup ( x => x.Width ).Returns ( 10 );
+            stubGraphic1bpp.Setup ( x => x.Height ).Returns ( 3 );
         }
 
         private void SetUpIndexedSetup()
@@ -83,6 +86,8 @@ namespace FenixLib.Tests.Imaging
             stubGraphic8bpp.Setup ( x => x.PixelData ).Returns ( pixelData8bpp );
             stubGraphic8bpp.Setup ( x => x.Palette ).Returns ( new Palette ( colors ) );
             stubGraphic8bpp.Setup ( x => x.GraphicFormat ).Returns ( GraphicFormat.Format8bppIndexed );
+            stubGraphic8bpp.Setup ( x => x.Width ).Returns ( 10 );
+            stubGraphic8bpp.Setup ( x => x.Height ).Returns ( 3 );
         }
 
         private void SetUp16bppSetup()
@@ -103,12 +108,28 @@ namespace FenixLib.Tests.Imaging
         [Test]
         public void Convert_MonochromeToIndexed_CheckFormat ()
         {
+            var targetPalette = new Palette();
+            targetPalette[0] = new PaletteColor(0, 0, 0);
+            targetPalette[1] = new PaletteColor(255, 255, 255);
 
+            var converted = StubGraphic1bpp.convert( GraphicFormat.Format8bppIndexed, targetPalette );
+            Assert.That(converted.PixelData, Is.EqualTo(StubGraphic8bpp.PixelData));
         }
+
         [Test]
         public void Convert_MonochromeTo16bpp_CheckFormat ()
         {
-
+            int count = 0;
+            var pixelReader = PixelReader.Create(StubGraphic1bpp);
+            while (pixelReader.HasPixels)
+            {
+                pixelReader.Read();
+                TestContext.Out.WriteLine($"{pixelReader.R}, {pixelReader.G}, {pixelReader.B}");
+                count++;
+            }
+            TestContext.Out.WriteLine($"{StubGraphic1bpp.PixelData.Length}");
+            TestContext.Out.WriteLine($"{count}");
+            TestContext.Out.WriteLine($"{StubGraphic1bpp.GraphicFormat.PixelsBytesForSize(10, 3)}");
         }
         [Test]
         public void Convert_MonochromeTo32bpp_CheckFormat ()

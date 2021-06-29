@@ -90,7 +90,7 @@ namespace FenixLib.Imaging
         {
             double hdiff = Math.Abs ( color1.H - color2.H ) / 360;
             double sdiff = Math.Abs ( color1.S - color2.S );
-            double ldiff = Math.Abs ( color1.L - color1.L );
+            double ldiff = Math.Abs ( color1.L - color2.L );
 
             return hdiff * hdiff * weights.H
                 + sdiff * sdiff * weights.S

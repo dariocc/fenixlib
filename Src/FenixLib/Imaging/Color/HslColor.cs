@@ -24,7 +24,7 @@ namespace FenixLib.Imaging.Color
 
         public HslColor ( int hue, double saturation, double luminosity )
         {
-            if ( hue >= 360 || hue <= 0 )
+            if ( hue >= 360 || hue < 0 )
                 throw new ArgumentOutOfRangeException ( 
                     "Hue must bee between 0 and 360" );
 
@@ -43,10 +43,10 @@ namespace FenixLib.Imaging.Color
 
         public static HslColor FromRgb ( RgbColor c )
         {
-            return FromRgb ( c.R / 255.0, c.G / 255.0, c.B / 255.0 );
+            return FromRgb ( c.R, c.G, c.B );
         }
 
-        // This method is private to obligue consumers to use RgbColor constructor,
+        // This method is private to force consumers to use RgbColor constructor,
         // which will validate the RgbColor components
         private static HslColor FromRgb ( double r, double g, double b )
         {
@@ -71,7 +71,7 @@ namespace FenixLib.Imaging.Color
                 h = ( int ) ( 60 * ( r - g ) / ( max - min ) + 240 );
             }
 
-            double l = 0.5 * ( max - min );
+            double l = 0.5 * ( max + min );
 
             double s;
             if ( max == min )
