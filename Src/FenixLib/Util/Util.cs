@@ -22,8 +22,7 @@ namespace FenixLib.Util
         internal static unsafe byte[] StructureToBytes<T> ( T[] st ) where T : struct
         {
             var bytes = new byte[Marshal.SizeOf ( st )];
-            fixed ( byte* ptr = bytes ) Marshal.StructureToPtr ( 
-                st, new IntPtr ( ptr ), true );
+            fixed ( byte* ptr = bytes ) Marshal.StructureToPtr ( st, new IntPtr ( ptr ), true );
             return bytes;
         }
 
