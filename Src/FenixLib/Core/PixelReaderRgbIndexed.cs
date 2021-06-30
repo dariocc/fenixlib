@@ -12,9 +12,9 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-namespace FenixLib.Imaging
+namespace FenixLib.Core
 {
-    internal class PixelReaderRgbInt16 : PixelReader
+    internal class PixelReaderRgbIndexed : PixelReader
     {
         public override bool HasPixels
         {
@@ -26,16 +26,13 @@ namespace FenixLib.Imaging
 
         public override void Read ()
         {
-            int value = Reader.ReadInt16 ();
+            int value = Reader.ReadByte ();
 
-            R = ( ( value >> 11 ) & 0x1F ) << 3;
-            G = ( ( value >> 5 ) & 0x3F ) << 2;
-            B = ( value & 0x1F ) << 3;
+            R = Graphic.Palette[value].R;
+            G = Graphic.Palette[value].G;
+            B = Graphic.Palette[value].B;
 
-            if ( value == 0 )
-                Alpha = 0;
-            else
-                Alpha = 255;
+            Alpha = value == 0 ? 0 : 255;
         }
     }
 }

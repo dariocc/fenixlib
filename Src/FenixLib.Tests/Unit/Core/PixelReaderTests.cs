@@ -14,7 +14,7 @@
 */
 using System.Collections.Generic;
 using FenixLib.Core;
-using FenixLib.Imaging;
+using FenixLib.Core;
 using NUnit.Framework;
 using Moq;
 
