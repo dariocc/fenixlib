@@ -16,7 +16,7 @@ using System;
 using Gdk;
 using FenixLib.Core;
 
-namespace FenixLib.Gdk
+namespace FenixLibAndGtkExample
 {
     public static class PixbufConversion
     {

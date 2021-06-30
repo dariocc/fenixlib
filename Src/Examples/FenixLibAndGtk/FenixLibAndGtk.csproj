@@ -12,10 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.24.24.34" />
-    <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\FenixLib\FenixLib.csproj" />
-    <ProjectReference Include="..\..\FenixLib.Gdk\FenixLib.Gdk.csproj" />
   </ItemGroup>
 </Project>
