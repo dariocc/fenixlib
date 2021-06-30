@@ -14,10 +14,11 @@
 */
 using System.Collections.Generic;
 using FenixLib.Core;
+using FenixLib.Imaging;
 using NUnit.Framework;
 using Moq;
 
-namespace FenixLib.Imaging
+namespace FenixLib.Tests.Unit.Imaging
 {
     [TestFixture]
     public class PixelReaderTests
