@@ -90,7 +90,7 @@ namespace FenixLib.Tests.Unit.IO
             var readerMock = new Mock<NativeFormatReader>( streamSetup.Object );
             createNativeFormatReaderValue = readerMock.Object;
 
-            // TODO: Verify calle din order
+            // TODO: Verify called in order
             readerMock.Setup ( x => x.ReadPalette () ).Returns ( new Palette () );
             readerMock.Setup ( x => x.ReadPaletteGammas () ).Returns ( new byte[0] { } );
             readerMock.Setup ( x => x.ReadInt32 () ).Returns ( 1 ); // FontInfo
