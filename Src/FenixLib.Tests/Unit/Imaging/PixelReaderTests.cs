@@ -12,8 +12,6 @@
 *   See the License for the specific language governing permissions and
 *   limitations under the License.
 */
-using System;
-using System.IO;
 using System.Collections.Generic;
 using FenixLib.Core;
 using NUnit.Framework;
@@ -71,6 +69,22 @@ namespace FenixLib.Imaging
 
             Assert.That(pixels, Is.EquivalentTo(expectedPixels));
         }
+
+        [Test]
+        public void ReadingPixels_32bppGraphic_Works()
+        {
+            var pixels = ReadAllPixels(Create32bppGraphicStub());
+            var color0 = (0, 0, 0, 0);
+            var color1 = (0, 0, 0, 255);
+            var color2 = (255, 0, 255, 0xF0);
+            var expectedPixels = new List<(int R, int G, int B, int A)>()
+            {
+                color0, color1, color2
+            };
+
+            Assert.That(pixels, Is.EquivalentTo(expectedPixels));
+        }
+
 
         private static List<(int R, int G, int B, int A)> ReadAllPixels(IGraphic graphic)
         {
@@ -143,6 +157,24 @@ namespace FenixLib.Imaging
             var graphic = new Mock<IGraphic>();
             graphic.Setup(x => x.PixelData).Returns(pixelData);
             graphic.Setup(x => x.GraphicFormat).Returns(GraphicFormat.Format16bppRgb565);
+            graphic.Setup(x => x.Width).Returns(3);
+            graphic.Setup(x => x.Height).Returns(1);
+
+            return graphic.Object;
+        }
+        private static IGraphic Create32bppGraphicStub()
+        {
+            // 3x1 1bpp data
+            byte[] pixelData = new byte[]
+            {
+                0x00, 0x00, 0x00, 0x00, 
+                0x00, 0x00, 0x00, 0xFF,
+                0xFF, 0x00, 0xFF, 0xF0
+            };
+
+            var graphic = new Mock<IGraphic>();
+            graphic.Setup(x => x.PixelData).Returns(pixelData);
+            graphic.Setup(x => x.GraphicFormat).Returns(GraphicFormat.Format32bppArgb);
             graphic.Setup(x => x.Width).Returns(3);
             graphic.Setup(x => x.Height).Returns(1);
 

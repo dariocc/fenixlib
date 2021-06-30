@@ -20,7 +20,7 @@ namespace FenixLib.Imaging
         {
             get
             {
-                return ( BaseStream.Position + 4 < BaseStream.Length );
+                return ( BaseStream.Position < BaseStream.Length );
             }
         }
 
