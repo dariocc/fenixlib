@@ -20,16 +20,6 @@ namespace FenixLib.Gdk
 {
     public static class PixbufConversion
     {
-        public static IGraphic ToGraphic ( this Pixbuf pixbuf )
-        {
-            if ( pixbuf == null )
-            {
-                throw new ArgumentNullException ( nameof ( pixbuf ) );
-            }
-
-            throw new NotImplementedException ();
-        }
-
         public static Pixbuf ToPixBuf ( this IGraphic graphic )
         {
             byte[] destData = new byte[GraphicFormat
