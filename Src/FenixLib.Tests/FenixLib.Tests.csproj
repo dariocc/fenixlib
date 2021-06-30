@@ -75,16 +75,4 @@
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Integration\Comparison\AbstractGraphicComparer.cs" />
-    <Compile Remove="Integration\Comparison\ComparableBitmapFont.cs" />
-    <Compile Remove="Integration\Comparison\ComparableSpriteAssortment.cs" />
-    <Compile Remove="Integration\Comparison\GlyphComparerByGlyphInfo.cs" />
-    <Compile Remove="Integration\Comparison\GraphicComparerByDimensions.cs" />
-    <Compile Remove="Integration\Comparison\GraphicComparerByPixels.cs" />
-    <Compile Remove="Integration\Comparison\IGraphicEquallyComparer.cs" />
-    <Compile Remove="Integration\Comparison\SpriteComparerByDescription.cs" />
-    <Compile Remove="Integration\FntDecoding.cs" />
-    <Compile Remove="Integration\FpgDecoding.cs" />
-  </ItemGroup>
 </Project>
