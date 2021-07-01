@@ -9,7 +9,7 @@ native graphic, graphic collections, bitmap fonts and palette formats of
 [Div GO](http://www.amakasoft.com/herramientas/div-go.html) and 
 [DIV](http://div-arena.co.uk/) game programming languages and frameworks.
 
-Supported pixel format are _1bpp aligned packed_, _8bpp indexed_, _16bpp RGB565_
+Supported pixel formats are _1bpp aligned packed_, _8bpp indexed_, _16bpp RGB565_
 and _32bpp ARGB_, i.e. all native graphic file formats.
 
 The following snippet shows how easy is to open a Fpg file, print the codes
@@ -92,11 +92,8 @@ There exists some additional projects in the `fenixlib` folder:
 
 Test project depend on [NUnit 3](http://www.nunit.org/) and [Moq](https://github.com/Moq/moq).
 
-Notice that originally, FenixLib used [Rhino Mocks](https://www.hibernatingrhinos.com/oss/rhino-mocks)
-for test doubles and that code has been ported to Moq without much ambition (just making the test pass).
-
-Use whatever test runner your .NET implementation provides you. I use .NET 5.0 and `dotnet test` command
-to run the tests.
+Use whatever test runner your .NET implementation provides you. I use .NET 5.0 and `dotnet test` 
+command to run the tests:
 
     dotnet test Src/FenixLib.Tests
 
