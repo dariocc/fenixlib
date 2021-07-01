@@ -1,4 +1,4 @@
-name: .NET
+name: Build FenixLib
 
 on:
   push:
@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore FenixLib/FenixLib
+      run: dotnet restore fenixlib/FenixLib
     - name: Build
-      run: dotnet build --no-restore FenixLib/FenixLib
+      run: dotnet build --no-restore fenixlib/FenixLib
     - name: Test
-      run: dotnet test --no-build --verbosity normal FenixLib/FenixLib.Tests
+      run: dotnet test --no-build --verbosity normal fenixlib/FenixLib.Tests
