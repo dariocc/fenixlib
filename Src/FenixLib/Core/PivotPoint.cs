@@ -1,4 +1,4 @@
-/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darï¿½o Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ namespace FenixLib.Core
 		public readonly int X;
 		public readonly int Y;
 
-		internal PivotPoint(int id, int x, int y)
+		public PivotPoint(int id, int x, int y)
 		{
 			Id = id;
 			X = x;

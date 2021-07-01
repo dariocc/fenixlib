@@ -2,8 +2,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyTitle>FenixLib Class Library</AssemblyTitle>
+    <AssemblyDescriptionAttribute>.NET support for manipulating PixTudio, Bennu GD and DivDx native formats</AssemblyDescriptionAttribute>
+    <AssemblyCompanyAttribute>Darío Cutillas Carrillo</AssemblyCompanyAttribute>
+    <AssemblyCopyrightAttribute>Copyright © 2016 Darío Cutillas Carrillo</AssemblyCopyrightAttribute>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />

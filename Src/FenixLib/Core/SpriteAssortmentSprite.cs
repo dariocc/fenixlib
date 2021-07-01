@@ -20,7 +20,7 @@ namespace FenixLib.Core
     public sealed class SpriteAssortmentSprite : ISprite
     {
 
-        internal SpriteAssortmentSprite ( int id, ISprite sprite )
+        public SpriteAssortmentSprite ( int id, ISprite sprite )
         {
             Id = id;
 

@@ -19,7 +19,7 @@ namespace FenixLib.Core
     {
         private readonly IGlyph baseGlyph;
 
-        internal FontGlyph ( char character, IGlyph glyph )
+        public FontGlyph ( char character, IGlyph glyph )
         {
             Character = character;
             baseGlyph = glyph;
