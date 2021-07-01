@@ -11,12 +11,17 @@
     <AssemblyTitle>$(Title)</AssemblyTitle>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/dacucar/fenixlib</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>Game Bennu Graphics Fpg Font BitmapFont Editor</PackageTags>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
-    <None Include="../../README.md" target="" Pack="true" PackagePath="/" />
+    <None Include="../README.md" target="" Pack="true" PackagePath="/" />
     <None Include="../logo.png" target="" Pack="true" PackagePath="/" />
     <None Include="../icon.png" Pack="true" PackagePath="/" />
-  </ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+  </ItemGroup>  
 </Project>
