@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore Src/FenixLib
+      run: dotnet restore FenixLib/FenixLib
     - name: Build
-      run: dotnet build --no-restore Src/FenixLib
+      run: dotnet build --no-restore FenixLib/FenixLib
     - name: Test
-      run: dotnet test --no-build --verbosity normal Src/FenixLib.Tests
+      run: dotnet test --no-build --verbosity normal FenixLib/FenixLib.Tests
