@@ -3,12 +3,19 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AssemblyTitleAttribute>FenixLib Class Library</AssemblyTitle>
-    <AssemblyDescriptionAttribute>.NET support for manipulating PixTudio, Bennu GD and DivDx native formats</AssemblyDescriptionAttribute>
-    <AssemblyCompanyAttribute>Darío Cutillas Carrillo</AssemblyCompanyAttribute>
-    <AssemblyCopyrightAttribute>Copyright © 2016 Darío Cutillas Carrillo</AssemblyCopyrightAttribute>
+    <Title>FenixLib</Title>
+    <Description>.NET support for manipulating PixTudio, BennuGD, DivGO and DivDx native formats.</Description>
+    <Authors>Darío Cutillas Carrillo</Authors>
+    <Company>Darío Cutillas Carrillo</Company>
+    <Copyright>Copyright © 2016 Darío Cutillas Carrillo</Copyright>
+    <AssemblyTitle>$(Title)</AssemblyTitle>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/dacucar/fenixlib</PackageProjectUrl>
+    <PackageTags>Game Bennu Graphics Fpg Font BitmapFont Editor</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+    <None Include="../../README.md" target="" Pack="true" PackagePath="/" />
+    <None Include="../../Media/nuget-icon.png" Pack="true" PackagePath="/" />
   </ItemGroup>
 </Project>
