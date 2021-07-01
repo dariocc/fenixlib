@@ -4,7 +4,7 @@
     <OutputType>Library</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Title>FenixLib</Title>
-    <Description>.NET support for manipulating PixTudio, BennuGD, DivGO and DivDx native formats.</Description>
+    <Summary>.NET support for manipulating PixTudio, BennuGD, DivGO and DivDx native formats.</Summary>
     <Authors>Darío Cutillas Carrillo</Authors>
     <Company>Darío Cutillas Carrillo</Company>
     <Copyright>Copyright © 2016 Darío Cutillas Carrillo</Copyright>
@@ -12,6 +12,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/dacucar/fenixlib</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageTags>Game Bennu Graphics Fpg Font BitmapFont Editor</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>

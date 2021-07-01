@@ -1,4 +1,4 @@
-![FenixLib](https://github.com/dariocc/fenixlib/blob/development/fennixlib/logo.png "FenixLib Logo")
+![FenixLib](https://raw.githubusercontent.com/dariocc/fenixlib/main/fenixlib/logo.png "FenixLib Logo")
 
 FenixLib brings .NET support for opening, creating and operating with
 native graphic, graphic collections, bitmap fonts and palette formats of
