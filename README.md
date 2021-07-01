@@ -9,12 +9,15 @@ native graphic, graphic collections, bitmap fonts and palette formats of
 [Div GO](http://www.amakasoft.com/herramientas/div-go.html) and 
 [DIV](http://div-arena.co.uk/) game programming languages and frameworks.
 
+Supported pixel format sare _1bpp aligned packed_, _8bpp indexed_, _16bpp RGB565_
+and _32bpp ARGB_, i.e. all native graphic file formats.
+
 The following snippet shows how easy is to open a Fpg file, print the codes
 and description of every map, change the description of map with code 10 and
 save the changes in a new file.
 
 ```csharp
-using FenixLib.Core;
+using FenixLib;
 using FenixLib.IO;
 
 // Load a Fpg file
@@ -35,7 +38,7 @@ spriteAssortment.SaveToFpg ( "foo-changed.fpg" );
 Another example, see how easy you can create a Fnt font file from scratch:
 
 ```csharp
-using FenixLib.Core;
+using FenixLib;
 using FenixLib.IO;
 
 var font = new BitmapFont ( GraphicFormat.Format32bppArgb, FontEncoding.ISO85591 );
@@ -53,90 +56,60 @@ font.SaveToFnt ( "foo.fnt" );
 
 For additional examples and documentation visit [the wiki](http://github.com/dacucar/fenixlib/wiki).
 
-
 ## Using the library
 
 Add a reference to your .NET project by using the [nuget package](https://www.nuget.org/packages/FenixLib/)
-or building it from the sources.
+or building it from the project file.
 
-If you know what [Fpg](https://github.com/dacucar/fenixlib/wiki/Native-Format#Fpg),
-[Map](https://github.com/dacucar/fenixlib/wiki/Native-Format#Map), 
-[Pal](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) and
-[Fnt](https://github.com/dacucar/fenixlib/wiki/Native-Format#Pal) files, working with FenixLib should 
-be quite straightforward, just make sure to go through the information in the following topics. 
+Check the [Core Types](https://github.com/dacucar/fenixlib/wiki/Core-Types) section in the wiki to learn
+about the `FenixLib` core types of the FenixLib library that are used to manipulate the different
+types of assets.
 
-* [Core Types](https://github.com/dacucar/fenixlib/wiki/Core-Types)
-* [IO Api](https://github.com/dacucar/fenixlib/wiki/IO-Api)
+Most likely you'll want to load or save those assets from the filesystem. The `NativeFile` type of 
+the `FenixLib.IO` namespace is a convenient facade to do exactly that.
 
-If you don't, just have a look to the [native formats introduction](https://github.com/dacucar/fenixlib/wiki/Native-Formats) 
-and then you will be ready to the topics above.
-
-You may also check the [example projects](https://github.com/dacucar/fenixlib/wiki/Examples) for some inspiration.
+You may also check the [example projects](https://github.com/dacucar/fenixlib/wiki/Examples).
 
 ## Building
 
-Fenixlib core assembly (FenixLib.dll) was originally written to target .NET framework 4.5 but it has 
-been migrated to .NET Standard 2.0 and therefore it should run on any .NET impelementation that
-supports it, including .NET Framework >= 4.6, Mono, .NET Core and .NET 5.0.
+FenixLib targets now .NET Standard 2.0 and should run on any .NET implementation that supports it, 
+namely .NET Framework 4.6 and later, .NET Core and .NET 5.0.
 
 Go ahead and make a clone of this repository:
 
     git clone https://github.com/dacucar/fenixlib.git
 
-Then build the fenixlib classlibrary. If using .NET 5.0 SDK, run:
+Then build the FenixLib class-library. If using .NET 5.0 SDK, run:
 
-    dotnet build Src/FenixLib
+    dotnet build fenixlib/FenixLib
 
-There exists some additional projects in the `Src` folder:
+There exists some additional projects in the `fenixlib` folder:
 
 * `FenixLib.Tests`: Test for fenix core assembly.
-* [`FenixLib.Gdk`](https://github.com/dacucar/fenixlib/wiki/FenixLibCairoAssembly). Basic functionality
-  for mapping fenixlib images to `Gdk` pixbuffs and be therefore able to visualize images in
-  Gdk applications.
-* `FenixLib.Gdip`: Provides types for mapping fenixlib image data to Gdi+ images and to create
-  fenixlib images from Gdi+ bitmaps.
-* `FenixLib.Gdip.Tests`: Tests for `FenixLib.Gdip`.
-
-And also some Examples under `Src/Examples` with a basic Winforms and Gdk applications. The winforms application
-will not work on Linux environments, but who cares nowadays? :)
+* `Examples/FenixLibAndGtk.csproj`: An example of how to use FenixLib together with Gtk-sharp.
 
 ### Running unit and integration tests
 
-[NUnit](http://www.nunit.org/) is the test framework used. At the time the test were being written I was still
-learning about NUnit and .NET testing in general.
+Test project depend on [NUnit 3](http://www.nunit.org/) and [Moq](https://github.com/Moq/moq).
 
-[Rhino Mocks](https://www.hibernatingrhinos.com/oss/rhino-mocks) was the mocking framework used at the time,
-but because it doesn't work on .NET 5.0 I did a small migration effort to [Moq](https://github.com/Moq/moq).
-I didn't spend lot of time making _the best possible migration_, just did the minimum to get them to 
-build and pass the tests.
+Notice that originally, FenixLib used [Rhino Mocks](https://www.hibernatingrhinos.com/oss/rhino-mocks)
+for test doubles and that code has been ported to Moq without much ambition (just making the test pass).
 
-For each FenixLib assembly there will be, if any, only one Test project. All test projects have a similar structure:
-
-* A ``Unit`` folder containing all unit tests. I put a lot of effor in doing code refractoring to minimize the overlapping 
-  between units and in most situation I try to only test public API. 
-  However, I do make use of the InternalsVisible and test ``internal`` functionality when I decide it is to early to expose 
-  a certain class outside the assembly. All unit tests are grouped under the ''unit'' `TestCategory`.
-
-* A ``Integration`` folder containing tests of groups of functionality. These tests help me test real-case situations 
-  such as decoding real files, etc. The tests are still written They are grouped under the ''integration'' TestCategory.
-
-> I'd normally prefer two separate assemblies for unit and integration tests, but this is an olde project where
-> my testing habits were still in development.
-
-Use whatever test runner your .NET implementation provides you. If using .NET 5.0:
+Use whatever test runner your .NET implementation provides you. I use .NET 5.0 and `dotnet test` command
+to run the tests.
 
     dotnet test Src/FenixLib.Tests
 
 ## Contributing
 
-This project is not actively maintained but if for whatever reasons you find it useful don't hesitate
-to contact me, open an issue or send your PRs and I'll look at them.
+Pull requests, issues and suggestions are welcomed. If you plan to do a large work it might be
+a good idea to open an issue and tell a bit about what you intend to use.
 
 ## License
 
-Copyright 2016-2021 Darío Cutillas Carrillo
+Copyright 2016 Darío Cutillas Carrillo
 
-FenixLib is distributed under the very permisive 
+FenixLib is distributed under the very permissive 
  [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 You are free to use FenixLib in both commercial and non commercial and 
