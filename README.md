@@ -1,4 +1,4 @@
-![FenixLib](Media/fenixlib.png "FenixLib Logo")
+![FenixLib](fenixlib/logo.png "FenixLib Logo")
 
 ![.NET](https://github.com/dariocc/fenixlib/actions/workflows/dotnet.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -18,18 +18,18 @@ using FenixLib.Core;
 using FenixLib.IO;
 
 // Load a Fpg file
-var spriteAssortment = NativeFile.LoadFpg ( "myfpg.fpg" );
+var spriteAssortment = NativeFile.LoadFpg ( "foo.fpg" );
 
 // Print out the code and description of every sprite in the Fpg
 foreach ( var sprite in spriteAssortment )
 {
-	System.Console.WriteLine ( sprite.Id.ToString() + " - " + sprite.Description );
+  System.Console.WriteLine ( sprite.Id.ToString() + " - " + sprite.Description );
 }
 
 // Change the description of Sprite with code 10
-spriteAssortment[10].Description = "My graphic";
+spriteAssortment[10].Description = "Bar";
 
-spriteAssortment.SaveToFpg ( "modified.fpg" );
+spriteAssortment.SaveToFpg ( "foo-changed.fpg" );
 ```
 
 Another example, see how easy you can create a Fnt font file from scratch:
@@ -48,10 +48,11 @@ var glyphGraphic = new Graphic( GraphicFormat.Format32bppArgb, 10, 10, new byte[
 font['å'] = new Glyph ( glyphGraphic );
 
 // Save the font to a Fnt file (only 'å' will contain a bitmap)
-font.SaveToFnt ( "myfont.fnt" );
+font.SaveToFnt ( "foo.fnt" );
 ```
 
-A battery of [examples](https://github.com/dacucar/fenixlib/wiki/Examples) is provided that coverts most common use cases.
+For additional examples and documentation visit [the wiki](http://github.com/dacucar/fenixlib/wiki).
+
 
 ## Using the library
 
@@ -76,7 +77,7 @@ You may also check the [example projects](https://github.com/dacucar/fenixlib/wi
 
 Fenixlib core assembly (FenixLib.dll) was originally written to target .NET framework 4.5 but it has 
 been migrated to .NET Standard 2.0 and therefore it should run on any .NET impelementation that
-supports it, including .NET Framework > 4.5, Mono, .NET Core and .NET 5.0.
+supports it, including .NET Framework >= 4.6, Mono, .NET Core and .NET 5.0.
 
 Go ahead and make a clone of this repository:
 
