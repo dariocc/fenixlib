@@ -9,7 +9,7 @@ native graphic, graphic collections, bitmap fonts and palette formats of
 [Div GO](http://www.amakasoft.com/herramientas/div-go.html) and 
 [DIV](http://div-arena.co.uk/) game programming languages and frameworks.
 
-Supported pixel format sare _1bpp aligned packed_, _8bpp indexed_, _16bpp RGB565_
+Supported pixel format are _1bpp aligned packed_, _8bpp indexed_, _16bpp RGB565_
 and _32bpp ARGB_, i.e. all native graphic file formats.
 
 The following snippet shows how easy is to open a Fpg file, print the codes
