@@ -1,7 +1,7 @@
 ![FenixLib](Media/fenixlib.png "FenixLib Logo")
 
 ![.NET](https://github.com/dariocc/fenixlib/actions/workflows/dotnet.yml/badge.svg)
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache-2.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 FenixLib brings .Net support for opening, creating and operating with
 native graphic, graphic collections, bitmap fonts and palette formats of
