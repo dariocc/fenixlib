@@ -1,0 +1,1 @@
+dotnet pack /p:VersionPrefix="2.0.0" --version-suffix="dev+$(git rev-parse HEAD)" --output . fenixlib/FenixLib
