@@ -1,6 +1,6 @@
 ![FenixLib](fenixlib/logo.png "FenixLib Logo")
 
-![.NET](https://github.com/dariocc/fenixlib/actions/workflows/dotnet.yml/badge.svg)
+![.NET](https://github.com/dariocc/fenixlib/actions/workflows/build-fenixlib.yml/badge.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 FenixLib brings .Net support for opening, creating and operating with
