@@ -1,8 +1,8 @@
 2.0.0
-- Migrate to .NET Standard.
+- Migrate libraries to .NET Standard 2.0 and examples and test projects to
+  .NET 5.0.
 - Moved FenixLib.Core types to FenixLib namespace. 
-- Removed Gdip and Gdk projects. Notice these weren't used
-- Removed FenixLib.Imaging.PixelWriter API: It was incomplete and not well thought.
+- Removed FenixLib.Imaging.PixelWriter types.
 
 1.0.0
 - First public release.
