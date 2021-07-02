@@ -14,8 +14,9 @@
  *    limitations under the License.
  */
 using NUnit.Framework;
+using FenixLib;
 
-namespace FenixLib.Tests.Unit.Core
+namespace FenixLibTests
 {
     [TestFixture ( Category = "Unit" )]
     class PivotPointTests

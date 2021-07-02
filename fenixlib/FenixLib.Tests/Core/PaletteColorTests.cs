@@ -15,8 +15,9 @@
  */
 using NUnit.Framework;
 using System;
+using FenixLib;
 
-namespace FenixLib.Tests.Unit.Core
+namespace FenixLibTests
 {
     [TestFixture ( Category = "Unit" )]
     class PaletteColorTests

@@ -16,8 +16,9 @@
 using NUnit.Framework;
 using FenixLib.IO;
 using System;
+using FenixLib;
 
-namespace FenixLib.Tests.Unit.Core.IO
+namespace FenixLibTests.IO
 {
     [TestFixture ( TypeArgs = new Type[] { typeof ( FpgSpriteAssortmentDecoder ), typeof ( ISpriteAssortment ) }, Category = "Unit" ) ]
     [TestFixture ( TypeArgs = new Type[] { typeof ( DivFntBitmapFontDecoder ), typeof ( IBitmapFont ) }, Category = "Unit" ) ]
