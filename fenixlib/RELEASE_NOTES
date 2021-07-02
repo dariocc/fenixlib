@@ -1,6 +1,5 @@
 2.0.0
-- Migrate libraries to .NET Standard 2.0 and examples and test projects to
-  .NET 5.0.
+- Migrate libraries to .NET Standard 2.0 and examples and test projects to .NET 5.0.
 - Moved FenixLib.Core types to FenixLib namespace. 
 - Removed FenixLib.Imaging.PixelWriter types.
 
