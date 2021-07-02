@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Moq;
+using FenixLib.Imaging;
 
 namespace FenixLib.Tests.Unit.Imaging
 {

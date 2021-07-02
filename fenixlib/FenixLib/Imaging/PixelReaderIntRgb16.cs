@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-namespace FenixLib
+namespace FenixLib.Imaging
 {
     internal class PixelReaderRgbInt16 : PixelReader
     {
