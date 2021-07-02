@@ -15,7 +15,7 @@
  */
 using System;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
     public sealed class GraphicFormat
     {

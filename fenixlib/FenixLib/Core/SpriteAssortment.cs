@@ -1,4 +1,4 @@
-/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darï¿½o Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
     public partial class SpriteAssortment : ISpriteAssortment
     {

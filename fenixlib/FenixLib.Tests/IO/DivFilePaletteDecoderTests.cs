@@ -15,7 +15,6 @@
  */
 using NUnit.Framework;
 using System.IO;
-using FenixLib.Core;
 using FenixLib.IO;
 using System;
 using Moq;

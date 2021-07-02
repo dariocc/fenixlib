@@ -14,7 +14,6 @@
  *    limitations under the License.
  */
 using System.Collections.Generic;
-using FenixLib.Core;
 using NUnit.Framework;
 using Moq;
 

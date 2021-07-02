@@ -15,7 +15,7 @@
  */
 using System.Collections.Generic;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
     public interface ISprite : IGraphic
     {

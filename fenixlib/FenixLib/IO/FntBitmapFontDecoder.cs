@@ -16,7 +16,6 @@
 using System.Linq;
 using System.IO;
 
-using FenixLib.Core;
 using static FenixLib.IO.NativeFormat;
 
 namespace FenixLib.IO

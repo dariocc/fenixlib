@@ -15,9 +15,9 @@
  */
 using System;
 using System.IO;
-using FenixLib.Core;
+using FenixLib;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
     public abstract class PixelReader : IDisposable
     {

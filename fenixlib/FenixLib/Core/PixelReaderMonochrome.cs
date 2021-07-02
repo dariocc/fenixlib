@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-namespace FenixLib.Core
+namespace FenixLib
 {
     internal class PixelReaderMonochrome : PixelReader
     {
@@ -30,7 +30,7 @@ namespace FenixLib.Core
 
         public override void Read ()
         {
-            var bytesPerStride = Core.GraphicFormat.Format1bppMonochrome.StrideForWidth ( Graphic.Width );
+            var bytesPerStride = FenixLib.GraphicFormat.Format1bppMonochrome.StrideForWidth ( Graphic.Width );
             var usedBitsInStride = Graphic.Width;
             var totalBitsInStride = bytesPerStride * 8;
 

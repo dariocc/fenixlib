@@ -16,7 +16,7 @@ using System;
 using System.IO;
 using System.Runtime.Serialization;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
 
     [Serializable]

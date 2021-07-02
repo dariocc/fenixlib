@@ -1,4 +1,4 @@
-/*  Copyright 2016 Darío Cutillas Carrillo
+/*  Copyright 2016 Darï¿½o Cutillas Carrillo
 *
 *   Licensed under the Apache License, Version 2.0 (the "License");
 *   you may not use this file except in compliance with the License.
@@ -13,9 +13,6 @@
 *   limitations under the License.
 */
 using System;
-using System.Data;
-using System.Linq;
-using FenixLib.Core;
 
 namespace FenixLib.IO
 {

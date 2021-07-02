@@ -14,7 +14,7 @@
 */
 using System;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
 	public struct PivotPoint
 	{

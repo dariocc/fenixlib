@@ -15,7 +15,6 @@
  */
 using NUnit.Framework;
 using System;
-using FenixLib.Core;
 using Moq;
 
 namespace FenixLib.Tests.Unit.Core

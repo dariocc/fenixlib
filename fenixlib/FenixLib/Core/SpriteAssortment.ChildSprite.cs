@@ -15,7 +15,7 @@
  */
 using System.Collections.Generic;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
     public partial class SpriteAssortment
     {
@@ -82,7 +82,7 @@ namespace FenixLib.Core
             }
 
             public int? FindFreePivotPointId ( int start = 0,
-                Sprite.SearchDirection direction = Core.Sprite.SearchDirection.Fordward )
+                Sprite.SearchDirection direction = FenixLib.Sprite.SearchDirection.Fordward )
             {
                 return Sprite.FindFreePivotPointId ( start, direction );
             }

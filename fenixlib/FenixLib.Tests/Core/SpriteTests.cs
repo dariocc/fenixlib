@@ -14,7 +14,6 @@
  *    limitations under the License.
  */
 using NUnit.Framework;
-using FenixLib.Core;
 using System;
 using Moq;
 

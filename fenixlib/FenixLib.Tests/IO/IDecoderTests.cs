@@ -16,7 +16,6 @@
 using NUnit.Framework;
 using FenixLib.IO;
 using System;
-using FenixLib.Core;
 
 namespace FenixLib.Tests.Unit.Core.IO
 {

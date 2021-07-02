@@ -15,7 +15,6 @@
  */
 using NUnit.Framework;
 using System.IO;
-using FenixLib.Core;
 using FenixLib.IO;
 
 namespace FenixLib.Tests.Unit.IO

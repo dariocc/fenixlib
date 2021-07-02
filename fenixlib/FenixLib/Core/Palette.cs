@@ -17,7 +17,7 @@ using System;
 using System.Collections;
 using System.Linq;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
     public class Palette : IEnumerable
     {

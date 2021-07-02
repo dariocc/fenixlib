@@ -16,7 +16,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
     internal class UniformFormatGraphicDictionary<K, E> : IDictionary<K, E> where E : IGraphic
     {

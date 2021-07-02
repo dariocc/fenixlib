@@ -19,7 +19,7 @@ using System;
 using System.Linq;
 using System.Collections;
 
-namespace FenixLib.Core
+namespace FenixLib
 {
     public class BitmapFont : IBitmapFont
     {

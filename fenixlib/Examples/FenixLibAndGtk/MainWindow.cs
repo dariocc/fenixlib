@@ -1,6 +1,6 @@
 using System;
 using Gtk;
-using FenixLib.Core;
+using FenixLib;
 using FenixLib.IO;
 
 namespace FenixLibAndGtkExample

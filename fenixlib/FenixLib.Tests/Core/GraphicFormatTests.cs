@@ -15,7 +15,6 @@
  */
 using NUnit.Framework;
 using System.Collections;
-using FenixLib.Core;
 
 namespace FenixLib.Tests.Unit.Core
 {
