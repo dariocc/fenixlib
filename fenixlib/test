@@ -1,6 +1,6 @@
 #!/bin/bash
 _SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 
-_project="$_SCRIPT_DIR"/FenixLib.Tests
+_PROJECT="$_SCRIPT_DIR"/FenixLibTests
 
-dotnet test "$_project"
+dotnet test "$_PROJECT"
