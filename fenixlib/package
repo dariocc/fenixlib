@@ -3,8 +3,13 @@ _SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
 _PROJECT="$_SCRIPT_DIR"/FenixLib
 _VERSION_FILE="$_SCRIPT_DIR"/version
 
-VERSION_PREFIX=${1:-"$(cat $_VERSION_FILE)"}
-VERSION_SUFFIX=${2:-"dev+$(git rev-parse HEAD)"}
+_DEFAULT_VERSION_PREFIX=$(cat "$_VERSION_FILE")
+_DEFAULT_VERSION_SUFFIX="dev+$(git rev-parse HEAD)"
+VERSION_PREFIX=${1:-$_DEFAULT_VERSION_PREFIX}
+VERSION_SUFFIX=${2-$_DEFAULT_VERSION_SUFFIX}
+
+echo "Version Prefix: $VERSION_PREFIX"
+echo "Version Suffix: ${VERSION_SUFFIX:-(empty)}"
 
 _outdir="$_SCRIPT_DIR"/nupkgs
 dotnet pack /p:VersionPrefix="$VERSION_PREFIX" --version-suffix="$VERSION_SUFFIX" --output "$_outdir" "$_PROJECT"
