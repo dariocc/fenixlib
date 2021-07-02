@@ -1,1 +1,3 @@
-dotnet pack /p:VersionPrefix="$(cat version)" --version-suffix="dev+$(git rev-parse HEAD)" --output nupkgs fenixlib/FenixLib
+#!/bin/bash
+_OUTDIR="$(dirname "${BASH_SOURCE[0]}")"/nupkgs
+dotnet pack /p:VersionPrefix="$(cat version)" --version-suffix="dev+$(git rev-parse HEAD)" --output "$_OUTDIR" fenixlib/FenixLib
