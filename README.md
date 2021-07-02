@@ -59,7 +59,11 @@ For additional examples and documentation visit [the wiki](http://github.com/dac
 ## Using the library
 
 Add a reference to your .NET project by using the [nuget package](https://www.nuget.org/packages/FenixLib/)
-or building it from the project file.
+or building it from the project file. If using `dotnet` CLI:
+
+```
+dotnet add package FenixLib --version 2.0.0
+```
 
 Check the [Core Types](https://github.com/dacucar/fenixlib/wiki/Core-Types) section in the wiki to learn
 about the `FenixLib` core types of the FenixLib library that are used to manipulate the different
