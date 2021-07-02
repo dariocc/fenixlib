@@ -1,7 +1,10 @@
 #!/bin/bash
 _SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"
+_PROJECT="$_SCRIPT_DIR"/FenixLib
+_VERSION_FILE="$_SCRIPT_DIR"/version
+
+VERSION_PREFIX=${1:-"$(cat $_VERSION_FILE)"}
+VERSION_SUFFIX=${2:-"dev+$(git rev-parse HEAD)"}
 
 _outdir="$_SCRIPT_DIR"/nupkgs
-_project="$_SCRIPT_DIR"/FenixLib
-_version_file="$_SCRIPT_DIR"/version
-dotnet pack /p:VersionPrefix="$(cat $_version_file)" --version-suffix="dev+$(git rev-parse HEAD)" --output "$_outdir" "$_project"
+dotnet pack /p:VersionPrefix="$VERSION_PREFIX" --version-suffix="$VERSION_SUFFIX" --output "$_outdir" "$_PROJECT"
