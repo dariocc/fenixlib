@@ -18,6 +18,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore fenixlib/FenixLib
     - name: Build
-      run: dotnet build --no-restore fenixlib/FenixLib
+      run: dotnet build fenixlib/FenixLib
     - name: Test
-      run: dotnet test --no-build fenixlib/FenixLibTests
+      run: dotnet test fenixlib/FenixLibTests
