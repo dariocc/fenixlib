@@ -80,6 +80,7 @@ namespace FenixLibTests
                 new Graphic ( GraphicFormat.Format32bppArgb, 1, 1, null );
             };
 
+            Assert.Fail();
             Assert.That ( createGraphic, Throws.InstanceOf<ArgumentNullException> () );
         }
 
