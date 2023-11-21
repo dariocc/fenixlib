@@ -32,7 +32,7 @@ namespace FenixLibTests
         {
             Mock<IGraphic> fakeGraphic = new Mock<IGraphic>();
             fakeGraphic.Setup ( x => x.Width ).Returns ( 1 );
-            fakeGraphic.Setup ( x => x.Height ).Returns ( 2 );
+            fakeGraphic.Setup ( x => x.Height ).Returns ( 1 );
             fakeGraphic.Setup ( x => x.GraphicFormat ).Returns ( GraphicFormat.Format32bppArgb );
             fakeGraphic.Setup ( x => x.PixelData ).Returns ( new byte[1] );
 

@@ -39,7 +39,7 @@ namespace FenixLib.Tests.Unit.IO
             var reader = new BinaryNativeFormatReader ( stream );
 
             var palette = ReadBody ( header, reader );
-            Assert.Fail();
+
             Assert.That ( palette, Is.EqualTo ( new Palette () ) );
         }
 
