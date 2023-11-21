@@ -2,15 +2,12 @@ name: Build FenixLib
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: main
   pull_request:
-    branches: [ main, develop ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
