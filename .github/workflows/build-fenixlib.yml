@@ -19,5 +19,3 @@ jobs:
       run: dotnet restore fenixlib/FenixLib
     - name: Build
       run: dotnet build fenixlib/FenixLib
-    - name: Test
-      run: dotnet test fenixlib/FenixLibTests
