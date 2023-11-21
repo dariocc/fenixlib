@@ -29,7 +29,7 @@ namespace FenixLibTests
         public void SetUp ()
         {
             pivotPoint = new PivotPoint ( 1, 10, 10 );
-            pivotPointSameId = new PivotPoint ( 1, 100, 100 );
+            pivotPointSameId = new PivotPoint ( 1, 50, 100 );
             differentPivotPoint = new PivotPoint ( 2, 10, 100 );
         }
 

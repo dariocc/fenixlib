@@ -10,7 +10,7 @@ jobs:
     name: Build and Test FenixLib
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -20,4 +20,4 @@ jobs:
     - name: Build
       run: dotnet build --no-restore fenixlib/FenixLib
     - name: Test
-      run: dotnet test --no-build --verbosity normal fenixlib/FenixLibTests
+      run: dotnet test --no-build fenixlib/FenixLibTests
