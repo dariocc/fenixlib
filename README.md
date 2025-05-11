@@ -77,13 +77,13 @@ You may also check the [example projects](https://github.com/dacucar/fenixlib/wi
 ## Building
 
 FenixLib targets now .NET Standard 2.0 and should run on any .NET implementation that supports it, 
-namely .NET Framework 4.6 and later, .NET Core and .NET 5.0.
+namely .NET Framework 4.6 and later, .NET Core and .NET 8.0.
 
 Go ahead and make a clone of this repository:
 
     git clone https://github.com/dacucar/fenixlib.git
 
-Then build the FenixLib class-library. If using .NET 5.0 SDK, run:
+Then build the FenixLib class-library:
 
     dotnet build fenixlib/FenixLib
 
