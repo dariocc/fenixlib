@@ -4,20 +4,21 @@ on:
   push:
     branches: main
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
     name: Build and Test FenixLib
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v7
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v6
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 10.0.x
     - name: Restore dependencies
-      run: dotnet restore fenixlib/FenixLib
+      run: dotnet restore fenixlib/FenixLibTests
     - name: Build
-      run: dotnet build --no-restore fenixlib/FenixLib
+      run: dotnet build --no-restore fenixlib/FenixLibTests
     - name: Test
       run: dotnet test --no-build --verbosity normal fenixlib/FenixLibTests

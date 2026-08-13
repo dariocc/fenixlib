@@ -26,56 +26,27 @@ namespace FenixLib.Tests.Unit.IO
     public class NativeFormatWriterTests
     {
         /* Note to developers:
-        The basic idea behind these test methods is to ensure that the WriteXXX or Write(xxx)
-        methods encode the information according to what it is expected. For that purpose
-        a Stream is stubbed and the Write functions of the methods will just write to a
-        byte[] field memory.
-        The tests for the each encoding operation will then validate this memory field against
-        what it is expected from it to have.
+        These tests write through NativeFormatWriter into a MemoryStream and then
+        validate the little-endian bytes that BinaryWriter produced.
         */
 
         private NativeFormatWriter formatWriter;
-        // Keeps track of the bytes written to the fake stream
-        // NOTE: As per https://msdn.microsoft.com/en-us/library/24e33k1w%28v=vs.110%29.aspx
-        // BinaryWriter implementation (superclass to fakeWriter) uses little-endian format
-        private byte[] memory;
+        private MemoryStream stream;
+        // Bytes written to the stream. BinaryWriter uses little-endian.
+        private byte[] memory => stream.ToArray ();
 
         [SetUp]
         public void SetUp ()
         {
-            // Stream stub that memorizes the bytes written to the field every
-            // time Write() overloads are called
-            var streamStub = new Mock<Stream> ();
-
-            streamStub.CallBase = true;
-            streamStub.Setup ( _ => _.CanWrite ).Returns ( true );
-
-            streamStub.Setup ( _ => _.Write (
-                It.IsAny<byte[]> (),
-                It.IsAny<int> (),
-                It.IsAny<int> () ) )
-            .Callback<byte[], int, int> ( ( bytes, offset, size ) =>
-               {
-                   var tmp = new byte[size];
-                   Array.Copy ( bytes, tmp, tmp.Length );
-                   ResizeMemory ( tmp );
-               } );
-
-            streamStub.Setup ( _ => _.WriteByte ( It.IsAny<byte> () ) )
-            .Callback<byte> ( b =>
-            {
-                var bytes = new byte[] { b };
-                ResizeMemory ( bytes );
-            } );
-
-
-            formatWriter = new NativeFormatWriter ( streamStub.Object );
+            stream = new MemoryStream ();
+            formatWriter = new NativeFormatWriter ( stream );
         }
 
         [TearDown]
         public void TearDown ()
         {
-            memory = null;
+            formatWriter.Dispose ();
+            stream.Dispose ();
         }
 
         [Test]
@@ -225,26 +196,5 @@ namespace FenixLib.Tests.Unit.IO
                 Is.All.EqualTo ( 8 ).Or.EqualTo ( 16 ).Or.EqualTo ( 32 ) );
         }
 
-        // Resizes currentMemory to hold bytes and copies the contents
-        // of bytes to it
-        private void ResizeMemory ( byte[] bytes )
-        {
-            int destIndex;
-
-            if ( memory == null )
-            {
-                destIndex = 0;
-                memory = new byte[bytes.Length];
-            }
-            else
-            {
-                destIndex = memory.Length;
-                var oldMemory = memory;
-                memory = new byte[memory.Length + bytes.Length];
-                Array.Copy ( oldMemory, memory, oldMemory.Length );
-            }
-
-            Array.Copy ( bytes, 0, memory, destIndex, bytes.Length );
-        }
     }
 }
