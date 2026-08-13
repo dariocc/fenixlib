@@ -19,19 +19,20 @@ namespace FenixLib
 {
     public struct PaletteColor
     {
+        // DIV / Bennu palettes are VGA 6-bit RGB. Stored as 8-bit values
+        // via << 2, so each channel lives in {0, 4, ..., 252}.
+        private const int BitsPerComponent = 6;
+        private const int ComponentShift = 8 - BitsPerComponent;
+
         public int R { get; }
         public int G { get; }
         public int B { get; }
 
         public PaletteColor ( int r, int g, int b )
         {
-            ValidateComponent ( r );
-            ValidateComponent ( g );
-            ValidateComponent ( b );
-
-            R = r;
-            G = g;
-            B = b;
+            R = ToVgaComponent ( r );
+            G = ToVgaComponent ( g );
+            B = ToVgaComponent ( b );
         }
 
         public bool Equals ( PaletteColor color )
@@ -65,13 +66,15 @@ namespace FenixLib
             return !( colorA == colorB );
         }
 
-        private static void ValidateComponent( int component )
+        private static int ToVgaComponent ( int component )
         {
             if ( component < 0 | component > 255 )
             {
-                throw new ArgumentOutOfRangeException ("component", component, 
-                    "Color component out of allowed range 0..255.");
+                throw new ArgumentOutOfRangeException ( "component", component,
+                    "Color component out of allowed range 0..255." );
             }
+
+            return ( component >> ComponentShift ) << ComponentShift;
         }
     }
 }

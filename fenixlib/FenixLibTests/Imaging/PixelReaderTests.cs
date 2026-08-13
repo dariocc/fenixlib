@@ -46,7 +46,7 @@ namespace FenixLibTests.Unit.Imaging
         {
             var pixels = ReadAllPixels(Create8bbpGraphicStub());
             var color0 = (0, 0, 0, 0);
-            var color1 = (128, 0, 255, 255);
+            var color1 = (128, 0, 252, 255);
             var color2 = (0, 0, 0, 255);
             var expectedPixels = new List<(int R, int G, int B, int A)>()
             {
