@@ -45,6 +45,21 @@ namespace FenixLibTests
             Assert.Throws<ArgumentOutOfRangeException> ( () => new PaletteColor ( r, g, b ) );
         }
 
+        [TestCase ( 0, 0, 0, 0, 0, 0 )]
+        [TestCase ( 1, 2, 3, 0, 0, 0 )]
+        [TestCase ( 4, 8, 12, 4, 8, 12 )]
+        [TestCase ( 10, 50, 100, 8, 48, 100 )]
+        [TestCase ( 255, 255, 255, 252, 252, 252 )]
+        public void Construct_QuantizesToVgaColorspace ( int r, int g, int b,
+            int expectedR, int expectedG, int expectedB )
+        {
+            var color = new PaletteColor ( r, g, b );
+
+            Assert.That ( color.R, Is.EqualTo ( expectedR ) );
+            Assert.That ( color.G, Is.EqualTo ( expectedG ) );
+            Assert.That ( color.B, Is.EqualTo ( expectedB ) );
+        }
+
         [Test]
         public void Equals_SameComponents_True ()
         {

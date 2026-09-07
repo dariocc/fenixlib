@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
     <OutputType>Library</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Title>FenixLib</Title>
@@ -15,8 +16,8 @@
     <PackageIcon>icon.png</PackageIcon>
     <PackageTags>Game Bennu Graphics Fpg Font BitmapFont Editor</PackageTags>
     <PackageReleaseNotes>
-    - Migrate libraries to .NET Standard 2.0 and examples and test projects to .NET 5.0.
-    - Moved FenixLib.Core types to FenixLib namespace. 
+    - Target .NET Standard 2.1 (Unity 6 / .NET 10 compatible).
+    - Moved FenixLib.Core types to FenixLib namespace.
     - Removed FenixLib.Imaging.PixelWriter.
     - Fixed bugs in FenixLib.Imaging.PixelReader.
     </PackageReleaseNotes>
@@ -25,10 +26,9 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.11" />
     <None Include="../README.md" target="" Pack="true" PackagePath="/" />
     <None Include="../logo.png" target="" Pack="true" PackagePath="/" />
     <None Include="../icon.png" Pack="true" PackagePath="/" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
   </ItemGroup>  
 </Project>

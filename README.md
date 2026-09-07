@@ -74,10 +74,13 @@ the `FenixLib.IO` namespace is a convenient facade to do exactly that.
 
 You may also check the [example projects](https://github.com/dacucar/fenixlib/wiki/Examples).
 
+To use FenixLib in Unity, copy `FenixLib.dll` and `System.Text.Encoding.CodePages.dll`
+into `Assets/Plugins`. Set the plugin API Compatibility Level to **.NET Standard 2.1**.
+
 ## Building
 
-FenixLib targets now .NET Standard 2.0 and should run on any .NET implementation that supports it, 
-namely .NET Framework 4.6 and later, .NET Core and .NET 8.0.
+FenixLib targets .NET Standard 2.1, the latest API surface supported by Unity 6
+(up to 6.7 LTS). It also runs on .NET 5+ and .NET 10. Tests and examples use .NET 10.
 
 Go ahead and make a clone of this repository:
 
@@ -89,17 +92,16 @@ Then build the FenixLib class-library:
 
 There exists some additional projects in the `fenixlib` folder:
 
-* `FenixLib.Tests`: Test for fenix core assembly.
+* `FenixLibTests`: Tests for the FenixLib assembly.
 * `Examples/FenixLibAndGtk.csproj`: An example of how to use FenixLib together with Gtk-sharp.
 
 ### Running unit and integration tests
 
 Test project depend on [NUnit 3](http://www.nunit.org/) and [Moq](https://github.com/Moq/moq).
 
-Use whatever test runner your .NET implementation provides you. I use .NET 5.0 and `dotnet test` 
-command to run the tests:
+Use `dotnet test` to run the tests:
 
-    dotnet test Src/FenixLib.Tests
+    dotnet test fenixlib/FenixLibTests
 
 ## Contributing
 
